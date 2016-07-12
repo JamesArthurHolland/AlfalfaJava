@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="alfalfa">
+    <output-path>$PROJECT_DIR$/out/artifacts/alfalfa</output-path>
+    <root id="archive" name="alfalfa.jar">
+      <element id="archive" name="alfalfa.jar" />
+      <element id="module-output" name="Alfalfa" />
+    </root>
+  </artifact>
+</component>
