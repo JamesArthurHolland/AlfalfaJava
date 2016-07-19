@@ -21,7 +21,7 @@ public class EntityInfo
     public boolean isVarLast(Variable var)
     {
         int sizeOfVariableList = variables.size();
-        if (variables.get(sizeOfVariableList - 1).isEqualTo (var)) {
+        if (variables.get(sizeOfVariableList - 1).equals (var)) {
             return true;
         }
         return false;

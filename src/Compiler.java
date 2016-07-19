@@ -366,14 +366,15 @@ public class Compiler
         if (matcher.matches()) {
             if (!givenVar.isPrimary ()) {
                 generatedSentence = matcher.group(1) + replaceVarsInString (givenVar, matcher.group(3));
-                if (matcher.group(2) == "NOT-LAST") {
+                String lastOrNot = matcher.group(2);
+                if (lastOrNot.equals("NOT-LAST")) {
                     if (!entityInfo.isVarLast (givenVar)) {
                         return generatedSentence;
                     } else {
                         return null;
                     }
                 }
-                if (matcher.group(2) == "LAST") {
+                if (lastOrNot.equals("LAST")) {
                     if (entityInfo.isVarLast (givenVar)) {
                         return generatedSentence;
                     } else {
