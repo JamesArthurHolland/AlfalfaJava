@@ -1,5 +1,5 @@
 -e user
--n AE\
+-n AE\User
 -db users
 -k id
 protected String forename;
