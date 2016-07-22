@@ -22,3 +22,6 @@ Consider that multiple installs can have different names eg alfalfaphp alfalfaja
 
 ```. ~/.bash_profile```
 
+## Video tutorial
+
+[![Alfalfa Setup](http://img.youtube.com/vi/b-euwq0upoc/0.jpg)](https://youtu.be/b-euwq0upoc "Alfalfa Setup")

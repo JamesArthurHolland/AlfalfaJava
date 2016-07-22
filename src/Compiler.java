@@ -35,8 +35,7 @@ public class Compiler
     {
         try {
             String workingDirectory = System.getProperty("user.dir");
-            System.out.println(System.getProperty("user.dir"));
-            String alfalfaDirectory = Compiler.getAlfalfaPatternDirectory();
+            String alfalfaDirectory = Compiler.getAlfalfaPatternDirectory() + "/";
             File folder = new File(alfalfaDirectory);
             ArrayList<File> listOfFiles = getTemplateFiles(folder.listFiles());
 
@@ -64,11 +63,6 @@ public class Compiler
 
                 CompilerResult compilerResult = Compiler.runAlfalfa(entityInfo, lines);
                 Compiler.writeCompilerResultToFile(workingDirectory, compilerResult);
-
-                for(String line : compilerResult.getOutput()) {
-                    System.out.println(line);
-                }
-
             }
 //            ArrayList<String> evalResult = compiler.evaluateTree (parseTree, entityInfo);
 
@@ -423,7 +417,7 @@ public class Compiler
     {
         String outputString = sentence.replaceAll("\\{\\{entity\\}\\}", entityInfo.getEntity());
         outputString = outputString.replaceAll("\\{\\{en_tity\\}\\}", camelToLowerUnderScore(entityInfo.getEntity()));
-        outputString = outputString.replaceAll("\\{\\{EN_TITY\\}\\}", camelToUpperUnderScore(entityInfo.getEntity()));
+        outputString = outputString.replaceAll("\\{\\{ENTITY\\}\\}", camelToUpperUnderScore(entityInfo.getEntity()));
         outputString = outputString.replaceAll("\\{\\{Entity\\}\\}", uppercaseFirst(entityInfo.getEntity()));
 
         return outputString;
@@ -474,7 +468,7 @@ public class Compiler
     {
         String outputString = sentence.replaceAll("\\{\\{var\\}\\}", givenVar.getName());
         outputString = outputString.replaceAll("\\{\\{v_ar\\}\\}", camelToLowerUnderScore(givenVar.getName()));
-        outputString = outputString.replaceAll("\\{\\{V_AR\\}\\}", camelToUpperUnderScore(givenVar.getName()));
+        outputString = outputString.replaceAll("\\{\\{VAR\\}\\}", camelToUpperUnderScore(givenVar.getName()));
         outputString = outputString.replaceAll("\\{\\{Var\\}\\}", uppercaseFirst(givenVar.getName()));
 
         return outputString;
@@ -484,7 +478,7 @@ public class Compiler
     {
         String outputString = sentence.replaceAll("\\{\\{type\\}\\}", givenVar.getType());
         outputString = outputString.replaceAll("\\{\\{t_ype\\}\\}", camelToLowerUnderScore(givenVar.getType()));
-        outputString = outputString.replaceAll("\\{\\{T_YPE\\}\\}", camelToUpperUnderScore(givenVar.getType()));
+        outputString = outputString.replaceAll("\\{\\{TYPE\\}\\}", camelToUpperUnderScore(givenVar.getType()));
         outputString = outputString.replaceAll("\\{\\{Type\\}\\}", uppercaseFirst(givenVar.getType()));
 
         return outputString;
