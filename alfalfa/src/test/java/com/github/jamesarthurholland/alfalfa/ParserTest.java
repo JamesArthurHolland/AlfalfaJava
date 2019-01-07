@@ -1,21 +1,22 @@
 package com.github.jamesarthurholland.alfalfa;
 
-import com.github.jamesarthurholland.alfalfa.Compiler;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.github.jamesarthurholland.alfalfa.*;
 
-import javax.swing.text.html.parser.Entity;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -43,7 +44,7 @@ public class ParserTest {
     @Test
     public void entityParseTest() {
         ArrayList<Variable> vars = new ArrayList<Variable>();
-        vars.add(new Variable(true, "protected", "int", "id"));
+        vars.add(new Variable(true, "protected", "long", "id"));
         vars.add(new Variable(false, "protected", "String", "firstName"));
         vars.add(new Variable(false, "protected", "String", "lastName"));
         vars.add(new Variable(false, "protected", "String", "course"));
@@ -52,16 +53,15 @@ public class ParserTest {
         EntityInfo entityInfo = new EntityInfo("Student", "", "", vars);
 
         try {
-            Path path = null;
-            path = Paths.get(this.getClass().getResource("Employee.txt").toURI());
-            List<String> list = Files.readAllLines(path, Charset.defaultCharset());
+            File studentEntityFile = new File("src/test/resources/Student.afae");
+            List<String> list = Files.readAllLines(studentEntityFile.toPath(), Charset.defaultCharset());
             ArrayList<String> arrayList = new ArrayList<String>();
             arrayList.addAll(list);
 
             EntityInfo scannedEntity = ConfigScanner.readConfig(arrayList);
 
             assertTrue(entityInfo.equals(scannedEntity));
-        } catch (URISyntaxException | IOException e) {
+        } catch ( IOException e) {
             e.printStackTrace();
         }
 

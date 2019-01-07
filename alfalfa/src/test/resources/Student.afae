@@ -1,6 +1,6 @@
-student
-k o Long id
-v o String firstname
-v o String firstname
-v o String firstname
-v o String firstname
+Student
+k o long id
+v o String firstName
+v o String lastName
+v o String course
+v o String passport

@@ -4,6 +4,10 @@ import java.util.Objects;
 
 public class Variable
 {
+    public static final String PUBLIC = "public";
+    public static final String PROTECTED = "protected";
+    public static final String PRIVATE = "private";
+
     protected boolean primary;
     protected String visibility;
     protected String type;
@@ -72,12 +76,8 @@ public class Variable
     }
 
     @Override
-    public String toString()
-    {
-//            if(String.IsNullOrEmpty(type)) {
-        return visibility + " $" + name;
-//            }
-//            return visibility + " " + type + " $" + name;
+    public String toString() {
+        return visibility;
     }
 
     public boolean isPrimary()

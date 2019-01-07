@@ -30,15 +30,25 @@ class ConfigScanner
         }
     }
 
-    private static boolean isVariableDefinition(String line)
+    private static boolean isVariableDefinitionSemanticallyCorrect() // TODO
     {
-        if(line.startsWith("k ") || line.startsWith("v ")) {
+        return true;
+//        return lineArray.length != 4
+    }
+
+    private static boolean isVariableDefinition(String[] lineArray) throws Exception
+    {
+        if(lineArray[0].equals("k") || lineArray[0].equals("v")) {
+            if(isVariableDefinitionSemanticallyCorrect() == false) {
+                throw new Exception("Variable definitions must be of the form: <k|v> <i|o|u> <var type> <var name>");
+            }
+
             return true;
         }
         return false;
     }
 
-    public static EntityInfo readConfig(ArrayList<String> entity) throws Exception
+    public static EntityInfo readConfig(ArrayList<String> entity)
     {
         EntityInfo entityInfo = new EntityInfo();
 //        ArrayList<String> name = fileToArrayList(fileName);
@@ -71,58 +81,37 @@ class ConfigScanner
                 continue;
             }
 
-            if(isVariableDefinition(line))  {
-                String[] lineArray = line.split("[ ]+");
+            String[] lineArray = line.split("[ ]+");
 
-                if(lineArray.length != 4) {
-                    throw new Exception("Variable definitions must be of the form: <k|v> <i|o|u> <var type> <var name>");
-                }
+            try {
+                if(isVariableDefinition(lineArray))  {
+                    if(lineArray[0].equals("k")) {
+                        var.setPrimary(true);
+                    }
+                    else {
+                        var.setPrimary(false);
+                    }
 
-                if(lineArray[0].equals("k")) {
-                    var.setPrimary(true);
-                }
-                else {
-                    var.setPrimary(false);
-                }
+                    if( ! (lineArray[1].equals("i") || lineArray[1].equals("o") || lineArray[1].equals("u")) ) {
+                        throw new Exception("Second token on variable definition line must be < i (private) | o (protected)| u (public) >");
+                    }
+                    if(lineArray[1].equals("i")) {
+                        var.setVisibility(Variable.PRIVATE);
+                    }
+                    if(lineArray[1].equals("o")) {
+                        var.setVisibility(Variable.PROTECTED);
+                    }
+                    if(lineArray[1].equals("u")) {
+                        var.setVisibility(Variable.PUBLIC);
+                    }
 
-                if( ! (lineArray[1].equals("i") || lineArray[1].equals("o") || lineArray[1].equals("u")) ) {
-                    throw new Exception("Second token on variable definition line must be < i (private) | o (protected)| u (public) >");
+                    var.setType(lineArray[2]);
+                    var.setName(lineArray[3]);
+                    entityInfo.getVariables().add(var);
                 }
-                var.setVisibility("protected");
-                var.setType("long");
-                var.setName(line.substring(3));
-                entityInfo.getVariables().add(var);
-                continue;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            // p prefix means public, pr means private, all other variables assumed protected.
-//            if(line.startsWith("public")) {
-//                var.setVisibility("public");
-//                line = line.substring(7);
-//            }
-//            else if(line.startsWith("private")) {
-//                var.setVisibility("private");
-//                line = line.substring(8);
-//            }
-//            else if(line.startsWith("protected")){
-//                var.setVisibility("protected");
-//                line = line.substring(10);
-//            }
-
-            //TODO here one must get the correct pattern for the file type, as members varaibles have different structures
-            Pattern parseTypeAndNamePattern = Pattern.compile("\\s*(\\w+)\\s+(\\w+)\\s+(\\w+);\\s*");
-            Matcher typeAndName = parseTypeAndNamePattern.matcher(line);
-
-            if(typeAndName.matches()) { // WORKS FOR JAVA ONLY, need filetype by this stage to determine token recognisation function
-                var.setVisibility(typeAndName.group(1));
-                var.setType(typeAndName.group(2));
-                var.setName(typeAndName.group(3));
-            }
-            else {
-                System.out.println("No match " + line);
-            }
-
-            entityInfo.getVariables().add(var);
         }
         return entityInfo;
     }
