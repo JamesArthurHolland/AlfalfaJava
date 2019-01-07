@@ -1,0 +1,14 @@
+package {{NAMESPACE}};
+
+public class {{Entity}} {
+    {{VARS}}
+    protected {{type}} {{var}};
+    {{/VARS}}
+
+    public City(int id, String country, String name, float lat, float lon) {
+        this.id = id;
+        this.country = country;
+        this.name = name;
+        this.coordinates = PointDouble.create(lat, lon);
+    }
+}
