@@ -6,9 +6,10 @@ import java.util.Objects;
 
 public class EntityInfo {
     protected String name;
-//    protected String nameSpace;
-//    protected String dbName;
-    protected List<Variable> variables = new ArrayList<Variable>();
+    protected String nameSpace;
+    protected String dbName;
+    protected List<Variable> variables = new ArrayList<>();
+    protected List<Mapping> mappings = new ArrayList<>();
 
     public EntityInfo() {
     }
@@ -20,7 +21,7 @@ public class EntityInfo {
 
     public EntityInfo(String entity, String nameSpace, String dbName, List<Variable> variables) { // TODO remove
         this.name = entity;
-//        this.nameSpace = nameSpace;
+        this.nameSpace = nameSpace;
 //        this.dbName = dbName;
         this.variables = variables;
     }
@@ -42,6 +43,10 @@ public class EntityInfo {
         return false;
     }
 
+    public void addMapping(Mapping mapping) {
+        mappings.add(mapping);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -57,7 +62,8 @@ public class EntityInfo {
         }
         EntityInfo entityInfo = (EntityInfo) o;
         // field comparison
-        return Objects.equals(name, entityInfo.name)
+        return name.equals(entityInfo.name)
+                && nameSpace.equals(entityInfo.nameSpace)
                 && Objects.equals(variables, entityInfo.variables);
     }
 
@@ -75,5 +81,26 @@ public class EntityInfo {
     {
         return name;
     }
+
+    public void setDbName(String db)
+    {
+        dbName = db;
+    }
+
+    public String getDbName()
+    {
+        return dbName;
+    }
+
+    public void setNameSpace(String givenNameSpace)
+    {
+        nameSpace = givenNameSpace;
+    }
+
+    public String getNameSpace()
+    {
+        return nameSpace;
+    }
+
 
 }

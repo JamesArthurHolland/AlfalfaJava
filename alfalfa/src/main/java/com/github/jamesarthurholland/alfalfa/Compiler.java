@@ -6,6 +6,7 @@ import com.github.jamesarthurholland.alfalfa.header.HeaderValidationResponse;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,10 +44,14 @@ public class Compiler
 
 
 //
-            ArrayList<String> entityInfoArrayList = ConfigScanner.fileToArrayList(System.getProperty("user.dir") + "/name.afae");
+            ArrayList<String> entityInfoArrayList = StringUtils.fileToArrayList(System.getProperty("user.dir") + "/name.afae");
 //            ArrayList<String> entityInfoArrayList = ConfigScanner.fileToArrayList(workingDirectory + "/src/name.afae");
 
-            EntityInfo entityInfo = ConfigScanner.readConfig(entityInfoArrayList);
+            Config config = new Config();
+
+            ConfigScanner configScanner = new ConfigScanner();
+            Config.ConfigElement configElement = configScanner.readConfigFromLines(entityInfoArrayList);
+            config.addElement(configElement);
 
 //            EntityInfo entityInfo = new EntityInfo();
 //            Variable id = new Variable(true, "public", "long", "id");
@@ -63,7 +68,7 @@ public class Compiler
                 String fileName = file.getName();
                 ArrayList<String> lines = fileToArrayList(alfalfaDirectory + fileName);
 
-                CompilerResult compilerResult = Compiler.runAlfalfa(entityInfo, lines);
+                CompilerResult compilerResult = Compiler.runAlfalfa(configElement.getEntityInfo(), lines);
                 Compiler.writeCompilerResultToFile(workingDirectory, compilerResult);
             }
 //            ArrayList<String> evalResult = compiler.evaluateTree (parseTree, entityInfo);

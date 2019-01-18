@@ -5,17 +5,24 @@
       <artifact name="alfalfa" />
     </artifacts-to-build>
   </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Config.java" line="6" mnemonic="4" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d4e62cd5-395e-4d48-a45d-961440d78cd3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/out/production/classes/com/github/jamesarthurholland/alfalfa/Variable.class" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/out/production/classes/com/github/jamesarthurholland/alfalfa/Variable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/out/production/classes/com/github/jamesarthurholland/alfalfa/Compiler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/out/production/classes/com/github/jamesarthurholland/alfalfa/ConfigScanner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/out/production/classes/com/github/jamesarthurholland/alfalfa/EntityInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/out/production/classes/com/github/jamesarthurholland/alfalfa/EntityInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/out/test/classes/com/github/jamesarthurholland/alfalfa/ParserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/out/test/classes/com/github/jamesarthurholland/alfalfa/ParserTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/out/test/resources/Employee.txt" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/out/test/resources/Employee.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alfalfa/out/test/resources/Student.afae" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/out/test/resources/Student.afae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Alfalfa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/ConfigScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/ConfigScanner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Variable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/EntityInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/EntityInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/src/test/resources/Employee.txt" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/Employee.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alfalfa/src/test/resources/Student.afae" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/Student.afae" afterDir="false" />
     </list>
     <ignored path="AlfalfaJava.iws" />
@@ -68,38 +75,40 @@
     <session id="-1246086813">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="2" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="afae" value="62" />
+          <entry key="afae" value="229" />
+          <entry key="dummy" value="7" />
           <entry key="gradle" value="27" />
-          <entry key="java" value="2357" />
+          <entry key="java" value="5741" />
+          <entry key="txt" value="46" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="27" />
-          <entry key="JAVA" value="2357" />
-          <entry key="PLAIN_TEXT" value="62" />
+          <entry key="JAVA" value="5741" />
+          <entry key="PLAIN_TEXT" value="282" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="afae" value="1" />
+          <entry key="afae" value="2" />
           <entry key="class" value="1" />
           <entry key="gradle" value="3" />
           <entry key="gradlew" value="1" />
           <entry key="iml" value="1" />
-          <entry key="java" value="25" />
+          <entry key="java" value="33" />
           <entry key="txt" value="6" />
         </counts>
       </usages-collector>
@@ -108,8 +117,8 @@
           <entry key="CLASS" value="1" />
           <entry key="Groovy" value="3" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="25" />
-          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="JAVA" value="33" />
+          <entry key="PLAIN_TEXT" value="9" />
         </counts>
       </usages-collector>
     </session>
@@ -118,24 +127,14 @@
     <favorites_list name="AlfalfaJava" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5421687">
+    <splitter split-orientation="horizontal" split-proportion="0.698324">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Variable.java">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Mapping.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="967">
-                  <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
-                  <folding>
-                    <element signature="e#496#497#0" expanded="true" />
-                    <element signature="e#540#541#0" expanded="true" />
-                    <element signature="e#1697#1698#0" expanded="true" />
-                    <element signature="e#1730#1731#0" expanded="true" />
-                    <element signature="e#1768#1769#0" expanded="true" />
-                    <element signature="e#1798#1799#0" expanded="true" />
-                    <element signature="e#1854#1855#0" expanded="true" />
-                    <element signature="e#1892#1893#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="315">
+                  <caret line="21" selection-start-line="21" selection-end-line="21" />
                 </state>
               </provider>
             </entry>
@@ -143,29 +142,12 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/EntityInfo.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="12" selection-start-line="12" selection-end-line="12" />
+                <state relative-caret-position="90">
+                  <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#1513#1514#0" expanded="true" />
-                    <element signature="e#1545#1546#0" expanded="true" />
-                    <element signature="e#1598#1599#0" expanded="true" />
-                    <element signature="e#1634#1635#0" expanded="true" />
-                    <element signature="e#1671#1672#0" expanded="true" />
-                    <element signature="e#1700#1701#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/util/Objects.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="319">
-                  <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
-                  <folding>
-                    <element signature="e#1410#1411#0" expanded="true" />
-                    <element signature="e#1471#1472#0" expanded="true" />
+                    <element signature="e#1276#1277#0" expanded="true" />
+                    <element signature="e#1298#1299#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -174,12 +156,10 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="358">
-                  <caret line="62" selection-start-line="62" selection-end-line="62" />
+                <state relative-caret-position="196">
+                  <caret line="50" column="57" selection-start-line="50" selection-start-column="57" selection-end-line="50" selection-end-column="57" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#1412#1422#0" expanded="true" />
-                    <element signature="e#2276#2284#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -197,7 +177,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/nio/file/Files.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="399">
+                <state relative-caret-position="46680">
                   <caret line="3200" column="31" selection-start-line="3200" selection-start-column="31" selection-end-line="3200" selection-end-column="31" />
                 </state>
               </provider>
@@ -206,32 +186,35 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/ConfigScanner.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="184">
-                  <caret line="86" selection-start-line="86" selection-end-line="86" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
+                <state relative-caret-position="761">
+                  <caret line="128" column="40" selection-start-line="128" selection-start-column="40" selection-end-line="128" selection-end-column="40" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Alfalfa.java">
+            <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Config.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
-                  <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+                <state relative-caret-position="615">
+                  <caret line="41" selection-start-line="41" selection-end-line="41" />
                   <folding>
                     <element signature="imports" expanded="true" />
+                    <element signature="e#317#318#0" expanded="true" />
+                    <element signature="e#344#345#0" expanded="true" />
+                    <element signature="e#1120#1121#0" expanded="true" />
+                    <element signature="e#1161#1162#0" expanded="true" />
+                    <element signature="e#1212#1213#0" expanded="true" />
+                    <element signature="e#1251#1252#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="4425">
-                  <caret line="297" column="38" selection-start-line="297" selection-start-column="38" selection-end-line="297" selection-end-column="38" />
+                <state relative-caret-position="412">
+                  <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -242,34 +225,61 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java">
+            <entry file="file://$PROJECT_DIR$/alfalfa/src/test/resources/Employee.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="476">
-                  <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
+                <state relative-caret-position="120">
+                  <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/alfalfa/src/test/resources/Passport.afae">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="45">
+                  <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Tree.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="90">
+                  <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Sentence.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="30">
+                  <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Loop.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="255">
+                  <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
                   <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#2177#2185#0" expanded="true" />
+                    <element signature="e#448#449#0" expanded="true" />
+                    <element signature="e#475#476#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/alfalfa/src/test/resources/Employee.txt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="14" selection-start-line="14" selection-end-line="14" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/alfalfa/src/test/resources/Student.afae">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="90">
-                  <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+                <state relative-caret-position="15">
+                  <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
                 </state>
               </provider>
             </entry>
@@ -706,13 +716,18 @@
         <option value="$PROJECT_DIR$/alfalfa/src/main/java/ConfigScanner.java" />
         <option value="$PROJECT_DIR$/alfalfa/src/main/java/Variable.java" />
         <option value="$PROJECT_DIR$/alfalfa/src/test/java/ParserTest.java" />
-        <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/EntityInfo.java" />
-        <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java" />
         <option value="$PROJECT_DIR$/alfalfa/build.gradle" />
-        <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/ConfigScanner.java" />
         <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Variable.java" />
+        <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Mapping.java" />
+        <option value="$PROJECT_DIR$/alfalfa/src/test/resources/Passport.afae" />
         <option value="$PROJECT_DIR$/alfalfa/src/test/resources/Student.afae" />
+        <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/EntityInfo.java" />
+        <option value="$PROJECT_DIR$/alfalfa/src/test/resources/Employee.txt" />
+        <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/StringUtils.java" />
         <option value="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java" />
+        <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/ConfigScanner.java" />
+        <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Config.java" />
+        <option value="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java" />
       </list>
     </option>
   </component>
@@ -725,11 +740,9 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="x" value="-1920" />
-    <option name="y" value="-100" />
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -758,77 +771,6 @@
               <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
               <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
               <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
-              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
-              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
-              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
-              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
-              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
-              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
-              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
-              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
-              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -843,7 +785,17 @@
               <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
               <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AlfalfaJava" type="462c0819:PsiDirectoryNode" />
+              <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="alfalfa" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
@@ -851,7 +803,6 @@
               <item name="alfalfa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AlfalfaJava" type="b2602c69:ProjectViewProjectNode" />
@@ -873,7 +824,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546880120829" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547830295333" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/alfalfa/src/test/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -912,7 +863,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ParserTest.entityParseTest">
+  <component name="RunManager" selected="JUnit.com.github.jamesarthurholland.alfalfa in alfalfa_test">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -1130,19 +1081,19 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method v="2" />
     </configuration>
-    <configuration name="ParserTest.entityParseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="alfalfa_test" />
-      <option name="PACKAGE_NAME" value="com.github.jamesarthurholland.alfalfa" />
-      <option name="MAIN_CLASS_NAME" value="com.github.jamesarthurholland.alfalfa.ParserTest" />
-      <option name="METHOD_NAME" value="entityParseTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="PARAMETERS" value="" />
+    <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
+    <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="alfalfa_test" />
+      <option name="PACKAGE_NAME" value="com.github.jamesarthurholland.alfalfa" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -1191,11 +1142,11 @@
     <list>
       <item itemvalue="JUnit.tests" />
       <item itemvalue="Application.Compiler" />
-      <item itemvalue="JUnit.ParserTest.entityParseTest" />
+      <item itemvalue="JUnit.com.github.jamesarthurholland.alfalfa in alfalfa_test" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ParserTest.entityParseTest" />
+        <item itemvalue="JUnit.com.github.jamesarthurholland.alfalfa in alfalfa_test" />
         <item itemvalue="Application.Compiler" />
       </list>
     </recent_temporary>
@@ -1219,67 +1170,68 @@
       <workItem from="1546618137393" duration="109000" />
       <workItem from="1546618276299" duration="120000" />
       <workItem from="1546618421623" duration="4439000" />
-      <workItem from="1546869547638" duration="8591000" />
+      <workItem from="1546869547638" duration="22391000" />
+      <workItem from="1547825559867" duration="3997000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 35m 33s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.10 at 16h 55m 10s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 36m 21s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.10 at 16h 59m 35s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 36m 42s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.10 at 16h 59m 42s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 38m 00s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.10 at 17h 00m 10s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 38m 02s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.10 at 17h 00m 33s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 38m 16s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.10 at 17h 02m 02s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 38m 43s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.10 at 17h 03m 02s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 39m 07s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.10 at 17h 08m 04s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 42m 24s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.15 at 15h 24m 09s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ParserTest_entityParseTest - 2019.01.07 at 16h 42m 57s.xml">
-      <configuration name="ParserTest.entityParseTest" configurationId="JUnit" />
+    <history-entry file="com_github_jamesarthurholland_alfalfa_in_alfalfa_test - 2019.01.18 at 15h 32m 52s.xml">
+      <configuration name="com.github.jamesarthurholland.alfalfa in alfalfa_test" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47788000" />
+    <option name="totallyTimeSpent" value="65585000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="-100" width="1920" height="1080" extended-state="6" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20447284" />
-      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23504274" />
+      <window_info id="Structure" order="1" weight="0.24973376" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Palette&#9;" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32826748" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34346506" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49764943" weight="0.3768997" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32810867" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27795193" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49764943" weight="0.40856844" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49764943" weight="0.32826748" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50235057" side_tool="true" weight="0.32991013" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32117528" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.25914314" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Build" order="13" />
@@ -1326,45 +1278,63 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java</url>
-          <line>65</line>
+          <line>70</line>
           <properties />
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java</url>
-          <line>456</line>
+          <line>461</line>
           <properties />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java</url>
-          <line>370</line>
+          <line>375</line>
           <properties />
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java</url>
-          <line>376</line>
+          <line>381</line>
           <properties />
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java</url>
-          <line>369</line>
+          <line>374</line>
           <properties />
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java</url>
-          <line>33</line>
+          <line>40</line>
           <properties />
-          <option name="timeStamp" value="56" />
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/EntityInfo.java</url>
+          <line>64</line>
+          <properties />
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java</url>
-          <line>62</line>
+          <line>47</line>
           <properties />
-          <option name="timeStamp" value="69" />
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/ConfigScanner.java</url>
+          <line>119</line>
+          <properties />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java</url>
+          <line>66</line>
+          <properties />
+          <option name="timeStamp" value="90" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1376,15 +1346,6 @@
   <component name="editorHistoryManager">
     <entry file="jar:///usr/lib/jvm/java-8-oracle/jre/lib/ext/nashorn.jar!/jdk/nashorn/internal/runtime/regexp/joni/Regex.class" />
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/String.java" />
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Sentence.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Loop.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Node.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/io/FileReader.class" />
     <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/lang/Class.class" />
     <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/lang/Exception.class" />
@@ -1444,13 +1405,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Tree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/NoPatternDirectoryException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1462,27 +1416,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Alfalfa.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/util/Objects.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
-          <folding>
-            <element signature="e#1410#1411#0" expanded="true" />
-            <element signature="e#1471#1472#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1500,22 +1433,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/nio/file/Files.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="3200" column="31" selection-start-line="3200" selection-start-column="31" selection-end-line="3200" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alfalfa/settings.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java">
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Variable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4425">
-          <caret line="297" column="38" selection-start-line="297" selection-start-column="38" selection-end-line="297" selection-end-column="38" />
+        <state relative-caret-position="195">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1697#1698#0" expanded="true" />
+            <element signature="e#1730#1731#0" expanded="true" />
+            <element signature="e#1768#1769#0" expanded="true" />
+            <element signature="e#1798#1799#0" expanded="true" />
+            <element signature="e#1854#1855#0" expanded="true" />
+            <element signature="e#1892#1893#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/util/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+          <folding>
+            <element signature="e#1410#1411#0" expanded="true" />
+            <element signature="e#1471#1472#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1527,10 +1469,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/ConfigScanner.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/nio/file/Files.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        <state relative-caret-position="46680">
+          <caret line="3200" column="31" selection-start-line="3200" selection-start-column="31" selection-end-line="3200" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Mapping.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/test/resources/Passport.afae">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/test/resources/Student.afae">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/test/resources/Employee.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Sentence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Loop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding>
+            <element signature="e#448#449#0" expanded="true" />
+            <element signature="e#475#476#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="50" column="57" selection-start-line="50" selection-start-column="57" selection-end-line="50" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1539,59 +1558,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/EntityInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1513#1514#0" expanded="true" />
-            <element signature="e#1545#1546#0" expanded="true" />
-            <element signature="e#1598#1599#0" expanded="true" />
-            <element signature="e#1634#1635#0" expanded="true" />
-            <element signature="e#1671#1672#0" expanded="true" />
-            <element signature="e#1700#1701#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Variable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="967">
-          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
-          <folding>
-            <element signature="e#496#497#0" expanded="true" />
-            <element signature="e#540#541#0" expanded="true" />
-            <element signature="e#1697#1698#0" expanded="true" />
-            <element signature="e#1730#1731#0" expanded="true" />
-            <element signature="e#1768#1769#0" expanded="true" />
-            <element signature="e#1798#1799#0" expanded="true" />
-            <element signature="e#1854#1855#0" expanded="true" />
-            <element signature="e#1892#1893#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/test/resources/Employee.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2177#2185#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alfalfa/src/test/resources/Student.afae">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1276#1277#0" expanded="true" />
+            <element signature="e#1298#1299#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Alfalfa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#317#318#0" expanded="true" />
+            <element signature="e#344#345#0" expanded="true" />
+            <element signature="e#1120#1121#0" expanded="true" />
+            <element signature="e#1161#1162#0" expanded="true" />
+            <element signature="e#1212#1213#0" expanded="true" />
+            <element signature="e#1251#1252#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/ConfigScanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="761">
+          <caret line="128" column="40" selection-start-line="128" selection-start-column="40" selection-end-line="128" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

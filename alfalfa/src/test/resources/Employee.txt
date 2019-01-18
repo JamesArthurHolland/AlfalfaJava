@@ -2,7 +2,12 @@ package {{NAMESPACE}};
 
 public class {{Entity}} {
     {{VARS}}
+    {{NO-MAP}}
     protected {{type}} {{var}};
+    {{/NO-MAP}}
+    {{121}}
+
+    {{/121}}
     {{/VARS}}
 
     public City(int id, String country, String name, float lat, float lon) {
