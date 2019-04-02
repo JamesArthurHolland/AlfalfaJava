@@ -77,11 +77,14 @@ public class ParserTest {
 
         ArrayList<String> arrayList = readFileToArrayList("src/test/resources/Passport.afae");
 
-        ConfigScanner configScanner = new ConfigScanner();
-        Config.ConfigElement config = configScanner.readConfigFromLines(arrayList);
-        EntityInfo scannedEntity = config.getEntityInfo();
 
-//        assertTrue(entityInfo.equals(scannedEntity));
+        Config config = new Config();
+        ConfigScanner configScanner = new ConfigScanner();
+        Config.ConfigElement configElement = configScanner.readConfigFromLines(arrayList);
+        EntityInfo scannedEntity = configElement.getEntityInfo();
+        config.addElement(configElement);
+
+        assertTrue(false);
     }
 
 

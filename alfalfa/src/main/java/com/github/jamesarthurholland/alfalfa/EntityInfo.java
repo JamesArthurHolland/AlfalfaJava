@@ -43,6 +43,11 @@ public class EntityInfo {
         return false;
     }
 
+    public String getFullyQualifedName()
+    {
+        return nameSpace + "." + name;
+    }
+
     public void addMapping(Mapping mapping) {
         mappings.add(mapping);
     }

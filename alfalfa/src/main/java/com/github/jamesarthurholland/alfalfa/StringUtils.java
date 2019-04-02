@@ -26,4 +26,25 @@ public class StringUtils {
             return list;
         }
     }
+
+    public static String camelToLowerUnderScore(String variableString)
+    {
+        String StringParts = variableString.replaceAll("([A-Z])", "_$1");
+        return StringParts.toLowerCase();
+    }
+
+    public static String camelToUpperUnderScore(String variableString)
+    {
+        String StringParts = variableString.replaceAll("([A-Z])", "_$1");
+        return StringParts.toUpperCase();
+    }
+
+    public static String uppercaseFirst(String s)
+    {
+        if (s.isEmpty())
+        {
+            return "";
+        }
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
+    }
 }

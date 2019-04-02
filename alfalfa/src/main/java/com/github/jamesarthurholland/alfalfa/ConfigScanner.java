@@ -110,7 +110,7 @@ class ConfigScanner
                             String mappedToEntity = mappingValue.substring(0, mappingValueArrayLastDotIndex);
                             String mappedToVariable = mappingValue.substring(mappingValueArrayLastDotIndex + 1);
 
-                            Mapping mapping = new Mapping(entityName, mappedToEntity, varName, mappedToVariable);
+                            Mapping mapping = new Mapping(entityInfo.getFullyQualifedName(), mappedToEntity, varName, mappedToVariable);
 
                             mappings.add(mapping);
 

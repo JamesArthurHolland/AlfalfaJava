@@ -2,7 +2,7 @@ package com.github.jamesarthurholland.alfalfa;
 
 class Loop extends Node
 {
-    public boolean leftTreeFixed = false;
+    public boolean leftTreeFixed;
     public static String type = "LOOP";
 
     public Loop()

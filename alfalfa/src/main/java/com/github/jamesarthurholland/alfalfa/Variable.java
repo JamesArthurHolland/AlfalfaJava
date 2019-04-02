@@ -8,6 +8,12 @@ public class Variable
     public static final String PROTECTED = "protected";
     public static final String PRIVATE = "private";
 
+    public static final String[] VariableConditionals = {
+      "KEY",
+      "121",
+      ""
+    };
+
     protected boolean primary;
     protected String visibility;
     protected String type;

@@ -7,7 +7,10 @@ public class Config {
     private ArrayList<EntityInfo> entityInfo;
     private HashMap<String, ArrayList<Mapping>> mappingsForEntityName;
 
-    public Config() {}
+    public Config() {
+        this.entityInfo = new ArrayList<>();
+        this.mappingsForEntityName = new HashMap<>();
+    }
 
     public Config(ArrayList<EntityInfo> info, ArrayList<Mapping> mappings) {
         this.entityInfo = info;

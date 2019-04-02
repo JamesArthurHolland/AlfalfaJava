@@ -2,9 +2,7 @@ package {{NAMESPACE}};
 
 public class {{Entity}} {
     {{VARS}}
-    {{NO-MAP}}
-    protected {{type}} {{var}};
-    {{/NO-MAP}}
+    {{NO-MAP}}protected {{type}} {{var}};{{/NO-MAP}}
     {{121}}
 
     {{/121}}
