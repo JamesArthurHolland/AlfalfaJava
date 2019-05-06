@@ -1,6 +1,6 @@
-package com.github.jamesarthurholland.alfalfa;
+package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
-import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.Node;
+import com.github.jamesarthurholland.alfalfa.SentenceEvaluator;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Loop;
 import com.github.jamesarthurholland.alfalfa.model.Sentence;
@@ -77,7 +77,7 @@ public class PatternASTree
         ArrayList<String> eval = new ArrayList<String> ();
         if (node instanceof Sentence) {
             Sentence s = (Sentence) node;
-            String outputSentence = evaluateForEntityReplacements(s.getSentenceString (), info);
+            String outputSentence = SentenceEvaluator.evaluateForEntityReplacements(s.getSentenceString (), info);
 //            outputSentence = evaluateForNamespace(outputSentence, info);
             eval.add (outputSentence);
         }

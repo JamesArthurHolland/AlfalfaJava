@@ -81,6 +81,7 @@ public class AlfalfaMain implements Callable<Void>
         catch (NoEntityFileException e) {
             System.out.println(e.getMessage());
         }
+        return null;
     }
 
     protected static ArrayList<File> getFiles(File[] allFiles, String extension)

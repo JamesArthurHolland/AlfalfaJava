@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Config {
@@ -17,14 +18,19 @@ public class Config {
 
     public Config(File[] modelFiles) {
         // getMappingStrings
-        Arrays.stream(modelFiles)
-            .filter(StringUtils::fileIsModelFile)
-            .allMatch(file -> {
-                ModelScanner.readConfigFromFile(file);
-            });
+
+        ArrayList<Config.Model> models = streamFilterModelFiles(modelFiles)
+            .map(ModelScanner::readConfigFromFile)
+            .collect(Collectors.toCollection(ArrayList::new));
 
         // getModelFiles
         // map models to models
+    }
+
+    protected Stream<File> streamFilterModelFiles(File [] allFiles)
+    {
+        return Arrays.stream(allFiles)
+                .filter(StringUtils::fileIsModelFile);
     }
 
     public Config(ArrayList<EntityInfo> info, ArrayList<Mapping> mappings) {

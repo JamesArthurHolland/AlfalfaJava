@@ -1,4 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.header;
+package com.github.jamesarthurholland.alfalfa.configurationBuilder.header;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

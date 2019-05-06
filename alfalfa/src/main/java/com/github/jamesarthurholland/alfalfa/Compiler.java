@@ -1,8 +1,9 @@
 package com.github.jamesarthurholland.alfalfa;
 
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.PatternASTree;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.header.InvalidHeaderException;
-import com.github.jamesarthurholland.alfalfa.header.HeaderHandler;
-import com.github.jamesarthurholland.alfalfa.header.HeaderValidationResponse;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.header.HeaderHandler;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.header.HeaderValidationResponse;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Loop;
 import com.github.jamesarthurholland.alfalfa.model.Sentence;
@@ -28,7 +29,6 @@ public class Compiler
             lines.remove(0);
             this.header = headerValidationResponse;
             this.templateLines = lines;
-            parseTree = new PatternASTree();
         }
         else {
             throw new InvalidHeaderException();

@@ -1,4 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.header;
+package com.github.jamesarthurholland.alfalfa.configurationBuilder.header;
 
 /**
  * Created by jamie on 03/07/16.
