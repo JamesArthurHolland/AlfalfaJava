@@ -1,6 +1,0 @@
-com.exampleapp.test.Student
-k o long id
-v o String firstName
-v o String lastName
-v o String course
-v o String passport
