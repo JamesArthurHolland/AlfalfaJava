@@ -6,6 +6,8 @@ import com.github.jamesarthurholland.alfalfa.model.Mapping;
 import com.google.common.io.Files;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,6 +17,8 @@ import java.util.stream.Stream;
 public class Config {
     private ArrayList<EntityInfo> entityInfoList;
     private HashMap<String, ArrayList<Mapping>> mappingsForEntityName;
+
+    public static final String ALFALFA_DOT_FOLDER = ".alfalfa";
 
     public Config(File[] modelFiles) {
         // getMappingStrings
@@ -61,6 +65,18 @@ public class Config {
 
     public ArrayList<EntityInfo> getEntityInfo() {
         return entityInfoList;
+    }
+
+    public static File readDotAlfalfaDirectory(String path) throws NoDotAlfalfaDirectoryException
+    {
+        Path pathWithAlfalfa = Paths.get(path + "/" + ALFALFA_DOT_FOLDER);
+
+        File alfalfaFolder = pathWithAlfalfa.toFile();
+
+        if( ! alfalfaFolder.exists() || ! alfalfaFolder.isDirectory()) {
+            throw new NoDotAlfalfaDirectoryException();
+        }
+        return alfalfaFolder;
     }
 
     protected static class Model
