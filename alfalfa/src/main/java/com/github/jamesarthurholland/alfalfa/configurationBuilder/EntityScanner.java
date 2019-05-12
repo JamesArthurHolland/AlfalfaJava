@@ -4,13 +4,15 @@ import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Mapping;
 import com.github.jamesarthurholland.alfalfa.model.Variable;
 import com.google.common.base.Charsets;
-import com.google.common.io.Files;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Optional;
 
-public class ModelScanner
+public class EntityScanner
 {
     private static boolean isVariableDefinitionSemanticallyCorrect() // TODO
     {
@@ -32,53 +34,40 @@ public class ModelScanner
 
 
 
-    public static Config.Model readConfigFromFile(File file)
+    public static EntityInfo readConfigFromFile(Path path)
     {
         try {
-            ArrayList<String> entity = (ArrayList) Files.readLines(file, Charsets.UTF_8);
+//            ArrayList<String> entity = (ArrayList) Files.readLines(path, Charsets.UTF_8);
             EntityInfo entityInfo = new EntityInfo(); // TODO bad
 //        ArrayList<String> name = fileToArrayList(fileName);
             boolean entityParsed = false;
             String entityName = "";
             ArrayList<Mapping> mappings = new ArrayList<>();
 
-            for(String line : entity)
-            {
-                String[] lineArray = line.split("[ ]+");
-
-                // Get entity name from given config file, if there is one.
-                if(entityParsed == false)  {
-                    int lastDotIndex = line.lastIndexOf(".");
-                    entityName = line.substring( lastDotIndex + 1);
-                    if( lastDotIndex == -1 || ! entityName.matches("\\w+") ){
-                        entityName = line;
-                    }
-                    else{
-                        entityInfo.setNameSpace(line.substring(0, lastDotIndex));
-                    }
-
-                    entityInfo.setName(entityName);
-                    entityParsed = true;
-                    continue;
+            Optional<String> qualifiedNameOptional = Files.lines(path).findFirst();
+            if(qualifiedNameOptional.isPresent()) {
+                String qualifiedName = qualifiedNameOptional.get();
+                int lastDotIndex = qualifiedName.lastIndexOf(".");
+                entityName = qualifiedName.substring( lastDotIndex + 1);
+                if( lastDotIndex == -1 || ! entityName.matches("\\w+") ){
+                    entityName = qualifiedName;
                 }
-                else {
+                else{
+                    entityInfo.setNameSpace(qualifiedName.substring(0, lastDotIndex));
+                }
+                entityInfo.setName(entityName);
+            }
 
+
+
+            Files.lines(path)
+                .skip(1)
+                .map(line -> line.split("[ ]+"))
+                .forEach(lineArray -> {
                     Variable var = new Variable();
-                    //            String chop = line;
-
-                    // Get the name's key variable ( id in most cases)
-                    if(line.startsWith("n"))  {
-                        entityInfo.setNameSpace(lineArray[1]);
-                        continue;
-                    }
-
-                    if(line.startsWith("-db"))  {
-                        //                entityInfo.setDbName(line.substring(4));
-                        continue;
-                    }
 
                     try {
-                        if(ModelScanner.isVariableDefinition(lineArray))  {
+                        if(EntityScanner.isVariableDefinition(lineArray))  {
                             if(lineArray[0].equals("k")) { // TODO check for 2 keys.. composite key?
                                 var.setPrimary(true);
                             }
@@ -127,15 +116,13 @@ public class ModelScanner
                             }
 
                             entityInfo.getVariables().add(var);
-                            continue;
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
+                }); // TODO create entity at return statement, encapsulation
 
-            }
-            return new Config.Model(entityInfo, mappings);
+            return entityInfo;
         } catch (IOException e) {
             e.printStackTrace();
         }

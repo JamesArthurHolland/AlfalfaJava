@@ -1,13 +1,13 @@
 package com.github.jamesarthurholland.alfalfa;
 
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.Config;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.ModelScanner;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.NoEntityFileException;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.header.InvalidHeaderException;
 import com.google.common.io.Files;
 import picocli.CommandLine;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
@@ -15,8 +15,8 @@ import java.util.concurrent.Callable;
         name = "afa", mixinStandardHelpOptions = true, version = "checksum 3.0")
 public class AlfalfaMain implements Callable<Void>
 {
-    @CommandLine.Option(names = { "-m", "--model" }, description = "Models folder or model file.")
-    private String modelDirectoryString = "";
+    @CommandLine.Parameters(arity = "1", paramLabel = "Runtime directory", description = "Working directory to run Alfalfa.")
+    private String workingDirectory = "";
 
     @CommandLine.Option(names = { "-t", "--template" }, description = "Templates folder or template file.")
     private String patternDirectoryString = "";
@@ -35,14 +35,15 @@ public class AlfalfaMain implements Callable<Void>
             File patternFolder = new File(patternDirectoryString);
             ArrayList<File> listOfFiles = getFiles(patternFolder.listFiles(), StringUtils.TEMPLATE_EXTENSION);
 
-            File templateFolder = new File(modelDirectoryString);
+            File templateFolder = new File(workingDirectory);
 
 
 //
             ArrayList<String> entityInfoArrayList = StringUtils.fileToArrayList(System.getProperty("user.dir") + "/name.afae");
-//            ArrayList<String> entityInfoArrayList = ModelScanner.fileToArrayList(workingDirectory + "/src/name.afae");
+//            ArrayList<String> entityInfoArrayList = EntityScanner.fileToArrayList(workingDirectory + "/src/name.afae");
 
-            Config config = new Config(templateFolder.listFiles());
+
+            Config config = new Config(Paths.get(workingDirectory));
 
 //            Config.ConfigElement configElement = modelScanner.readConfigFromLines(entityInfoArrayList);
 //            config.addElement(configElement);

@@ -4,6 +4,7 @@ import com.github.jamesarthurholland.alfalfa.configurationBuilder.NoEntityFileEx
 import com.google.common.io.Files;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class StringUtils {
@@ -34,9 +35,9 @@ public class StringUtils {
         }
     }
 
-    public static boolean fileIsModelFile(File file)
+    public static boolean fileIsModelFile(Path path)
     {
-        return Files.getFileExtension(file.getName()).equals(StringUtils.MODEL_EXTENSION);
+        return Files.getFileExtension(path.toString()).equals(StringUtils.MODEL_EXTENSION);
     }
 
     public static String camelToLowerUnderScore(String variableString)

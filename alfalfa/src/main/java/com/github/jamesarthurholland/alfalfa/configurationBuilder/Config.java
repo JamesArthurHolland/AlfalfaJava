@@ -3,9 +3,10 @@ package com.github.jamesarthurholland.alfalfa.configurationBuilder;
 import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Mapping;
-import com.google.common.io.Files;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -20,21 +21,31 @@ public class Config {
 
     public static final String ALFALFA_DOT_FOLDER = ".alfalfa";
 
-    public Config(File[] modelFiles) {
+    public Config(Path workingDirectory) throws NoDotAlfalfaDirectoryException {
         // getMappingStrings
 
-        ArrayList<Config.Model> models = streamFilterModelFiles(modelFiles)
-            .map(ModelScanner::readConfigFromFile)
+        if(!hasDotAlfalfaDirectory(workingDirectory)) {
+            throw new NoDotAlfalfaDirectoryException();
+        }
+
+        Path dotAlfalfaPath = workingDirectory.resolve(ALFALFA_DOT_FOLDER);
+
+        ArrayList<Config.Model> models = streamFilterModelFiles(dotAlfalfaPath)
+            .map(EntityScanner::readConfigFromFile)
             .collect(Collectors.toCollection(ArrayList::new));
 
         // getModelFiles
         // map models to models
     }
 
-    protected Stream<File> streamFilterModelFiles(File [] allFiles)
+    protected Stream<Path> streamFilterModelFiles(Path path)
     {
-        return Arrays.stream(allFiles)
-                .filter(StringUtils::fileIsModelFile);
+        try {
+            Files.list(path)
+                    .filter(StringUtils::fileIsModelFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Config(ArrayList<EntityInfo> info, ArrayList<Mapping> mappings) {
@@ -67,19 +78,17 @@ public class Config {
         return entityInfoList;
     }
 
-    public static File readDotAlfalfaDirectory(String path) throws NoDotAlfalfaDirectoryException
+    public static boolean hasDotAlfalfaDirectory(Path path)
     {
-        Path pathWithAlfalfa = Paths.get(path + "/" + ALFALFA_DOT_FOLDER);
+        Path pathWithAlfalfa = path.resolve(ALFALFA_DOT_FOLDER);
 
-        File alfalfaFolder = pathWithAlfalfa.toFile();
-
-        if( ! alfalfaFolder.exists() || ! alfalfaFolder.isDirectory()) {
-            throw new NoDotAlfalfaDirectoryException();
+        if( Files.exists(pathWithAlfalfa) && Files.isDirectory(pathWithAlfalfa)) {
+            return true;
         }
-        return alfalfaFolder;
+        return false;
     }
 
-    protected static class Model
+    public static class Model
     {
         private EntityInfo entityInfo;
         private ArrayList <Mapping> mappings;
