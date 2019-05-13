@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +21,6 @@ public class ConfigScanTests {
 
     @Test
     public void noDotAlfalfaDirectoryExceptionTest() {
-        assertFalse(Config.hasDotAlfalfaDirectory("src/test/resources/empty_dir"));
+        assertFalse(Config.hasDotAlfalfaDirectory(Paths.get("src/test/resources/model/empty_dir")));
     }
 }

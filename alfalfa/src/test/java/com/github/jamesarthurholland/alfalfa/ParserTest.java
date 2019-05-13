@@ -6,11 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.Config;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.EntityScanner;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Variable;
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,7 @@ public class ParserTest {
         studentVars.add(new Variable(false, "protected", "String", "course"));
         studentVars.add(new Variable(false, "protected", "String", "passport"));
 
-        return new EntityInfo("Student", "com.exampleapp.test", "", studentVars);
+        return new EntityInfo("Student", "com.exampleapp.test", studentVars);
     }
 
     private static EntityInfo getPassportEntity()  {
@@ -36,21 +38,21 @@ public class ParserTest {
         vars.add(new Variable(false, "protected", "int", "countryOfIssue"));
         vars.add(new Variable(false, "protected", "long", "studentId"));
 
-        return new EntityInfo("Passport", "com.exampleapp.test", "", vars);
+        return new EntityInfo("Passport", "com.exampleapp.test", vars);
     }
 
-
-    @Test
-    public void testAllStructs() {
-        EntityInfo entityInfo = getStudentEntity();
-    }
 
 //    @Test
-//    public void simpleEntityStudentParseTest() {
+//    public void testAllStructs() {
 //        EntityInfo entityInfo = getStudentEntity();
-//        EntityInfo scannedEntity = getConfigFromFilename("src/test/resources/Student.afae").getEntityInfo();
-//        assertTrue(scannedEntity.equals(entityInfo));
 //    }
+
+    @Test
+    public void simpleEntityStudentParseTest() {
+        EntityInfo entityInfo = getStudentEntity();
+        EntityInfo scannedEntity = EntityScanner.readConfigFromFile(Paths.get("src/test/resources/model/Student.afae"));
+        assertTrue(scannedEntity.equals(entityInfo));
+    }
 //
 //    @Test
 //    public void simpleEntityPassportParseTest() {

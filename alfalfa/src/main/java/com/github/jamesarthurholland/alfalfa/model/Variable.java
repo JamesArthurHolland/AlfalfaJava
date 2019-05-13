@@ -19,9 +19,6 @@ public class Variable
     protected String type;
     protected String name;
 
-    public Variable(){
-    }
-
     public Variable(boolean primary, String visibility, String type, String name)
     {
         this.primary = primary;

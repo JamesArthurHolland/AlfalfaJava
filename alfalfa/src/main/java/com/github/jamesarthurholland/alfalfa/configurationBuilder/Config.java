@@ -30,9 +30,9 @@ public class Config {
 
         Path dotAlfalfaPath = workingDirectory.resolve(ALFALFA_DOT_FOLDER);
 
-        ArrayList<Config.Model> models = streamFilterModelFiles(dotAlfalfaPath)
-            .map(EntityScanner::readConfigFromFile)
-            .collect(Collectors.toCollection(ArrayList::new));
+//        ArrayList<Entity> entity = streamFilterModelFiles(dotAlfalfaPath)
+//            .map(EntityScanner::readConfigFromFile)
+//            .collect(Collectors.toCollection(ArrayList::new));
 
         // getModelFiles
         // map models to models
@@ -41,11 +41,12 @@ public class Config {
     protected Stream<Path> streamFilterModelFiles(Path path)
     {
         try {
-            Files.list(path)
+            return Files.list(path)
                     .filter(StringUtils::fileIsModelFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null; // TODO wrong I think
     }
 
     public Config(ArrayList<EntityInfo> info, ArrayList<Mapping> mappings) {

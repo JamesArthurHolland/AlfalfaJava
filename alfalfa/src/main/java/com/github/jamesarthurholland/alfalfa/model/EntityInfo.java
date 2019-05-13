@@ -7,7 +7,6 @@ import java.util.Objects;
 public class EntityInfo {
     protected String name;
     protected String nameSpace;
-    protected String dbName;
     protected List<Variable> variables = new ArrayList<>();
     protected List<Mapping> mappings = new ArrayList<>();
 
@@ -19,10 +18,9 @@ public class EntityInfo {
         this.variables = variables;
     }
 
-    public EntityInfo(String entity, String nameSpace, String dbName, List<Variable> variables) { // TODO remove
+    public EntityInfo(String entity, String nameSpace, List<Variable> variables) { // TODO remove
         this.name = entity;
         this.nameSpace = nameSpace;
-//        this.dbName = dbName;
         this.variables = variables;
     }
 
@@ -85,16 +83,6 @@ public class EntityInfo {
     public String getName()
     {
         return name;
-    }
-
-    public void setDbName(String db)
-    {
-        dbName = db;
-    }
-
-    public String getDbName()
-    {
-        return dbName;
     }
 
     public void setNameSpace(String givenNameSpace)
