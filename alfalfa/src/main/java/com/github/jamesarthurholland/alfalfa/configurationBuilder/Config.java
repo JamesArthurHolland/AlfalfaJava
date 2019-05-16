@@ -31,7 +31,7 @@ public class Config {
         Path dotAlfalfaPath = workingDirectory.resolve(ALFALFA_DOT_FOLDER);
 
 //        ArrayList<Entity> entity = streamFilterModelFiles(dotAlfalfaPath)
-//            .map(EntityScanner::readConfigFromFile)
+//            .map(ModelFileScanner::readConfigFromFile)
 //            .collect(Collectors.toCollection(ArrayList::new));
 
         // getModelFiles

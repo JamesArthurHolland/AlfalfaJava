@@ -2,17 +2,11 @@ package com.github.jamesarthurholland.alfalfa;
 
 
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.Config;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.EntityScanner;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.ModelFileScanner;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Variable;
 import org.junit.jupiter.api.Test;
@@ -50,7 +44,7 @@ public class ParserTest {
     @Test
     public void simpleEntityStudentParseTest() {
         EntityInfo entityInfo = getStudentEntity();
-        EntityInfo scannedEntity = EntityScanner.readConfigFromFile(Paths.get("src/test/resources/model/Student.afae"));
+        EntityInfo scannedEntity = ModelFileScanner.readConfigFromFile(Paths.get("src/test/resources/model/Student.afae"));
         assertTrue(scannedEntity.equals(entityInfo));
     }
 //

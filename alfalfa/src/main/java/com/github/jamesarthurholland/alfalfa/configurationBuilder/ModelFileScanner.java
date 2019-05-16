@@ -3,18 +3,17 @@ package com.github.jamesarthurholland.alfalfa.configurationBuilder;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Mapping;
 import com.github.jamesarthurholland.alfalfa.model.Variable;
-import com.google.common.base.Charsets;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class EntityScanner
+public class ModelFileScanner
 {
     public static final HashMap<String, String> visibilityForLetterMap = new HashMap<>();
 
@@ -37,7 +36,66 @@ public class EntityScanner
         return true;
     }
 
+    public static boolean isMappingLine(String[] lineArray) {
+        return lineArray.length > 4;
+    }
 
+    public static HashMap<String, HashSet<Mapping>> readMappingsFromFile(Path path)
+    {
+        try {
+            Optional<String> qualifiedNameOptional = Files.lines(path).findFirst();
+            if(qualifiedNameOptional.isPresent()) {
+                final String qualifiedName = qualifiedNameOptional.get();
+
+                HashSet<Mapping> mappings = Files.lines(path)
+                    .skip(1)
+                    .map(line -> line.split("[ ]+"))
+                    .filter(ModelFileScanner::isVariableDefinition)
+                    .filter(ModelFileScanner::isMappingLine)
+                    .map(lineArray -> {
+                        String varName = lineArray[3];
+
+                        String mappingDefinition = lineArray[4];
+                        String[] mappingKeyArray = mappingDefinition.split("<-");
+                        Mapping.Type mappingType = Mapping.Type.ONE_TO_ONE;
+
+                        if(mappingKeyArray[0].equals("121")) { // TODO error for unknown mapping code
+                            mappingType = Mapping.Type.ONE_TO_ONE;
+                        }
+
+                        String mappingValue = mappingKeyArray[1]; // TODO error check mapping to
+
+                        int mappingValueArrayLastDotIndex = mappingValue.lastIndexOf(".");
+                        String mappedFromEntity = mappingValue.substring(0, mappingValueArrayLastDotIndex);
+                        String mappedFromVariable = mappingValue.substring(mappingValueArrayLastDotIndex + 1);
+
+                        return new Mapping(mappedFromEntity, qualifiedName, mappedFromVariable, varName, mappingType);
+                    })
+                    .collect(Collectors.toCollection(HashSet::new)); // TODO create entity at return statement, encapsulation
+
+                HashMap<String, HashSet<Mapping>> mappingsForName = new HashMap<>();
+                mappingsForName.put(qualifiedName, mappings);
+
+                mappings.forEach(mapping -> {
+                    String otherQualifedName = mapping.getParentEntityName();
+                    if(mapping.getParentEntityName() == qualifiedName) {
+                        otherQualifedName = mapping.getChildEntityName();
+                    }
+                    HashSet otherQualifiedNameMappings = mappingsForName.getOrDefault(otherQualifedName, new HashSet<>());
+                    otherQualifiedNameMappings.add(mapping);
+
+                    mappingsForName.put(otherQualifedName, otherQualifiedNameMappings);
+                });
+
+                return mappingsForName;
+            }
+        } catch (MalformedVariableLineException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static EntityInfo readConfigFromFile(Path path)
     {
@@ -63,7 +121,7 @@ public class EntityScanner
             ArrayList<Variable> variables = Files.lines(path)
                 .skip(1)
                 .map(line -> line.split("[ ]+"))
-                .filter(EntityScanner::isVariableDefinition)
+                .filter(ModelFileScanner::isVariableDefinition)
                 .map(lineArray -> {
                     boolean varIsPrimary = lineArray[0].equals("k"); // TODO check for 2 keys.. composite key?
 
@@ -72,29 +130,6 @@ public class EntityScanner
 
                     String varType = lineArray[2];
                     String varName = lineArray[3];
-
-                    // Mapping
-                    if( lineArray.length > 4 ) {
-                        String mappingDefinition = lineArray[4];
-                        String[] mappingKeyArray = mappingDefinition.split("->");
-                        Mapping.Type mappingType;
-
-                        if(mappingKeyArray[0].equals("121")) { // TODO error for unknown mapping code
-                            mappingType = Mapping.Type.ONE_TO_ONE;
-                        }
-
-                        String mappingValue = mappingKeyArray[1]; // TODO error check mapping to
-
-                        int mappingValueArrayLastDotIndex = mappingValue.lastIndexOf(".");
-                        String mappedToEntity = mappingValue.substring(0, mappingValueArrayLastDotIndex);
-                        String mappedToVariable = mappingValue.substring(mappingValueArrayLastDotIndex + 1);
-
-                        Mapping mapping = new Mapping(entityInfo.getFullyQualifedName(), mappedToEntity, varName, mappedToVariable);
-
-                        mappings.add(mapping);
-
-                        System.out.println();
-                    }
 
                     return new Variable(varIsPrimary, visibility, varType, varName);
                 })

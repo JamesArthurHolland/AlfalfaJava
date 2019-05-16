@@ -40,7 +40,7 @@ public class AlfalfaMain implements Callable<Void>
 
 //
             ArrayList<String> entityInfoArrayList = StringUtils.fileToArrayList(System.getProperty("user.dir") + "/name.afae");
-//            ArrayList<String> entityInfoArrayList = EntityScanner.fileToArrayList(workingDirectory + "/src/name.afae");
+//            ArrayList<String> entityInfoArrayList = ModelFileScanner.fileToArrayList(workingDirectory + "/src/name.afae");
 
 
             Config config = new Config(Paths.get(workingDirectory));
