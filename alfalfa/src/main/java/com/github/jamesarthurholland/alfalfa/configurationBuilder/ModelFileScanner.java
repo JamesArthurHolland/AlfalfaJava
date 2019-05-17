@@ -47,6 +47,8 @@ public class ModelFileScanner
             if(qualifiedNameOptional.isPresent()) {
                 final String qualifiedName = qualifiedNameOptional.get();
 
+                HashMap<String, HashSet<Mapping>> mappingsForName = new HashMap<>();
+
                 HashSet<Mapping> mappings = Files.lines(path)
                     .skip(1)
                     .map(line -> line.split("[ ]+"))
@@ -69,23 +71,20 @@ public class ModelFileScanner
                         String mappedFromEntity = mappingValue.substring(0, mappingValueArrayLastDotIndex);
                         String mappedFromVariable = mappingValue.substring(mappingValueArrayLastDotIndex + 1);
 
-                        return new Mapping(mappedFromEntity, qualifiedName, mappedFromVariable, varName, mappingType);
-                    })
-                    .collect(Collectors.toCollection(HashSet::new)); // TODO create entity at return statement, encapsulation
 
-                HashMap<String, HashSet<Mapping>> mappingsForName = new HashMap<>();
+                        Mapping mapping = new Mapping(mappedFromEntity, qualifiedName, mappedFromVariable, varName, mappingType); // TODO create constructor that takes linearray
+
+                        HashSet<Mapping> otherQualifiedNameMappings = mappingsForName.getOrDefault(mappedFromEntity, new HashSet<>()); // TODO can the following 2 lines be 1 line? yes if getOrDefault creates key
+                        otherQualifiedNameMappings.add(mapping);
+                        mappingsForName.put(mappedFromEntity, otherQualifiedNameMappings);
+
+                        return mapping;
+                    })
+                    .collect(Collectors.toCollection(HashSet::new)); // TODO add to hashset same as the "other entity"
+
+
                 mappingsForName.put(qualifiedName, mappings);
 
-                mappings.forEach(mapping -> {
-                    String otherQualifedName = mapping.getParentEntityName();
-                    if(mapping.getParentEntityName() == qualifiedName) {
-                        otherQualifedName = mapping.getChildEntityName();
-                    }
-                    HashSet otherQualifiedNameMappings = mappingsForName.getOrDefault(otherQualifedName, new HashSet<>());
-                    otherQualifiedNameMappings.add(mapping);
-
-                    mappingsForName.put(otherQualifedName, otherQualifiedNameMappings);
-                });
 
                 return mappingsForName;
             }
