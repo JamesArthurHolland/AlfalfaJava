@@ -2,16 +2,29 @@ package com.github.jamesarthurholland.alfalfa;
 
 
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 
+import com.github.jamesarthurholland.alfalfa.PatternImporter;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.ModelFileScanner;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Variable;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.io.TempDir;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class ParserTest {
 
@@ -46,6 +59,22 @@ public class ParserTest {
         EntityInfo entityInfo = getStudentEntity();
         EntityInfo scannedEntity = ModelFileScanner.readConfigFromFile(Paths.get("src/test/resources/model/Student.afae"));
         assertTrue(scannedEntity.equals(entityInfo));
+    }
+
+
+
+    @Test void copyDirectoryFromAlfalfaRepo(@TempDir Path tempDir) {
+        // arrange
+
+        String patternName = "com.github.jamesarthurholland/genericapi";
+        String version = "0.1";
+
+        PatternImporter.importPattern(patternName, version, tempDir);
+
+        // assert
+        assertAll(
+                () -> assertTrue(Files.exists(tempDir.resolve("test")))
+        );
     }
 //
 //    @Test
@@ -94,5 +123,14 @@ public class ParserTest {
 //        assertTrue(false);
 //    }
 
+    public class FileWriter {
 
+        public void writeTo(String path, String content) throws IOException {
+            Path target = Paths.get(path);
+            if (Files.exists(target)) {
+                throw new IOException("file already exists");
+            }
+            Files.copy(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)), target);
+        }
+    }
 }
