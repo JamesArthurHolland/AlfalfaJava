@@ -3,21 +3,17 @@ package com.github.jamesarthurholland.alfalfa.configurationBuilder;
 import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Mapping;
+import one.util.streamex.EntryStream;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.stream.Collectors;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Config {
-    private ArrayList<EntityInfo> entityInfoList;
-    private HashMap<String, ArrayList<Mapping>> mappingsForEntityName;
+    private ArrayList<EntityInfo> entityInfoList = new ArrayList<>();
+    private Map<String, HashSet<Mapping>> mappingsForEntityName = new HashMap<>();
 
     public static final String ALFALFA_DOT_FOLDER = ".alfalfa";
 
@@ -30,10 +26,18 @@ public class Config {
 
         Path dotAlfalfaPath = workingDirectory.resolve(ALFALFA_DOT_FOLDER);
 
-//        ArrayList<Entity> entity = streamFilterModelFiles(dotAlfalfaPath)
-//            .map(ModelFileScanner::readConfigFromFile)
-//            .collect(Collectors.toCollection(ArrayList::new));
 
+        streamFilterModelFiles(dotAlfalfaPath)
+            .map(ModelFileScanner::readModelFile)
+            .forEach(modelFileScan -> {
+                mappingsForEntityName = EntryStream.of(modelFileScan.getMappings())
+                        .append(EntryStream.of(mappingsForEntityName))
+                        .toMap((e1, e2) -> e1);
+
+                entityInfoList.add(modelFileScan.getEntityInfo());
+            });
+
+        System.out.println("Config constructor DBG");
         // getModelFiles
         // map models to models
     }
@@ -49,10 +53,6 @@ public class Config {
         return null; // TODO wrong I think
     }
 
-    public Config(ArrayList<EntityInfo> info, ArrayList<Mapping> mappings) {
-        this.entityInfoList = info;
-        this.mappingsForEntityName = new HashMap<>();
-    }
 
 //    public void addElement(ConfigElement element) {
 //        this.entityInfoList.add(element.getEntityInfo());
@@ -89,20 +89,5 @@ public class Config {
         return false;
     }
 
-    public static class Model
-    {
-        private EntityInfo entityInfo;
-        private ArrayList <Mapping> mappings;
 
-
-        public Model(EntityInfo entityInfo, ArrayList<Mapping> mappings) {
-            this.entityInfo = entityInfo;
-            this.mappings = mappings;
-        }
-
-        public EntityInfo getEntityInfo() {
-            return entityInfo;
-        }
-
-    }
 }

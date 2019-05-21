@@ -8,7 +8,6 @@ public class EntityInfo {
     protected String name;
     protected String nameSpace;
     protected List<Variable> variables = new ArrayList<>();
-    protected List<Mapping> mappings = new ArrayList<>();
 
     public EntityInfo() {
     }
@@ -44,10 +43,6 @@ public class EntityInfo {
     public String getFullyQualifedName()
     {
         return nameSpace + "." + name;
-    }
-
-    public void addMapping(Mapping mapping) {
-        mappings.add(mapping);
     }
 
     @Override

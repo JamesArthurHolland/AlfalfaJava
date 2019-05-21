@@ -7,10 +7,7 @@ import com.github.jamesarthurholland.alfalfa.model.Variable;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ModelFileScanner
@@ -38,6 +35,14 @@ public class ModelFileScanner
 
     public static boolean isMappingLine(String[] lineArray) {
         return lineArray.length > 4;
+    }
+
+
+    public static ModelFileScan readModelFile(Path path) {
+        EntityInfo entityInfo = readEntityInfoFromFile(path);
+        HashMap<String, HashSet<Mapping>> mappingsForName = readMappingsFromFile(path);
+
+        return new ModelFileScan(entityInfo, mappingsForName);
     }
 
     public static HashMap<String, HashSet<Mapping>> readMappingsFromFile(Path path)
@@ -96,15 +101,14 @@ public class ModelFileScanner
         return null;
     }
 
-    public static EntityInfo readConfigFromFile(Path path)
+    public static EntityInfo readEntityInfoFromFile(Path path)
     {
         try {
-            EntityInfo entityInfo = new EntityInfo(); // TODO bad
-            String entityName = "";
+            String entityName = ""; // TODO consider name object to embed in entityinfo
             String namespace = "";
-            ArrayList<Mapping> mappings = new ArrayList<>();
 
             Optional<String> qualifiedNameOptional = Files.lines(path).findFirst();
+
             if(qualifiedNameOptional.isPresent()) {
                 String qualifiedName = qualifiedNameOptional.get();
                 int lastDotIndex = qualifiedName.lastIndexOf(".");
@@ -142,5 +146,25 @@ public class ModelFileScanner
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static class ModelFileScan
+    {
+        private EntityInfo entityInfo;
+        private Map<String, HashSet<Mapping>> mappingsForName;
+
+
+        public ModelFileScan(EntityInfo entityInfo, HashMap<String, HashSet<Mapping>> mappings) {
+            this.entityInfo = entityInfo;
+            this.mappingsForName = mappings;
+        }
+
+        public EntityInfo getEntityInfo() {
+            return entityInfo;
+        }
+
+        public Map<String, HashSet<Mapping>> getMappings() {
+            return mappingsForName;
+        }
     }
 }
