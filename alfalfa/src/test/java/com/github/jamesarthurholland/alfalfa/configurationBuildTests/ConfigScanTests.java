@@ -8,16 +8,14 @@ import com.github.jamesarthurholland.alfalfa.model.Mapping;
 import com.github.jamesarthurholland.alfalfa.model.Variable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import sun.awt.image.ImageWatched;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,18 +45,17 @@ public class ConfigScanTests {
     }
 
     private static EntityInfo getStudentEntity()  {
-        ArrayList<Variable> studentVars = new ArrayList<Variable>();
+        LinkedHashSet<Variable> studentVars = new LinkedHashSet<>();
         studentVars.add(new Variable(true, "protected", "long", "id"));
         studentVars.add(new Variable(false, "protected", "String", "firstName"));
         studentVars.add(new Variable(false, "protected", "String", "lastName"));
         studentVars.add(new Variable(false, "protected", "String", "course"));
-        studentVars.add(new Variable(false, "protected", "String", "passport"));
 
         return new EntityInfo("Student", "com.exampleapp.test", studentVars);
     }
 
     private static EntityInfo getPassportEntity()  {
-        ArrayList<Variable> vars = new ArrayList<Variable>();
+        LinkedHashSet<Variable> vars = new LinkedHashSet<Variable>();
         vars.add(new Variable(true, "protected", "long", "id"));
         vars.add(new Variable(false, "protected", "int", "countryOfIssue"));
         vars.add(new Variable(false, "protected", "long", "studentId"));
@@ -76,8 +73,40 @@ public class ConfigScanTests {
     public void configScanTest() {
         Config config = new Config(Paths.get("src/test/resources/exampleWorkingDirectory/"));
 
+        EntityInfo student = getStudentEntity();
+        assertTrue(config.getEntityInfo().contains(student));
+        assertTrue(config.getEntityInfo().contains(getPassportEntity()));
+
         ModelFileScanner.ModelFileScan modelFile = ModelFileScanner.readModelFile(Paths.get("src/test/resources/exampleWorkingDirectory/.alfalfa/Passport.afam"));
 
+    }
+
+    @Test
+    public void variableEqualsTest() {
+        Variable v1 = new Variable(true, "protected", "long", "id");
+        Variable v2 = new Variable(true, "protected", "long", "id");
+
+        assertTrue(v1.equals(v2));
+    }
+
+    @Test
+    public void variablesEqualsTest() {
+        Variable v1 = new Variable(true, "protected", "long", "id");
+        Variable v2 = new Variable(true, "protected", "long", "id");
+        LinkedHashSet<Variable> vs1 = new LinkedHashSet<>();
+        LinkedHashSet<Variable> vs2 = new LinkedHashSet<>();
+        vs1.add(v1);
+        vs2.add(v2);
+
+        assertTrue(vs1.equals(vs2));
+    }
+
+    @Test
+    public void entityEqualsTest() {
+        EntityInfo p1 = getPassportEntity();
+        EntityInfo p2 = getPassportEntity();
+
+        assertTrue(p1.equals(p2));
     }
 
     @Test

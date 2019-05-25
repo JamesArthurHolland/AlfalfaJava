@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class Config {
-    private ArrayList<EntityInfo> entityInfoList = new ArrayList<>();
+    private HashSet<EntityInfo> entityInfoList = new HashSet<>();
     private Map<String, HashSet<Mapping>> mappingsForEntityName = new HashMap<>();
 
     public static final String ALFALFA_DOT_FOLDER = ".alfalfa";
@@ -75,7 +75,7 @@ public class Config {
 //        }
 //    }
 
-    public ArrayList<EntityInfo> getEntityInfo() {
+    public HashSet<EntityInfo> getEntityInfo() {
         return entityInfoList;
     }
 

@@ -121,7 +121,7 @@ public class ModelFileScanner
                 }
             }
 
-            ArrayList<Variable> variables = Files.lines(path)
+            LinkedHashSet<Variable> variables = Files.lines(path)
                 .skip(1)
                 .map(line -> line.split("[ ]+"))
                 .filter(ModelFileScanner::isVariableDefinition)
@@ -136,7 +136,7 @@ public class ModelFileScanner
 
                     return new Variable(varIsPrimary, visibility, varType, varName);
                 })
-                .collect(Collectors.toCollection(ArrayList::new)); // TODO create entity at return statement, encapsulation
+                .collect(Collectors.toCollection(LinkedHashSet::new)); // TODO create entity at return statement, encapsulation
 
 
             return new EntityInfo(entityName, namespace, variables);

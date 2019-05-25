@@ -42,10 +42,15 @@ public class Variable
         }
         Variable variable = (Variable) o;
         // field comparison
-        return Objects.equals(primary, variable.primary)
-                && Objects.equals(visibility, variable.visibility)
-                && Objects.equals(type, variable.type)
-                && Objects.equals(name, variable.name);
+        return primary == variable.primary
+                && visibility.equals(variable.visibility)
+                && type.equals(variable.type)
+                && name.equals(variable.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(primary, visibility, type, name);
     }
 
     public void setVisibility(String givenVisibility)
@@ -92,24 +97,4 @@ public class Variable
     {
         primary = givenPrimary;
     }
-
-    public boolean isEqualTo(Variable otherVar)
-    {
-        if (primary != otherVar.isPrimary()) {
-            return false;
-        }
-        if (visibility != otherVar.getVisibility ()) {
-            return false;
-        }
-        if (type != otherVar.getType ()) {
-            if (type == null && otherVar.getType () == null) {
-                return false;
-            }
-        }
-        if (name != otherVar.getName ()) {
-            return false;
-        }
-        return true;
-    }
-
 }

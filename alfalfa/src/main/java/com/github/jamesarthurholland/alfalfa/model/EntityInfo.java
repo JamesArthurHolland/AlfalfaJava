@@ -1,23 +1,18 @@
 package com.github.jamesarthurholland.alfalfa.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class EntityInfo {
     protected String name;
     protected String nameSpace;
-    protected List<Variable> variables = new ArrayList<>();
+    protected LinkedHashSet<Variable> variables = new LinkedHashSet<>();
 
-    public EntityInfo() {
-    }
-
-    public EntityInfo(String entity, List<Variable> variables) {
+    public EntityInfo(String entity, LinkedHashSet<Variable> variables) {
         this.name = entity;
         this.variables = variables;
     }
 
-    public EntityInfo(String entity, String nameSpace, List<Variable> variables) { // TODO remove
+    public EntityInfo(String entity, String nameSpace, LinkedHashSet<Variable> variables) { // TODO remove
         this.name = entity;
         this.nameSpace = nameSpace;
         this.variables = variables;
@@ -34,7 +29,7 @@ public class EntityInfo {
 
     public boolean isVarLast(Variable var) {
         int sizeOfVariableList = variables.size();
-        if (variables.get(sizeOfVariableList - 1).equals(var)) {
+        if (Arrays.asList(variables.toArray()).get(sizeOfVariableList - 1).equals(var)) {
             return true;
         }
         return false;
@@ -62,10 +57,15 @@ public class EntityInfo {
         // field comparison
         return name.equals(entityInfo.name)
                 && nameSpace.equals(entityInfo.nameSpace)
-                && Objects.equals(variables, entityInfo.variables);
+                && variables.equals(entityInfo.variables);
     }
 
-    public List<Variable> getVariables()
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, nameSpace, variables);
+    }
+
+    public Set<Variable> getVariables()
     {
         return variables;
     }
