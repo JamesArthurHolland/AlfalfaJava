@@ -7,6 +7,7 @@ import com.google.common.io.Files;
 import picocli.CommandLine;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -15,8 +16,8 @@ import java.util.concurrent.Callable;
         name = "afa", mixinStandardHelpOptions = true, version = "checksum 3.0")
 public class AlfalfaMain implements Callable<Void>
 {
-    @CommandLine.Parameters(arity = "1", paramLabel = "Runtime directory", description = "Working directory to run Alfalfa.")
-    private String workingDirectory = "";
+//    @CommandLine.Parameters(arity = "1", paramLabel = "Runtime directory", description = "Working directory to run Alfalfa.")
+//    private String workingDirectoryString = ""; TODO defaults to current directory but maybe can run other dirs in future?
 
     @CommandLine.Option(names = { "-t", "--template" }, description = "Templates folder or template file.")
     private String patternDirectoryString = "";
@@ -31,19 +32,11 @@ public class AlfalfaMain implements Callable<Void>
     @Override
     public Void call() throws Exception {
         try {
-            String workingDirectory = System.getProperty("user.dir");
-            File patternFolder = new File(patternDirectoryString);
-            ArrayList<File> listOfFiles = getFiles(patternFolder.listFiles(), StringUtils.TEMPLATE_EXTENSION);
+            Path workingDirectory = Paths.get(System.getProperty("user.dir"));
+            Config config = new Config(workingDirectory);
+            Path patternDirectory = Paths.get(patternDirectoryString);
+            Alfalfa.alfalfaSimpleRun(workingDirectory, patternDirectory, config);
 
-            File templateFolder = new File(workingDirectory);
-
-
-//
-            ArrayList<String> entityInfoArrayList = StringUtils.fileToArrayList(System.getProperty("user.dir") + "/name.afae");
-//            ArrayList<String> entityInfoArrayList = ModelFileScanner.fileToArrayList(workingDirectory + "/src/name.afae");
-
-
-            Config config = new Config(Paths.get(workingDirectory));
 
 //            Config.ConfigElement configElement = modelScanner.readConfigFromLines(entityInfoArrayList);
 //            config.addElement(configElement);

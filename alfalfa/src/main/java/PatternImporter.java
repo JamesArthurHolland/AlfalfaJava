@@ -8,28 +8,14 @@ import java.util.stream.Stream;
 public class PatternImporter
 {
     public static void importPattern(String patternName, String version, Path outputDir) {
+        // TODO must pass this alfalfafile of calling pattern, in order to do overrides.
+        //  must return pattern meta file? maybe read meta file first to check requirements met re vars
         Path userHome = Paths.get(System.getProperty("user.home"));
         Path patternDir = userHome.resolve(".alfalfa/repository/").resolve(patternName).resolve(version).resolve("main"); // TODO main should be static string
 
 
-        try (Stream<Path> stream = Files.walk(patternDir)) {
-            stream.forEachOrdered(sourcePath -> {
-                System.out.println(sourcePath);
-                System.out.println(patternDir.relativize(sourcePath));
-                try {
-                    Files.copy(
-                            sourcePath,
-                            outputDir.resolve(patternDir.relativize(sourcePath))
-                    );
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            });
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-
-        }
+        FileUtils.copyDirRecursive(patternDir, outputDir);
     }
+
+
 }

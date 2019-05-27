@@ -40,6 +40,11 @@ public class StringUtils {
         return Files.getFileExtension(path.toString()).equals(StringUtils.MODEL_EXTENSION);
     }
 
+    public static boolean fileIsTemplateFile(Path path)
+    {
+        return Files.getFileExtension(path.toString()).equals(StringUtils.TEMPLATE_EXTENSION);
+    }
+
     public static String camelToLowerUnderScore(String variableString)
     {
         String StringParts = variableString.replaceAll("([A-Z])", "_$1");

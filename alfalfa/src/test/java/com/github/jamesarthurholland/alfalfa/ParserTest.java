@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.Config;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.ModelFileScanner;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Variable;
@@ -23,6 +24,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
 
+    @Test
+    public void simpleParseTest(@TempDir Path tempDir) {
+        FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), tempDir);
+        Config config = new Config(tempDir);
+        Alfalfa.alfalfaSimpleRun(tempDir, Paths.get("src/test/resources/exampleTemplateDirectory"), config);
+        System.out.println("SimpleParseTest debug");
+    }
 
 //
 //    @Test
