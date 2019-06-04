@@ -1,6 +1,7 @@
-package com.github.jamesarthurholland.alfalfa.configurationBuilder;
+package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 import com.github.jamesarthurholland.alfalfa.StringUtils;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.NoDotAlfalfaDirectoryException;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Mapping;
 import one.util.streamex.EntryStream;
@@ -11,13 +12,13 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class Config {
+public class Schema {
     private HashSet<EntityInfo> entityInfoList = new HashSet<>();
     private Map<String, HashSet<Mapping>> mappingsForEntityName = new HashMap<>();
 
     public static final String ALFALFA_DOT_FOLDER = ".alfalfa";
 
-    public Config(Path workingDirectory) throws NoDotAlfalfaDirectoryException {
+    public Schema(Path workingDirectory) throws NoDotAlfalfaDirectoryException {
         // getMappingStrings
 
         if(!hasDotAlfalfaDirectory(workingDirectory)) {
@@ -37,7 +38,7 @@ public class Config {
                 entityInfoList.add(modelFileScan.getEntityInfo());
             });
 
-        System.out.println("Config constructor DBG");
+        System.out.println("Schema constructor DBG");
         // getModelFiles
         // map models to models
     }

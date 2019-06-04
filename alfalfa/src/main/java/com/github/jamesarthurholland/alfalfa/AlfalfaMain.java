@@ -1,8 +1,8 @@
 package com.github.jamesarthurholland.alfalfa;
 
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.Config;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.NoEntityFileException;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.header.InvalidHeaderException;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.NoEntityFileException;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.InvalidHeaderException;
 import com.google.common.io.Files;
 import picocli.CommandLine;
 
@@ -33,12 +33,12 @@ public class AlfalfaMain implements Callable<Void>
     public Void call() throws Exception {
         try {
             Path workingDirectory = Paths.get(System.getProperty("user.dir"));
-            Config config = new Config(workingDirectory);
+            Schema config = new Schema(workingDirectory);
             Path patternDirectory = Paths.get(patternDirectoryString);
             Alfalfa.alfalfaSimpleRun(workingDirectory, patternDirectory, config);
 
 
-//            Config.ConfigElement configElement = modelScanner.readConfigFromLines(entityInfoArrayList);
+//            Schema.ConfigElement configElement = modelScanner.readConfigFromLines(entityInfoArrayList);
 //            config.addElement(configElement);
 
 //            EntityInfo entityInfo = new EntityInfo();

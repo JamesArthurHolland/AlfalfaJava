@@ -1,4 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.configurationBuilder;
+package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 public class MalformedVariableLineException extends RuntimeException
 {

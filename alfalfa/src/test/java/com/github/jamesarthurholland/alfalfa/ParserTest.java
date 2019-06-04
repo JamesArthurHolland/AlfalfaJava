@@ -8,18 +8,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.Config;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.ModelFileScanner;
-import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
-import com.github.jamesarthurholland.alfalfa.model.Variable;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.io.TempDir;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ParserTest {
@@ -27,7 +21,7 @@ public class ParserTest {
     @Test
     public void simpleParseTest(@TempDir Path tempDir) {
         FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), tempDir);
-        Config config = new Config(tempDir);
+        Schema config = new Schema(tempDir);
         Alfalfa.alfalfaSimpleRun(tempDir, Paths.get("src/test/resources/exampleTemplateDirectory"), config);
         System.out.println("SimpleParseTest debug");
     }
@@ -40,7 +34,7 @@ public class ParserTest {
 //        assertTrue(scannedEntity.equals(entityInfo));
 //    }
 //
-//    private Config.Model getModelFromFilename(String fileName)
+//    private Schema.Model getModelFromFilename(String fileName)
 //    {
 //        ArrayList<String> arrayList = readFileToArrayList(fileName);
 //        ConfigScanner configScanner = new ConfigScanner();
@@ -70,9 +64,9 @@ public class ParserTest {
 //        ArrayList<String> arrayList = readFileToArrayList("src/test/resources/Passport.afam");
 //
 //
-//        Config config = new Config();
+//        Schema config = new Schema();
 //        ConfigScanner configScanner = new ConfigScanner();
-//        Config.ConfigElement configElement = configScanner.readConfigFromLines(arrayList);
+//        Schema.ConfigElement configElement = configScanner.readConfigFromLines(arrayList);
 //        EntityInfo scannedEntity = configElement.getEntityInfo();
 //        config.addElement(configElement);
 //

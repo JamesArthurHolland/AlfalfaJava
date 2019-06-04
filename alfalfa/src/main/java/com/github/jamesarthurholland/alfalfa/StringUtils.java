@@ -1,6 +1,6 @@
 package com.github.jamesarthurholland.alfalfa;
 
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.NoEntityFileException;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.NoEntityFileException;
 import com.google.common.io.Files;
 
 import java.io.*;

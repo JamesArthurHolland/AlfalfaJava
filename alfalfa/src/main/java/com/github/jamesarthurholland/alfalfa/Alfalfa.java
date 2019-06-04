@@ -1,18 +1,16 @@
 package com.github.jamesarthurholland.alfalfa;
 
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.Config;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Alfalfa {
-    public static void alfalfaSimpleRun(Path workingDirectory, Path templateDirectory, Config config){
+    public static void alfalfaSimpleRun(Path workingDirectory, Path templateDirectory, Schema config){
 //            ArrayList<Path> patterns = Files.list(Paths.get("patternFolderPathString"))
 
         config.getEntityInfo().forEach(entityInfo -> {

@@ -1,4 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.configurationBuilder;
+package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Mapping;

@@ -1,0 +1,19 @@
+---
+name: "TestPattern"
+version: "0.1"
+
+imports:
+  - name: "Import1"
+    swap:
+    version:
+    location: "loc1"
+    vars:
+      testString: TEST_STRING
+
+  - name: "Import2"
+    swap:
+      version:
+      location: "loc2"
+    vars:
+      testString: TEST_STRING
+

@@ -2,6 +2,7 @@ package com.github.jamesarthurholland.alfalfa;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class FileUtils {
@@ -25,5 +26,10 @@ public class FileUtils {
             e.printStackTrace();
 
         }
+    }
+
+    public static Path patternPath(String patternName, String version) {
+        Path userHome = Paths.get(System.getProperty("user.home"));
+        return userHome.resolve(".alfalfa/repository/").resolve(patternName).resolve(version).resolve("main");
     }
 }

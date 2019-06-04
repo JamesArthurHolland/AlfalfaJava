@@ -1,4 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.configurationBuilder;
+package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 /**
  * Created by jamie on 03/07/16.

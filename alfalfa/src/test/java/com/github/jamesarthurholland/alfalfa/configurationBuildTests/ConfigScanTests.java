@@ -1,17 +1,13 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuildTests;
 
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.Config;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.ModelFileScanner;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.NoDotAlfalfaDirectoryException;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.ModelFileScanner;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Mapping;
 import com.github.jamesarthurholland.alfalfa.model.Variable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import sun.awt.image.ImageWatched;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -71,7 +67,7 @@ public class ConfigScanTests {
 
     @Test
     public void configScanTest() {
-        Config config = new Config(Paths.get("src/test/resources/exampleWorkingDirectory/"));
+        Schema config = new Schema(Paths.get("src/test/resources/exampleWorkingDirectory/"));
 
         EntityInfo student = getStudentEntity();
         assertTrue(config.getEntityInfo().contains(student));
@@ -155,7 +151,7 @@ public class ConfigScanTests {
 
     @Test
     public void noDotAlfalfaDirectoryExceptionTest() {
-        assertFalse(Config.hasDotAlfalfaDirectory(Paths.get("src/test/resources/empty_dir")));
+        assertFalse(Schema.hasDotAlfalfaDirectory(Paths.get("src/test/resources/empty_dir")));
     }
 
 
