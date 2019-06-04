@@ -28,8 +28,14 @@ public class FileUtils {
         }
     }
 
+    public static Path patternPathMain(String patternName, String version) {
+        return patternPath(patternName, version).resolve("main");
+    }
+
     public static Path patternPath(String patternName, String version) {
         Path userHome = Paths.get(System.getProperty("user.home"));
         return userHome.resolve(".alfalfa/repository/").resolve(patternName).resolve(version).resolve("main");
     }
+
+
 }

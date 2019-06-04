@@ -11,7 +11,7 @@ public class PatternImporter
     public static void importPattern(String patternName, String version, Path outputDir) {
         // TODO must pass this alfalfafile of calling pattern, in order to do overrides.
         //  must return pattern meta file? maybe read meta file first to check requirements met re vars
-        Path patternDir = FileUtils.patternPath(patternName, version); // TODO main should be static string
+        Path patternDir = FileUtils.patternPathMain(patternName, version); // TODO main should be static string
 
         FileUtils.copyDirRecursive(patternDir, outputDir);
     }
