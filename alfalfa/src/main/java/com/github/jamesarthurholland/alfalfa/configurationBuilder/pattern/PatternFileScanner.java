@@ -70,6 +70,10 @@ public class PatternFileScanner {
                 Pattern swapPattern = getPattern(currentPatternName, currentPatternVersion, swapHashMap, importPatternBuilder);
 
                 importPatternBuilder = swapPattern == null ? new PatternBuilder() : new PatternBuilder(swapPattern);
+                importHashMap.putIfAbsent(VERSION_KEY, currentPatternVersion);
+                if(importHashMap.get(VERSION_KEY).equals(null)) {
+                    importPatternBuilder.setVersion(currentPatternVersion);
+                }
                 importPatternBuilder.addImportHashMap(importHashMap);
                 Pattern importedPattern = getPattern(currentPatternName, currentPatternVersion, importHashMap, importPatternBuilder);
 
@@ -170,12 +174,14 @@ public class PatternFileScanner {
         }
 
         public PatternBuilder addImportHashMap(LinkedHashMap<String, Object> importHashMap) {
-            String locationString = (String) importHashMap.get(LOCATION_KEY);
+            String locationString = (String) importHashMap.getOrDefault(LOCATION_KEY, "");
+            if( ! locationString.isEmpty() ) {
+                this.setLocation(Paths.get(locationString));
+            }
 
             this.setName((String) importHashMap.get(NAME_KEY))
                     .setVersion((String) importHashMap.get(VERSION_KEY))
-                    .setLocation(Paths.get(locationString))
-                    .setVars((LinkedHashMap<String, String>) importHashMap.get(VARS_KEY));
+                    .setVars((LinkedHashMap<String, String>) importHashMap.getOrDefault(VARS_KEY, new LinkedHashMap<String, String>()));
 
             return this;
         }
