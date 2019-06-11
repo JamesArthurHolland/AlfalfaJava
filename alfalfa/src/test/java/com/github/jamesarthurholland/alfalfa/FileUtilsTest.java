@@ -13,7 +13,7 @@ public class FileUtilsTest {
     @Test
     public void patternPath() {
         String fullPatternName = "com.github.jamesarthurholland/genericapi/main";
-        String pathString = FileUtils.patternPath(fullPatternName, "0.1").toString();
+        String pathString = FileUtils.modulePath(fullPatternName, "0.1").toString();
         assertTrue(pathString.equals("com.github.jamesarthurholland/genericapi/0.1/main"));
 
     }

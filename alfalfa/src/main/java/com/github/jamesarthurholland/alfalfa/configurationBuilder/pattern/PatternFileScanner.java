@@ -135,13 +135,13 @@ public class PatternFileScanner {
 
         Path patternPath;
         if (patternIsASubModuleOfCurrentPattern(patternName)) {
-            patternPath = FileUtils.modulePatternPath(
+            patternPath = FileUtils.modulePath(
                 currentPatternName,
                 currentPatternVersion, // TODO different version maybe allowed? Pass swapVersion if exists
                 patternName
             );
         } else {
-            patternPath = FileUtils.patternPath(patternName, patternVersion);
+            patternPath = FileUtils.modulePath(patternName, patternVersion);
         }
         if(patternPath == null) {
             throw new RuntimeException("Swap pattern path can't be null for " + this.workingDirectory + ", " + importHashMap.get(NAME_KEY));

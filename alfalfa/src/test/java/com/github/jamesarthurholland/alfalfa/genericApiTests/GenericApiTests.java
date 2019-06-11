@@ -25,7 +25,7 @@ public class GenericApiTests {
     @Test void api(@TempDir Path tempDir) {
         // arrange
 
-        String patternName = "com.github.jamesarthurholland/genericapi"; // TODO use dots the whole way or look at how maven does it
+        String patternName = "com.github.jamesarthurholland/genericapi/main"; // TODO use dots the whole way or look at how maven does it
         String version = "0.1";
 
 //        com.github.jamesarthurholland.alfalfa.PatternImporter.importPattern(patternName, version, tempDir);
@@ -33,7 +33,7 @@ public class GenericApiTests {
         FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), tempDir);
         Pattern pattern = new PatternFileScanner(tempDir).scan();
 
-        Path patternPath = FileUtils.patternPath(patternName, version);
+        Path patternPath = FileUtils.modulePath(patternName, version);
 
         // assert
         assertAll(

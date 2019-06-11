@@ -5,6 +5,7 @@ version: "0.1"
 imports:
   - name: com.github.jamesarthurholland/genericapi/main
     version: "0.1"
+    location: "./"
 
 vars:
   - project_var: "Project level var"

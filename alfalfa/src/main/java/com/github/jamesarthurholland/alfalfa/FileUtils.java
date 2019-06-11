@@ -48,15 +48,16 @@ public class FileUtils {
         return userHome.resolve(".alfalfa/repository/");
     }
 
-    public static Path modulePatternPath(String patternName, String version, String moduleName) {
-        return patternPath(patternName, version).resolve("modules").resolve(moduleName);
+    public static Path modulePath(String patternName, String version, String moduleName) {
+        return getAlfalfaRepository().resolve(patternName).resolve(version).resolve(moduleName);
     }
 
     public static Path patternPathMain(String patternName, String version) {
-        return patternPath(patternName, version).resolve("main");
+        return modulePath(patternName, version).resolve("main");
     }
 
-    public static Path patternPath(String patternFullName, String version) {
+    // TODO if no module, ie com.github.jamesarthurholland/genericapi then it should import main
+    public static Path modulePath(String patternFullName, String version) {
         String[] patternNameParts = patternFullName.split("/");
         String origin = patternNameParts[0];
         String pattern = patternNameParts[1];
