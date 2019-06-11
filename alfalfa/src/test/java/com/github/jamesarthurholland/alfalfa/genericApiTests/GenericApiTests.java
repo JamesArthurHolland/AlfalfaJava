@@ -37,7 +37,7 @@ public class GenericApiTests {
 
         // assert
         assertAll(
-                () -> assertTrue(Files.exists(tempDir.resolve("test")))
+                () -> assertTrue(Files.exists(tempDir.resolve("main/src/main/kotlin/com/aetasa/rest/genericapiapp/di/")))
         );
     }
 }

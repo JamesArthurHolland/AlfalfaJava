@@ -17,8 +17,8 @@ public class FileUtils {
                 System.out.println(patternDir.relativize(sourcePath));
                 try {
                     Files.copy(
-                            sourcePath,
-                            outputDir.resolve(patternDir.relativize(sourcePath))
+                        sourcePath,
+                        outputDir.resolve(patternDir.relativize(sourcePath))
                     );
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
@@ -28,7 +28,6 @@ public class FileUtils {
         }
         catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 
@@ -57,8 +56,12 @@ public class FileUtils {
         return patternPath(patternName, version).resolve("main");
     }
 
-    public static Path patternPath(String patternName, String version) {
-        return getAlfalfaRepository().resolve(patternName).resolve(version);
+    public static Path patternPath(String patternFullName, String version) {
+        String[] patternNameParts = patternFullName.split("/");
+        String origin = patternNameParts[0];
+        String pattern = patternNameParts[1];
+        String module = patternNameParts[2];
+        return getAlfalfaRepository().resolve(origin).resolve(pattern).resolve(version).resolve(module);
     }
 
 

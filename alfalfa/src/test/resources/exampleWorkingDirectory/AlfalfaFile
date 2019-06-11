@@ -3,7 +3,7 @@ name: Example Generic Api
 version: "0.1"
 
 imports:
-  - name: com.github.jamesarthurholland/genericapi
+  - name: com.github.jamesarthurholland/genericapi/main
     version: "0.1"
 
 vars:

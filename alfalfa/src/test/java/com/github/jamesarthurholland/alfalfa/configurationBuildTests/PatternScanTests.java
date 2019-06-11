@@ -15,4 +15,5 @@ public class PatternScanTests {
         Pattern pattern = new PatternFileScanner(patternPath).scan();
         System.out.println("PatternScanTest");
     }
+
 }

@@ -85,8 +85,6 @@ public class PatternFileScanner {
                 currentPattern.imports.add(importedPattern);
 
 
-                String locationString = (String) importHashMap.get(LOCATION_KEY);
-                Path location = Paths.get(locationString);
 
 //                PatternBuilder importPatternBuilder = new PatternBuilder()
 //                        .setName(importName)
@@ -198,7 +196,7 @@ public class PatternFileScanner {
 //        }
 
         public Pattern build() {
-            return new Pattern(patternTmp.name, patternTmp.version, patternTmp.vars);
+            return patternTmp;
         }
 
         public PatternBuilder setName(String name) {

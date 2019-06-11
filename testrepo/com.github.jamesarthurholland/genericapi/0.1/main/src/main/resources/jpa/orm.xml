@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+                 version="1.0">
+    <description>Employee Mapping</description>
+    <entity class="com.aetasa.rest.genericapiapp.employee.Employee" name="Employee">
+        <table name="employees"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="TABLE"/>
+            </id>
+            <basic name="firstName">
+                <column name="first_name" length="100"/>
+            </basic>
+            <basic name="lastName">
+                <column name="last_name" length="100"/>
+            </basic>
+            <basic name="department">
+                <column name="department" length="100"/>
+            </basic>
+            <basic name="email">
+                <column name="email" length="100"/>
+            </basic>
+            <one-to-many name="contracts" target-entity="com.aetasa.rest.genericapiapp.employee.Contract" mapped-by="employee"/>
+        </attributes>
+    </entity>
+</entity-mappings>

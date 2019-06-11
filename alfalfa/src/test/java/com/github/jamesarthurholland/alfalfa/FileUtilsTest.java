@@ -11,12 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class FileUtilsTest {
 
     @Test
-    public void fileUtils() {
-        String patternName = "com.github.jamesarthurholland/genericapi"; // TODO use dots the whole way or look at how maven does it
-        String version = "0.1";
+    public void patternPath() {
+        String fullPatternName = "com.github.jamesarthurholland/genericapi/main";
+        String pathString = FileUtils.patternPath(fullPatternName, "0.1").toString();
+        assertTrue(pathString.equals("com.github.jamesarthurholland/genericapi/0.1/main"));
 
-
-        Path modulePatternPath = FileUtils.modulePatternPath(patternName, version, "di");
-        assertTrue(FileUtils.patternPath(patternName, version).relativize(modulePatternPath).toString().equals("modules/di"));
     }
 }
