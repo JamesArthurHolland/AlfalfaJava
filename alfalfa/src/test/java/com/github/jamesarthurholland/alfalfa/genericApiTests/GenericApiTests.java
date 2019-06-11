@@ -28,10 +28,12 @@ public class GenericApiTests {
         String patternName = "com.github.jamesarthurholland/genericapi"; // TODO use dots the whole way or look at how maven does it
         String version = "0.1";
 
-        com.github.jamesarthurholland.alfalfa.PatternImporter.importPattern(patternName, version, tempDir);
+//        com.github.jamesarthurholland.alfalfa.PatternImporter.importPattern(patternName, version, tempDir);
+
+        FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), tempDir);
+        Pattern pattern = new PatternFileScanner(tempDir).scan();
 
         Path patternPath = FileUtils.patternPath(patternName, version);
-        Pattern pattern = PatternFileScanner.scanRootPatternFile(patternPath);
 
         // assert
         assertAll(

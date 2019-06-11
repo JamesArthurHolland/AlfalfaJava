@@ -19,6 +19,7 @@ public class Pattern {
     public ArrayList<Pattern> imports = new ArrayList<>();
 //    public HashMap<String, Pattern> imports;
     public LinkedHashMap<String, String> vars = new LinkedHashMap<>();
+    public ArrayList<Path> files = new ArrayList<>();
     public Path outputLocation;
 
 
