@@ -1,0 +1,11 @@
+---
+name: com.github.jamesarthurholland/genericapi
+version: "0.1"
+
+imports:
+  - name: di
+    location: main/src/main/kotlin/com/aetasa/rest/genericapiapp/di/
+    mode: for_each
+
+vars:
+  - project_var: "Project level var"
