@@ -17,10 +17,10 @@ public class Pattern {
     public String name;
     public String version;
     public ArrayList<Pattern> imports = new ArrayList<>();
-//    public HashMap<String, Pattern> imports;
+//    public HashMap<String, Pattern> imports = new HashMap<>();
     public LinkedHashMap<String, String> vars = new LinkedHashMap<>();
     public ArrayList<Path> files = new ArrayList<>();
-    public Path outputLocation;
+    public Path outputPath;
 
 
     public Pattern() {}
@@ -48,7 +48,7 @@ public class Pattern {
 //    private static class ImportDetail {
 //        public Pattern original;
 //        public Pattern swap;
-//        public String outputLocation;
+//        public String outputPath;
 //
 //        public ImportDetail(LinkedHashMap<String, String> importHashMap)
 //        {

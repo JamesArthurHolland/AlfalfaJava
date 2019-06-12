@@ -27,24 +27,26 @@ public class PatternFileScanner {
 
     public Pattern scan() {
         if(Files.exists(workingDirectory.resolve(ALFALFA_FILE))) {
+//            PatternBuilder patternBuilder = new PatternBuilder();
             PatternBuilder patternBuilder = new PatternBuilder();
-            return scanPatternFile(workingDirectory, patternBuilder);
+            return scanPatternFile(patternBuilder, workingDirectory);
         }
         return null;
     }
 
-    private Pattern scanPatternFile(Path workingDirectory, PatternBuilder patternBuilder) {
+    private Pattern scanPatternFile(PatternBuilder patternBuilder, Path workingDirectory) {
         try {
+            if( ! Files.exists(workingDirectory.resolve(ALFALFA_FILE))) {
+                return patternBuilder.build(); // TODO this needs to work for files in the directory
+            }
             Path alfalfaFile = workingDirectory.resolve(ALFALFA_FILE);
             BufferedReader reader = Files.newBufferedReader(alfalfaFile);
-            //            Yaml object = new Yaml(new Constructor(Pattern.class));
-//                Pattern pattern = (Pattern) new Yaml(new Constructor(Pattern.class)).load(reader);
-
-            Pattern currentPattern = null;
 
             Map<String, Object> patternYamlObject = (Map<String, Object>) new Yaml().load(reader);
-            String currentPatternName = (String) patternYamlObject.get(NAME_KEY);
+            String currentPatternName = (String) patternYamlObject.get(NAME_KEY); // TODO builder.addHashmap for this as well
             String currentPatternVersion = (String) patternYamlObject.get(VERSION_KEY);
+            String currentPatternLocationString = (String) patternYamlObject.getOrDefault(LOCATION_KEY,"./");
+            Path currentPatternPath = Paths.get(currentPatternLocationString);
             // TODO scan vars and (pass them down the tree)???
             LinkedHashMap<String, String> vars = new LinkedHashMap<>();
 
@@ -53,54 +55,20 @@ public class PatternFileScanner {
             }
 
             patternBuilder.setName(currentPatternName)
-                    .setVersion(currentPatternVersion)
-                    .setVars(vars);
+                .setVersion(currentPatternVersion)
+                .setVars(vars)
+                .setOutputLocation(currentPatternPath);
 
-            currentPattern = patternBuilder.build();
+            Pattern currentPattern = patternBuilder.build();
 
 
             ArrayList<LinkedHashMap<String, Object>> imports = (ArrayList<LinkedHashMap<String, Object>>) patternYamlObject.get(IMPORTS_KEY);
+
             for(LinkedHashMap<String, Object> importHashMap : imports) {
-                String importName = (String) importHashMap.get(NAME_KEY);
-                System.out.println("DEBUG PATTERN SCAN");
-
-                LinkedHashMap<String, Object> swapHashMap = (LinkedHashMap<String, Object>) importHashMap.get(SWAP_NAME_KEY);
-
-                PatternBuilder importPatternBuilder = swapHashMap == null ? new PatternBuilder() : new PatternBuilder(swapHashMap);
-                Pattern swapPattern = getPattern(currentPatternName, currentPatternVersion, swapHashMap, importPatternBuilder);
-
-                importPatternBuilder = swapPattern == null ? new PatternBuilder() : new PatternBuilder(swapPattern);
-                importHashMap.putIfAbsent(VERSION_KEY, currentPatternVersion);
-                if(importHashMap.get(VERSION_KEY).equals(null)) {
-                    importPatternBuilder.setVersion(currentPatternVersion);
-                }
-                importPatternBuilder.addImportHashMap(importHashMap);
-                Pattern importedPattern = getPattern(currentPatternName, currentPatternVersion, importHashMap, importPatternBuilder);
-
-
-                // TODO if no alfalfa in module, still add the files to new pattern
-                if(importedPattern == null) {
-                    importedPattern = importPatternBuilder.build();
-                }
+                Pattern importedPattern = getImportPattern(currentPattern, importHashMap);
                 currentPattern.imports.add(importedPattern);
-
-
-
-//                PatternBuilder importPatternBuilder = new PatternBuilder()
-//                        .setName(importName)
-//                        .setLocation(location)
-//                        .setVersion((String) importHashMap.get(VERSION_KEY))
-//                        .setVars((LinkedHashMap<String, String>) importHashMap.get(VARS_KEY));
-
-
-//                Pattern importedPattern = scanPatternFile(FileUtils.patternPath(importName, version), importPatternBuilder);
-//                Path patternPath = importDetail.getPatternPath();
-
-                //                this.imports.put()
             }
-            ////            pattern = yaml.load(reader);
-            //            pattern = new Pattern(name, version, imports);
-            System.out.println("AlfalfaFile scan");
+
             return currentPattern;
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,51 +76,50 @@ public class PatternFileScanner {
         return null;
     }
 
-    private Pattern getPattern(String currentPatternName, String currentPatternVersion, LinkedHashMap<String, Object> importHashMap, PatternBuilder patternBuilder) {
-        // TODO get vars etc from this level
+    private Pattern getImportPattern(Pattern currentPattern, LinkedHashMap<String, Object> importHashMap) {
+        PatternBuilder importPatternBuilder = new PatternBuilder();
 
-        if(importHashMap != null) {
+        LinkedHashMap<String, Object> swapHashMap = (LinkedHashMap<String, Object>) importHashMap.get(SWAP_NAME_KEY);
+        if(swapHashMap != null) {
+            importPatternBuilder = new PatternBuilder(swapHashMap);
+            Pattern swapPattern = scanPatternFile(importPatternBuilder, getPathForHashMap(currentPattern, swapHashMap));
 
-            Path patternPath = getPathForPatternName(currentPatternName, currentPatternVersion, importHashMap);
-            patternBuilder.addFiles(FileUtils.getFilePathsRecursive(patternPath));
-
-            if(Files.exists(patternPath.resolve(ALFALFA_FILE))) {
-                return scanPatternFile(
-                    patternPath,
-                    patternBuilder
-                );
-            }
-            else {
-                return patternBuilder.build();
+            if(swapPattern != null) {
+                importPatternBuilder = new PatternBuilder(swapPattern);
             }
         }
-        return null;
+
+        importPatternBuilder.addImportHashMap(importHashMap, currentPattern);
+
+        Pattern importedPattern = scanPatternFile(importPatternBuilder, getPathForHashMap(currentPattern, importHashMap));
+
+        if(importedPattern == null) {
+            importedPattern = importPatternBuilder.build();
+        }
+
+        return importedPattern;
     }
 
-    private Path getPathForPatternName(String currentPatternName, String currentPatternVersion, LinkedHashMap<String, Object> importHashMap) {
+    public static Path getPathForHashMap(Pattern parentPattern, LinkedHashMap<String, Object> importHashMap) {
         String patternName = (String) importHashMap.get(NAME_KEY);
         String patternVersion = (String) importHashMap.get(VERSION_KEY);
 
+
         Path patternPath;
-        if (patternIsASubModuleOfCurrentPattern(patternName)) {
-            patternPath = FileUtils.modulePath(
-                currentPatternName,
-                currentPatternVersion, // TODO different version maybe allowed? Pass swapVersion if exists
+        if (FileUtils.patternIsASubModuleOfCurrentPattern(patternName)) {
+            patternPath = FileUtils.modulePathFromParentAndName(
+                parentPattern.name,
+                parentPattern.version, // TODO different version maybe allowed? Pass swapVersion if exists
                 patternName
             );
         } else {
             patternPath = FileUtils.modulePath(patternName, patternVersion);
         }
         if(patternPath == null) {
-            throw new RuntimeException("Swap pattern path can't be null for " + this.workingDirectory + ", " + importHashMap.get(NAME_KEY));
+            throw new RuntimeException("Swap pattern path can't be null for " + importHashMap.get(NAME_KEY));
         }
         return patternPath;
     }
-
-    private boolean patternIsASubModuleOfCurrentPattern(String patternName) {
-        return patternName.contains(".") == false;
-    }
-
 
     protected static class PatternBuilder {
         private Pattern patternTmp;
@@ -168,34 +135,36 @@ public class PatternFileScanner {
         public PatternBuilder(LinkedHashMap<String, Object> importHashMap)
         {
             patternTmp = new Pattern();
-            addImportHashMap(importHashMap);
+            addImportHashMap(importHashMap, null);
         }
 
-        public PatternBuilder addImportHashMap(LinkedHashMap<String, Object> importHashMap) {
-            String locationString = (String) importHashMap.getOrDefault(LOCATION_KEY, "");
-            if( ! locationString.isEmpty() ) {
-                this.setLocation(Paths.get(locationString));
-            }
+        public PatternBuilder addImportHashMap(LinkedHashMap<String, Object> importHashMap, Pattern parentPattern) {
+            if(importHashMap != null) {
+                String importName = (String) importHashMap.get(NAME_KEY);
+                String importVersion = (String) importHashMap.getOrDefault(VERSION_KEY, "");
+                if(FileUtils.patternIsASubModuleOfCurrentPattern(importName) && importVersion.isEmpty()) {
+                    this.setVersion(parentPattern.version);
+                }
 
-            this.setName((String) importHashMap.get(NAME_KEY))
+                String outputLocation = (String) importHashMap.getOrDefault(LOCATION_KEY, "./");
+                Path outputPath = parentPattern.outputPath.resolve(outputLocation);
+
+                Path patternFilesPath = getPathForHashMap(parentPattern, importHashMap);
+
+                this.setName((String) importHashMap.get(NAME_KEY))
                     .setVersion((String) importHashMap.get(VERSION_KEY))
-                    .setVars((LinkedHashMap<String, String>) importHashMap.getOrDefault(VARS_KEY, new LinkedHashMap<String, String>()));
+                    .setVars((LinkedHashMap<String, String>) importHashMap.getOrDefault(VARS_KEY, new LinkedHashMap<String, String>()))
+                    .setOutputLocation(outputPath)
+                    .addFiles(FileUtils.getFilePathsRecursive(patternFilesPath));
+            }
 
             return this;
         }
 
-//        public PatternBuilder addSwapHashMap(LinkedHashMap<String, Object> swapHashMap, String importName) {
-//            String locationString = (String) swapHashMap.get(LOCATION_KEY);
-//
-//            this.setName(importName)
-//                    .setVersion((String) swapHashMap.get(VERSION_KEY))
-//                    .setLocation(Paths.get(locationString))
-//                    .setVars((LinkedHashMap<String, String>) swapHashMap.get(VARS_KEY));
-//
-//            return this;
-//        }
-
         public Pattern build() {
+
+
+
             return patternTmp;
         }
 
@@ -203,11 +172,6 @@ public class PatternFileScanner {
             patternTmp.name = Optional.ofNullable(patternTmp.name).orElse(name);
             return this;
         }
-
-//        public PatternBuilder setSwapName(String swapName) {
-//            patternTmp.name = Optional.ofNullable(patternTmp.name).orElse(swapName);
-//            return this;
-//        }
 
         public PatternBuilder addFiles(ArrayList<Path> paths) {
             patternTmp.files.addAll(paths);
@@ -224,8 +188,8 @@ public class PatternFileScanner {
             return this;
         }
 
-        public PatternBuilder setLocation(Path location) {
-            patternTmp.outputLocation = location;
+        public PatternBuilder setOutputLocation(Path location) {
+            patternTmp.outputPath = location;
             return this;
         }
 

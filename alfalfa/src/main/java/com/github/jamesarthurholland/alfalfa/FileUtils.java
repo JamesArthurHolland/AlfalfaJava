@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FileUtils {
-
+    public static boolean patternIsASubModuleOfCurrentPattern(String patternName) {
+        return patternName.contains(".") == false;
+    }
 
     public static void copyDirRecursive(Path patternDir, Path outputDir) {
         try (Stream<Path> stream = Files.walk(patternDir)) {
@@ -54,6 +56,13 @@ public class FileUtils {
 
     public static Path patternPathMain(String patternName, String version) {
         return modulePath(patternName, version).resolve("main");
+    }
+
+    public static Path modulePathFromParentAndName(String parentPatternFullName, String version, String moduleName) {
+        String[] patternNameParts = parentPatternFullName.split("/");
+        String origin = patternNameParts[0];
+        String pattern = patternNameParts[1];
+        return getAlfalfaRepository().resolve(origin).resolve(pattern).resolve(version).resolve(moduleName);
     }
 
     // TODO if no module, ie com.github.jamesarthurholland/genericapi then it should import main

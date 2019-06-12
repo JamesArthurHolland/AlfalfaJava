@@ -31,7 +31,7 @@ public class GenericApiTests {
 //        com.github.jamesarthurholland.alfalfa.PatternImporter.importPattern(patternName, version, tempDir);
 
         FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), tempDir);
-        Pattern pattern = new PatternFileScanner(tempDir).scan();
+        Pattern pattern = new PatternFileScanner(Paths.get("src/test/resources/exampleWorkingDirectory")).scan();
 
         Path patternPath = FileUtils.modulePath(patternName, version);
 
