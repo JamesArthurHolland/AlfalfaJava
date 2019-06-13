@@ -21,6 +21,14 @@ public class Pattern {
     public LinkedHashMap<String, String> vars = new LinkedHashMap<>();
     public ArrayList<Path> files = new ArrayList<>();
     public Path outputPath;
+    public Path patternRepoPath;
+
+    public VariableMode mode = VariableMode.FOR_EACH;
+
+    public enum VariableMode {
+        FOR_EACH,
+        SINGLE
+    }
 
 
     public Pattern() {}

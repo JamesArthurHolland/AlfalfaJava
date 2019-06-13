@@ -149,22 +149,20 @@ public class PatternFileScanner {
                 String outputLocation = (String) importHashMap.getOrDefault(LOCATION_KEY, "./");
                 Path outputPath = parentPattern.outputPath.resolve(outputLocation);
 
-                Path patternFilesPath = getPathForHashMap(parentPattern, importHashMap);
+                Path patternRepoPath = getPathForHashMap(parentPattern, importHashMap);
 
                 this.setName((String) importHashMap.get(NAME_KEY))
                     .setVersion((String) importHashMap.get(VERSION_KEY))
                     .setVars((LinkedHashMap<String, String>) importHashMap.getOrDefault(VARS_KEY, new LinkedHashMap<String, String>()))
                     .setOutputLocation(outputPath)
-                    .addFiles(FileUtils.getFilePathsRecursive(patternFilesPath));
+                    .addFiles(FileUtils.getFilePathsRecursive(patternRepoPath))
+                    .setPatternRepoPath(patternRepoPath);
             }
 
             return this;
         }
 
         public Pattern build() {
-
-
-
             return patternTmp;
         }
 
@@ -193,6 +191,9 @@ public class PatternFileScanner {
             return this;
         }
 
-
+        public PatternBuilder setPatternRepoPath(Path patternRepoPath) {
+            patternTmp.patternRepoPath = patternRepoPath;
+            return this;
+        }
     }
 }

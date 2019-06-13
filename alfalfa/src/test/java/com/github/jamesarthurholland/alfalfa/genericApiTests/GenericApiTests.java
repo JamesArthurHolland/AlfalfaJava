@@ -1,8 +1,10 @@
 package com.github.jamesarthurholland.alfalfa.genericApiTests;
 
+import com.github.jamesarthurholland.alfalfa.Alfalfa;
 import com.github.jamesarthurholland.alfalfa.FileUtils;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.PatternFileScanner;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -33,7 +35,12 @@ public class GenericApiTests {
         FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), tempDir);
         Pattern pattern = new PatternFileScanner(Paths.get("src/test/resources/exampleWorkingDirectory")).scan();
 
-        Path patternPath = FileUtils.modulePath(patternName, version);
+
+        Schema config = new Schema(Paths.get("src/test/resources/exampleWorkingDirectory/"));
+
+
+        System.out.println("ALFALFA run \n\n\n========\n\n\n");
+        Alfalfa.alfalfaRun(tempDir, config, pattern);
 
         // assert
         assertAll(
