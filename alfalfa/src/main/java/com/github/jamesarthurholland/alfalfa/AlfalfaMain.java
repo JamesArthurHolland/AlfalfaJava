@@ -1,5 +1,7 @@
 package com.github.jamesarthurholland.alfalfa;
 
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.PatternFileScanner;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.NoEntityFileException;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.InvalidHeaderException;
@@ -22,7 +24,8 @@ public class AlfalfaMain implements Callable<Void>
     @CommandLine.Option(names = { "-t", "--template" }, description = "Templates folder or template file.")
     private String patternDirectoryString = "";
 
-
+    @CommandLine.Option(names = { "--debug" })
+    private boolean debug = false;
 
     public static void main(String[] args)
     {
@@ -32,10 +35,28 @@ public class AlfalfaMain implements Callable<Void>
     @Override
     public Void call() throws Exception {
         try {
+            if(debug == true) {
+                String patternName = "com.github.jamesarthurholland/genericapi/main"; // TODO use dots the whole way or look at how maven does it
+                String version = "0.1";
+
+//        com.github.jamesarthurholland.alfalfa.PatternImporter.importPattern(patternName, version, tempDir);
+
+                Path outputPath = Paths.get("/Users/beljh/testoutput");
+
+                FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), outputPath);
+                Pattern pattern = new PatternFileScanner(Paths.get("src/test/resources/exampleWorkingDirectory")).scan();
+
+
+                Schema config = new Schema(Paths.get("src/test/resources/exampleWorkingDirectory/"));
+                Alfalfa.alfalfaRun(outputPath, config, pattern);
+                return null;
+            }
             Path workingDirectory = Paths.get(System.getProperty("user.dir"));
             Schema config = new Schema(workingDirectory);
             Path patternDirectory = Paths.get(patternDirectoryString);
             Alfalfa.alfalfaSimpleRun(workingDirectory, patternDirectory, config);
+
+
 
 
 //            Schema.ConfigElement configElement = modelScanner.readConfigFromLines(entityInfoArrayList);

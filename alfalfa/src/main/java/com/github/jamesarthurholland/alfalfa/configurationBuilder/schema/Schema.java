@@ -16,7 +16,7 @@ public class Schema {
     private HashSet<EntityInfo> entityInfoList = new HashSet<>();
     private Map<String, HashSet<Mapping>> mappingsForEntityName = new HashMap<>();
 
-    public static final String ALFALFA_DOT_FOLDER = ".alfalfa";
+    public static final String ALFALFA_DOT_FOLDER = "alfalfa";
 
     public Schema(Path workingDirectory) throws NoDotAlfalfaDirectoryException {
         // getMappingStrings
