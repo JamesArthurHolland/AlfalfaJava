@@ -8,4 +8,5 @@ imports:
     location: "./"
 
 vars:
-  - project_var: "Project level var"
+  project_var: "This should be top level"
+  top1_2: "TOP LEVEL 2"

@@ -8,4 +8,4 @@ imports:
     mode: for_each
 
 vars:
-  - project_var: "Project level var"
+  project_var_2: "Second module level {{project_var}}"

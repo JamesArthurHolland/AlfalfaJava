@@ -1,6 +1,8 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern;
 
 import com.github.jamesarthurholland.alfalfa.FileUtils;
+import com.google.common.collect.Maps;
+import com.hubspot.jinjava.Jinjava;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.BufferedReader;
@@ -9,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class PatternFileScanner {
     public static String ALFALFA_FILE = "AlfalfaFile";
@@ -48,7 +51,7 @@ public class PatternFileScanner {
             String currentPatternLocationString = (String) patternYamlObject.getOrDefault(LOCATION_KEY,"./");
             Path currentPatternPath = Paths.get(currentPatternLocationString);
             // TODO scan vars and (pass them down the tree)???
-            LinkedHashMap<String, String> vars = new LinkedHashMap<>();
+            LinkedHashMap<String, String> vars = (LinkedHashMap<String, String>) patternYamlObject.getOrDefault(VARS_KEY, new LinkedHashMap<>());
 
             if(patternBuilder == null) {
                 patternBuilder = new PatternBuilder();
@@ -123,6 +126,7 @@ public class PatternFileScanner {
 
     protected static class PatternBuilder {
         private Pattern patternTmp;
+        private Jinjava jinjava = new Jinjava();
 
         public PatternBuilder(Pattern pattern) {
             this.patternTmp = pattern;
@@ -151,9 +155,20 @@ public class PatternFileScanner {
 
                 Path patternRepoPath = getPathForHashMap(parentPattern, importHashMap);
 
+
+                LinkedHashMap<String, String> vars = (LinkedHashMap<String, String>) importHashMap.getOrDefault(VARS_KEY, new LinkedHashMap<>());
+                vars.entrySet().stream().forEach(entry -> {
+                    String renderedVariable = jinjava.render(entry.getValue(), parentPattern.vars);
+                    vars.putIfAbsent(entry.getKey(), renderedVariable);
+                });
+                parentPattern.vars.entrySet().stream().forEach(entry -> {
+                    vars.putIfAbsent(entry.getKey(), entry.getValue());
+                });
+
+
                 this.setName((String) importHashMap.get(NAME_KEY))
                     .setVersion((String) importHashMap.get(VERSION_KEY))
-                    .setVars((LinkedHashMap<String, String>) importHashMap.getOrDefault(VARS_KEY, new LinkedHashMap<String, String>()))
+                    .setVars(vars)
                     .setOutputLocation(outputPath)
                     .addFiles(FileUtils.getFilePathsRecursive(patternRepoPath))
                     .setPatternRepoPath(patternRepoPath);

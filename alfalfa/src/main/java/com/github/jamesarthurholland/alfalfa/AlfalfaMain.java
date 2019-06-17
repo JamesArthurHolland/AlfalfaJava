@@ -36,18 +36,13 @@ public class AlfalfaMain implements Callable<Void>
     public Void call() throws Exception {
         try {
             if(debug == true) {
-                String patternName = "com.github.jamesarthurholland/genericapi/main"; // TODO use dots the whole way or look at how maven does it
-                String version = "0.1";
-
-//        com.github.jamesarthurholland.alfalfa.PatternImporter.importPattern(patternName, version, tempDir);
-
                 Path outputPath = Paths.get("/Users/beljh/testoutput");
 
-                FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), outputPath);
-                Pattern pattern = new PatternFileScanner(Paths.get("src/test/resources/exampleWorkingDirectory")).scan();
+//                FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), outputPath);
+                Pattern pattern = new PatternFileScanner(outputPath).scan();
+                Schema config = new Schema(outputPath);
 
 
-                Schema config = new Schema(Paths.get("src/test/resources/exampleWorkingDirectory/"));
                 Alfalfa.alfalfaRun(outputPath, config, pattern);
                 return null;
             }
