@@ -18,4 +18,4 @@ imports:
       import2: use this var just
 
 vars:
-  - project_var: "Project level var"
+  project_var: "Project level var"

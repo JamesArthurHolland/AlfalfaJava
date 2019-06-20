@@ -1,11 +1,18 @@
 package com.github.jamesarthurholland.alfalfa;
 
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.Serializer;
+import com.esotericsoftware.kryo.io.Input;
+import com.esotericsoftware.kryo.io.Output;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.PatternFileScanner.ALFALFA_FILE;
 
 public class FileUtils {
     public static boolean patternIsASubModuleOfCurrentPattern(String patternName) {
@@ -31,6 +38,10 @@ public class FileUtils {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean isAlfalfaFile(Path path) {
+        return path.getFileName().equals(ALFALFA_FILE);
     }
 
     public static ArrayList<Path> getFilePathsRecursive(Path patternDir) {
@@ -74,5 +85,8 @@ public class FileUtils {
         return getAlfalfaRepository().resolve(origin).resolve(pattern).resolve(version).resolve(module);
     }
 
+    public static boolean isEmptyDir(Path path) {
+        return Files.isDirectory(path) && path.toFile().listFiles().length == 0;
+    }
 
 }

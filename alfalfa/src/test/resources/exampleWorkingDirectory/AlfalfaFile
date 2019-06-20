@@ -1,5 +1,5 @@
 ---
-name: Example Generic Api
+name: com.github.jamesarthurholland/exampleApi
 version: "0.1"
 
 imports:

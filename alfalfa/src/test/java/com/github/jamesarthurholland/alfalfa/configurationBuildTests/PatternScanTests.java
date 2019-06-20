@@ -16,4 +16,12 @@ public class PatternScanTests {
         System.out.println("PatternScanTest");
     }
 
+    @Test
+    public void clonePattern() {
+        Path patternPath = Paths.get("src/test/resources/examplePatternDirectory");
+        Pattern a = new PatternFileScanner(patternPath).scan();
+        Pattern b = a.copy();
+
+        assert(a.equals(b));
+    }
 }

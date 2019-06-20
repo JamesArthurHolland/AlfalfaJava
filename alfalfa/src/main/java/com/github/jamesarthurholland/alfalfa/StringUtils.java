@@ -42,6 +42,9 @@ public class StringUtils {
 
     public static boolean fileIsTemplateFile(Path path)
     {
+        if(java.nio.file.Files.isDirectory(path)) {
+            return false;
+        }
         return Files.getFileExtension(path.toString()).equals(StringUtils.TEMPLATE_EXTENSION);
     }
 
