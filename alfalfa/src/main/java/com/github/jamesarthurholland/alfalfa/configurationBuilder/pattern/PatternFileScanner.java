@@ -22,6 +22,7 @@ public class PatternFileScanner {
     public static String SWAP_NAME_KEY = "swap";
     public static String VERSION_KEY = "version";
     public static String VARS_KEY = "vars";
+    public static String FOLDER_SWAPS_KEY = "folder_swaps";
 
     private Path workingDirectory = null;
 
@@ -142,6 +143,7 @@ public class PatternFileScanner {
             Path currentPatternPath = Paths.get(currentPatternLocationString);
 //             TODO scan vars and (pass them down the tree)???
             LinkedHashMap<String, String> vars = parseVarsFromHashMap(patternHashMap, patternTmp.vars);
+            LinkedHashMap<String, String> folderSwaps = parseFolderSwapsFromHashMap(patternHashMap, patternTmp.folderSwaps)
 
             this.setName(currentPatternName)
                     .setVersion(currentPatternVersion)
@@ -152,20 +154,28 @@ public class PatternFileScanner {
         }
 
         private LinkedHashMap<String, String> parseVarsFromHashMap(LinkedHashMap<String, Object> patternHashMap, LinkedHashMap<String, String> parentVars) {
-            LinkedHashMap<String, String> vars = (LinkedHashMap<String, String>) patternHashMap.getOrDefault(VARS_KEY, new LinkedHashMap<>());
-            if(parentVars.size() == 0) {
-                vars.putAll(vars);
-                return vars;
+            parseList(VARS_KEY, patternHashMap, parentVars);
+        }
+
+
+        private LinkedHashMap<String, String> parseFolderSwapsFromHashMap(LinkedHashMap<String, Object> patternHashMap, LinkedHashMap<String, String> parentFolderSwaps) {
+            return parseList(FOLDER_SWAPS_KEY, patternHashMap, parentFolderSwaps);
+        }
+
+        private static LinkedHashMap<String, String> parseList(String key, LinkedHashMap<String, Object> patternHashMap, LinkedHashMap<String, String> parentItems) {
+            LinkedHashMap<String, String> items = (LinkedHashMap<String, String>) patternHashMap.getOrDefault(key, new LinkedHashMap<>());
+            if(parentItems.size() == 0) {
+                return items;
             }
 
-            vars.entrySet().stream().forEach(entry -> {
-                String renderedVariable = new Jinjava().render(entry.getValue(), parentVars);
-                vars.put(entry.getKey(), renderedVariable);
+            items.entrySet().stream().forEach(entry -> {
+                String renderedVariable = new Jinjava().render(entry.getValue(), parentItems);
+                items.put(entry.getKey(), renderedVariable);
             });
-            parentVars.entrySet().stream().forEach(entry -> {
-                vars.putIfAbsent(entry.getKey(), entry.getValue());
+            parentItems.entrySet().stream().forEach(entry -> {
+                items.putIfAbsent(entry.getKey(), entry.getValue());
             });
-            return vars;
+            return items;
         }
 
 
@@ -176,7 +186,7 @@ public class PatternFileScanner {
                 String outputLocation = (String) importHashMap.getOrDefault(LOCATION_KEY, "./");
 
                 if(FileUtils.patternIsASubModuleOfCurrentPattern(importName) && importVersion.isEmpty()) {
-                    this.setVersion(parentPatternBuilder.patternTmp.version);
+                    this.setVersion(parentPatternBuilder.patternTmp.version); // TODO confirm
                 }
 
                 Path outputPath = parentPatternBuilder.patternTmp.getOutputPath() == null ? Paths.get(outputLocation) : parentPatternBuilder.patternTmp.getOutputPath().resolve(outputLocation);
@@ -238,4 +248,6 @@ public class PatternFileScanner {
             return this;
         }
     }
+
+
 }

@@ -29,6 +29,7 @@ public class Pattern implements Serializable
     public String version;
     public ArrayList<Pattern> imports = new ArrayList<>();
 //    public HashMap<String, Pattern> imports = new HashMap<>();
+    public LinkedHashMap<String, String> folderSwaps = new LinkedHashMap<>();
     public LinkedHashMap<String, String> vars = new LinkedHashMap<>();
     public ArrayList<String> files = new ArrayList<>();
     public String outputPath;
@@ -43,16 +44,29 @@ public class Pattern implements Serializable
 
     public Pattern() {}
 
-    public Pattern(String name, String version, LinkedHashMap<String, String> vars) {
+    public Pattern(
+        String name,
+        String version,
+        LinkedHashMap<String, String> folderSwaps,
+        LinkedHashMap<String, String> vars
+    ) {
         this.name = requireNonNull(name, "The argument 'name' must not be null.");
         this.version = requireNonNull(version, "The argument 'version' must not be null.");
+        this.folderSwaps = folderSwaps;
         this.vars = vars;
     }
 
-    public Pattern(String name, String version, ArrayList<Pattern> imports, LinkedHashMap<String, String> vars) {
+    public Pattern(
+        String name,
+        String version,
+        ArrayList<Pattern> imports,
+        LinkedHashMap<String, String> folderSwaps,
+        LinkedHashMap<String, String> vars
+    ) {
         this.name = requireNonNull(name, "The argument 'name' must not be null.");
         this.version = requireNonNull(version, "The argument 'version' must not be null.");
         this.imports = imports;
+        this.folderSwaps = folderSwaps;
         this.vars = vars;
     }
 
