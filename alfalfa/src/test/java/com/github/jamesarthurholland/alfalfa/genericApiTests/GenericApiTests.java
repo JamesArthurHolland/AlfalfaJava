@@ -2,6 +2,7 @@ package com.github.jamesarthurholland.alfalfa.genericApiTests;
 
 import com.github.jamesarthurholland.alfalfa.Alfalfa;
 import com.github.jamesarthurholland.alfalfa.FileUtils;
+import com.github.jamesarthurholland.alfalfa.PatternImporter;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.PatternFileScanner;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
@@ -27,10 +28,10 @@ public class GenericApiTests {
     @Test void api(@TempDir Path tempDir) {
         // arrange
 
-        String patternName = "com.github.jamesarthurholland/genericapi/main"; // TODO use dots the whole way or look at how maven does it
+        String patternName = "com.github.jamesarthurholland/genericapi"; // TODO use dots the whole way or look at how maven does it
         String version = "0.1";
 
-//        com.github.jamesarthurholland.alfalfa.PatternImporter.importPattern(patternName, version, tempDir);
+        PatternImporter.importPattern(patternName, version, tempDir);
 
         FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), tempDir);
         Pattern pattern = new PatternFileScanner(Paths.get("src/test/resources/exampleWorkingDirectory")).scan();

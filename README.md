@@ -1,27 +1,8 @@
-# **Alfalfa Commandline Version**
-#### 1. Clone AlfalfaJava and compile.
+To copy testrepo
 
-```git clone git@github.com:JamesArthurHolland/AlfalfaJava```
+cp -ru com.github.jamesarthurholland ~/.alfalfa/repository/
 
-```cd AlfalfaJava/src && javac *.java```
- 
-#### 2. Clone patterns and add to pattern directory file. 
-Only one pattern directory can reside in this file. To run Alfalfa with different patterns, make a new install 
-or change the patternDirectory.txt file to point to the working directory of the new pattern directory.
-
-```git clone git@github.com:JamesArthurHolland/AlfalfaPatternsPhalconPHP```
-
-```cd AlfalfaPatternsPhalconPHP && pwd >> where/installed/AlfalfaJava/src/patternDirectory.txt```
-
-#### 3. Make an alias for Alfalfa. 
-Consider that multiple installs can have different names eg alfalfaphp alfalfajava etc.
-
-```echo "alias alfalfa='java -cp ~/AlfalfaJava/src/ Compiler'" >> ~/.bash_profile```
-
-#### 4. Reinitialise your bash profile.
-
-```. ~/.bash_profile```
-
-## Video tutorial
-
-[![Alfalfa Setup](http://img.youtube.com/vi/b-euwq0upoc/0.jpg)](https://youtu.be/b-euwq0upoc "Alfalfa Setup")
+Issues:
+1. com/github/jamesarthurholland/alfalfa/Alfalfa.java:60 Isn't filtering alfalfafiles properly
+2. com/github/jamesarthurholland/alfalfa/Alfalfa.java:66 We want to copy directories as well.
+We also want to have some sort of name swap option in the alfalfa file, because 

@@ -22,7 +22,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
 
-//    compile group: 'commons-io', name: 'commons-io', version: '2.6.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile 'info.picocli:picocli:3.9.5'
     compile group: 'com.leacox.motif', name: 'motif', version: '0.1'
     compile group: 'com.google.guava', name: 'guava', version: '11.0.2'

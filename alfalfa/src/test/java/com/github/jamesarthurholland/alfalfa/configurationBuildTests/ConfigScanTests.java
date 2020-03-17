@@ -1,7 +1,7 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuildTests;
 
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.ModelFileScanner;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.model.Mapping;
 import com.github.jamesarthurholland.alfalfa.model.Variable;

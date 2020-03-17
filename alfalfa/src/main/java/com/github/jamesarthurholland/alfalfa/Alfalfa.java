@@ -33,10 +33,10 @@ public class Alfalfa {
             try {
 
                 Files.list(templateDirectory)
-                        .filter(StringUtils::fileIsTemplateFile)
-                        .forEach(patternPath -> {
-                            evaluateTemplateFileForConfig(patternPath, entityInfo, workingDirectory);
-                        });
+                    .filter(StringUtils::fileIsTemplateFile)
+                    .forEach(patternPath -> {
+                        evaluateTemplateFileForConfig(patternPath, entityInfo, workingDirectory);
+                    });
             } catch (IOException e) {
                 e.printStackTrace();
             }

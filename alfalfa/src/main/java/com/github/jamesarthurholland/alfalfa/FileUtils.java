@@ -66,7 +66,7 @@ public class FileUtils {
     }
 
     public static Path patternPathMain(String patternName, String version) {
-        return modulePath(patternName, version).resolve("main");
+        return Paths.get(patternName).resolve(version).resolve("main");
     }
 
     public static Path modulePathFromParentAndName(String parentPatternFullName, String version, String moduleName) {
