@@ -143,7 +143,7 @@ public class PatternFileScanner {
             Path currentPatternPath = Paths.get(currentPatternLocationString);
 //             TODO scan vars and (pass them down the tree)???
             LinkedHashMap<String, String> vars = parseVarsFromHashMap(patternHashMap, patternTmp.vars);
-            LinkedHashMap<String, String> folderSwaps = parseFolderSwapsFromHashMap(patternHashMap, patternTmp.folderSwaps)
+            LinkedHashMap<String, String> folderSwaps = parseFolderSwapsFromHashMap(patternHashMap, patternTmp.folderSwaps);
 
             this.setName(currentPatternName)
                     .setVersion(currentPatternVersion)
@@ -154,7 +154,7 @@ public class PatternFileScanner {
         }
 
         private LinkedHashMap<String, String> parseVarsFromHashMap(LinkedHashMap<String, Object> patternHashMap, LinkedHashMap<String, String> parentVars) {
-            parseList(VARS_KEY, patternHashMap, parentVars);
+            return parseList(VARS_KEY, patternHashMap, parentVars);
         }
 
 

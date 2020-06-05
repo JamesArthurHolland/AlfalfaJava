@@ -57,13 +57,15 @@ public class Alfalfa {
             pattern.files.stream()
                 .sorted()
                 .map(Paths::get)
-                .filter(path -> FileUtils.isAlfalfaFile(path) == false )
+                .filter(path -> FileUtils.isAlfalfaFile(path) == false )// TODO this doesnt work
                 .forEach(fullPath -> {
                     Log.info("File is " + fullPath);
                     Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullPath);
+                    // TODO folderSwap here if file is folder and folderfilePathRelativeToModule is listed in folder swaps
                     Path fileAbsoluteOutputPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule);
 
                     if(fileIsTemplateFile(fullPath)) {
+                        // TODO
                         if(pattern.mode == Pattern.VariableMode.FOR_EACH) {
                             config.getEntityInfo().forEach(entityInfo -> {
                                 Path fileOutputDirectoryPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule).getParent();
@@ -75,6 +77,8 @@ public class Alfalfa {
                     else if( FileUtils.isEmptyDir(fullPath) || ! Files.isDirectory(fullPath) && !FileUtils.isAlfalfaFile(fullPath)) {
                         try {
                             // TODO add file if doesn't exist, otherwise if exists, find the delta between this one and the last. Then add the diff. Don't delete any code that was added manually.
+
+
 
 
                             Files.lines(fullPath, Charset.defaultCharset()) // TODO this breaks for binary files
