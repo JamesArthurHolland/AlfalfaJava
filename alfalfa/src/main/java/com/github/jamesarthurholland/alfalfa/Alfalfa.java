@@ -2,25 +2,22 @@ package com.github.jamesarthurholland.alfalfa;
 
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
-import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
+import com.github.jamesarthurholland.alfalfa.fileHandlers.DirectoryFileHandler;
+import com.github.jamesarthurholland.alfalfa.fileHandlers.TemplateFileHandler;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
-import java.nio.charset.MalformedInputException;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static com.github.jamesarthurholland.alfalfa.StringUtils.fileIsTemplateFile;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class Alfalfa {
 
@@ -35,7 +32,7 @@ public class Alfalfa {
                 Files.list(templateDirectory)
                     .filter(StringUtils::fileIsTemplateFile)
                     .forEach(patternPath -> {
-                        evaluateTemplateFileForConfig(patternPath, entityInfo, workingDirectory);
+                        TemplateFileHandler.evaluateTemplateFileForConfig(patternPath, entityInfo, workingDirectory);
                     });
             } catch (IOException e) {
                 e.printStackTrace();
@@ -45,7 +42,9 @@ public class Alfalfa {
 //                    .collect(Collectors.toCollection(ArrayList::new));
     }
 
-
+    public static boolean pathIsNotTheModuleRootFolder(Path path, Pattern pattern) {
+        return ! Files.isDirectory(path) || (Files.isDirectory(path) && ! pattern.getPatternRepoPath().relativize(path).toString().isEmpty());
+    }
 
     public static void alfalfaRun(Path workingDirectory, Schema config, Pattern rootPattern) {
         Stack<Pattern> patternStack = new Stack();
@@ -58,52 +57,52 @@ public class Alfalfa {
                 .sorted()
                 .map(Paths::get)
                 .filter(path -> FileUtils.isAlfalfaFile(path) == false )// TODO this doesnt work
+                .filter(path -> pathIsNotTheModuleRootFolder(path, pattern))
                 .forEach(fullPath -> {
                     Log.info("File is " + fullPath);
+                    boolean test1 = pathIsNotTheModuleRootFolder(fullPath, pattern);
                     Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullPath);
-                    // TODO folderSwap here if file is folder and folderfilePathRelativeToModule is listed in folder swaps
-                    Path fileAbsoluteOutputPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule);
+                    AtomicReference<Path> fileAbsoluteOutputPath = new AtomicReference<>(workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule));
+
+
 
                     if(fileIsTemplateFile(fullPath)) {
                         // TODO
-                        if(pattern.mode == Pattern.VariableMode.FOR_EACH) {
-                            config.getEntityInfo().forEach(entityInfo -> {
-                                Path fileOutputDirectoryPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule).getParent();
-                                evaluateTemplateFileForConfig(fullPath, entityInfo, fileOutputDirectoryPath);
-                            });
-                        }
+                        TemplateFileHandler.handleTemplateFile(pattern, workingDirectory, config, filePathRelativeToModule, fullPath);
                     }
-//                    else if ( )
+                    else if (Files.isDirectory(fullPath)) {
+                        DirectoryFileHandler.handle(workingDirectory, config, pattern, filePathRelativeToModule, fileAbsoluteOutputPath);
+//                        else {
+//                            try {
+//                                Files.createDirectories(fileAbsoluteOutputPath.get());
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+                    }
                     else if( FileUtils.isEmptyDir(fullPath) || ! Files.isDirectory(fullPath) && !FileUtils.isAlfalfaFile(fullPath)) {
                         try {
                             // TODO add file if doesn't exist, otherwise if exists, find the delta between this one and the last. Then add the diff. Don't delete any code that was added manually.
 
+// TODO folderSwap here if file is folder and folderfilePathRelativeToModule is listed in folder swaps
 
 
-
+                            Log.info("Here not alfalfafile " + fullPath);
                             Files.lines(fullPath, Charset.defaultCharset()) // TODO this breaks for binary files
-                                .map(pattern::injectVarsToLine)
-                                .collect(Collectors.toCollection(ArrayList::new))
-                                .forEach(list -> {
-                                    try {
-                                        org.apache.commons.io.FileUtils.writeLines(fileAbsoluteOutputPath.toFile(), Collections.singleton(list));
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                });
-
+                                    .map(pattern::injectVarsToLine)
+                                    .collect(Collectors.toCollection(ArrayList::new))
+                                    .forEach(list -> {
+                                        try {
+                                            org.apache.commons.io.FileUtils.writeLines(fileAbsoluteOutputPath.get().toFile(), Collections.singleton(list));
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
 
 
 //                            Files.copy(fullPath, fileAbsoluteOutputPath, REPLACE_EXISTING);
-                        } catch (UncheckedIOException e) {
+                        } catch (Exception e1) {
                             Log.warning("File " + fullPath.toString() + " is a binary, copying without touching. Are you sure you need this binary?");
-                            try {
-                                Files.copy(fullPath, fileAbsoluteOutputPath, REPLACE_EXISTING);
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
-                        catch (Exception e1) {
                             e1.printStackTrace();
                         }
                         return;
@@ -121,13 +120,7 @@ public class Alfalfa {
         }
     }
 
-    public static void evaluateTemplateFileForConfig(Path patternFilePath, EntityInfo entityInfo, Path workingDirectory) {
-        try {
-            ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
-            CompilerResult compilerResult = Compiler.runAlfalfa(entityInfo, lines);
-            Compiler.writeCompilerResultToFile(workingDirectory.toString(), compilerResult);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
+
+
 }

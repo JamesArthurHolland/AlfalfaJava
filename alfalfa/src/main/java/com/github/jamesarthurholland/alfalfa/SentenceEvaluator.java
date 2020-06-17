@@ -123,7 +123,7 @@ public class SentenceEvaluator
     {
         String outputString = sentence.replaceAll("\\{\\{entity\\}\\}", entityInfo.getName());
         outputString = outputString.replaceAll("\\{\\{en_tity\\}\\}", camelToLowerUnderScore(entityInfo.getName()));
-        outputString = outputString.replaceAll("\\{\\{ENTITY\\}\\}", camelToUpperUnderScore(entityInfo.getName()));
+        outputString = outputString.replaceAll("\\{\\{EN_TITY\\}\\}", camelToUpperUnderScore(entityInfo.getName()));
         outputString = outputString.replaceAll("\\{\\{Entity\\}\\}", uppercaseFirst(entityInfo.getName()));
 
         return outputString;

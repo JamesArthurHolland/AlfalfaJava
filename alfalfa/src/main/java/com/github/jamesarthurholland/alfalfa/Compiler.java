@@ -37,7 +37,7 @@ public class Compiler
 
 
 
-    protected static void writeCompilerResultToFile(String workingDirectory, CompilerResult compilerResult)
+    public static void writeCompilerResultToFile(String workingDirectory, CompilerResult compilerResult)
     {
         try {
             PrintWriter writer = new PrintWriter("" + workingDirectory + "/" + compilerResult.getFileName(), "UTF-8");

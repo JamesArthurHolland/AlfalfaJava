@@ -1,0 +1,105 @@
+{{ALFALFA -o {{en_tity}}s.ex}}
+defmodule WsElixirRest.{{Entity}}s do
+  @moduledoc """
+  The {{Entity}}s context.
+  """
+
+  import Ecto.Query, warn: false
+  alias WsElixirRest.Repo
+
+  alias WsElixirRest.{{Entity}}s.{{Entity}}
+
+  @doc """
+  Returns the list of {{en_tity}}s.
+
+  ## Examples
+
+      iex> list_{{en_tity}}s()
+      [%{{Entity}}{}, ...]
+
+  """
+  def list_{{en_tity}}s do
+    Repo.all({{Entity}})
+  end
+
+  @doc """
+  Gets a single {{en_tity}}.
+
+  Raises `Ecto.NoResultsError` if the {{Entity}} does not exist.
+
+  ## Examples
+
+      iex> get_{{en_tity}}!(123)
+      %{{Entity}}{}
+
+      iex> get_{{en_tity}}!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_{{en_tity}}!(id), do: Repo.get!({{Entity}}, id)
+
+  @doc """
+  Creates a {{en_tity}}.
+
+  ## Examples
+
+      iex> create_{{en_tity}}(%{field: value})
+      {:ok, %{{Entity}}{}}
+
+      iex> create_{{en_tity}}(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_{{en_tity}}(attrs \\ %{}) do
+    %{{Entity}}{}
+    |> {{Entity}}.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a {{en_tity}}.
+
+  ## Examples
+
+      iex> update_{{en_tity}}({{en_tity}}, %{field: new_value})
+      {:ok, %{{Entity}}{}}
+
+      iex> update_{{en_tity}}({{en_tity}}, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_{{en_tity}}(%{{Entity}}{} = {{en_tity}}, attrs) do
+    {{en_tity}}
+    |> {{Entity}}.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a {{Entity}}.
+
+  ## Examples
+
+      iex> delete_{{en_tity}}({{en_tity}})
+      {:ok, %{{Entity}}{}}
+
+      iex> delete_{{en_tity}}({{en_tity}})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_{{en_tity}}(%{{Entity}}{} = {{en_tity}}) do
+    Repo.delete({{en_tity}})
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking {{en_tity}} changes.
+
+  ## Examples
+
+      iex> change_{{en_tity}}({{en_tity}})
+      %Ecto.Changeset{source: %{{Entity}}{}}
+
+  """
+  def change_{{en_tity}}(%{{Entity}}{} = {{en_tity}}) do
+    {{Entity}}.changeset({{en_tity}}, %{})
+  end
+end

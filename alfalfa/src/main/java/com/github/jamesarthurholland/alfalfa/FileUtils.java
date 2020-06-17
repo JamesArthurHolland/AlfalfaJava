@@ -1,10 +1,5 @@
 package com.github.jamesarthurholland.alfalfa;
 
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.Serializer;
-import com.esotericsoftware.kryo.io.Input;
-import com.esotericsoftware.kryo.io.Output;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +10,9 @@ import java.util.stream.Stream;
 import static com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.PatternFileScanner.ALFALFA_FILE;
 
 public class FileUtils {
+
+    public static final String MODULES_FOLDER = "modules";
+
     public static boolean patternIsASubModuleOfCurrentPattern(String patternName) {
         return patternName.contains(".") == false;
     }
@@ -66,14 +64,14 @@ public class FileUtils {
     }
 
     public static Path patternPathMain(String patternName, String version) {
-        return Paths.get(patternName).resolve(version).resolve("main");
+        return getAlfalfaRepository().resolve(patternName).resolve(version).resolve("main"); // TODO tidy
     }
 
     public static Path modulePathFromParentAndName(String parentPatternFullName, String version, String moduleName) {
         String[] patternNameParts = parentPatternFullName.split("/");
         String origin = patternNameParts[0];
         String pattern = patternNameParts[1];
-        return getAlfalfaRepository().resolve(origin).resolve(pattern).resolve(version).resolve(moduleName);
+        return getAlfalfaRepository().resolve(origin).resolve(pattern).resolve(version).resolve(MODULES_FOLDER).resolve(moduleName);
     }
 
     // TODO if no module, ie com.github.jamesarthurholland/genericapi then it should import main

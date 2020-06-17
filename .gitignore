@@ -4,3 +4,4 @@ alfalfa/gradle/
 alfalfa/gradlew*
 .idea/*
 alfalfa/build/
+out/*

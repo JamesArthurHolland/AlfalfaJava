@@ -1,0 +1,12 @@
+{{ALFALFA -o {{entity}}_resolver.ex}}
+defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
+  alias ElixirRest.{{Entity}}s
+
+  def {{entity}}s(_, _, _) do
+    {:ok, {{Entity}}s.list_{{entity}}s()}
+  end
+
+  def register_{{entity}}(_, %{input: input}, _) do
+    {{Entity}}s.create_{{entity}}(input)
+  end
+end

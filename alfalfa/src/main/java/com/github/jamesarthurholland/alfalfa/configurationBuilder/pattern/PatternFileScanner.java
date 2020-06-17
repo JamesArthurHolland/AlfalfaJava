@@ -1,7 +1,6 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern;
 
 import com.github.jamesarthurholland.alfalfa.FileUtils;
-import com.google.common.collect.Maps;
 import com.hubspot.jinjava.Jinjava;
 import org.yaml.snakeyaml.Yaml;
 
@@ -10,9 +9,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PatternFileScanner {
     public static String ALFALFA_FILE = "AlfalfaFile";
@@ -143,7 +143,6 @@ public class PatternFileScanner {
             Path currentPatternPath = Paths.get(currentPatternLocationString);
 //             TODO scan vars and (pass them down the tree)???
             LinkedHashMap<String, String> vars = parseVarsFromHashMap(patternHashMap, patternTmp.vars);
-            LinkedHashMap<String, String> folderSwaps = parseFolderSwapsFromHashMap(patternHashMap, patternTmp.folderSwaps);
 
             this.setName(currentPatternName)
                     .setVersion(currentPatternVersion)
@@ -201,9 +200,12 @@ public class PatternFileScanner {
                         .filter(path -> ! FileUtils.isAlfalfaFile(path) )
                         .collect(Collectors.toCollection(ArrayList::new));
 
+                LinkedHashMap<String, String> folderSwaps = parseFolderSwapsFromHashMap(importHashMap, patternTmp.folderSwaps);
+
                 this.setName((String) importHashMap.get(NAME_KEY))
                     .setVersion((String) importHashMap.get(VERSION_KEY))
                     .setVars(vars)
+                    .setFolderSwaps(folderSwaps)
                     .setOutputLocation(outputPath)
                     .addFiles(filesAndDirectoriesNoAlfalfaFiles) // TODO don't copy alfalfafile
                     .setPatternRepoPath(patternRepoPath);
@@ -245,6 +247,11 @@ public class PatternFileScanner {
 
         public PatternBuilder setPatternRepoPath(Path patternRepoPath) {
             patternTmp.setPatternRepoPath(patternRepoPath);
+            return this;
+        }
+
+        public PatternBuilder setFolderSwaps(LinkedHashMap<String, String> swaps) {
+            swaps.forEach(patternTmp.folderSwaps::putIfAbsent);
             return this;
         }
     }
