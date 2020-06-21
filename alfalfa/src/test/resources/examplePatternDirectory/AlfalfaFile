@@ -1,0 +1,21 @@
+---
+name: "TestPattern"
+version: "0.1"
+
+imports:
+  - name: import1
+    version: "0.1"
+    swap:
+      name: swap2useinstead
+      version: "0.1"
+      location: loc1
+      vars:
+        swapVar: "Swap var 1"
+
+  - name: Import2
+    version: "0.1"
+    vars:
+      import2: use this var just
+
+vars:
+  project_var: "Project level var"

@@ -1,0 +1,46 @@
+{{ALFALFA -o {{Entity}}Entity.php}}
+<?php
+
+namespace {{NAMESPACE}}\{{Entity}};
+
+use {{NAMESPACE}}\Stdlib\EntityTrait;
+
+
+class {{Entity}}Entity implements \JsonSerializable
+{
+    use EntityTrait;
+
+{{VARS}}
+    protected ${{var}};
+{{/VARS}}
+
+    public function __construct(
+    {{VARS}}
+        {{KEY}}${{var}},{{/KEY}}
+        {{NOT-KEY NOT-LAST}}${{var}},{{/NOT-KEY}}
+        {{NOT-KEY LAST}}${{var}}{{/NOT-KEY}}
+	{{/VARS}}
+    ) {
+    {{VARS}}
+		{{KEY}}$this->set{{Var}}(${{var}}){{/KEY}}
+			{{NOT-KEY NOT-LAST}}->set{{Var}}(${{var}}){{/NOT-KEY}}
+			{{NOT-KEY LAST}}->set{{Var}}(${{var}});{{/NOT-KEY}}
+	{{/VARS}}
+    }
+
+{{VARS}}
+    public function set{{Var}}(${{var}})
+    {
+        $this->{{var}} = ${{var}};
+        return $this;
+    }
+{{/VARS}}
+
+{{VARS}}
+    public function get{{Var}}()
+    {
+        return $this->{{var}};
+    }
+{{/VARS}}
+
+}

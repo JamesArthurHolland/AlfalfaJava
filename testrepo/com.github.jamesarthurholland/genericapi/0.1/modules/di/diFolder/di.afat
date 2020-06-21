@@ -1,0 +1,8 @@
+{{ALFALFA -o {{Entity}}Di}}
+
+{{NAMESPACE}}\{{Entity}};
+
+
+{{VARS}}
+    protected ${{var}};
+{{/VARS}}

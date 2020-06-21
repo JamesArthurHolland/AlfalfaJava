@@ -1,0 +1,12 @@
+---
+name: com.github.jamesarthurholland/exampleRestApi
+version: "0.1"
+
+imports:
+  - name: com.github.jamesarthurholland/elixir-rest/main
+    version: "0.1"
+    location: "./"
+
+vars:
+  project_var: "This should be top level"
+  top1_2: "TOP LEVEL 2"

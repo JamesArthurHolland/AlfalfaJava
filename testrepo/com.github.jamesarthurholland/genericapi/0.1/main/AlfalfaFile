@@ -1,0 +1,13 @@
+---
+name: com.github.jamesarthurholland/genericapi
+version: "0.1"
+
+imports:
+  - name: di
+    location: ./src/main/kotlin/com/aetasa/rest/genericapiapp/di/
+    mode: for_each
+    folder_swaps:
+      diFolder: "FolderSwap{{Entity}}"
+
+vars:
+  project_var_2: "Second module level {{project_var}}"

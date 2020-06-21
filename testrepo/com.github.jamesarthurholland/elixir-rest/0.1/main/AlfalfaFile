@@ -1,0 +1,18 @@
+---
+name: com.github.jamesarthurholland/elixir-rest
+version: "0.1"
+
+imports:
+  - name: ecto
+    location: ./lib/elixir_rest/
+    mode: for_each
+    folder_swaps:
+      ecto-output: "{{en_tity}}s"
+
+  - name: resolvers
+    location: ./lib/elixir_rest_web/resolvers/
+    mode: for_each
+
+  - name: controllers
+    location: ./lib/elixir_rest_web/controllers/
+    mode: for_each
