@@ -1,5 +1,6 @@
 package com.github.jamesarthurholland.alfalfa.fileHandlers;
 
+import com.github.jamesarthurholland.alfalfa.FileUtils;
 import com.github.jamesarthurholland.alfalfa.SentenceEvaluator;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
@@ -10,11 +11,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class DirectoryFileHandler
 {
-    public static void handle(Path workingDirectory, Schema config, Pattern pattern, Path filePathRelativeToModule, AtomicReference<Path> fileAbsoluteOutputPath) {
+    public static void handle(Path workingDirectory, Schema config, Pattern pattern, Path fullInputPath, Path fileAbsoluteOutputPath) {
+        Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullInputPath);
+
+
         if(pattern.mode == Pattern.VariableMode.FOR_EACH && doesDirectoryNeedFolderSwap(filePathRelativeToModule, pattern)) {
             config.getEntityInfo().forEach(entityInfo -> {
                 Path fileAbsoluteOutputPathNew = outputPathForPatternFolderSwap(filePathRelativeToModule, fileAbsoluteOutputPath, pattern, workingDirectory, entityInfo);
@@ -24,6 +27,13 @@ public class DirectoryFileHandler
                     e.printStackTrace();
                 }
             });
+        }
+        else if(FileUtils.isEmptyDir(fullInputPath)) {
+            try {
+                Files.createDirectories(fileAbsoluteOutputPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -42,8 +52,8 @@ public class DirectoryFileHandler
         return childFolder.startsWith(parentFolder);
     }
 
-    public static Path outputPathForPatternFolderSwap(Path relativePath, AtomicReference<Path> unswapped, Pattern pattern, Path workingDirectory, EntityInfo entityInfo) {
-        Path outputPath = Paths.get(unswapped.get().toUri());
+    public static Path outputPathForPatternFolderSwap(Path relativePath, Path unswapped, Pattern pattern, Path workingDirectory, EntityInfo entityInfo) {
+        Path outputPath = Paths.get(unswapped.toUri());
 
         for (Map.Entry<String, String> entry : pattern.folderSwaps.entrySet()) {
             String folderName = entry.getKey();

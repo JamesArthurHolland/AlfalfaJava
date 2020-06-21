@@ -60,18 +60,18 @@ public class Alfalfa {
                 .filter(path -> pathIsNotTheModuleRootFolder(path, pattern))
                 .forEach(fullPath -> {
                     Log.info("File is " + fullPath);
-                    boolean test1 = pathIsNotTheModuleRootFolder(fullPath, pattern);
                     Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullPath);
+
                     AtomicReference<Path> fileAbsoluteOutputPath = new AtomicReference<>(workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule));
 
 
 
                     if(fileIsTemplateFile(fullPath)) {
                         // TODO
-                        TemplateFileHandler.handleTemplateFile(pattern, workingDirectory, config, filePathRelativeToModule, fullPath);
+                        TemplateFileHandler.handleTemplateFile(pattern, workingDirectory, config, fullPath);
                     }
                     else if (Files.isDirectory(fullPath)) {
-                        DirectoryFileHandler.handle(workingDirectory, config, pattern, filePathRelativeToModule, fileAbsoluteOutputPath);
+                        DirectoryFileHandler.handle(workingDirectory, config, pattern, fullPath, fileAbsoluteOutputPath.get());
 //                        else {
 //                            try {
 //                                Files.createDirectories(fileAbsoluteOutputPath.get());

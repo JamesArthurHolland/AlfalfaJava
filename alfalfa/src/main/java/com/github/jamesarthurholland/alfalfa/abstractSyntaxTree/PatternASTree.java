@@ -2,8 +2,6 @@ package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
 import com.github.jamesarthurholland.alfalfa.SentenceEvaluator;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
-import com.github.jamesarthurholland.alfalfa.model.Loop;
-import com.github.jamesarthurholland.alfalfa.model.Sentence;
 import com.github.jamesarthurholland.alfalfa.model.Variable;
 
 import java.util.ArrayList;

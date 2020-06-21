@@ -1,6 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.model;
-
-import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.Node;
+package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
 public class Sentence extends Node
 {

@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-@CommandLine.Command(description = "Prints the checksum (MD5 by default) of a file to STDOUT.",
+@CommandLine.Command(description = "Runs Alfalfa.",
         name = "afa", mixinStandardHelpOptions = true, version = "checksum 3.0")
 public class AlfalfaMain implements Callable<Void>
 {
@@ -23,6 +23,9 @@ public class AlfalfaMain implements Callable<Void>
 
     @CommandLine.Option(names = { "-t", "--template" }, description = "Templates folder or template file.")
     private String patternDirectoryString = "";
+
+    @CommandLine.Option(names = { "-pv", "--pattern-version" }, description = "Templates folder or template file.")
+    private String patternVersionString = "";
 
     @CommandLine.Option(names = { "--debug" })
     private boolean debug = false;
@@ -35,48 +38,16 @@ public class AlfalfaMain implements Callable<Void>
     @Override
     public Void call() throws Exception {
         try {
-            if(debug == true) {
-                Path outputPath = Paths.get("/Users/beljh/testoutput");
-
-//                FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), outputPath);
-                Pattern pattern = new PatternFileScanner(outputPath).scan();
-                Schema config = new Schema(outputPath);
-
-
-                Alfalfa.alfalfaRun(outputPath, config, pattern);
-                return null;
-            }
             Path workingDirectory = Paths.get(System.getProperty("user.dir"));
+
+            Pattern pattern = new PatternFileScanner(workingDirectory).scan();
+
+
             Schema config = new Schema(workingDirectory);
-            Path patternDirectory = Paths.get(patternDirectoryString);
-            Alfalfa.alfalfaSimpleRun(workingDirectory, patternDirectory, config);
 
 
-
-
-//            Schema.ConfigElement configElement = modelScanner.readConfigFromLines(entityInfoArrayList);
-//            config.addElement(configElement);
-
-//            EntityInfo entityInfo = new EntityInfo();
-//            Variable id = new Variable(true, "public", "long", "id");
-//            Variable companyId = new Variable(true, "public", "long", "companyId");
-//            Variable contractId = new Variable(true, "public", "String", "contractId");
-//            Variable status = new Variable(true, "public", "int", "status");
-//            entityInfo.name = "Shift";
-//            entityInfo.variables.add(id);
-//            entityInfo.variables.add(companyId);
-//            entityInfo.variables.add(contractId);
-//            entityInfo.variables.add(status);
-
-//            for(File file : listOfFiles) {
-//                String fileName = file.getName();
-//                ArrayList<String> lines = StringUtils.fileToArrayList(alfalfaDirectory + fileName);
-//
-//                CompilerResult compilerResult = Compiler.runAlfalfa(configElement.getEntityInfo(), lines);
-//                Compiler.writeCompilerResultToFile(workingDirectory, compilerResult);
-//            }
-//            ArrayList<String> evalResult = compiler.evaluateTree (parseTree, entityInfo);
-
+            System.out.println("ALFALFA run \n\n\n========\n\n\n");
+            Alfalfa.alfalfaRun(workingDirectory, config, pattern);
 
         }
         catch (NoPatternDirectoryException e) {

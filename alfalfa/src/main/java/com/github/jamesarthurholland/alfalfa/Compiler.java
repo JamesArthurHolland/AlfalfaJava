@@ -5,8 +5,8 @@ import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderHandler;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderValidationResponse;
 import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
-import com.github.jamesarthurholland.alfalfa.model.Loop;
-import com.github.jamesarthurholland.alfalfa.model.Sentence;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.Loop;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.Sentence;
 
 import java.io.*;
 import java.net.URL;

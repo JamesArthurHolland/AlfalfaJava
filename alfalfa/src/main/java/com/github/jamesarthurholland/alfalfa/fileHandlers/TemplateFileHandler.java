@@ -17,7 +17,9 @@ import java.util.stream.Collectors;
 
 public class TemplateFileHandler
 {
-    public static void handleTemplateFile(Pattern pattern, Path workingDirectory, Schema config, Path filePathRelativeToModule, Path fullPath) {
+    public static void handleTemplateFile(Pattern pattern, Path workingDirectory, Schema config, Path fullInputPath) {
+        Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullInputPath);
+
         if(pattern.mode == Pattern.VariableMode.FOR_EACH) {
             config.getEntityInfo().forEach(entityInfo -> {
                 Path fileOutputDirectoryPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule).getParent();
@@ -26,7 +28,7 @@ public class TemplateFileHandler
                     fileOutputDirectoryPath = outputPathForPatternFolderSwap(filePathRelativeToModule, fileOutputDirectoryPath, pattern, workingDirectory, entityInfo);
                 }
 
-                evaluateTemplateFileForConfig(fullPath, entityInfo, fileOutputDirectoryPath);
+                evaluateTemplateFileForConfig(fullInputPath, entityInfo, fileOutputDirectoryPath);
             });
         }
         // TODO not for each?
