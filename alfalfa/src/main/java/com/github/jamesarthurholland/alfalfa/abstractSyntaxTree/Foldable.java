@@ -45,7 +45,7 @@ public class Foldable extends Node
     }
 
     @Override
-    public String getType() {
+    public Types getType() {
         return null;
     }
 

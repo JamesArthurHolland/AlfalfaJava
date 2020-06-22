@@ -1,10 +1,10 @@
 package com.github.jamesarthurholland.alfalfa.fileHandlers;
 
 import com.github.jamesarthurholland.alfalfa.FileUtils;
-import com.github.jamesarthurholland.alfalfa.SentenceEvaluator;
+import com.github.jamesarthurholland.alfalfa.transpiler.SentenceForEachEntityEvaluator;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
-import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +18,7 @@ public class DirectoryFileHandler
         Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullInputPath);
 
 
-        if(pattern.mode == Pattern.VariableMode.FOR_EACH && doesDirectoryNeedFolderSwap(filePathRelativeToModule, pattern)) {
+        if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY && doesDirectoryNeedFolderSwap(filePathRelativeToModule, pattern)) {
             config.getEntityInfo().forEach(entityInfo -> {
                 Path fileAbsoluteOutputPathNew = outputPathForPatternFolderSwap(filePathRelativeToModule, fileAbsoluteOutputPath, pattern, workingDirectory, entityInfo);
                 try {
@@ -61,7 +61,7 @@ public class DirectoryFileHandler
 
             if(isChildFolderInParentFolder(relativePath, Paths.get(folderName))) {
                 String relativeFolderSwapped = unswapped.toString().replace(folderName, swapValue);
-                relativeFolderSwapped = SentenceEvaluator.evaluateForEntityReplacements(relativeFolderSwapped, entityInfo);
+                relativeFolderSwapped = SentenceForEachEntityEvaluator.evaluateForEntityReplacements(relativeFolderSwapped, entityInfo);
                 outputPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(relativeFolderSwapped);
             }
         }

@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /**
  * Created by jamie on 04/07/16.
  */
-public class TemplateParseResult
+public class TranspileResult
 {
     protected String fileName;
     protected ArrayList<String> output;
 
-    public TemplateParseResult(String fileName, ArrayList<String> output) {
+    public TranspileResult(String fileName, ArrayList<String> output) {
         this.fileName = fileName;
         this.output = output;
     }

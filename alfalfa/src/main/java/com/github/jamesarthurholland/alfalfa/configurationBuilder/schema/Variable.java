@@ -1,4 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.model;
+package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 import java.util.Objects;
 
@@ -8,7 +8,7 @@ public class Variable
     public static final String PROTECTED = "protected";
     public static final String PRIVATE = "private";
 
-    public static final String[] VariableConditionals = {
+    public static final String[] VariableConditionals = { // TODO should be enum
       "KEY",
       "121",
       ""

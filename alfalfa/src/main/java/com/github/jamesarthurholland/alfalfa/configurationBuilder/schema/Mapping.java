@@ -1,4 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.model;
+package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 import java.util.Objects;
 

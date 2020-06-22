@@ -1,7 +1,5 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
-import com.github.jamesarthurholland.alfalfa.model.Variable;
-
 public class KeyVariableConditional extends VariableConditional {
     public static final String TOKEN = "KEY";
 

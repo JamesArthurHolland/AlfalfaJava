@@ -1,7 +1,5 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
-import com.github.jamesarthurholland.alfalfa.model.Variable;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

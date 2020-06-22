@@ -3,7 +3,7 @@ package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 public class Sentence extends Node
 {
     private String sentence;
-    public static final String type = "SENTENCE";
+    public static final Foldable.Types type = "SENTENCE";
 
     public Sentence(String givenSentence)
     {
@@ -29,7 +29,7 @@ public class Sentence extends Node
         return this.sentence;
     }
 
-    public String getType()
+    public Foldable.Types getType()
     {
         return type;
     }

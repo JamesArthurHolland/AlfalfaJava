@@ -2,11 +2,12 @@ package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
 import com.github.jamesarthurholland.alfalfa.NoPatternDirectoryException;
 import com.github.jamesarthurholland.alfalfa.PatternDirectoryEmptyException;
-import com.github.jamesarthurholland.alfalfa.SentenceEvaluator;
+import com.github.jamesarthurholland.alfalfa.transpiler.SentenceForEachEntityEvaluator;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderHandler;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderValidationResponse;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.InvalidHeaderException;
-import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 
 import java.io.*;
 import java.net.URL;
@@ -35,11 +36,11 @@ public class TemplateParser
 
 
 
-    public static void writeCompilerResultToFile(String workingDirectory, TemplateParseResult templateParseResult)
+    public static void writeCompilerResultToFile(String workingDirectory, TranspileResult transpileResult)
     {
         try {
-            PrintWriter writer = new PrintWriter("" + workingDirectory + "/" + templateParseResult.getFileName(), "UTF-8");
-            for(String line : templateParseResult.getOutput()) {
+            PrintWriter writer = new PrintWriter("" + workingDirectory + "/" + transpileResult.getFileName(), "UTF-8");
+            for(String line : transpileResult.getOutput()) {
                 writer.println(line);
             }
             writer.close();
@@ -80,12 +81,20 @@ public class TemplateParser
         }
     }
 
-    public static TemplateParseResult runAlfalfa(EntityInfo entityInfo, ArrayList<String> lines) {
+    public static TranspileResult runAlfalfaForEntity(EntityInfo entityInfo, ArrayList<String> lines, Pattern pattern) {
         TemplateParser parser = new TemplateParser(lines);
         TemplateASTree parseTree = parser.parseTemplateLines(parser.getTemplateLines());
-        String fileName = SentenceEvaluator.evaluateForEntityReplacements(parser.getHeader().getFileName(), entityInfo);
+        String fileName = SentenceForEachEntityEvaluator.evaluateForEntityReplacements(parser.getHeader().getFileName(), entityInfo);
 
-        return new TemplateParseResult(fileName, parseTree.evaluateTree (parseTree, entityInfo));
+        return new TranspileResult(fileName, parseTree.evaluateTree(parseTree, entityInfo, null, pattern));
+    }
+
+    public static TranspileResult runAlfalfaForSchema(Schema schema, ArrayList<String> lines) {
+        TemplateParser parser = new TemplateParser(lines);
+        TemplateASTree parseTree = parser.parseTemplateLines(parser.getTemplateLines());
+        String fileName = parser.getHeader().getFileName();
+
+        return new TranspileResult(fileName, parseTree.evaluateTree(parseTree, null, schema));
     }
 
     public TemplateASTree parseTemplateLines(ArrayList<String> lines)

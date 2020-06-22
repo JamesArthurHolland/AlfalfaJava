@@ -270,6 +270,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -305,12 +306,17 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.github.jamesarthurholland.alfalfa.transpiler" />
+      <recent name="com.github.jamesarthurholland.alfalfa.configurationBuilder.schema" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/alfalfa/src/test/resources" />
       <recent name="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.github.jamesarthurholland.alfalfa" />
       <recent name="com.github.jamesarthurholland.alfalfa.elixirRestTests" />
       <recent name="" />
     </key>
@@ -773,7 +779,7 @@
       <workItem from="1591974586671" duration="6540000" />
       <workItem from="1592244673353" duration="48658000" />
       <workItem from="1592422133847" duration="432000" />
-      <workItem from="1592424166643" duration="18142000" />
+      <workItem from="1592424166643" duration="36141000" />
     </task>
     <servers />
   </component>
@@ -817,22 +823,30 @@
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="2495" y="458" key="#com.intellij.fileTypes.FileTypeChooser/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1591969890707" />
-    <state x="2565" y="362" key="#com.intellij.ide.util.MemberChooser" timestamp="1592772306134">
+    <state x="2565" y="362" key="#com.intellij.ide.util.MemberChooser" timestamp="1592868149951">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
-    <state x="2565" y="362" key="#com.intellij.ide.util.MemberChooser/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592772306134" />
+    <state x="2565" y="362" key="#com.intellij.ide.util.MemberChooser/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592868149951" />
+    <state x="2505" y="436" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1592867069796">
+      <screen x="1792" y="109" width="1920" height="1080" />
+    </state>
+    <state x="2505" y="436" key="#com.intellij.ide.util.PackageChooserDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592867069796" />
     <state x="2489" y="446" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591973297928">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="2489" y="446" key="#com.intellij.ide.util.TreeClassChooserDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1591973297928" />
-    <state x="1792" y="109" width="1181" height="1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1592785867169">
+    <state x="2501" y="525" width="723" height="256" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1592867071306">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
-    <state x="1792" y="109" width="1181" height="1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592785867169" />
-    <state x="2490" y="403" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1592773329069">
+    <state x="2501" y="525" width="723" height="256" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592867071306" />
+    <state x="1792" y="109" width="1181" height="1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1592864918793">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
-    <state x="2490" y="403" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592773329069" />
+    <state x="1792" y="109" width="1181" height="1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592864918793" />
+    <state x="2490" y="403" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1592856946007">
+      <screen x="1792" y="109" width="1920" height="1080" />
+    </state>
+    <state x="2490" y="403" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592856946007" />
     <state width="935" height="466" key="DebuggerActiveHint" timestamp="1592345455116">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
@@ -910,6 +924,10 @@
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="1892" y="209" width="1720" height="880" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592445678063" />
+    <state x="1892" y="209" width="1720" height="880" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1592849471583">
+      <screen x="1792" y="109" width="1920" height="1080" />
+    </state>
+    <state x="1892" y="209" width="1720" height="880" key="com.intellij.history.integration.ui.views.FileHistoryDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592849471583" />
     <state x="2475" y="548" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1591974373005">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
@@ -926,10 +944,10 @@
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="2490" y="394" key="extract.method.dialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592784543632" />
-    <state x="2459" y="238" width="707" height="822" key="find.popup" timestamp="1592775534465">
+    <state x="2459" y="238" width="707" height="822" key="find.popup" timestamp="1592859176940">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
-    <state x="2459" y="238" width="707" height="822" key="find.popup/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592775534465" />
+    <state x="2459" y="238" width="707" height="822" key="find.popup/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592859176940" />
     <state x="2417" y="350" width="670" height="676" key="search.everywhere.popup" timestamp="1592175847502">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>

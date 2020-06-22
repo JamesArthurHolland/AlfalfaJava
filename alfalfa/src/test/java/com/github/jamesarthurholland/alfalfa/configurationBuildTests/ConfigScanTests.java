@@ -2,9 +2,9 @@ package com.github.jamesarthurholland.alfalfa.configurationBuildTests;
 
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.ModelFileScanner;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
-import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
-import com.github.jamesarthurholland.alfalfa.model.Mapping;
-import com.github.jamesarthurholland.alfalfa.model.Variable;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Mapping;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Variable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 

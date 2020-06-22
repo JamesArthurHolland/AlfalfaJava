@@ -23,11 +23,11 @@ public class Pattern implements Serializable
     public ArrayList<String> files = new ArrayList<>();
     public String outputPath;
     public String patternRepoPath;
-    public VariableMode mode = VariableMode.FOR_EACH;
+    public ImportMode mode = ImportMode.FOR_EACH_ENTITY;
 
-    public enum VariableMode {
-        FOR_EACH,
-        SINGLE
+    public enum ImportMode {
+        FOR_EACH_ENTITY,
+        ONCE_FOR_ENTITY
     }
 
 

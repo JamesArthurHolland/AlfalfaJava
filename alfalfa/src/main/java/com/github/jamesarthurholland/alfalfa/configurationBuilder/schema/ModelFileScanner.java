@@ -1,9 +1,5 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
-import com.github.jamesarthurholland.alfalfa.model.EntityInfo;
-import com.github.jamesarthurholland.alfalfa.model.Mapping;
-import com.github.jamesarthurholland.alfalfa.model.Variable;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
