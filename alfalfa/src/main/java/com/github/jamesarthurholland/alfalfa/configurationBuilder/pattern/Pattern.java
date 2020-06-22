@@ -1,25 +1,14 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern;
 
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.serializers.FieldSerializer;
-import com.github.jamesarthurholland.alfalfa.FileUtils;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.inject.name.Named;
 import com.hubspot.jinjava.Jinjava;
 import org.apache.commons.lang3.SerializationUtils;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
 
 import javax.inject.Inject;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.Serializable;
-import java.io.StringWriter;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import static java.util.Objects.requireNonNull;
 
@@ -116,25 +105,4 @@ public class Pattern implements Serializable
         return jinjava.render(line, vars);
     }
 
-//    private static class ImportDetail {
-//        public Pattern original;
-//        public Pattern swap;
-//        public String outputPath;
-//
-//        public ImportDetail(LinkedHashMap<String, String> importHashMap)
-//        {
-//
-//        }
-//
-//        public ImportDetail(Pattern original, Pattern swap, ArrayList<ImportDetail> imports, HashMap<String, String> vars) {
-//            this.swap = swap;
-//        }
-//
-//        public Path getPatternPath() {
-//            if(swap == null) {
-//                return FileUtils.patternPath(original.name, original.version);
-//            }
-//            return FileUtils.patternPath(swap.name, swap.version);
-//        }
-//    }
 }

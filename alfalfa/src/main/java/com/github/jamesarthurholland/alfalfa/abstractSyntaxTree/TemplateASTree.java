@@ -6,11 +6,11 @@ import com.github.jamesarthurholland.alfalfa.model.Variable;
 
 import java.util.ArrayList;
 
-public class PatternASTree
+public class TemplateASTree
 {
     Node root;
 
-    public PatternASTree()
+    public TemplateASTree()
     {
 
     }
@@ -26,7 +26,7 @@ public class PatternASTree
         currentNode.right = node;
     }
 
-    public void insert(PatternASTree subTree)
+    public void insert(TemplateASTree subTree)
     {
         Node currentNode = findCurrentNode();
 
@@ -39,8 +39,8 @@ public class PatternASTree
         Node currentNode = root;
         while (currentNode.right != null || currentNode.left != null) {
             if (currentNode.left != null) {
-                if (currentNode instanceof Loop) {
-                    Loop currentAsLoop = (Loop) currentNode;
+                if (currentNode instanceof Foldable) {
+                    Foldable currentAsLoop = (Foldable) currentNode;
                     if (currentAsLoop.isLeftTreeFixed() == true) {
                         if (currentNode.right != null) {
                             currentNode = currentNode.right;
@@ -64,7 +64,7 @@ public class PatternASTree
         return currentNode;
     }
 
-    public ArrayList<String> evaluateTree(PatternASTree tree, EntityInfo info)
+    public ArrayList<String> evaluateTree(TemplateASTree tree, EntityInfo info)
     {
         Node rootNode = tree.getRoot ();
         return evaluateSubTree(rootNode, info);

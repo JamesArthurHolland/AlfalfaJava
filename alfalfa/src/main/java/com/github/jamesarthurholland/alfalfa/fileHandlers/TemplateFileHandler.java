@@ -1,7 +1,7 @@
 package com.github.jamesarthurholland.alfalfa.fileHandlers;
 
-import com.github.jamesarthurholland.alfalfa.Compiler;
-import com.github.jamesarthurholland.alfalfa.CompilerResult;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TemplateParser;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TemplateParseResult;
 import com.github.jamesarthurholland.alfalfa.SentenceEvaluator;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
@@ -37,8 +37,8 @@ public class TemplateFileHandler
     public static void evaluateTemplateFileForConfig(Path patternFilePath, EntityInfo entityInfo, Path workingDirectory) {
         try {
             ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
-            CompilerResult compilerResult = Compiler.runAlfalfa(entityInfo, lines);
-            Compiler.writeCompilerResultToFile(workingDirectory.toString(), compilerResult);
+            TemplateParseResult templateParseResult = TemplateParser.runAlfalfa(entityInfo, lines); // TODO pass pattern here and do conditional based on variable mode
+            TemplateParser.writeCompilerResultToFile(workingDirectory.toString(), templateParseResult);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -129,6 +129,14 @@ public class SentenceEvaluator
         return outputString;
     }
 
+//    protected String evaluateForNamespace(String sentence, EntityInfo entityInfo)
+//    {
+//        String nameSpace = entityInfo.getNameSpace();
+//        nameSpace = nameSpace.replaceAll("\\\\", "\\\\\\\\");
+//        String outputSentence = sentence.replaceAll("\\{\\{NAMESPACE\\}\\}", nameSpace);
+//        return outputSentence;
+//    }
+
     public String replaceInputInString (Variable givenVar, String sentence)
     {
         String outputString = sentence.replaceAll("\\{\\{input\\}\\}", givenVar.getName());

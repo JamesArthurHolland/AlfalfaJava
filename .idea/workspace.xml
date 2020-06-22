@@ -25,21 +25,187 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d4e62cd5-395e-4d48-a45d-961440d78cd3" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Alfalfa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/AlfalfaMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/FileUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/PatternImporter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/SentenceEvaluator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/StringUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/PatternASTree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/NoDotAlfalfaDirectoryException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/pattern/Pattern.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/pattern/PatternFileScanner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/KeyVariableConditional.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/MalformedVariableLineException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/ModelFileScanner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/Schema.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/VariableConditional.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/di/GsonModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/DirectoryFileHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/TemplateFileHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/model/EntityInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/model/Mapping.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/FileUtilsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/JinJavaTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/ParserTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/configurationBuildTests/ConfigScanTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/configurationBuildTests/PatternScanTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/elixirRestTests/ElixirRestTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/genericApiTests/GenericApiTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/examplePatternDirectory/AlfalfaFile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/exampleTemplateDirectory/entity.afat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/exampleWorkingDirectory/AlfalfaFile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/exampleWorkingDirectory/alfalfa/Passport.afam" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/exampleWorkingDirectory/alfalfa/Student.afam" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/exampleWorkingDirectoryElixir/AlfalfaFile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/exampleWorkingDirectoryElixir/alfalfa/Passport.afam" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/exampleWorkingDirectoryElixir/alfalfa/Student.afam" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/templates/AllLanguageStructs.afat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alfalfa/src/test/resources/templates/Entity.afat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setWatchman.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/.formatter.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/AlfalfaFile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/config/config.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/config/dev.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/config/prod.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/config/prod.secret.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/config/test.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest/application.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest/repo.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/channels/user_socket.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/endpoint.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/gettext.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/router.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/schema.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/schema/types.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/schema/user_type.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/views/error_helpers.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/views/error_view.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/mix.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/mix.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/priv/gettext/en/LC_MESSAGES/errors.po" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/priv/gettext/errors.pot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/priv/repo/migrations/20200609231355_create_users.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/priv/repo/seeds.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/elixir_rest/accounts/accounts_test.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/elixir_rest_web/views/error_view_test.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/support/channel_case.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/support/conn_case.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/support/data_case.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/test_helper.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/controllers/controller.afat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/controllers/fallback_controller.ex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/ecto/ecto-output/context.afat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/ecto/ecto-output/entity.afat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/resolvers/entity_resolver.afat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/AlfalfaFile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/sql/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/sql/sql-scripts/contracts.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/sql/sql-scripts/employees.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/sql/sql-scripts/insert.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/kotlin/com/aetasa/rest/genericapiapp/GenericAPIApplication.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/kotlin/com/aetasa/rest/genericapiapp/di/EmployeeModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/kotlin/com/aetasa/rest/genericapiapp/employee/Contract.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/kotlin/com/aetasa/rest/genericapiapp/employee/Employee.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/kotlin/com/aetasa/rest/genericapiapp/generic/GenericController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/kotlin/com/aetasa/rest/genericapiapp/generic/GenericEntity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/kotlin/com/aetasa/rest/genericapiapp/generic/GenericService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/resources/jpa/contract-orm.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/main/resources/jpa/orm.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/main/src/test/kotlin/com/aetasa/rest/restapi/RestapiApplicationTests.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/modules/di/diFolder/di.afat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/genericapi/0.1/modules/di/testDi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/alfalfa.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/AlfalfaJava.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Alfalfa.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Alfalfa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/AlfalfaMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/AlfalfaMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Compiler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/PatternASTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/PatternASTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/DirectoryFileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/DirectoryFileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/TemplateFileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/TemplateFileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/model/Loop.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/Loop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/model/Sentence.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/Sentence.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/AlfalfaFile" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/AlfalfaFile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/ws_elixir_rest.ex" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest.ex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/ws_elixir_rest_web.ex" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web.ex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/ws_elixir_rest/accounts/accounts_test.exs" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/elixir_rest/accounts/accounts_test.exs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/ws_elixir_rest_web/views/error_view_test.exs" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/test/elixir_rest_web/views/error_view_test.exs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alfalfa.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/alfalfa/alfalfa.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/Alfalfa.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/Compiler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/CompilerResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/ConfigScanner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/EntityInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/InvalidHeaderException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/Loop.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/NoEntityFileException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/NoPatternDirectoryException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/ParcelableOutput.txt" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/ParcelableOutput.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/Parser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/PatternDirectoryEmptyException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/Sentence.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/Tree.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/Variable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/entity.afae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/header/HeaderHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/header/HeaderValidationResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Alfalfa/patternDirectory.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/Alfalfa.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/Compiler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/ConfigScanner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/EntityInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/Loop.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/ParcelableOutput.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/Parser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/Sentence.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/Tree.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlfalfaJava/Variable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/xyz.alfalfa/xyz/alfalfa/Compiler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/xyz.alfalfa/xyz/alfalfa/ConfigScanner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/xyz.alfalfa/xyz/alfalfa/EntityInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/xyz.alfalfa/xyz/alfalfa/Loop.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/xyz.alfalfa/xyz/alfalfa/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/xyz.alfalfa/xyz/alfalfa/Tree.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/xyz.alfalfa/xyz/alfalfa/Variable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Alfalfa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Compiler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CompilerResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/CompilerResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ConfigScanner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EntityInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InvalidHeaderException.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/header/InvalidHeaderException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Loop.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/Loop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoEntityFileException.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/NoEntityFileException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoPatternDirectoryException.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/NoPatternDirectoryException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParcelableOutput.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PatternDirectoryEmptyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/PatternDirectoryEmptyException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sentence.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/Sentence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tree.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/model/Variable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/header/HeaderHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/header/HeaderHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/header/HeaderHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/header/HeaderValidationResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/header/HeaderValidationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/header/HeaderValidationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/patternDirectory.txt" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/patternDirectory.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -497,6 +663,53 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="alfalfa" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="alfalfa" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -560,7 +773,7 @@
       <workItem from="1591974586671" duration="6540000" />
       <workItem from="1592244673353" duration="48658000" />
       <workItem from="1592422133847" duration="432000" />
-      <workItem from="1592424166643" duration="8882000" />
+      <workItem from="1592424166643" duration="18142000" />
     </task>
     <servers />
   </component>
@@ -592,10 +805,10 @@
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="2428" y="268" key="#Compiler/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1591973303414" />
-    <state x="2240" y="230" key="#Project_Structure" timestamp="1592409307060">
+    <state x="2240" y="230" key="#Project_Structure" timestamp="1592772206912">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
-    <state x="2240" y="230" key="#Project_Structure/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592409307060" />
+    <state x="2240" y="230" key="#Project_Structure/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592772206912" />
     <state x="2216" y="311" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592409302560">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
@@ -604,10 +817,22 @@
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="2495" y="458" key="#com.intellij.fileTypes.FileTypeChooser/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1591969890707" />
+    <state x="2565" y="362" key="#com.intellij.ide.util.MemberChooser" timestamp="1592772306134">
+      <screen x="1792" y="109" width="1920" height="1080" />
+    </state>
+    <state x="2565" y="362" key="#com.intellij.ide.util.MemberChooser/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592772306134" />
     <state x="2489" y="446" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591973297928">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="2489" y="446" key="#com.intellij.ide.util.TreeClassChooserDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1591973297928" />
+    <state x="1792" y="109" width="1181" height="1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1592785867169">
+      <screen x="1792" y="109" width="1920" height="1080" />
+    </state>
+    <state x="1792" y="109" width="1181" height="1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592785867169" />
+    <state x="2490" y="403" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1592773329069">
+      <screen x="1792" y="109" width="1920" height="1080" />
+    </state>
+    <state x="2490" y="403" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592773329069" />
     <state width="935" height="466" key="DebuggerActiveHint" timestamp="1592345455116">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
@@ -672,10 +897,10 @@
     <state width="1878" height="328" key="GridCell.Tab.1.right/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1097@1792.109.1920.1080" timestamp="1592357853870" />
     <state width="1878" height="501" key="GridCell.Tab.1.right/1792.109.1920.1080/0.0.1792.1120/-1920.40.1920.1080@1792.109.1920.1080" timestamp="1592241949714" />
     <state width="1878" height="501" key="GridCell.Tab.1.right/1792.132.1920.1057/0.23.1792.1031/-1920.63.1920.1057@1792.132.1920.1057" timestamp="1592243433826" />
-    <state x="2261" y="288" key="SettingsEditor" timestamp="1592267944482">
+    <state x="2261" y="288" key="SettingsEditor" timestamp="1592778705531">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
-    <state x="2261" y="288" key="SettingsEditor/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592267944482" />
+    <state x="2261" y="288" key="SettingsEditor/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592778705531" />
     <state x="2261" y="288" key="SettingsEditor/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1097@1792.109.1920.1080" timestamp="1591974522978" />
     <state width="500" height="445" key="SwitcherDM" timestamp="1592267699094">
       <screen x="1792" y="109" width="1920" height="1080" />
@@ -697,14 +922,14 @@
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="1892" y="209" width="1720" height="880" key="dock-window-1/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592356678947" />
-    <state x="2490" y="394" key="extract.method.dialog" timestamp="1592357430775">
+    <state x="2490" y="394" key="extract.method.dialog" timestamp="1592784543632">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
-    <state x="2490" y="394" key="extract.method.dialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592357430775" />
-    <state x="2459" y="238" width="586" height="822" key="find.popup" timestamp="1592270893629">
+    <state x="2490" y="394" key="extract.method.dialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592784543632" />
+    <state x="2459" y="238" width="707" height="822" key="find.popup" timestamp="1592775534465">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
-    <state x="2459" y="238" width="586" height="822" key="find.popup/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592270893629" />
+    <state x="2459" y="238" width="707" height="822" key="find.popup/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592775534465" />
     <state x="2417" y="350" width="670" height="676" key="search.everywhere.popup" timestamp="1592175847502">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>

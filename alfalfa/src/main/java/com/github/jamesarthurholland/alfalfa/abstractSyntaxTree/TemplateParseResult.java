@@ -1,16 +1,16 @@
-package com.github.jamesarthurholland.alfalfa;
+package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
 import java.util.ArrayList;
 
 /**
  * Created by jamie on 04/07/16.
  */
-public class CompilerResult
+public class TemplateParseResult
 {
     protected String fileName;
     protected ArrayList<String> output;
 
-    public CompilerResult(String fileName, ArrayList<String> output) {
+    public TemplateParseResult(String fileName, ArrayList<String> output) {
         this.fileName = fileName;
         this.output = output;
     }
