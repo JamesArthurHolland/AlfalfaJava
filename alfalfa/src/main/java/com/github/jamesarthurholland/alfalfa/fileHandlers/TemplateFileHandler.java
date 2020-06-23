@@ -46,7 +46,7 @@ public class TemplateFileHandler
 
         try {
             ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
-            TranspileResult transpileResult = TemplateParser.runAlfalfaForSchema(schema, lines); // TODO pass pattern here and do conditional based on variable mode
+            TranspileResult transpileResult = TemplateParser.runAlfalfaForSchema(schema, lines, pattern); // TODO pass pattern here and do conditional based on variable mode
             TemplateParser.writeCompilerResultToFile(fileOutputDirectoryPath.toString(), transpileResult);
         } catch (IOException e) {
             e.printStackTrace();

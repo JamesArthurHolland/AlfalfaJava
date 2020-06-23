@@ -16,3 +16,6 @@ imports:
   - name: controllers
     location: ./lib/elixir_rest_web/controllers/
     mode: for_each
+
+  - name: schema
+    location: ./lib/elixir_rest_web/

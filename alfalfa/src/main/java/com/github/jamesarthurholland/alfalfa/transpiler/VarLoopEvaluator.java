@@ -10,44 +10,43 @@ import static com.github.jamesarthurholland.alfalfa.StringUtils.camelToLowerUnde
 import static com.github.jamesarthurholland.alfalfa.StringUtils.camelToUpperUnderScore;
 import static com.github.jamesarthurholland.alfalfa.StringUtils.uppercaseFirst;
 
-public class SentenceForEachEntityEvaluator implements SentenceEvaluator
+public class VarLoopEvaluator
 {
-    private Variable givenVar;
-    private EntityInfo entityInfo;
+//    private Variable givenVar;
+//    private EntityInfo entityInfo;
+//
+//    public SentenceForEachEntityEvaluator(Variable givenVar, EntityInfo entityInfo) {
+//        this.givenVar = givenVar;
+//        this.entityInfo = entityInfo;
+//    }
 
-    public SentenceForEachEntityEvaluator(Variable givenVar, EntityInfo entityInfo) {
-        this.givenVar = givenVar;
-        this.entityInfo = entityInfo;
-    }
+//    public SentenceForEachEntityEvaluator(Variable givenVar, SentenceForEachEntityEvaluator evaluator) {
+//        this.givenVar = givenVar;
+//        this.entityInfo = evaluator.entityInfo;
+//    }
 
-    public SentenceForEachEntityEvaluator(Variable givenVar, SentenceForEachEntityEvaluator evaluator) {
-        this.givenVar = givenVar;
-        this.entityInfo = evaluator.entityInfo;
-    }
-
-    @Override
-    public String evaluate(String sentence)
+    public static String evaluate(String sentence, Variable givenVar, EntityInfo entityInfo)
     {
-        String generatedSentence = evaluateForEntityReplacements(sentence, this.entityInfo);
+        String generatedSentence = evaluateForEntityReplacements(sentence, entityInfo);
 //        generatedSentence = evaluateForNamespace(sentence, entityInfo);
-        generatedSentence = evaluateForKeyStatement (this.givenVar, generatedSentence);
+        generatedSentence = evaluateForKeyStatement (givenVar, generatedSentence);
 
         if (generatedSentence == null) {
             return generatedSentence;
         }
-        generatedSentence = evaluateForNotKeyStatement(this.givenVar, generatedSentence, entityInfo);
+        generatedSentence = evaluateForNotKeyStatement(givenVar, generatedSentence, entityInfo);
         if (generatedSentence == null) {
             return generatedSentence;
         }
-        generatedSentence = evaluateForNotLastStatement(this.givenVar, generatedSentence, entityInfo);
+        generatedSentence = evaluateForNotLastStatement(givenVar, generatedSentence, entityInfo);
         if (generatedSentence == null) {
             return generatedSentence;
         }
-        generatedSentence = evaluateForLastStatement(this.givenVar, generatedSentence, entityInfo);
+        generatedSentence = evaluateForLastStatement(givenVar, generatedSentence, entityInfo);
         if (generatedSentence != null) {
-            generatedSentence = replaceVarsInString (this.givenVar, generatedSentence);
-            generatedSentence = replaceTypesInString(this.givenVar, generatedSentence);
-            generatedSentence = replaceVisibilityInString(this.givenVar, generatedSentence);
+            generatedSentence = replaceVarsInString (givenVar, generatedSentence);
+            generatedSentence = replaceTypesInString(givenVar, generatedSentence);
+            generatedSentence = replaceVisibilityInString(givenVar, generatedSentence);
         }
         return generatedSentence;
     }
@@ -60,7 +59,7 @@ public class SentenceForEachEntityEvaluator implements SentenceEvaluator
         Matcher matcher = patternForKey.matcher(sentence);
         if (matcher.matches()) {
             if (!givenVar.isPrimary ()) {
-                generatedSentence = matcher.group(1) + SentenceForEachEntityEvaluator.replaceVarsInString (givenVar, matcher.group(3));
+                generatedSentence = matcher.group(1) + VarLoopEvaluator.replaceVarsInString (givenVar, matcher.group(3));
                 String lastOrNot = matcher.group(2);
                 if (lastOrNot.equals("NOT-LAST")) {
                     if (!entityInfo.isVarLast (givenVar)) {

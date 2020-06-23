@@ -1,7 +1,7 @@
 package com.github.jamesarthurholland.alfalfa.fileHandlers;
 
 import com.github.jamesarthurholland.alfalfa.FileUtils;
-import com.github.jamesarthurholland.alfalfa.transpiler.SentenceForEachEntityEvaluator;
+import com.github.jamesarthurholland.alfalfa.transpiler.VarLoopEvaluator;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
@@ -61,7 +61,7 @@ public class DirectoryFileHandler
 
             if(isChildFolderInParentFolder(relativePath, Paths.get(folderName))) {
                 String relativeFolderSwapped = unswapped.toString().replace(folderName, swapValue);
-                relativeFolderSwapped = SentenceForEachEntityEvaluator.evaluateForEntityReplacements(relativeFolderSwapped, entityInfo);
+                relativeFolderSwapped = VarLoopEvaluator.evaluateForEntityReplacements(relativeFolderSwapped, entityInfo);
                 outputPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(relativeFolderSwapped);
             }
         }

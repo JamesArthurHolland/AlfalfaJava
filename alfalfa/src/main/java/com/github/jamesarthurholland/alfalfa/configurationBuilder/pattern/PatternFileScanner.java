@@ -18,11 +18,19 @@ public class PatternFileScanner {
     public static String ALFALFA_FILE = "AlfalfaFile";
     public static String IMPORTS_KEY = "imports";
     public static String LOCATION_KEY = "location";
+    public static String MODE_KEY = "mode";
     public static String NAME_KEY = "name";
     public static String SWAP_NAME_KEY = "swap";
     public static String VERSION_KEY = "version";
     public static String VARS_KEY = "vars";
     public static String FOLDER_SWAPS_KEY = "folder_swaps";
+
+    public static LinkedHashMap<String, Pattern.ImportMode> IMPORT_LOOKUP = new LinkedHashMap<>();
+
+    static {
+        IMPORT_LOOKUP.put("once", Pattern.ImportMode.ONCE_FOR_ENTITY);
+        IMPORT_LOOKUP.put("for_each", Pattern.ImportMode.FOR_EACH_ENTITY);
+    }
 
     private Path workingDirectory = null;
 
@@ -140,6 +148,7 @@ public class PatternFileScanner {
             String currentPatternName = (String) patternHashMap.get(NAME_KEY); // TODO builder.addHashmap for this as well
             String currentPatternVersion = (String) patternHashMap.get(VERSION_KEY);
             String currentPatternLocationString = (String) patternHashMap.getOrDefault(LOCATION_KEY,"./");
+
             Path currentPatternPath = Paths.get(currentPatternLocationString);
 //             TODO scan vars and (pass them down the tree)???
             LinkedHashMap<String, String> vars = parseVarsFromHashMap(patternHashMap, patternTmp.vars);
@@ -184,6 +193,10 @@ public class PatternFileScanner {
                 String importVersion = (String) importHashMap.getOrDefault(VERSION_KEY, "");
                 String outputLocation = (String) importHashMap.getOrDefault(LOCATION_KEY, "./");
 
+                String currentModeString = (String) importHashMap.getOrDefault(MODE_KEY, "once");
+                Pattern.ImportMode mode = IMPORT_LOOKUP.get(currentModeString);
+
+
                 if(FileUtils.patternIsASubModuleOfCurrentPattern(importName) && importVersion.isEmpty()) {
                     this.setVersion(parentPatternBuilder.patternTmp.version); // TODO confirm
                 }
@@ -207,6 +220,7 @@ public class PatternFileScanner {
                     .setVars(vars)
                     .setFolderSwaps(folderSwaps)
                     .setOutputLocation(outputPath)
+                    .setMode(mode)
                     .addFiles(filesAndDirectoriesNoAlfalfaFiles) // TODO don't copy alfalfafile
                     .setPatternRepoPath(patternRepoPath);
             }
@@ -227,6 +241,11 @@ public class PatternFileScanner {
             paths.stream()
                 .map(Path::toString)
                 .forEach(path -> patternTmp.files.add(path));
+            return this;
+        }
+
+        public PatternBuilder setMode(Pattern.ImportMode mode) {
+            patternTmp.mode = mode;
             return this;
         }
 

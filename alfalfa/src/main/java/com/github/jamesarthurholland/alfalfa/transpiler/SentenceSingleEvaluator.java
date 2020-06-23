@@ -4,7 +4,7 @@ import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityI
 
 import static com.github.jamesarthurholland.alfalfa.StringUtils.*;
 
-public class SentenceSingleEvaluator implements SentenceEvaluator
+public class SentenceSingleEvaluator
 {
     private EntityInfo entityInfo;
 
@@ -12,16 +12,15 @@ public class SentenceSingleEvaluator implements SentenceEvaluator
         this.entityInfo = entityInfo;
     }
 
-    @Override
-    public String evaluate(String sentenceToEvaluate)
+    public static String evaluate(String sentenceToEvaluate, EntityInfo entityInfo)
     {
-        String generatedSentence = evaluateForEntityReplacements(sentenceToEvaluate);
+        String generatedSentence = evaluateForEntityReplacements(sentenceToEvaluate, entityInfo);
 //        generatedSentence = evaluateForNamespace(sentence, entityInfo);
 
         return generatedSentence;
     }
 
-    public String evaluateForEntityReplacements (String sentence)
+    public static String evaluateForEntityReplacements (String sentence, EntityInfo entityInfo)
     {
         String outputString = sentence.replaceAll("\\{\\{entity\\}\\}", entityInfo.getName());
         outputString = outputString.replaceAll("\\{\\{en_tity\\}\\}", camelToLowerUnderScore(entityInfo.getName()));

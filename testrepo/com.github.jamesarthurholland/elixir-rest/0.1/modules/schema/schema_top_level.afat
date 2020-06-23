@@ -1,0 +1,34 @@
+{{ALFALFA -o schema.ex}}
+defmodule ElixirRestWeb.Schema do
+  use Absinthe.Schema
+
+  alias ElixirRestWeb.Resolvers
+  # import Types
+  import_types(ElixirRestWeb.Schema.Types)
+
+  {{ENTITIES}}
+  query do
+    @desc "Get a list of all {{entity}}s"
+    field :{{entity}}s, list_of(:{{entity}}_type) do
+      # Resolver
+      resolve(&Resolvers.{{Entity}}Resolver.{{entity}}s/3)
+    end
+  end
+
+  mutation do
+    @desc "Create a new {{entity}}"
+    field :create_{{entity}}, type: :{{entity}}_type do
+      arg(:input, non_null(:{{entity}}_input_type))
+      resolve(&Resolvers.{{Entity}}Resolver.register_{{entity}}/3)
+    end
+  end
+
+  {{/ENTITIES}}
+  
+
+
+
+  #subscription do
+  #end
+
+end

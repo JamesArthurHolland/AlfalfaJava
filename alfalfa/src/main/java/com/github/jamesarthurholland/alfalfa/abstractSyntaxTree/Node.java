@@ -11,5 +11,4 @@ public abstract class Node
     }
 
     public abstract void print ();
-    public abstract Foldable.Types getType ();
 }

@@ -2,18 +2,19 @@ package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
 import com.github.jamesarthurholland.alfalfa.NoPatternDirectoryException;
 import com.github.jamesarthurholland.alfalfa.PatternDirectoryEmptyException;
-import com.github.jamesarthurholland.alfalfa.transpiler.SentenceForEachEntityEvaluator;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderHandler;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderValidationResponse;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.InvalidHeaderException;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
+import com.github.jamesarthurholland.alfalfa.transpiler.VarLoopEvaluator;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class TemplateParser
 {
@@ -84,17 +85,17 @@ public class TemplateParser
     public static TranspileResult runAlfalfaForEntity(EntityInfo entityInfo, ArrayList<String> lines, Pattern pattern) {
         TemplateParser parser = new TemplateParser(lines);
         TemplateASTree parseTree = parser.parseTemplateLines(parser.getTemplateLines());
-        String fileName = SentenceForEachEntityEvaluator.evaluateForEntityReplacements(parser.getHeader().getFileName(), entityInfo);
+        String fileName = VarLoopEvaluator.evaluateForEntityReplacements(parser.getHeader().getFileName(), entityInfo);
 
         return new TranspileResult(fileName, parseTree.evaluateTree(parseTree, entityInfo, null, pattern));
     }
 
-    public static TranspileResult runAlfalfaForSchema(Schema schema, ArrayList<String> lines) {
+    public static TranspileResult runAlfalfaForSchema(Schema schema, ArrayList<String> lines, Pattern pattern) {
         TemplateParser parser = new TemplateParser(lines);
         TemplateASTree parseTree = parser.parseTemplateLines(parser.getTemplateLines());
         String fileName = parser.getHeader().getFileName();
 
-        return new TranspileResult(fileName, parseTree.evaluateTree(parseTree, null, schema));
+        return new TranspileResult(fileName, parseTree.evaluateTree(parseTree, null, schema, pattern));
     }
 
     public TemplateASTree parseTemplateLines(ArrayList<String> lines)
@@ -106,11 +107,10 @@ public class TemplateParser
             line = lines.get(0);
 
             boolean isValid = false;
-            for (Foldable.Types type : Foldable.Types.values()) {
-                if (isValidLoopOpenerForType(line, type)) {
-                    isValid = true;
-                    parseTree = parseFoldable(lines, parseTree, type);
-                }
+            if (isValidLoopOpener(line).isPresent()) {
+                Optional<Foldable.Types> type = isValidLoopOpener(line);
+                isValid = true;
+                parseTree = parseFoldable(lines, parseTree, type.get());
             }
             if (isValid == false) {
                 Sentence sentenceNode = new Sentence (line);
@@ -133,10 +133,10 @@ public class TemplateParser
         nestLevel++;
         while (nestLevel != 0) {
             String subLine = lines.get(0);
-            if(isValidLoopOpenerForType(subLine, type)) {
+            if(isValidLoopOpener(subLine).isPresent()) {
                 nestLevel++;
             }
-            if (isValidLoopCloserForType(subLine, type)) {
+            if (isValidLoopCloser(subLine, type)) {
                 nestLevel--;
             }
             loopLines.add (lines.get(0)); // TODO use remove, it passes back
@@ -151,24 +151,23 @@ public class TemplateParser
         return parseTree;
     }
 
-    public boolean isValidLoopOpenerForType(String line, Foldable.Types type)
+    public Optional<Foldable.Types> isValidLoopOpener(String line)
     {
-        Pattern varsLoopOpenerPattern = Pattern.compile(Foldable.FOLDABLE_KEYS.get(type)); // TODO there was $ at end. assumed mistake. inspect
-        Matcher matcher = varsLoopOpenerPattern.matcher(line);
-        if (matcher.matches()) {
-            return true;
+        for (Foldable.Types type : Foldable.Types.values()) {
+            java.util.regex.Pattern varsLoopOpenerPattern = Foldable.FOLDABLE_OPENERS.get(type); // TODO there was $ at end. assumed mistake. inspect
+            Matcher matcher = varsLoopOpenerPattern.matcher(line);
+            if (matcher.matches()) {
+                return Optional.of(type);
+            }
         }
-        return false;
+        return Optional.empty();
     }
 
-    public boolean isValidLoopCloserForType(String line, Foldable.Types type)
+    public boolean isValidLoopCloser(String line, Foldable.Types type)
     {
-        Pattern varsLoopOpenerPattern = Pattern.compile(Foldable.FOLDABLE_KEYS.get(type));
+        java.util.regex.Pattern varsLoopOpenerPattern = Foldable.FOLDABLE_CLOSERS.get(type);
         Matcher matcher = varsLoopOpenerPattern.matcher(line);
-        if (matcher.matches()) {
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 
     public ArrayList<String> getTemplateLines(){

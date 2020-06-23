@@ -26,18 +26,18 @@ public class Alfalfa {
     public static void alfalfaSimpleRun(Path workingDirectory, Path templateDirectory, Schema config){
 //            ArrayList<Path> patterns = Files.list(Paths.get("patternFolderPathString"))
 
-        config.getEntityInfo().forEach(entityInfo -> {
-            try {
-
-                Files.list(templateDirectory)
-                    .filter(StringUtils::fileIsTemplateFile)
-                    .forEach(patternPath -> {
-                        TemplateFileHandler.evaluateTemplateFileForConfig(patternPath, entityInfo, workingDirectory);
-                    });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+//        config.getEntityInfo().forEach(entityInfo -> {
+//            try {
+//
+//                Files.list(templateDirectory)
+//                    .filter(StringUtils::fileIsTemplateFile)
+//                    .forEach(patternPath -> {
+//                        TemplateFileHandler.evaluateTemplateFileForEntityInfo(patternPath, entityInfo, workingDirectory);
+//                    });
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
 
 //                    .collect(Collectors.toCollection(ArrayList::new));
     }

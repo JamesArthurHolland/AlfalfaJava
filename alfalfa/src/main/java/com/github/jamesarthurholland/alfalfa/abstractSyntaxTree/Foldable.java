@@ -1,6 +1,7 @@
 package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
 import java.util.LinkedHashMap;
+import java.util.regex.Pattern;
 
 public class Foldable extends Node
 {
@@ -10,11 +11,19 @@ public class Foldable extends Node
         VAR_CONDITIONAL
     }
 
-    public static final LinkedHashMap<Types, String> FOLDABLE_KEYS = new LinkedHashMap<>();
+    public static final LinkedHashMap<Types, Pattern> FOLDABLE_OPENERS = new LinkedHashMap<>();
+    public static final LinkedHashMap<Types, Pattern> FOLDABLE_CLOSERS = new LinkedHashMap<>();
 
     static {
-        FOLDABLE_KEYS.put(Types.VAR_LOOP, keyToLoopOpener("VARS"));
-        FOLDABLE_KEYS.put(Types.VAR_LOOP, keyToLoopOpener("ENTITIES"));
+        FOLDABLE_OPENERS.put(Types.VAR_LOOP, keyToLoopOpener("VARS"));
+        FOLDABLE_OPENERS.put(Types.ENTITY_LOOP, keyToLoopOpener("ENTITIES"));
+        FOLDABLE_OPENERS.put(Types.VAR_CONDITIONAL, keyToLoopOpener("ENTITIES"));
+
+        FOLDABLE_CLOSERS.put(Types.VAR_LOOP, keyToLoopCloser("VARS"));
+        FOLDABLE_CLOSERS.put(Types.ENTITY_LOOP, keyToLoopCloser("ENTITIES"));
+        FOLDABLE_CLOSERS.put(Types.VAR_CONDITIONAL, keyToLoopCloser("ENTITIES"));
+
+
     }
 
     private boolean leftTreeFixed;
@@ -26,8 +35,12 @@ public class Foldable extends Node
         leftTreeFixed = false;
     }
 
-    public static String keyToLoopOpener(String word) {
-        return "^\\s*\\{\\{" + word + "\\}\\}\\s*$";
+    public static Pattern keyToLoopOpener(String word) {
+        return Pattern.compile("^\\s*\\{\\{" + word + "\\}\\}\\s*$");
+    }
+
+    public static Pattern keyToLoopCloser(String word) {
+        return Pattern.compile("^\\s*\\{\\{/" + word + "\\}\\}\\s*$");
     }
 
     public boolean isLeftTreeFixed()
@@ -42,11 +55,6 @@ public class Foldable extends Node
     @Override
     public void print() {
 
-    }
-
-    @Override
-    public Types getType() {
-        return null;
     }
 
 }
