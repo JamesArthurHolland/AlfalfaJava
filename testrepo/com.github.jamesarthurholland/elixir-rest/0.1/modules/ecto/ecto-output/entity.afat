@@ -1,4 +1,4 @@
-{{ALFALFA -o {{entity}}.ex}}
+{{ALFALFA -o {{en_tity}}.ex}}
 defmodule ElixirRest.{{Entity}}s.{{Entity}} do
   use Ecto.Schema
   import Ecto.Changeset

@@ -150,6 +150,9 @@ public class PatternFileScanner {
             String currentPatternLocationString = (String) patternHashMap.getOrDefault(LOCATION_KEY,"./");
 
             Path currentPatternPath = Paths.get(currentPatternLocationString);
+            if(this.patternTmp.getOutputPath() != null) {
+                currentPatternPath = this.patternTmp.getOutputPath().resolve(Paths.get(currentPatternLocationString));
+            }
 //             TODO scan vars and (pass them down the tree)???
             LinkedHashMap<String, String> vars = parseVarsFromHashMap(patternHashMap, patternTmp.vars);
 

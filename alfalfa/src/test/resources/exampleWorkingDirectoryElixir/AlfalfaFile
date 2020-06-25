@@ -5,7 +5,8 @@ version: "0.1"
 imports:
   - name: com.github.jamesarthurholland/elixir-rest/main
     version: "0.1"
-    location: "./"
+    location: "./api"
+
 
 vars:
   project_var: "This should be top level"

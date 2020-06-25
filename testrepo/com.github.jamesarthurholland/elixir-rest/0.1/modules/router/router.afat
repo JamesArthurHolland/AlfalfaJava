@@ -1,8 +1,15 @@
+{{ALFALFA -o router.ex}}
 defmodule ElixirRestWeb.Router do
   use ElixirRestWeb, :router
 
   pipeline :api do
     plug(:accepts, ["json"])
+  end
+
+  scope "/" do
+    {{ENTITIES}}
+    resources "/{{entity}}s", {{Entity}}Controller
+    {{/ENTITIES}}
   end
 
   scope "/api" do

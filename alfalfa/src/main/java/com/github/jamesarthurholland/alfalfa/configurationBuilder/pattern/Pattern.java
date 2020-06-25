@@ -73,6 +73,9 @@ public class Pattern implements Serializable
 
 
     public Path getOutputPath() {
+        if (outputPath == null) {
+            return null;
+        }
         return Paths.get(outputPath);
     }
 
