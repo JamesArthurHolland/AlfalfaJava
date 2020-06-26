@@ -2,7 +2,7 @@ package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 import java.util.Objects;
 
-public class Variable
+public class Variable implements Cloneable
 {
     public static final String PUBLIC = "public";
     public static final String PROTECTED = "protected";
@@ -25,6 +25,23 @@ public class Variable
         this.visibility = visibility;
         this.type = type;
         this.name = name;
+    }
+
+    public Variable(Variable other) {
+        this.primary = other.primary;
+        this.visibility = other.visibility;
+        this.type = other.type;
+        this.name = other.name;
+    }
+
+    @Override
+    public Object clone() {
+        return new Variable(
+            this.primary,
+            this.visibility,
+            this.type,
+            this.name
+        );
     }
 
     @Override

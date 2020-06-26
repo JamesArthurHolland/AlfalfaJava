@@ -1,10 +1,16 @@
 package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
+import com.github.jamesarthurholland.alfalfa.transpiler.FoldableEvaluator;
+import com.github.jamesarthurholland.alfalfa.transpiler.SentenceEvaluator;
+
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.regex.Pattern;
 
-public class Foldable extends Node
+public abstract class Foldable extends Node implements FoldableEvaluator
 {
+    public abstract ArrayList<Node> evaluate(LinkedHashMap<String, Object> container);
+
     public static enum Types {
         VAR_LOOP,
         ENTITY_LOOP,
@@ -22,17 +28,15 @@ public class Foldable extends Node
         FOLDABLE_CLOSERS.put(Types.VAR_LOOP, keyToLoopCloser("VARS"));
         FOLDABLE_CLOSERS.put(Types.ENTITY_LOOP, keyToLoopCloser("ENTITIES"));
         FOLDABLE_CLOSERS.put(Types.VAR_CONDITIONAL, keyToLoopCloser("ENTITIES"));
-
-
     }
 
-    private boolean leftTreeFixed;
-    public static Types type;
+    protected boolean rightNodeFixed;
+    public final Types type;
 
     public Foldable(Types type)
     {
         this.type = type;
-        leftTreeFixed = false;
+        rightNodeFixed = false;
     }
 
     public static Pattern keyToLoopOpener(String word) {
@@ -43,18 +47,37 @@ public class Foldable extends Node
         return Pattern.compile("^\\s*\\{\\{/" + word + "\\}\\}\\s*$");
     }
 
-    public boolean isLeftTreeFixed()
+    public boolean isRightNodeFixed()
     {
-        return leftTreeFixed;
+        return rightNodeFixed;
     }
 
-    public void fixLeftTree() {
-        leftTreeFixed = true;
+    public void setRightNodeFixed() {
+        rightNodeFixed = true;
     }
 
     @Override
-    public void print() {
+    public void print() {}
 
+    public ArrayList<Node> addSentenceEvaluatorToLoopChildNodes(Foldable copy, SentenceEvaluator evaluator) {
+        ArrayList<Node> nodes = new ArrayList<>();
+
+        Sentence childNode = (Sentence) copy.right;
+
+        while(childNode != null) {
+            nodes.add(childNode);
+            childNode.setEvaluator(evaluator);
+            if(childNode.left != null) {
+                childNode = (Sentence) childNode.left;
+            }
+            else {
+                childNode = null;
+            }
+        }
+
+        return nodes;
     }
+
+
 
 }

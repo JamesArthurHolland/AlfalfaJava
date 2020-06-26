@@ -10,22 +10,30 @@ import static com.github.jamesarthurholland.alfalfa.StringUtils.camelToLowerUnde
 import static com.github.jamesarthurholland.alfalfa.StringUtils.camelToUpperUnderScore;
 import static com.github.jamesarthurholland.alfalfa.StringUtils.uppercaseFirst;
 
-public class VarLoopEvaluator
+public class SentenceVarEvaluator implements Cloneable, SentenceEvaluator
 {
-//    private Variable givenVar;
-//    private EntityInfo entityInfo;
-//
-//    public SentenceForEachEntityEvaluator(Variable givenVar, EntityInfo entityInfo) {
-//        this.givenVar = givenVar;
-//        this.entityInfo = entityInfo;
-//    }
+    private Variable givenVar;
+    private EntityInfo entityInfo;
 
-//    public SentenceForEachEntityEvaluator(Variable givenVar, SentenceForEachEntityEvaluator evaluator) {
+    public SentenceVarEvaluator(Variable givenVar, EntityInfo entityInfo) {
+        this.givenVar = givenVar;
+        this.entityInfo = entityInfo;
+    }
+
+    @Override
+    public Object clone() {
+        return new SentenceVarEvaluator(
+            ((Variable)this.givenVar.clone()),
+            ((EntityInfo)this.entityInfo.clone())
+        );
+    }
+
+    //    public SentenceForEachEntityEvaluator(Variable givenVar, SentenceForEachEntityEvaluator evaluator) {
 //        this.givenVar = givenVar;
 //        this.entityInfo = evaluator.entityInfo;
 //    }
 
-    public static String evaluate(String sentence, Variable givenVar, EntityInfo entityInfo)
+    public String evaluate(String sentence)
     {
         String generatedSentence = evaluateForEntityReplacements(sentence, entityInfo);
 //        generatedSentence = evaluateForNamespace(sentence, entityInfo);
@@ -59,7 +67,7 @@ public class VarLoopEvaluator
         Matcher matcher = patternForKey.matcher(sentence);
         if (matcher.matches()) {
             if (!givenVar.isPrimary ()) {
-                generatedSentence = matcher.group(1) + VarLoopEvaluator.replaceVarsInString (givenVar, matcher.group(3));
+                generatedSentence = matcher.group(1) + SentenceVarEvaluator.replaceVarsInString (givenVar, matcher.group(3));
                 String lastOrNot = matcher.group(2);
                 if (lastOrNot.equals("NOT-LAST")) {
                     if (!entityInfo.isVarLast (givenVar)) {

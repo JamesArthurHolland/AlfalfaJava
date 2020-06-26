@@ -2,7 +2,8 @@ package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 import java.util.*;
 
-public class EntityInfo {
+public class EntityInfo implements Cloneable
+{
     protected String name;
     protected String nameSpace;
     protected LinkedHashSet<Variable> variables = new LinkedHashSet<>();
@@ -16,6 +17,18 @@ public class EntityInfo {
         this.name = entity;
         this.nameSpace = nameSpace;
         this.variables = variables;
+    }
+
+    @Override
+    public Object clone() {
+
+        variables = new LinkedHashSet<>();
+
+        this.variables.forEach(variable -> {
+            this.variables.add(new Variable(variable));
+        });
+
+        return new EntityInfo(this.name, this.nameSpace, variables);
     }
 
     public String getPrimaryKey(EntityInfo info) {

@@ -4,11 +4,13 @@ import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TranspileResult;
 import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TemplateParser;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
+import com.github.jamesarthurholland.alfalfa.transpiler.TreeEvaluator;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 
 public class TemplateFileHandler
@@ -31,13 +33,16 @@ public class TemplateFileHandler
 
             try {
                 ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
-                TranspileResult transpileResult = TemplateParser.runAlfalfaForEntity(entityInfo, lines, pattern); // TODO pass pattern here and do conditional based on variable mode
+
+                LinkedHashMap<String, Object> container = new LinkedHashMap<>();
+                container.put(TemplateParser.ENTITY_INFO_KEY, entityInfo);
+
+                TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern); // TODO pass pattern here and do conditional based on variable mode
                 TemplateParser.writeCompilerResultToFile(fileOutputDirectoryPath.toString(), transpileResult);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-
     }
 
     public static void evaluateTemplateFileForSchema(Path patternFilePath, Schema schema, Path fullInputPath, Path workingDirectory, Pattern pattern) {
@@ -46,7 +51,10 @@ public class TemplateFileHandler
 
         try {
             ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
-            TranspileResult transpileResult = TemplateParser.runAlfalfaForSchema(schema, lines, pattern); // TODO pass pattern here and do conditional based on variable mode
+
+            LinkedHashMap<String, Object> container = new LinkedHashMap<>();
+            container.put(TemplateParser.SCHEMA_KEY, schema);
+            TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern); // TODO pass pattern here and do conditional based on variable mode
             TemplateParser.writeCompilerResultToFile(fileOutputDirectoryPath.toString(), transpileResult);
         } catch (IOException e) {
             e.printStackTrace();

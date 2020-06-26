@@ -1,10 +1,9 @@
 package com.github.jamesarthurholland.alfalfa.transpiler;
 
+import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 
-import static com.github.jamesarthurholland.alfalfa.StringUtils.*;
-
-public class SentenceSingleEvaluator
+public class SentenceSingleEvaluator implements Cloneable, SentenceEvaluator
 {
     private EntityInfo entityInfo;
 
@@ -12,22 +11,17 @@ public class SentenceSingleEvaluator
         this.entityInfo = entityInfo;
     }
 
-    public static String evaluate(String sentenceToEvaluate, EntityInfo entityInfo)
+    @Override
+    public Object clone() {
+        return new SentenceSingleEvaluator((EntityInfo) this.entityInfo.clone());
+    }
+
+    public String evaluate(String sentenceToEvaluate)
     {
-        String generatedSentence = evaluateForEntityReplacements(sentenceToEvaluate, entityInfo);
+        String generatedSentence = StringUtils.evaluateForEntityReplacements(sentenceToEvaluate, this.entityInfo);
 //        generatedSentence = evaluateForNamespace(sentence, entityInfo);
 
         return generatedSentence;
-    }
-
-    public static String evaluateForEntityReplacements (String sentence, EntityInfo entityInfo)
-    {
-        String outputString = sentence.replaceAll("\\{\\{entity\\}\\}", entityInfo.getName());
-        outputString = outputString.replaceAll("\\{\\{en_tity\\}\\}", camelToLowerUnderScore(entityInfo.getName()));
-        outputString = outputString.replaceAll("\\{\\{EN_TITY\\}\\}", camelToUpperUnderScore(entityInfo.getName()));
-        outputString = outputString.replaceAll("\\{\\{Entity\\}\\}", uppercaseFirst(entityInfo.getName()));
-
-        return outputString;
     }
 
 //    protected String evaluateForNamespace(String sentence, EntityInfo entityInfo)

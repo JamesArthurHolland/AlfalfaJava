@@ -1,5 +1,6 @@
 package com.github.jamesarthurholland.alfalfa;
 
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.NoEntityFileException;
 import com.google.common.io.Files;
 
@@ -33,6 +34,16 @@ public class StringUtils {
         finally {
             return list;
         }
+    }
+
+    public static String evaluateForEntityReplacements (String sentence, EntityInfo entityInfo)
+    {
+        String outputString = sentence.replaceAll("\\{\\{entity\\}\\}", entityInfo.getName());
+        outputString = outputString.replaceAll("\\{\\{en_tity\\}\\}", camelToLowerUnderScore(entityInfo.getName()));
+        outputString = outputString.replaceAll("\\{\\{EN_TITY\\}\\}", camelToUpperUnderScore(entityInfo.getName()));
+        outputString = outputString.replaceAll("\\{\\{Entity\\}\\}", uppercaseFirst(entityInfo.getName()));
+
+        return outputString;
     }
 
     public static boolean fileIsModelFile(Path path)
