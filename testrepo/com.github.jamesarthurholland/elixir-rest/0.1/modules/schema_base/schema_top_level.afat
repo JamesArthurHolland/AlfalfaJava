@@ -6,26 +6,27 @@ defmodule ElixirRestWeb.Schema do
   # import Types
   import_types(ElixirRestWeb.Schema.Types)
 
-  {{ENTITIES}}
   query do
-    @desc "Get a list of all {{entity}}s"
-    field :{{entity}}s, list_of(:{{entity}}_type) do
+    {{ENTITIES}}
+    @desc "Get a list of all {{en_tity}} entities"
+    field :{{en_tity}}, list_of(:{{en_tity}}_type) do
       # Resolver
-      resolve(&Resolvers.{{Entity}}Resolver.{{entity}}s/3)
+      resolve(&Resolvers.{{Entity}}Resolver.{{en_tity}}/3)
     end
+
+    {{/ENTITIES}}
   end
 
   mutation do
-    @desc "Create a new {{entity}}"
-    field :create_{{entity}}, type: :{{entity}}_type do
-      arg(:input, non_null(:{{entity}}_input_type))
-      resolve(&Resolvers.{{Entity}}Resolver.register_{{entity}}/3)
+    {{ENTITIES}}
+    @desc "Create a new {{en_tity}}"
+    field :create_{{en_tity}}, type: :{{en_tity}}_type do
+      arg(:input, non_null(:{{en_tity}}_input_type))
+      resolve(&Resolvers.{{Entity}}Resolver.create_{{en_tity}}/3)
     end
+
+    {{/ENTITIES}}
   end
-
-  {{/ENTITIES}}
-  
-
 
 
   #subscription do

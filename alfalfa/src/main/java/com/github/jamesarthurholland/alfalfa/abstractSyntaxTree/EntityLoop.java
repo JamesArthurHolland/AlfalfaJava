@@ -51,7 +51,8 @@ public class EntityLoop extends Foldable implements FoldableEvaluator
                 .forEach(entityInfo -> {
                     SentenceSingleEvaluator evaluator = new SentenceSingleEvaluator(entityInfo);
                     EntityLoop copy = new EntityLoop(this);
-                    nodes.addAll(addSentenceEvaluatorToLoopChildNodes(copy, evaluator));
+                    ArrayList<Node> sentenceEvaluatorNodes = addSentenceEvaluatorToLoopChildNodes(copy, evaluator);
+                    nodes.addAll(sentenceEvaluatorNodes);
                 });
 
         return nodes;

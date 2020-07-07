@@ -105,7 +105,8 @@ public class Pattern implements Serializable
 
     public String injectVarsToLine(String line) {
         Jinjava jinjava = new Jinjava();
-        return jinjava.render(line, vars);
+        String output = jinjava.render(line, vars);
+        return output;
     }
 
 }

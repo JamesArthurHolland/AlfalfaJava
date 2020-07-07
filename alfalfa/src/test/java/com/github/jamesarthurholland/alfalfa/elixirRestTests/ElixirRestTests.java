@@ -2,7 +2,6 @@ package com.github.jamesarthurholland.alfalfa.elixirRestTests;
 
 import com.github.jamesarthurholland.alfalfa.Alfalfa;
 import com.github.jamesarthurholland.alfalfa.FileUtils;
-import com.github.jamesarthurholland.alfalfa.PatternImporter;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.PatternFileScanner;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
@@ -28,16 +27,10 @@ public class ElixirRestTests {
     @Test void api(@TempDir Path tempDir) {
         // arrange
 
-        String patternName = "com.github.jamesarthurholland/elixir-rest"; // TODO use dots the whole way or look at how maven does it
-        String version = "0.1";
-
-        PatternImporter.importPattern(patternName, version, tempDir);
-
         FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectoryElixir"), tempDir);
-        Pattern pattern = new PatternFileScanner(Paths.get("src/test/resources/exampleWorkingDirectoryElixir")).scan();
+        Pattern pattern = new PatternFileScanner(tempDir).scan();
 
-
-        Schema config = new Schema(Paths.get("src/test/resources/exampleWorkingDirectoryElixir/"));
+        Schema config = new Schema(tempDir);
 
 
         System.out.println("ALFALFA run \n\n\n========\n\n\n");
@@ -45,7 +38,9 @@ public class ElixirRestTests {
 
         // assert
         assertAll(
-                () -> assertTrue(Files.exists(tempDir.resolve("lib/elixir_rest_web/controllers")))
+                () -> assertTrue(Files.exists(tempDir.resolve("api/lib/elixir_rest_web/controllers"))),
+                () -> assertTrue(Files.exists(tempDir.resolve("api/lib/elixir_rest/student")), "No student dir"),
+                () -> assertTrue(Files.exists(tempDir.resolve("api/lib/elixir_rest/student/student_entity.ex")), "No student_entity file")
         );
     }
 }

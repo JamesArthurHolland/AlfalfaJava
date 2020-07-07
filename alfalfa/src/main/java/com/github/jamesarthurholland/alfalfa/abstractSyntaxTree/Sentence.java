@@ -34,7 +34,16 @@ public class Sentence extends Node implements Cloneable
         if(this.evaluator != null) {
             evaluator = (SentenceEvaluator) this.evaluator.clone();
         }
-        return new Sentence(this.left, this.right, this.sentence, evaluator);
+        Node left = null;
+        Node right = null;
+        if(this.left != null) {
+            left = copy(this.left);
+        }
+        if(this.right != null) {
+            right = copy(this.right);
+        }
+
+        return new Sentence(left, right, this.sentence, evaluator);
     }
 
     public Sentence(Sentence other) {

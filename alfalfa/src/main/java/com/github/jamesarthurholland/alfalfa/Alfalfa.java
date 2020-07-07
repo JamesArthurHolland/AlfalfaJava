@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
@@ -86,19 +85,16 @@ public class Alfalfa {
 
 // TODO folderSwap here if file is folder and folderfilePathRelativeToModule is listed in folder swaps
 
-
                             Log.info("Here not alfalfafile " + fullPath);
-                            Files.lines(fullPath, Charset.defaultCharset()) // TODO this breaks for binary files
+                            ArrayList<String> lines = Files.lines(fullPath, Charset.defaultCharset()) // TODO this breaks for binary files
                                     .map(pattern::injectVarsToLine)
-                                    .collect(Collectors.toCollection(ArrayList::new))
-                                    .forEach(list -> {
-                                        try {
-                                            org.apache.commons.io.FileUtils.writeLines(fileAbsoluteOutputPath.get().toFile(), Collections.singleton(list));
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                    });
+                                    .collect(Collectors.toCollection(ArrayList::new));
 
+                            try {
+                                org.apache.commons.io.FileUtils.writeLines(fileAbsoluteOutputPath.get().toFile(), lines);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
 //                            Files.copy(fullPath, fileAbsoluteOutputPath, REPLACE_EXISTING);
                         } catch (Exception e1) {
@@ -111,9 +107,6 @@ public class Alfalfa {
                     System.out.println(filePathRelativeToModule);
                     System.out.println(fileAbsoluteOutputPath);
                     System.out.println("\n");
-
-
-
                 });
 
             pattern.imports.forEach(patternStack::add);

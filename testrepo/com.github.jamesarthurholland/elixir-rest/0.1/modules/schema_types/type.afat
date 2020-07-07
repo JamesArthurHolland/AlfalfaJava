@@ -1,0 +1,20 @@
+{{ALFALFA -o {{en_tity}}_type.ex}}
+defmodule ElixirRestWeb.Schema.Types.{{Entity}}Type do
+  use Absinthe.Schema.Notation
+
+  object :{{en_tity}}_type do
+    {{VARS}}
+    field(:{{var}}, :{{type}})
+	{{/VARS}}
+  end
+
+  # TODO validation of nullables
+  input_object :{{en_tity}}_input_type do
+    {{VARS}}
+    {{NOT-KEY NOT-LAST}}field(:{{var}}, :{{type}}){{/NOT-KEY}}
+	{{/VARS}}
+	{{VARS}}
+    {{NOT-KEY LAST}}field(:{{var}}, :{{type}}){{/NOT-KEY}}
+	{{/VARS}}
+  end
+end

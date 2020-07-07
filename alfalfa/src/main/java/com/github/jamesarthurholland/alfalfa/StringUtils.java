@@ -6,6 +6,7 @@ import com.google.common.io.Files;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class StringUtils {
@@ -44,6 +45,10 @@ public class StringUtils {
         outputString = outputString.replaceAll("\\{\\{Entity\\}\\}", uppercaseFirst(entityInfo.getName()));
 
         return outputString;
+    }
+
+    public static Path processPathEntityReplacement(Path fileOutputDirectoryPath, EntityInfo info) {
+        return Paths.get(StringUtils.evaluateForEntityReplacements(fileOutputDirectoryPath.toString(), info));
     }
 
     public static boolean fileIsModelFile(Path path)

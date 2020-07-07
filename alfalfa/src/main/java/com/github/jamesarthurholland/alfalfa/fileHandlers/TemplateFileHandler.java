@@ -1,7 +1,7 @@
 package com.github.jamesarthurholland.alfalfa.fileHandlers;
 
-import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TranspileResult;
 import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TemplateParser;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TranspileResult;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.transpiler.TreeEvaluator;
@@ -31,6 +31,12 @@ public class TemplateFileHandler
             Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullInputPath);
             Path fileOutputDirectoryPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule).getParent();
 
+            if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY && DirectoryFileHandler.doesDirectoryNeedFolderSwap(filePathRelativeToModule, pattern)) {
+                fileOutputDirectoryPath = DirectoryFileHandler.outputPathForPatternFolderSwap(
+                        filePathRelativeToModule, fileOutputDirectoryPath, pattern, workingDirectory, entityInfo
+                );
+            }
+
             try {
                 ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
 
@@ -44,6 +50,8 @@ public class TemplateFileHandler
             }
         });
     }
+
+
 
     public static void evaluateTemplateFileForSchema(Path patternFilePath, Schema schema, Path fullInputPath, Path workingDirectory, Pattern pattern) {
         Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullInputPath);

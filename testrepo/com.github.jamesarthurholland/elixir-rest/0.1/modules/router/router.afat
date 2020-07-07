@@ -6,9 +6,11 @@ defmodule ElixirRestWeb.Router do
     plug(:accepts, ["json"])
   end
 
-  scope "/" do
+  scope "/" do ElixirRestWeb
+    pipe_through(:api)
+
     {{ENTITIES}}
-    resources "/{{entity}}s", {{Entity}}Controller
+    resources "/{{en_tity}}", ElixirRestWeb.{{Entity}}Controller
     {{/ENTITIES}}
   end
 

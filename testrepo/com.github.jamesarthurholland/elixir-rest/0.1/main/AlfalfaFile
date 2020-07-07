@@ -7,7 +7,7 @@ imports:
     location: ./lib/elixir_rest/
     mode: for_each
     folder_swaps:
-      ecto-output: "{{en_tity}}s"
+      ecto-output: "{{en_tity}}"
 
   - name: resolvers
     location: ./lib/elixir_rest_web/resolvers/
@@ -28,3 +28,5 @@ imports:
 
   - name: schema_types
     location: ./lib/elixir_rest_web/schema/
+    mode: for_each
+

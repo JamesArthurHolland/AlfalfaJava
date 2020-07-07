@@ -2,18 +2,18 @@
 defmodule ElixirRestWeb.{{Entity}}Controller do
   use ElixirRestWeb, :controller
 
-  alias ElixirRest.{{Entity}}s
-  alias ElixirRest.{{Entity}}s.{{Entity}}
+  alias ElixirRest.{{Entity}}
+  alias ElixirRest.{{Entity}}.{{Entity}}Entity
 
   action_fallback ElixirRestWeb.FallbackController
 
   def index(conn, _params) do
-    {{en_tity}}s = {{Entity}}s.list_{{en_tity}}s()
-    render(conn, "index.json", {{en_tity}}s: {{en_tity}}s)
+    {{en_tity}} = {{Entity}}.list_{{en_tity}}()
+    render(conn, "index.json", {{en_tity}}: {{en_tity}})
   end
 
-  def create(conn, %{"{{en_tity}}" => {{en_tity}}_params}) do
-    with {:ok, %{{Entity}}{} = {{en_tity}}} <- {{Entity}}s.create_{{en_tity}}({{en_tity}}_params) do
+  def create(conn, {{en_tity}}_params) do
+    with {:ok, %{{Entity}}Entity{} = {{en_tity}}} <- {{Entity}}.create_{{en_tity}}({{en_tity}}_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", {{en_tity}}_path(conn, :show, {{en_tity}}))
@@ -22,21 +22,21 @@ defmodule ElixirRestWeb.{{Entity}}Controller do
   end
 
   def show(conn, %{"id" => id}) do
-    {{en_tity}} = {{Entity}}s.get_{{en_tity}}!(id)
+    {{en_tity}} = {{Entity}}.get_{{en_tity}}!(id)
     render(conn, "show.json", {{en_tity}}: {{en_tity}})
   end
 
   def update(conn, %{"id" => id, "{{en_tity}}" => {{en_tity}}_params}) do
-    {{en_tity}} = {{Entity}}s.get_{{en_tity}}!(id)
+    {{en_tity}} = {{Entity}}.get_{{en_tity}}!(id)
 
-    with {:ok, %{{Entity}}{} = {{en_tity}}} <- {{Entity}}s.update_{{en_tity}}({{en_tity}}, {{en_tity}}_params) do
+    with {:ok, %{{Entity}}Entity{} = {{en_tity}}} <- {{Entity}}.update_{{en_tity}}({{en_tity}}, {{en_tity}}_params) do
       render(conn, "show.json", {{en_tity}}: {{en_tity}})
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    {{en_tity}} = {{Entity}}s.get_{{en_tity}}!(id)
-    with {:ok, %{{Entity}}{}} <- {{Entity}}s.delete_{{en_tity}}({{en_tity}}) do
+    {{en_tity}} = {{Entity}}.get_{{en_tity}}!(id)
+    with {:ok, %{{Entity}}Entity{}} <- {{Entity}}.delete_{{en_tity}}({{en_tity}}) do
       send_resp(conn, :no_content, "")
     end
   end

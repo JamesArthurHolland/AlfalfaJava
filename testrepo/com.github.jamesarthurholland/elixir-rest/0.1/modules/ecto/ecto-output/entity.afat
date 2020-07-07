@@ -1,28 +1,35 @@
-{{ALFALFA -o {{en_tity}}.ex}}
-defmodule ElixirRest.{{Entity}}s.{{Entity}} do
+{{ALFALFA -o {{en_tity}}_entity.ex}}
+defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "{{entity}}s" do
+  schema "{{en_tity}}" do
     {{VARS}}
-    field(:{{var}}, {{type}})
+    {{NOT-KEY NOT-LAST}}field(:{{var}}, :{{type}}){{/NOT-KEY}}
+	{{/VARS}}
+	{{VARS}}
+    {{NOT-KEY LAST}}field(:{{var}}, :{{type}}){{/NOT-KEY}}
 	{{/VARS}}
 
     timestamps()
   end
 
   @doc false
-  def changeset({{entity}}, attrs) do
-    {{entity}}
+  def changeset({{en_tity}}, attrs) do
+    {{en_tity}}
     |> cast(attrs, [
       {{VARS}}
       {{NOT-KEY NOT-LAST}}:{{v_ar}},{{/NOT-KEY}}
+      {{/VARS}}
+      {{VARS}}
       {{NOT-KEY LAST}}:{{v_ar}}{{/NOT-KEY}}
       {{/VARS}}
     ])
     |> validate_required([
       {{VARS}}
       {{NOT-KEY NOT-LAST}}:{{v_ar}},{{/NOT-KEY}}
+      {{/VARS}}
+      {{VARS}}
       {{NOT-KEY LAST}}:{{v_ar}}{{/NOT-KEY}}
       {{/VARS}}
     ])

@@ -17,7 +17,13 @@ public class TreeEvaluator
         TemplateASTree parseTree = parser.parseTemplateLines(parser.getTemplateLines());
         String fileName = parser.getHeader().getFileName();
 
-        return new TranspileResult(fileName, TreeEvaluator.evaluateTree(parseTree, container, pattern));
+        if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY) {
+            EntityInfo entityInfo = (EntityInfo) container.get(TemplateParser.ENTITY_INFO_KEY);
+            fileName = StringUtils.evaluateForEntityReplacements(fileName, entityInfo);
+        }
+
+        ArrayList<String> processedFileLines = TreeEvaluator.evaluateTree(parseTree, container, pattern);
+        return new TranspileResult(fileName, processedFileLines);
     }
 
     public static ArrayList<String> evaluateTree(TemplateASTree tree, LinkedHashMap<String, Object> container, Pattern pattern)
@@ -50,6 +56,7 @@ public class TreeEvaluator
                 if (currentNode.left != null & sentence.isInLoop() == false) {
                     nodeStack.push(currentNode.left);
                 }
+                // TODO entities loop bug
             }
 
             if (currentNode instanceof Foldable) {

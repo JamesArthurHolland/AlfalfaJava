@@ -1,5 +1,7 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
+import com.esotericsoftware.minlog.Log;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -66,6 +68,9 @@ public class ModelFileScanner
                             mappingType = Mapping.Type.ONE_TO_ONE;
                         }
 
+                        if(mappingKeyArray.length < 2) {
+                            Log.error("Mapping array wrong", "Defintion:" + mappingDefinition + ", path: " + path + ", line:" + Arrays.toString(lineArray));
+                        }
                         String mappingValue = mappingKeyArray[1]; // TODO error check mapping to
 
                         int mappingValueArrayLastDotIndex = mappingValue.lastIndexOf(".");
@@ -90,6 +95,7 @@ public class ModelFileScanner
                 return mappingsForName;
             }
         } catch (MalformedVariableLineException e) {
+            System.out.println("Path was" + path);
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

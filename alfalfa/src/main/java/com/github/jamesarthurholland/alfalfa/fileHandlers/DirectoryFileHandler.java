@@ -41,7 +41,7 @@ public class DirectoryFileHandler
         for (Map.Entry<String, String> entry : pattern.folderSwaps.entrySet()) {
             String folderName = entry.getKey();
 
-            if (relativePath.compareTo(Paths.get(folderName)) == 0) {
+            if (isChildFolderInParentFolder(relativePath, Paths.get(folderName))) {
                 return true;
             }
         }

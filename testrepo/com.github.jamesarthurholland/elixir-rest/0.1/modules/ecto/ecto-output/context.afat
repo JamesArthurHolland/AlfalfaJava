@@ -1,25 +1,25 @@
-{{ALFALFA -o {{en_tity}}s.ex}}
-defmodule WsElixirRest.{{Entity}}s do
+{{ALFALFA -o {{en_tity}}.ex}}
+defmodule ElixirRest.{{Entity}} do
   @moduledoc """
-  The {{Entity}}s context.
+  The {{Entity}} context.
   """
 
   import Ecto.Query, warn: false
-  alias WsElixirRest.Repo
+  alias ElixirRest.Repo
 
-  alias WsElixirRest.{{Entity}}s.{{Entity}}
+  alias ElixirRest.{{Entity}}.{{Entity}}Entity
 
   @doc """
-  Returns the list of {{en_tity}}s.
+  Returns the list of {{en_tity}}.
 
   ## Examples
 
-      iex> list_{{en_tity}}s()
-      [%{{Entity}}{}, ...]
+      iex> list_{{en_tity}}()
+      [%{{Entity}}Entity{}, ...]
 
   """
-  def list_{{en_tity}}s do
-    Repo.all({{Entity}})
+  def list_{{en_tity}} do
+    Repo.all({{Entity}}Entity)
   end
 
   @doc """
@@ -30,13 +30,13 @@ defmodule WsElixirRest.{{Entity}}s do
   ## Examples
 
       iex> get_{{en_tity}}!(123)
-      %{{Entity}}{}
+      %{{Entity}}Entity{}
 
       iex> get_{{en_tity}}!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_{{en_tity}}!(id), do: Repo.get!({{Entity}}, id)
+  def get_{{en_tity}}!(id), do: Repo.get!({{Entity}}Entity, id)
 
   @doc """
   Creates a {{en_tity}}.
@@ -44,15 +44,15 @@ defmodule WsElixirRest.{{Entity}}s do
   ## Examples
 
       iex> create_{{en_tity}}(%{field: value})
-      {:ok, %{{Entity}}{}}
+      {:ok, %{{Entity}}Entity{}}
 
       iex> create_{{en_tity}}(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
   def create_{{en_tity}}(attrs \\ %{}) do
-    %{{Entity}}{}
-    |> {{Entity}}.changeset(attrs)
+    %{{Entity}}Entity{}
+    |> {{Entity}}Entity.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -62,15 +62,15 @@ defmodule WsElixirRest.{{Entity}}s do
   ## Examples
 
       iex> update_{{en_tity}}({{en_tity}}, %{field: new_value})
-      {:ok, %{{Entity}}{}}
+      {:ok, %{{Entity}}Entity{}}
 
       iex> update_{{en_tity}}({{en_tity}}, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_{{en_tity}}(%{{Entity}}{} = {{en_tity}}, attrs) do
+  def update_{{en_tity}}(%{{Entity}}Entity{} = {{en_tity}}, attrs) do
     {{en_tity}}
-    |> {{Entity}}.changeset(attrs)
+    |> {{Entity}}Entity.changeset(attrs)
     |> Repo.update()
   end
 
@@ -80,13 +80,13 @@ defmodule WsElixirRest.{{Entity}}s do
   ## Examples
 
       iex> delete_{{en_tity}}({{en_tity}})
-      {:ok, %{{Entity}}{}}
+      {:ok, %{{Entity}}Entity{}}
 
       iex> delete_{{en_tity}}({{en_tity}})
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_{{en_tity}}(%{{Entity}}{} = {{en_tity}}) do
+  def delete_{{en_tity}}(%{{Entity}}Entity{} = {{en_tity}}) do
     Repo.delete({{en_tity}})
   end
 
@@ -96,10 +96,10 @@ defmodule WsElixirRest.{{Entity}}s do
   ## Examples
 
       iex> change_{{en_tity}}({{en_tity}})
-      %Ecto.Changeset{source: %{{Entity}}{}}
+      %Ecto.Changeset{source: %{{Entity}}Entity{}}
 
   """
-  def change_{{en_tity}}(%{{Entity}}{} = {{en_tity}}) do
-    {{Entity}}.changeset({{en_tity}}, %{})
+  def change_{{en_tity}}(%{{Entity}}Entity{} = {{en_tity}}) do
+    {{Entity}}Entity.changeset({{en_tity}}, %{})
   end
 end
