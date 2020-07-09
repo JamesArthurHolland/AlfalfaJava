@@ -3,6 +3,10 @@ defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
   use Ecto.Schema
   import Ecto.Changeset
 
+  {{VARS}}
+  {{KEY}}@primary_key {:id, :string, []}{{/KEY}}
+  {{KEY}}@derive {Phoenix.Param, key: :id}{{/KEY}}
+  {{/VARS}}
   schema "{{en_tity}}" do
     {{VARS}}
     {{NOT-KEY NOT-LAST}}field(:{{var}}, :{{type}}){{/NOT-KEY}}
@@ -19,6 +23,7 @@ defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
     {{en_tity}}
     |> cast(attrs, [
       {{VARS}}
+      {{KEY}}:{{v_ar}},{{/KEY}}
       {{NOT-KEY NOT-LAST}}:{{v_ar}},{{/NOT-KEY}}
       {{/VARS}}
       {{VARS}}
@@ -27,6 +32,7 @@ defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
     ])
     |> validate_required([
       {{VARS}}
+      {{KEY}}:{{v_ar}},{{/KEY}}
       {{NOT-KEY NOT-LAST}}:{{v_ar}},{{/NOT-KEY}}
       {{/VARS}}
       {{VARS}}

@@ -4,6 +4,7 @@ defmodule ElixirRest.{{Entity}} do
   The {{Entity}} context.
   """
 
+  import Ecto.UUID
   import Ecto.Query, warn: false
   alias ElixirRest.Repo
 
@@ -51,6 +52,12 @@ defmodule ElixirRest.{{Entity}} do
 
   """
   def create_{{en_tity}}(attrs \\ %{}) do
+    uuid = Ecto.UUID.load(Ecto.UUID.generate)
+
+    Map.merge(attrs, %{
+      id: uuid
+    })
+
     %{{Entity}}Entity{}
     |> {{Entity}}Entity.changeset(attrs)
     |> Repo.insert()
