@@ -23,6 +23,7 @@ public class TemplateFileHandler
         else if (pattern.mode == Pattern.ImportMode.ONCE_FOR_ENTITY) {
             evaluateTemplateFileForSchema(fullInputPath, schema, fullInputPath, workingDirectory, pattern);
         }
+
         // TODO not for each?
     }
 

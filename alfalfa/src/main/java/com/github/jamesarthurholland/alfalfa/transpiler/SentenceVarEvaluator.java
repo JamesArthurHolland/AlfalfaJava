@@ -1,14 +1,13 @@
 package com.github.jamesarthurholland.alfalfa.transpiler;
 
+import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Variable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.github.jamesarthurholland.alfalfa.StringUtils.camelToLowerUnderScore;
-import static com.github.jamesarthurholland.alfalfa.StringUtils.camelToUpperUnderScore;
-import static com.github.jamesarthurholland.alfalfa.StringUtils.uppercaseFirst;
+import static com.github.jamesarthurholland.alfalfa.StringUtils.*;
 
 public class SentenceVarEvaluator implements Cloneable, SentenceEvaluator
 {
@@ -36,7 +35,6 @@ public class SentenceVarEvaluator implements Cloneable, SentenceEvaluator
     public String evaluate(String sentence)
     {
         String generatedSentence = evaluateForEntityReplacements(sentence, entityInfo);
-//        generatedSentence = evaluateForNamespace(sentence, entityInfo);
         generatedSentence = evaluateForKeyStatement (givenVar, generatedSentence);
 
         if (generatedSentence == null) {
@@ -56,6 +54,7 @@ public class SentenceVarEvaluator implements Cloneable, SentenceEvaluator
             generatedSentence = replaceTypesInString(givenVar, generatedSentence);
             generatedSentence = replaceVisibilityInString(givenVar, generatedSentence);
         }
+        generatedSentence = StringUtils.evaluateForNamespace(generatedSentence, entityInfo);
         return generatedSentence;
     }
 

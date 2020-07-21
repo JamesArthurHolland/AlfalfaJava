@@ -26,24 +26,12 @@
   <component name="ChangeListManager">
     <list default="true" id="d4e62cd5-395e-4d48-a45d-961440d78cd3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Alfalfa.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/Alfalfa.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/StringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/StringUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/EntityLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/EntityLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/Sentence.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/abstractSyntaxTree/Sentence.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/pattern/Pattern.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/pattern/Pattern.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/ModelFileScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/schema/ModelFileScanner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/DirectoryFileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/DirectoryFileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/pattern/PatternFileScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/configurationBuilder/pattern/PatternFileScanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/TemplateFileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/TemplateFileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/transpiler/TreeEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/transpiler/TreeEvaluator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/elixirRestTests/ElixirRestTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/test/java/com/github/jamesarthurholland/alfalfa/elixirRestTests/ElixirRestTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/AlfalfaFile" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/AlfalfaFile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/main/lib/elixir_rest_web/schema/user_type.ex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/controllers/controller.afat" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/controllers/controller.afat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/ecto/ecto-output/context.afat" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/ecto/ecto-output/context.afat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/ecto/ecto-output/entity.afat" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/ecto/ecto-output/entity.afat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/transpiler/SentenceSingleEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/transpiler/SentenceSingleEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/transpiler/SentenceVarEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/transpiler/SentenceVarEvaluator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/resolvers/entity_resolver.afat" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/resolvers/entity_resolver.afat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/router/router.afat" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/router/router.afat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/schema_base/schema_top_level.afat" beforeDir="false" afterPath="$PROJECT_DIR$/testrepo/com.github.jamesarthurholland/elixir-rest/0.1/modules/schema_base/schema_top_level.afat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -574,7 +562,9 @@
       <workItem from="1592244673353" duration="48658000" />
       <workItem from="1592422133847" duration="432000" />
       <workItem from="1592424166643" duration="89107000" />
-      <workItem from="1593435535515" duration="26214000" />
+      <workItem from="1593435535515" duration="32779000" />
+      <workItem from="1594817353552" duration="2023000" />
+      <workItem from="1594908804541" duration="1787000" />
     </task>
     <servers />
   </component>
@@ -658,9 +648,10 @@
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="1892" y="209" width="1720" height="880" key="DiffContextDialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593437894537" />
-    <state width="1878" height="348" key="GridCell.Tab.0.bottom" timestamp="1593682554439">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state width="1878" height="253" key="GridCell.Tab.0.bottom" timestamp="1594737717405">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
+    <state width="1878" height="253" key="GridCell.Tab.0.bottom/-1920.23.1920.1006/1792.23.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1594737717405" />
     <state width="1878" height="348" key="GridCell.Tab.0.bottom/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593682554439" />
     <state width="1878" height="301" key="GridCell.Tab.0.bottom/-1920.63.1920.1057/1792.109.1920.1007/0.23.1792.1097@1792.109.1920.1007" timestamp="1592879950674" />
     <state width="1878" height="474" key="GridCell.Tab.0.bottom/-1920.63.1920.1057/1792.109.1920.1009/0.23.1792.1097@1792.109.1920.1009" timestamp="1593118543743" />
@@ -668,11 +659,13 @@
     <state width="1878" height="339" key="GridCell.Tab.0.bottom/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1031@1792.109.1920.1080" timestamp="1593142558151" />
     <state width="1878" height="474" key="GridCell.Tab.0.bottom/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1097@1792.109.1920.1080" timestamp="1593118541267" />
     <state width="1878" height="379" key="GridCell.Tab.0.bottom/-1920.63.1920.1057/1792.132.1920.1057/0.23.1792.1024@1792.132.1920.1057" timestamp="1593143832251" />
+    <state width="1878" height="348" key="GridCell.Tab.0.bottom/-3712.-40.1920.1080/0.0.1920.1080/-1792.-40.1792.1120@0.0.1920.1080" timestamp="1594653452476" />
     <state width="1878" height="501" key="GridCell.Tab.0.bottom/1792.109.1920.1080/0.0.1792.1120/-1920.40.1920.1080@1792.109.1920.1080" timestamp="1592241949711" />
     <state width="1878" height="501" key="GridCell.Tab.0.bottom/1792.132.1920.1057/0.23.1792.1031/-1920.63.1920.1057@1792.132.1920.1057" timestamp="1592243433825" />
-    <state width="1878" height="348" key="GridCell.Tab.0.center" timestamp="1593682554437">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state width="1878" height="253" key="GridCell.Tab.0.center" timestamp="1594737717404">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
+    <state width="1878" height="253" key="GridCell.Tab.0.center/-1920.23.1920.1006/1792.23.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1594737717404" />
     <state width="1878" height="348" key="GridCell.Tab.0.center/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593682554437" />
     <state width="1878" height="301" key="GridCell.Tab.0.center/-1920.63.1920.1057/1792.109.1920.1007/0.23.1792.1097@1792.109.1920.1007" timestamp="1592879950672" />
     <state width="1878" height="474" key="GridCell.Tab.0.center/-1920.63.1920.1057/1792.109.1920.1009/0.23.1792.1097@1792.109.1920.1009" timestamp="1593118543740" />
@@ -680,11 +673,13 @@
     <state width="1878" height="339" key="GridCell.Tab.0.center/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1031@1792.109.1920.1080" timestamp="1593142558149" />
     <state width="1878" height="474" key="GridCell.Tab.0.center/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1097@1792.109.1920.1080" timestamp="1593118541264" />
     <state width="1878" height="379" key="GridCell.Tab.0.center/-1920.63.1920.1057/1792.132.1920.1057/0.23.1792.1024@1792.132.1920.1057" timestamp="1593143832248" />
+    <state width="1878" height="348" key="GridCell.Tab.0.center/-3712.-40.1920.1080/0.0.1920.1080/-1792.-40.1792.1120@0.0.1920.1080" timestamp="1594653452475" />
     <state width="1878" height="501" key="GridCell.Tab.0.center/1792.109.1920.1080/0.0.1792.1120/-1920.40.1920.1080@1792.109.1920.1080" timestamp="1592241949709" />
     <state width="1878" height="501" key="GridCell.Tab.0.center/1792.132.1920.1057/0.23.1792.1031/-1920.63.1920.1057@1792.132.1920.1057" timestamp="1592243433824" />
-    <state width="1878" height="348" key="GridCell.Tab.0.left" timestamp="1593682554436">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state width="1878" height="253" key="GridCell.Tab.0.left" timestamp="1594737717403">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
+    <state width="1878" height="253" key="GridCell.Tab.0.left/-1920.23.1920.1006/1792.23.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1594737717403" />
     <state width="1878" height="348" key="GridCell.Tab.0.left/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593682554436" />
     <state width="1878" height="301" key="GridCell.Tab.0.left/-1920.63.1920.1057/1792.109.1920.1007/0.23.1792.1097@1792.109.1920.1007" timestamp="1592879950672" />
     <state width="1878" height="474" key="GridCell.Tab.0.left/-1920.63.1920.1057/1792.109.1920.1009/0.23.1792.1097@1792.109.1920.1009" timestamp="1593118543734" />
@@ -692,11 +687,13 @@
     <state width="1878" height="339" key="GridCell.Tab.0.left/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1031@1792.109.1920.1080" timestamp="1593142558148" />
     <state width="1878" height="474" key="GridCell.Tab.0.left/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1097@1792.109.1920.1080" timestamp="1593118541263" />
     <state width="1878" height="379" key="GridCell.Tab.0.left/-1920.63.1920.1057/1792.132.1920.1057/0.23.1792.1024@1792.132.1920.1057" timestamp="1593143832247" />
+    <state width="1878" height="348" key="GridCell.Tab.0.left/-3712.-40.1920.1080/0.0.1920.1080/-1792.-40.1792.1120@0.0.1920.1080" timestamp="1594653452474" />
     <state width="1878" height="501" key="GridCell.Tab.0.left/1792.109.1920.1080/0.0.1792.1120/-1920.40.1920.1080@1792.109.1920.1080" timestamp="1592241949708" />
     <state width="1878" height="501" key="GridCell.Tab.0.left/1792.132.1920.1057/0.23.1792.1031/-1920.63.1920.1057@1792.132.1920.1057" timestamp="1592243433823" />
-    <state width="1878" height="348" key="GridCell.Tab.0.right" timestamp="1593682554438">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state width="1878" height="253" key="GridCell.Tab.0.right" timestamp="1594737717405">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
+    <state width="1878" height="253" key="GridCell.Tab.0.right/-1920.23.1920.1006/1792.23.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1594737717405" />
     <state width="1878" height="348" key="GridCell.Tab.0.right/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593682554438" />
     <state width="1878" height="301" key="GridCell.Tab.0.right/-1920.63.1920.1057/1792.109.1920.1007/0.23.1792.1097@1792.109.1920.1007" timestamp="1592879950735" />
     <state width="1878" height="474" key="GridCell.Tab.0.right/-1920.63.1920.1057/1792.109.1920.1009/0.23.1792.1097@1792.109.1920.1009" timestamp="1593118543829" />
@@ -704,11 +701,13 @@
     <state width="1878" height="339" key="GridCell.Tab.0.right/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1031@1792.109.1920.1080" timestamp="1593142558205" />
     <state width="1878" height="474" key="GridCell.Tab.0.right/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1097@1792.109.1920.1080" timestamp="1593118541266" />
     <state width="1878" height="379" key="GridCell.Tab.0.right/-1920.63.1920.1057/1792.132.1920.1057/0.23.1792.1024@1792.132.1920.1057" timestamp="1593143832250" />
+    <state width="1878" height="348" key="GridCell.Tab.0.right/-3712.-40.1920.1080/0.0.1920.1080/-1792.-40.1792.1120@0.0.1920.1080" timestamp="1594653452475" />
     <state width="1878" height="501" key="GridCell.Tab.0.right/1792.109.1920.1080/0.0.1792.1120/-1920.40.1920.1080@1792.109.1920.1080" timestamp="1592241949710" />
     <state width="1878" height="501" key="GridCell.Tab.0.right/1792.132.1920.1057/0.23.1792.1031/-1920.63.1920.1057@1792.132.1920.1057" timestamp="1592243433824" />
-    <state width="1878" height="253" key="GridCell.Tab.1.bottom" timestamp="1593682540201">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state width="1878" height="253" key="GridCell.Tab.1.bottom" timestamp="1594737717409">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
+    <state width="1878" height="253" key="GridCell.Tab.1.bottom/-1920.23.1920.1006/1792.23.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1594737717409" />
     <state width="1878" height="253" key="GridCell.Tab.1.bottom/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593682540201" />
     <state width="1878" height="301" key="GridCell.Tab.1.bottom/-1920.63.1920.1057/1792.109.1920.1007/0.23.1792.1097@1792.109.1920.1007" timestamp="1592879950676" />
     <state width="1878" height="474" key="GridCell.Tab.1.bottom/-1920.63.1920.1057/1792.109.1920.1009/0.23.1792.1097@1792.109.1920.1009" timestamp="1593118543749" />
@@ -718,9 +717,10 @@
     <state width="1878" height="379" key="GridCell.Tab.1.bottom/-1920.63.1920.1057/1792.132.1920.1057/0.23.1792.1024@1792.132.1920.1057" timestamp="1593143832254" />
     <state width="1878" height="501" key="GridCell.Tab.1.bottom/1792.109.1920.1080/0.0.1792.1120/-1920.40.1920.1080@1792.109.1920.1080" timestamp="1592241949715" />
     <state width="1878" height="501" key="GridCell.Tab.1.bottom/1792.132.1920.1057/0.23.1792.1031/-1920.63.1920.1057@1792.132.1920.1057" timestamp="1592243433827" />
-    <state width="1878" height="253" key="GridCell.Tab.1.center" timestamp="1593682540199">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state width="1878" height="253" key="GridCell.Tab.1.center" timestamp="1594737717406">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
+    <state width="1878" height="253" key="GridCell.Tab.1.center/-1920.23.1920.1006/1792.23.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1594737717406" />
     <state width="1878" height="253" key="GridCell.Tab.1.center/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593682540199" />
     <state width="1878" height="301" key="GridCell.Tab.1.center/-1920.63.1920.1057/1792.109.1920.1007/0.23.1792.1097@1792.109.1920.1007" timestamp="1592879950675" />
     <state width="1878" height="474" key="GridCell.Tab.1.center/-1920.63.1920.1057/1792.109.1920.1009/0.23.1792.1097@1792.109.1920.1009" timestamp="1593118543746" />
@@ -730,9 +730,10 @@
     <state width="1878" height="379" key="GridCell.Tab.1.center/-1920.63.1920.1057/1792.132.1920.1057/0.23.1792.1024@1792.132.1920.1057" timestamp="1593143832253" />
     <state width="1878" height="501" key="GridCell.Tab.1.center/1792.109.1920.1080/0.0.1792.1120/-1920.40.1920.1080@1792.109.1920.1080" timestamp="1592241949714" />
     <state width="1878" height="501" key="GridCell.Tab.1.center/1792.132.1920.1057/0.23.1792.1031/-1920.63.1920.1057@1792.132.1920.1057" timestamp="1592243433826" />
-    <state width="1878" height="253" key="GridCell.Tab.1.left" timestamp="1593682540199">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state width="1878" height="253" key="GridCell.Tab.1.left" timestamp="1594737717406">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
+    <state width="1878" height="253" key="GridCell.Tab.1.left/-1920.23.1920.1006/1792.23.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1594737717406" />
     <state width="1878" height="253" key="GridCell.Tab.1.left/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593682540199" />
     <state width="1878" height="301" key="GridCell.Tab.1.left/-1920.63.1920.1057/1792.109.1920.1007/0.23.1792.1097@1792.109.1920.1007" timestamp="1592879950674" />
     <state width="1878" height="474" key="GridCell.Tab.1.left/-1920.63.1920.1057/1792.109.1920.1009/0.23.1792.1097@1792.109.1920.1009" timestamp="1593118543745" />
@@ -742,9 +743,10 @@
     <state width="1878" height="379" key="GridCell.Tab.1.left/-1920.63.1920.1057/1792.132.1920.1057/0.23.1792.1024@1792.132.1920.1057" timestamp="1593143832252" />
     <state width="1878" height="501" key="GridCell.Tab.1.left/1792.109.1920.1080/0.0.1792.1120/-1920.40.1920.1080@1792.109.1920.1080" timestamp="1592241949712" />
     <state width="1878" height="501" key="GridCell.Tab.1.left/1792.132.1920.1057/0.23.1792.1031/-1920.63.1920.1057@1792.132.1920.1057" timestamp="1592243433825" />
-    <state width="1878" height="253" key="GridCell.Tab.1.right" timestamp="1593682540200">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state width="1878" height="253" key="GridCell.Tab.1.right" timestamp="1594737717407">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
+    <state width="1878" height="253" key="GridCell.Tab.1.right/-1920.23.1920.1006/1792.23.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1594737717407" />
     <state width="1878" height="253" key="GridCell.Tab.1.right/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593682540200" />
     <state width="1878" height="301" key="GridCell.Tab.1.right/-1920.63.1920.1057/1792.109.1920.1007/0.23.1792.1097@1792.109.1920.1007" timestamp="1592879950675" />
     <state width="1878" height="474" key="GridCell.Tab.1.right/-1920.63.1920.1057/1792.109.1920.1009/0.23.1792.1097@1792.109.1920.1009" timestamp="1593118543748" />
@@ -782,11 +784,12 @@
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
     <state x="2475" y="548" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1591974373005" />
-    <state x="2379" y="313" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593636769835">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state x="-1244" y="172" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1594332195569">
+      <screen x="-1792" y="-40" width="1792" height="1120" />
     </state>
     <state x="2379" y="313" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593636769835" />
     <state x="2379" y="313" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1097@1792.109.1920.1080" timestamp="1592918331367" />
+    <state x="-1244" y="172" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-3712.-40.1920.1080/0.0.1920.1080/-1792.-40.1792.1120@-1792.-40.1792.1120" timestamp="1594332195569" />
     <state x="1892" y="209" width="1720" height="880" key="dock-window-1" timestamp="1592356678947">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
@@ -796,10 +799,12 @@
     </state>
     <state x="2490" y="394" key="extract.method.dialog/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1592784543632" />
     <state x="2490" y="394" key="extract.method.dialog/-1920.63.1920.1057/1792.109.1920.1080/0.23.1792.1097@1792.109.1920.1080" timestamp="1593118165386" />
-    <state x="2459" y="238" width="707" height="822" key="find.popup" timestamp="1593698490407">
-      <screen x="1792" y="109" width="1920" height="1080" />
+    <state x="623" y="134" width="660" height="853" key="find.popup" timestamp="1594910080321">
+      <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="2459" y="238" width="707" height="822" key="find.popup/-1920.40.1920.1080/1792.109.1920.1080/0.0.1792.1120@1792.109.1920.1080" timestamp="1593698490407" />
+    <state x="-1169" y="94" width="660" height="853" key="find.popup/-3712.-40.1920.1080/0.0.1920.1080/-1792.-40.1792.1120@-1792.-40.1792.1120" timestamp="1594395285596" />
+    <state x="623" y="134" width="660" height="853" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1594910080321" />
     <state x="2417" y="350" width="670" height="676" key="search.everywhere.popup" timestamp="1592175847502">
       <screen x="1792" y="109" width="1920" height="1080" />
     </state>
@@ -870,7 +875,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/alfalfa/src/main/java/com/github/jamesarthurholland/alfalfa/fileHandlers/TemplateFileHandler.java</url>
-          <line>59</line>
+          <line>60</line>
           <option name="timeStamp" value="208" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

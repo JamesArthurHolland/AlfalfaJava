@@ -2,11 +2,11 @@
 defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
   alias ElixirRest.{{Entity}}
 
-  def {{entity}}(_, _, _) do
-    {:ok, {{Entity}}.list_{{entity}}()}
+  def {{en_tity}}(_, _, _) do
+    {:ok, {{Entity}}.list_{{en_tity}}()}
   end
 
-  def register_{{entity}}(_, %{input: input}, _) do
-    {{Entity}}.create_{{entity}}(input)
+  def register_{{en_tity}}(_, %{input: input}, _) do
+    {{Entity}}.create_{{en_tity}}(input)
   end
 end

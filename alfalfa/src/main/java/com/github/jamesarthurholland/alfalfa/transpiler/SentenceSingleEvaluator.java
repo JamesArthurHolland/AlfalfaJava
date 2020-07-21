@@ -19,16 +19,10 @@ public class SentenceSingleEvaluator implements Cloneable, SentenceEvaluator
     public String evaluate(String sentenceToEvaluate)
     {
         String generatedSentence = StringUtils.evaluateForEntityReplacements(sentenceToEvaluate, this.entityInfo);
-//        generatedSentence = evaluateForNamespace(sentence, entityInfo);
+        generatedSentence = StringUtils.evaluateForNamespace(generatedSentence, entityInfo);
 
         return generatedSentence;
     }
 
-//    protected String evaluateForNamespace(String sentence, EntityInfo entityInfo)
-//    {
-//        String nameSpace = entityInfo.getNameSpace();
-//        nameSpace = nameSpace.replaceAll("\\\\", "\\\\\\\\");
-//        String outputSentence = sentence.replaceAll("\\{\\{NAMESPACE\\}\\}", nameSpace);
-//        return outputSentence;
-//    }
+
 }

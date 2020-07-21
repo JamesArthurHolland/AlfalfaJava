@@ -1,0 +1,24 @@
+{{ALFALFA -o {{Entity}}Mapper.php}}
+<?php
+
+namespace {{NAMESPACE}}\{{Entity}};
+
+use {{NAMESPACE}}\{{Entity}}\{{Entity}}Entity;
+
+class {{Entity}}Mapper
+{
+    public function fromArray($entityArray)
+    {
+        if(!$entityArray) {
+            return null;
+        }
+
+        return new {{Entity}}Entity(
+        {{VARS}}
+			{{KEY}}$entityArray['{{var}}'],{{/KEY}}
+			{{NOT-KEY NOT-LAST}}$entityArray['{{var}}'],{{/NOT-KEY}}
+			{{NOT-KEY LAST}}$entityArray['{{var}}']{{/NOT-KEY}}
+		{{/VARS}}
+        );
+    }
+}

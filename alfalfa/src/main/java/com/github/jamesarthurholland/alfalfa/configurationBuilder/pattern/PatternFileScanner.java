@@ -64,9 +64,11 @@ public class PatternFileScanner {
 
             ArrayList<LinkedHashMap<String, Object>> imports = (ArrayList<LinkedHashMap<String, Object>>) patternHashMap.get(IMPORTS_KEY);
 
-            for(LinkedHashMap<String, Object> importHashMap : imports) {
-                Pattern importedPattern = getImportPattern(importHashMap, currentPatternBuilder);
-                currentPatternBuilder.build().imports.add(importedPattern);
+            if(imports != null) {
+                for(LinkedHashMap<String, Object> importHashMap : imports) {
+                    Pattern importedPattern = getImportPattern(importHashMap, currentPatternBuilder);
+                    currentPatternBuilder.build().imports.add(importedPattern);
+                }
             }
 
             return currentPatternBuilder.build();

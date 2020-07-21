@@ -1,0 +1,31 @@
+{{ALFALFA -o {{Entity}}ApiDi.php}}
+<?php
+
+    $di->set('{{entity}}Mapper', array(
+            'className' => '{{NAMESPACE}}\{{Entity}}Mapper'
+        ));
+
+    $di->set('{{entity}}Service', array(
+            'className' => '{{NAMESPACE}}\{{Entity}}Service',
+            'arguments' => array(
+            array('type' => 'service', 'name' => '{{entity}}Db')
+        )
+    ));
+
+    $di->set('{{entity}}Db', array(
+        'className' => '{{NAMESPACE}}\{{Entity}}Db',
+        'arguments' => array(
+            array('type' => 'service', 'name' => '{{entity}}Mapper')
+        )
+    ));
+
+    $di->set('{{entity}}Filter', array(
+        'className' => '{{NAMESPACE}}\{{Entity}}Filter'
+    ));
+
+    $di->set('{{entity}}FilterMapper', array(
+        'className' => 'ASA\Stdlib\FilterMapperAbstract',
+        'arguments' => array(
+            array('type' => 'service', 'name' => '{{entity}}Filter')
+        )
+    ));

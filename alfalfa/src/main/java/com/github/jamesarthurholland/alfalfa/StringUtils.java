@@ -37,6 +37,14 @@ public class StringUtils {
         }
     }
 
+    public static String evaluateForNamespace(String sentence, EntityInfo entityInfo)
+    {
+        String nameSpace = entityInfo.getNameSpace();
+        nameSpace = nameSpace.replaceAll("\\\\", "\\\\\\\\");
+        String outputSentence = sentence.replaceAll("\\{\\{NAMESPACE\\}\\}", nameSpace);
+        return outputSentence;
+    }
+
     public static String evaluateForEntityReplacements (String sentence, EntityInfo entityInfo)
     {
         String outputString = sentence.replaceAll("\\{\\{entity\\}\\}", entityInfo.getName());

@@ -1,0 +1,15 @@
+{{ALFALFA -o {{Entity}}Service.php}}
+<?php
+
+namespace {{NAMESPACE}}\{{Entity}};
+
+use {{NAMESPACE}}\Stdlib\ServiceAbstract;
+use {{NAMESPACE}}\Stdlib\StorageInterface;
+
+class {{Entity}}Service  extends ServiceAbstract
+{
+    public function __construct(StorageInterface $repository)
+    {
+        $this->setRepository($repository);
+    }
+}
