@@ -2,11 +2,20 @@
 defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
   alias ElixirRest.{{Entity}}
 
-  def {{en_tity}}(_, _, _) do
-    {:ok, {{Entity}}.list_{{en_tity}}()}
+  {{VARS}}
+  {{KEY}}def {{fetch}}(_, %{{{v_ar}}: {{v_ar}}}, _) do{{/KEY}}
+  {{/VARS}}
+    {:ok, {{Entity}}.fetch({{v_ar}})}
   end
 
   def register_{{en_tity}}(_, %{input: input}, _) do
     {{Entity}}.create_{{en_tity}}(input)
   end
+
+  {{INDICES}}
+  def fetch_by_{{in_dex}}(_, %{{{in_dex}}: {{in_dex}}}, _) do
+    {:ok, {{Entity}}.fetch_by_{{in_dex}}({{in_dex}})}
+  end
+
+  {{/INDICES}}
 end

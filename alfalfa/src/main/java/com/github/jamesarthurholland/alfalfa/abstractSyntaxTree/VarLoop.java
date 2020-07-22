@@ -25,16 +25,21 @@ public class VarLoop extends Foldable implements FoldableEvaluator
     }
 
     @Override
-    public ArrayList<Node> evaluate(LinkedHashMap<String, Object> container) {
+    public ArrayList<Node> evaluate(Container container) {
         ArrayList<Node> nodes = new ArrayList<>();
 
+        if(context != null) {
+            container = context.container;
+        }
         EntityInfo info = (EntityInfo) container.get(TemplateParser.ENTITY_INFO_KEY);
 
+        Container finalContainer = container;
         info.getVariables()
             .forEach(var -> {
                 SentenceVarEvaluator evaluator = new SentenceVarEvaluator(var, info);
                 VarLoop copy = new VarLoop(this);
-                nodes.addAll(addSentenceEvaluatorToLoopChildNodes(copy, evaluator));
+                Context context = new Context(finalContainer, evaluator);
+                nodes.addAll(addContextToChildNodes(copy, context));
             });
 
         return nodes;

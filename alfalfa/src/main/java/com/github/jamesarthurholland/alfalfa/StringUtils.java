@@ -8,6 +8,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.OptionalInt;
 
 public class StringUtils {
 
@@ -74,12 +75,32 @@ public class StringUtils {
 
     public static String camelToLowerUnderScore(String variableString)
     {
+        OptionalInt firstChar = variableString.chars().findFirst();
+
+        if ( firstChar.isPresent() ) {
+            char first = (char) firstChar.getAsInt();
+            if(Character.isUpperCase(first) && numberOfUpperCases(variableString) == 1) {
+                return variableString.toLowerCase();
+            }
+        }
         String StringParts = variableString.replaceAll("([A-Z])", "_$1");
         return StringParts.toLowerCase();
     }
 
+    public static int numberOfUpperCases(String givenString) {
+        return (int) givenString.chars().filter((s)->Character.isUpperCase(s)).count();
+    }
+
     public static String camelToUpperUnderScore(String variableString)
     {
+        OptionalInt firstChar = variableString.chars().findFirst();
+
+        if ( firstChar.isPresent() ) {
+            char first = (char) firstChar.getAsInt();
+            if(Character.isUpperCase(first) && numberOfUpperCases(variableString) == 1) {
+                return variableString.toUpperCase();
+            }
+        }
         String StringParts = variableString.replaceAll("([A-Z])", "_$1");
         return StringParts.toUpperCase();
     }

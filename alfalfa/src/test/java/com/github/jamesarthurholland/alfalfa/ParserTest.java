@@ -2,6 +2,12 @@ package com.github.jamesarthurholland.alfalfa;
 
 
 
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.PatternFileScanner;
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,21 +15,25 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
-import org.junit.jupiter.api.Test;
-
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class ParserTest {
 
     @Test
     public void simpleParseTest(@TempDir Path tempDir) {
-        FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectory"), tempDir);
-        Schema config = new Schema(tempDir);
-        Alfalfa.alfalfaSimpleRun(tempDir, Paths.get("src/test/resources/exampleTemplateDirectory"), config);
+        FileUtils.copyDirRecursive(Paths.get("src/test/resources/exampleWorkingDirectoryAllConstructs"), tempDir);
+        Schema schema = new Schema(tempDir);
+
+        Pattern pattern = new PatternFileScanner(tempDir).scan();
+
+        Alfalfa.alfalfaRun(tempDir, schema, pattern);
         System.out.println("SimpleParseTest debug");
+
+        assertAll(
+                () -> assertTrue(Files.exists(tempDir.resolve("student/Student.php")))
+        );
     }
 
 //

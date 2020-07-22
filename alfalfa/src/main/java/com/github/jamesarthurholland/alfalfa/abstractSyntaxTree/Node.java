@@ -4,17 +4,30 @@ import com.google.gson.Gson;
 
 public abstract class Node
 {
+    public final Types type;
     public Node left, right;
+    public Context context;
 
-    public Node()
+    public static enum Types {
+        SENTENCE,
+        VAR_LOOP,
+        ENTITY_LOOP,
+        INDICES_LOOP,
+        VAR_CONDITIONAL
+    }
+
+    public Node(Types type)
     {
         left = null;
         right = null;
+        this.type = type;
     }
 
-    public Node(Node left, Node right) {
+    public Node(Types type, Node left, Node right, Context context) {
+        this.type = type;
         this.left = left;
         this.right = right;
+        this.context = context;
     }
 
     public static Node copy(Node node) {
@@ -33,6 +46,11 @@ public abstract class Node
                     case VAR_CONDITIONAL:
                         // TODO
                         break;
+                    case INDICES_LOOP:
+                        return new IndicesLoop((IndicesLoop)node);
+                    default:
+                        System.out.println("ERROR in node copy");
+                        break;
                 }
             }
         } catch (CloneNotSupportedException e) {
@@ -41,5 +59,15 @@ public abstract class Node
         return null;
     }
 
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     public abstract void print ();
+
+
 }

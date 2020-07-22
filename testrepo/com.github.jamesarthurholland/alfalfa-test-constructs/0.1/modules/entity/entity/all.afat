@@ -1,0 +1,5 @@
+{{ALFALFA -o {{Entity}}.php}}
+
+{{INDICES}}
+{{INDEX}}
+{{/INDICES}}

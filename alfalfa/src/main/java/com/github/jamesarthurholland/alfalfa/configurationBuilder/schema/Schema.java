@@ -10,11 +10,17 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class Schema {
+public class Schema implements Cloneable
+{
     private HashSet<EntityInfo> entityInfoList = new HashSet<>();
     private Map<String, HashSet<Mapping>> mappingsForEntityName = new HashMap<>();
 
     public static final String ALFALFA_DOT_FOLDER = "alfalfa";
+
+    public Schema(HashSet<EntityInfo> entityInfoList, Map<String, HashSet<Mapping>> mappingsForEntityName) {
+        this.entityInfoList = entityInfoList;
+        this.mappingsForEntityName = mappingsForEntityName;
+    }
 
     public Schema(Path workingDirectory) throws NoDotAlfalfaDirectoryException {
         // getMappingStrings
@@ -52,6 +58,14 @@ public class Schema {
         return null; // TODO wrong I think
     }
 
+    public Optional<Mapping> getMappingForEntityVar(EntityInfo info, Variable var) {
+        Optional<Mapping> mapping = this.mappingsForEntityName.get(info.getFullyQualifedName())
+                .stream()
+                .filter(current -> current.toVarName.equals(var.getName()))
+                .findFirst();
+
+        return mapping;
+    }
 
 //    public void addElement(ConfigElement element) {
 //        this.entityInfoList.add(element.getEntityInfo());
@@ -75,7 +89,37 @@ public class Schema {
 //    }
 
     public HashSet<EntityInfo> getEntityInfo() {
+
+
         return entityInfoList;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+
+        Map<String, HashSet<Mapping>> newMappingsMap = new HashMap<>();
+
+        this.mappingsForEntityName.entrySet()
+            .stream()
+            .forEach(entry -> {
+                String key = entry.getKey();
+                HashSet<Mapping> mappings = entry.getValue();
+
+                HashSet<Mapping> clonedMappings = new HashSet<>();
+
+                for(Mapping mapping : mappings) {
+                    clonedMappings.add( (Mapping)mapping.clone() );
+                }
+
+                newMappingsMap.put(key, clonedMappings);
+            });
+
+        HashSet<EntityInfo> clonedInfoList = new HashSet<>();
+
+        this.entityInfoList.stream()
+                .forEach(entityInfo -> clonedInfoList.add( ((EntityInfo)entityInfo.clone()) ));
+
+        return new Schema(clonedInfoList, newMappingsMap);
     }
 
     public static boolean hasDotAlfalfaDirectory(Path path)

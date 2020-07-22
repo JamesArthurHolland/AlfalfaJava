@@ -7,12 +7,11 @@ import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityI
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.Stack;
 
 public class TreeEvaluator
 {
-    public static TranspileResult runAlfalfa(ArrayList<String> lines, LinkedHashMap<String, Object> container, Pattern pattern) {
+    public static TranspileResult runAlfalfa(ArrayList<String> lines, Container container, Pattern pattern) {
         TemplateParser parser = new TemplateParser(lines);
         TemplateASTree parseTree = parser.parseTemplateLines(parser.getTemplateLines());
         String fileName = parser.getHeader().getFileName();
@@ -26,7 +25,7 @@ public class TreeEvaluator
         return new TranspileResult(fileName, processedFileLines);
     }
 
-    public static ArrayList<String> evaluateTree(TemplateASTree tree, LinkedHashMap<String, Object> container, Pattern pattern)
+    public static ArrayList<String> evaluateTree(TemplateASTree tree, Container container, Pattern pattern)
     {
         Node rootNode = tree.getRoot ();
 
@@ -39,17 +38,7 @@ public class TreeEvaluator
             Node currentNode = nodeStack.pop();
             if (currentNode instanceof Sentence) {
                 Sentence sentence = (Sentence) currentNode;
-                String evaluatedSentence = null;
-                if(sentence.isInLoop()) {
-                    evaluatedSentence = sentence.evaluate();
-                }
-                else if(pattern.mode == Pattern.ImportMode.ONCE_FOR_ENTITY) {
-                    evaluatedSentence = sentence.getSentenceString();
-                }
-                else if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY) {
-                    EntityInfo info = (EntityInfo) container.get(TemplateParser.ENTITY_INFO_KEY);
-                    evaluatedSentence = StringUtils.evaluateForEntityReplacements(sentence.getSentenceString(), info);
-                }
+                String evaluatedSentence = sentence.evaluate();
                 if (evaluatedSentence != null) {
                     eval.add (evaluatedSentence);
                 }

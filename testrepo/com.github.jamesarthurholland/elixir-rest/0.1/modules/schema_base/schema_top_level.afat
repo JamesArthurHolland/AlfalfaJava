@@ -8,13 +8,26 @@ defmodule ElixirRestWeb.Schema do
 
   query do
     {{ENTITIES}}
-    @desc "Get a list of all {{en_tity}} entities"
-    field :{{en_tity}}, list_of(:{{en_tity}}_type) do
-      # Resolver
-      resolve(&Resolvers.{{Entity}}Resolver.{{en_tity}}/3)
+    {{VARS}}
+    {{KEY}}@desc "Fetch a {{en_tity}} by primary key"{{/KEY}}
+    {{KEY}}field :{{en_tity}}s, type: :{{en_tity}}_type do{{/KEY}}
+    {{KEY}}  # Resolver{{/KEY}}
+    {{KEY}}  resolve(&Resolvers.{{Entity}}Resolver.fetch/3){{/KEY}}
+    {{KEY}}end{{/KEY}}
+    {{/VARS}}
+
+    {{INDICES}}
+    @desc "Get {{en_tity}} by {{in_dex}}"
+    field :{{en_tity}}, type: :{{en_tity}}_type do
+      arg(:{{in_dex}}, non_null(:string))
+      resolve(&Resolvers.{{Entity}}Resolver.fetch_by_{{in_dex}}/3)
     end
 
+    {{/INDICES}}
+
     {{/ENTITIES}}
+
+
   end
 
   mutation do

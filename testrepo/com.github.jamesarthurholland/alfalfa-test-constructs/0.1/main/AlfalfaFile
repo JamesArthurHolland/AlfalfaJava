@@ -1,0 +1,7 @@
+---
+name: com.github.jamesarthurholland/alfalfa-test-constructs
+version: "0.1"
+
+imports:
+  - name: once_test
+    location: ./

@@ -1,38 +1,29 @@
 package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
-import com.github.jamesarthurholland.alfalfa.transpiler.SentenceEvaluator;
-
 public class Sentence extends Node implements Cloneable
 {
     private String sentence;
-    private SentenceEvaluator evaluator;
     public static final String type = "SENTENCE";
 
-    public Sentence(String givenSentence)
-    {
-        this.sentence = givenSentence;
+    public Sentence(String sentence) {
+        super(Types.SENTENCE);
+        this.sentence = sentence;
     }
 
-    public Sentence(String sentence, SentenceEvaluator evaluator) {
+    public Sentence(Node left, Node right, String sentence, Context context) {
+        super(Types.SENTENCE, left, right, context);
         this.sentence = sentence;
-        this.evaluator = evaluator;
-    }
-
-    public Sentence(Node left, Node right, String sentence, SentenceEvaluator evaluator) {
-        super(left, right);
-        this.sentence = sentence;
-        this.evaluator = evaluator;
     }
 
     public boolean isInLoop() {
-        return evaluator != null;
+        return context != null;
     }
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        SentenceEvaluator evaluator = null;
-        if(this.evaluator != null) {
-            evaluator = (SentenceEvaluator) this.evaluator.clone();
+        Context context = null;
+        if(this.context != null) {
+            context = (Context) this.context.clone();
         }
         Node left = null;
         Node right = null;
@@ -43,20 +34,10 @@ public class Sentence extends Node implements Cloneable
             right = copy(this.right);
         }
 
-        return new Sentence(left, right, this.sentence, evaluator);
+        return new Sentence(left, right, this.sentence, context);
     }
 
-    public Sentence(Sentence other) {
-        this.sentence = other.sentence;
-        this.evaluator = (SentenceEvaluator) other.evaluator.clone();
 
-        if(other.left != null) {
-            this.left = copy(other.left);
-        }
-        if(other.right != null) {
-            this.right = copy(other.right);
-        }
-    }
 
     public void print() {
         System.out.println("sentence " + sentence + "\n");
@@ -83,14 +64,10 @@ public class Sentence extends Node implements Cloneable
     }
 
     public String evaluate() {
-        if (this.evaluator == null) {
+        if (this.context == null) {
             return sentence;
         }
-        return evaluator.evaluate(sentence);
+        return this.context.evaluator.evaluate(sentence);
     }
 
-    public Sentence setEvaluator(SentenceEvaluator evaluator) {
-        this.evaluator = evaluator;
-        return this;
-    }
 }

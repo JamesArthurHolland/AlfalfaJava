@@ -43,6 +43,18 @@ public class Mapping {
         return Objects.hash(parentEntityName, childEntityName, fromVarName, toVarName, type);
     }
 
+    @Override
+    protected Object clone() {
+
+        return new Mapping(
+            this.parentEntityName,
+            this.childEntityName,
+            this.fromVarName,
+            this.toVarName,
+            this.type
+        );
+    }
+
     public String getParentEntityName() {
         return parentEntityName;
     }

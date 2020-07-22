@@ -1,5 +1,6 @@
 package com.github.jamesarthurholland.alfalfa.fileHandlers;
 
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.Container;
 import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TemplateParser;
 import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TranspileResult;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
@@ -10,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 
 public class TemplateFileHandler
@@ -41,8 +41,9 @@ public class TemplateFileHandler
             try {
                 ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
 
-                LinkedHashMap<String, Object> container = new LinkedHashMap<>();
+                Container container = new Container();
                 container.put(TemplateParser.ENTITY_INFO_KEY, entityInfo);
+                container.put(TemplateParser.SCHEMA_KEY, schema);
 
                 TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern); // TODO pass pattern here and do conditional based on variable mode
                 TemplateParser.writeCompilerResultToFile(fileOutputDirectoryPath.toString(), transpileResult);
@@ -61,7 +62,7 @@ public class TemplateFileHandler
         try {
             ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
 
-            LinkedHashMap<String, Object> container = new LinkedHashMap<>();
+            Container container = new Container();
             container.put(TemplateParser.SCHEMA_KEY, schema);
             TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern); // TODO pass pattern here and do conditional based on variable mode
             TemplateParser.writeCompilerResultToFile(fileOutputDirectoryPath.toString(), transpileResult);

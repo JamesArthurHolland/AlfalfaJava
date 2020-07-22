@@ -1,7 +1,5 @@
 package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
-import com.google.gson.Gson;
-
 public class FoldableFactory
 {
     public static Foldable newFoldable(Foldable.Types type) {
@@ -10,6 +8,8 @@ public class FoldableFactory
                 return new VarLoop();
             case ENTITY_LOOP:
                 return new EntityLoop();
+            case INDICES_LOOP:
+                return new IndicesLoop();
             case VAR_CONDITIONAL:
                 // TODO
                 break;

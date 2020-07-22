@@ -5,7 +5,6 @@ import com.github.jamesarthurholland.alfalfa.transpiler.FoldableEvaluator;
 import com.github.jamesarthurholland.alfalfa.transpiler.SentenceSingleEvaluator;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 public class EntityLoop extends Foldable implements FoldableEvaluator
 {
@@ -42,7 +41,7 @@ public class EntityLoop extends Foldable implements FoldableEvaluator
 //    }
 
     @Override
-    public ArrayList<Node> evaluate(LinkedHashMap<String, Object> container) {
+    public ArrayList<Node> evaluate(Container container) {
         ArrayList<Node> nodes = new ArrayList<>();
 
         Schema schema = (Schema) container.get(TemplateParser.SCHEMA_KEY);
@@ -50,8 +49,11 @@ public class EntityLoop extends Foldable implements FoldableEvaluator
         schema.getEntityInfo()
                 .forEach(entityInfo -> {
                     SentenceSingleEvaluator evaluator = new SentenceSingleEvaluator(entityInfo);
+                    Container newContainer = (Container) container.clone();
+                    newContainer.put(TemplateParser.ENTITY_INFO_KEY, entityInfo);
+                    Context context = new Context(newContainer, evaluator);
                     EntityLoop copy = new EntityLoop(this);
-                    ArrayList<Node> sentenceEvaluatorNodes = addSentenceEvaluatorToLoopChildNodes(copy, evaluator);
+                    ArrayList<Node> sentenceEvaluatorNodes = addContextToChildNodes(copy, context);
                     nodes.addAll(sentenceEvaluatorNodes);
                 });
 

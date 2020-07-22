@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Stack;
 import java.util.regex.Matcher;
 
 public class TemplateParser
@@ -114,13 +115,19 @@ public class TemplateParser
 
         int nestLevel = 0;
 
+        Stack<Foldable.Types> typesStack = new Stack<>();
+        typesStack.push(type);
+
         nestLevel++;
         while (nestLevel != 0) {
             String subLine = lines.get(0);
-            if(isValidLoopOpener(subLine).isPresent()) {
+            Optional<Foldable.Types> typeIfValidOpener = isValidLoopOpener(subLine);
+            if(typeIfValidOpener.isPresent()) {
+                typesStack.push(typeIfValidOpener.get());
                 nestLevel++;
             }
-            if (isValidLoopCloser(subLine, type)) {
+            if (isValidLoopCloser(subLine, typesStack.peek())) {
+                typesStack.pop();
                 nestLevel--;
             }
             loopLines.add (lines.get(0)); // TODO use remove, it passes back
@@ -136,7 +143,10 @@ public class TemplateParser
 
     public Optional<Foldable.Types> isValidLoopOpener(String line) // TODO change to Foldable, not loop, in name
     {
-        for (Foldable.Types type : Foldable.Types.values()) {
+        for (Foldable.Types type : Node.Types.values()) {
+            if(type == Node.Types.SENTENCE) {
+                continue;
+            }
             java.util.regex.Pattern varsLoopOpenerPattern = Foldable.FOLDABLE_OPENERS.get(type); // TODO there was $ at end. assumed mistake. inspect
             Matcher matcher = varsLoopOpenerPattern.matcher(line);
             if (matcher.matches()) {

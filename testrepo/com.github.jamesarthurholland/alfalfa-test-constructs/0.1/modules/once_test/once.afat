@@ -1,0 +1,15 @@
+{{ALFALFA -o once.php}}
+
+{{ENTITIES}}
+entity is {{en_tity}}
+{{INDICES}}
+Index {{in_dex}}
+{{/INDICES}}
+{{/ENTITIES}}
+
+
+  - name: entity
+    location: ./
+    mode: for_each
+    folder_swaps:
+      entity: "{{en_tity}}"
