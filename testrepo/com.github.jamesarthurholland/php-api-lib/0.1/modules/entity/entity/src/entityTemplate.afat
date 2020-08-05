@@ -1,0 +1,35 @@
+{{ALFALFA -o {{Entity}}Entity.php}}
+<?php
+
+namespace {{NAMESPACE}}\{{Entity}};
+
+use {{NAMESPACE}}\Stdlib\EntityTrait;
+
+
+class {{Entity}}Entity
+{
+{{VARS}}
+    public ${{var}};
+{{/VARS}}
+
+    public function __construct(
+    {{VARS}}
+        {{KEY}}${{var}},{{/KEY}}
+        {{NOT-KEY NOT-LAST}}${{var}},{{/NOT-KEY}}
+        {{NOT-KEY LAST}}${{var}}{{/NOT-KEY}}
+	{{/VARS}}
+    ) {
+    {{VARS}}
+		$this->{{var}} = ${{var}};
+	{{/VARS}}
+    }
+
+    public static function toFieldsArray() {
+        return [
+            {{VARS}}
+            '{{var}}',
+            {{/VARS}}
+        ];
+    }
+
+}

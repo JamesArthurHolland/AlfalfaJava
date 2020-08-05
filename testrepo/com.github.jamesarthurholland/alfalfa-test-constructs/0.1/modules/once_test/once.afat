@@ -8,8 +8,3 @@ Index {{in_dex}}
 {{/ENTITIES}}
 
 
-  - name: entity
-    location: ./
-    mode: for_each
-    folder_swaps:
-      entity: "{{en_tity}}"

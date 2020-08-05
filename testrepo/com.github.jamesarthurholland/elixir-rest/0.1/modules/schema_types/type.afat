@@ -4,17 +4,17 @@ defmodule ElixirRestWeb.Schema.Types.{{Entity}}Type do
 
   object :{{en_tity}}_type do
     {{VARS}}
-    field(:{{var}}, :{{type}})
+    field(:{{v_ar}}, :{{type}})
 	{{/VARS}}
   end
 
   # TODO validation of nullables
   input_object :{{en_tity}}_input_type do
     {{VARS}}
-    {{NOT-KEY NOT-LAST}}field(:{{var}}, :{{type}}){{/NOT-KEY}}
+    {{NOT-KEY NOT-LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
 	{{/VARS}}
 	{{VARS}}
-    {{NOT-KEY LAST}}field(:{{var}}, :{{type}}){{/NOT-KEY}}
+    {{NOT-KEY LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
 	{{/VARS}}
   end
 end

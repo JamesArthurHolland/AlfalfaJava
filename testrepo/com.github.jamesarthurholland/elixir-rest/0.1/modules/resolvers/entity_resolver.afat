@@ -2,14 +2,22 @@
 defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
   alias ElixirRest.{{Entity}}
 
-  {{VARS}}
-  {{KEY}}def {{fetch}}(_, %{{{v_ar}}: {{v_ar}}}, _) do{{/KEY}}
-  {{/VARS}}
-    {:ok, {{Entity}}.fetch({{v_ar}})}
+  def fetch(_, %{id: id}, _) do
+    {{en_tity}} = {{Entity}}.fetch(id)
+    case {{en_tity}} do
+      nil -> {:error, nil}
+      _   -> {:ok, {{en_tity}}}
   end
 
-  def register_{{en_tity}}(_, %{input: input}, _) do
+  def create_{{en_tity}}(_, %{input: input}, _) do
     {{Entity}}.create_{{en_tity}}(input)
+  end
+
+  def update(%{id: id, {{en_tity}}: update_users_data}_params, _info) do
+    case fetch(%{id: id}, _info) do
+     {:ok, {{en_tity}}} -> {{en_tity}} |> {{Entity}}.update_{{en_tity}}({{en_tity}}_params)
+     {:error, _} -> {:error, "Failed to update {{en_tity}}"}
+    end
   end
 
   {{INDICES}}

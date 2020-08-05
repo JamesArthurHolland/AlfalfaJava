@@ -8,17 +8,16 @@ defmodule ElixirRestWeb.Schema do
 
   query do
     {{ENTITIES}}
-    {{VARS}}
-    {{KEY}}@desc "Fetch a {{en_tity}} by primary key"{{/KEY}}
-    {{KEY}}field :{{en_tity}}s, type: :{{en_tity}}_type do{{/KEY}}
-    {{KEY}}  # Resolver{{/KEY}}
-    {{KEY}}  resolve(&Resolvers.{{Entity}}Resolver.fetch/3){{/KEY}}
-    {{KEY}}end{{/KEY}}
-    {{/VARS}}
+    @desc "Fetch a {{en_tity}} by id"
+    field :{{en_tity}}, type: :{{en_tity}}_type do
+      # Resolver
+      arg(:id, non_null(:string))
+      resolve(&Resolvers.{{Entity}}Resolver.fetch/3)
+    end
 
     {{INDICES}}
     @desc "Get {{en_tity}} by {{in_dex}}"
-    field :{{en_tity}}, type: :{{en_tity}}_type do
+    field :{{en_tity}}_by_{{in_dex}}, type: :{{en_tity}}_type do
       arg(:{{in_dex}}, non_null(:string))
       resolve(&Resolvers.{{Entity}}Resolver.fetch_by_{{in_dex}}/3)
     end

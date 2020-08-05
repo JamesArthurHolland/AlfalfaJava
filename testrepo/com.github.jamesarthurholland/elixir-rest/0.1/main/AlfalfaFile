@@ -9,6 +9,9 @@ imports:
     folder_swaps:
       ecto-output: "{{en_tity}}"
 
+  - name: dockerfile
+    location: ./
+
   - name: resolvers
     location: ./lib/elixir_rest_web/resolvers/
     mode: for_each

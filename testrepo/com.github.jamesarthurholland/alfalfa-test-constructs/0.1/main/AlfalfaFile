@@ -3,5 +3,8 @@ name: com.github.jamesarthurholland/alfalfa-test-constructs
 version: "0.1"
 
 imports:
-  - name: once_test
+  - name: entity
     location: ./
+    mode: for_each
+    folder_swaps:
+      entity: "{{en_tity}}"

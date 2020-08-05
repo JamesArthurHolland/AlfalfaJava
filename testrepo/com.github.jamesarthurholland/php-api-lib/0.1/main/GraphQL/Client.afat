@@ -1,0 +1,26 @@
+{{ALFALFA -o Client.php}}
+<?php
+
+namespace {{Namespace}}\GraphQLClient;
+
+use GraphQL\Query;
+
+class Client
+{
+    public static function fetchByArgs($entity, $vars, $args, $varValues, $selectionSet) {
+        $client = new \GraphQL\Client(
+            'http://0.0.0.0:4000/api/graphql'
+        );
+
+        $gql = (new Query($entity))
+            ->setVariables($vars)
+            ->setArguments($args)
+            ->setSelectionSet(
+                $selectionSet
+            );
+
+        $results = $client->runQuery($gql, true, $varValues);
+
+        return $results->getData()[$entity];
+    }
+}

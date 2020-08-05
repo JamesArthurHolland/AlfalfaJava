@@ -13,7 +13,7 @@ defmodule ElixirRestWeb.{{Entity}}View do
   def render("{{en_tity}}.json", %{{{en_tity}}: {{en_tity}}}) do
     %{
       {{VARS}}
-      {{var}}: {{en_tity}}.{{var}},
+      {{v_ar}}: {{en_tity}}.{{v_ar}},
       {{/VARS}}
     }
   end

@@ -1,0 +1,17 @@
+{{ALFALFA -o composer.json}}
+{
+    "name": "{{NAMESPACE}}/{{Entity}}",
+    "description": "A library to handle connections to graphql for {{Entity}}",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jamie Holland",
+            "email": "jholland@dnsfilter.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"{{NAMESPACE}}\\{{Entity}}\\": "src/"}
+    },
+    "require": {}
+}

@@ -1,5 +1,10 @@
 {{ALFALFA -o {{Entity}}.php}}
 
-{{INDICES}}
-{{INDEX}}
-{{/INDICES}}
+entity {{en_tity}}
+{{VARS}}
+{{v_ar}}
+
+
+{{/VARS}}
+
+{{entity}}

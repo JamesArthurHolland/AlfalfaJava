@@ -38,7 +38,20 @@ public class TreeEvaluator
             Node currentNode = nodeStack.pop();
             if (currentNode instanceof Sentence) {
                 Sentence sentence = (Sentence) currentNode;
-                String evaluatedSentence = sentence.evaluate();
+                String evaluatedSentence = null;
+                if(sentence.isInLoop()) {
+                    evaluatedSentence = sentence.evaluate();
+                }
+                else if(pattern.mode == Pattern.ImportMode.ONCE_FOR_ENTITY) {
+                    evaluatedSentence = sentence.getSentenceString();
+                }
+                else if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY) {
+                    EntityInfo info = (EntityInfo) container.get(TemplateParser.ENTITY_INFO_KEY);
+                    evaluatedSentence = StringUtils.evaluateForEntityReplacements(sentence.getSentenceString(), info);
+                    evaluatedSentence = StringUtils.evaluateForNamespace(evaluatedSentence, info);
+                }
+
+
                 if (evaluatedSentence != null) {
                     eval.add (evaluatedSentence);
                 }
