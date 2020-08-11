@@ -71,13 +71,11 @@ public class Alfalfa {
                     }
                     else if (Files.isDirectory(fullPath)) {
                         DirectoryFileHandler.handle(workingDirectory, config, pattern, fullPath, fileAbsoluteOutputPath.get());
-//                        else {
-//                            try {
-//                                Files.createDirectories(fileAbsoluteOutputPath.get());
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
+                        try {
+                            Files.createDirectories(fileAbsoluteOutputPath.get());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                     else if( FileUtils.isEmptyDir(fullPath) || ! Files.isDirectory(fullPath) && !FileUtils.isAlfalfaFile(fullPath)) {
                         try {

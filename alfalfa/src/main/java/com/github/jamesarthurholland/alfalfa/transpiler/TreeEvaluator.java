@@ -8,6 +8,7 @@ import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityI
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class TreeEvaluator
 {
@@ -22,6 +23,10 @@ public class TreeEvaluator
         }
 
         ArrayList<String> processedFileLines = TreeEvaluator.evaluateTree(parseTree, container, pattern);
+        processedFileLines = processedFileLines
+            .stream()
+            .map(pattern::injectVarsToLine)
+            .collect(Collectors.toCollection(ArrayList::new));
         return new TranspileResult(fileName, processedFileLines);
     }
 

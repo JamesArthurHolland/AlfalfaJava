@@ -7,14 +7,15 @@ defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
     case {{en_tity}} do
       nil -> {:error, nil}
       _   -> {:ok, {{en_tity}}}
+    end
   end
 
   def create_{{en_tity}}(_, %{input: input}, _) do
     {{Entity}}.create_{{en_tity}}(input)
   end
 
-  def update(%{id: id, {{en_tity}}: update_users_data}_params, _info) do
-    case fetch(%{id: id}, _info) do
+  def update_{{en_tity}}(%{id: id, {{en_tity}}: {{en_tity}}_params}, _info) do
+    case fetch(_, %{id: id}, _) do
      {:ok, {{en_tity}}} -> {{en_tity}} |> {{Entity}}.update_{{en_tity}}({{en_tity}}_params)
      {:error, _} -> {:error, "Failed to update {{en_tity}}"}
     end

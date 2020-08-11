@@ -26,10 +26,10 @@ class {{Entity}}Service
         return $mapper->fromArray($json);
     }
 
-    public static function save($entity) {
+    public static function create($entity) {
         $mutation = (new Mutation('create{{Entity}}'))
             ->setVariables([new Variable('{{entity}}', '{{Entity}}InputObject', true)])
-            ->setArguments(['{{entity}}Object' => '${{entity}}']);
+            ->setArguments(['{{entity}}InputObject' => '${{entity}}']);
 
         $variables = ['{{entity}}' => [
             {{VARS}}

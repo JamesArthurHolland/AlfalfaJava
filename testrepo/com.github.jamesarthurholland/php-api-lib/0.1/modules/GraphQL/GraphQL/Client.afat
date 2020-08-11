@@ -1,7 +1,7 @@
 {{ALFALFA -o Client.php}}
 <?php
 
-namespace {{Namespace}}\GraphQLClient;
+namespace {{PROJECT}}\GraphQLClient;
 
 use GraphQL\Query;
 

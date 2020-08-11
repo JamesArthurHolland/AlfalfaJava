@@ -37,6 +37,13 @@ defmodule ElixirRestWeb.Schema do
       resolve(&Resolvers.{{Entity}}Resolver.create_{{en_tity}}/3)
     end
 
+    @desc "Update a {{en_tity}}"
+    field :update_{{en_tity}}, type: :{{en_tity}}_type do
+      arg(:id, non_null(:string))
+      arg(:{{en_tity}}, non_null(:{{en_tity}}_input_type))
+      resolve(&Resolvers.{{Entity}}Resolver.update_{{en_tity}}/2)
+    end
+
     {{/ENTITIES}}
   end
 
