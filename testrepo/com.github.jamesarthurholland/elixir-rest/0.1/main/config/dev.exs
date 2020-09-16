@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :elixir_rest, ElixirRestWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: 80],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -39,8 +39,9 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :elixir_rest, ElixirRest.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "homestead",
-  password: "secret",
-  database: "homestead",
-  hostname: "localhost",
-  pool_size: 10
+  username: {:system, "RDS_USERNAME"},
+  password: {:system, "RDS_PASSWORD"},
+  database: {:system, "RDS_DATABASE"},
+  hostname: {:system, "RDS_HOST"},
+  pool_size: {:system, "RDS_POOL_SIZE", 10}
+

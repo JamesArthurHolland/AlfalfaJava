@@ -9,6 +9,8 @@ defmodule ElixirRestWeb.Router do
   scope "/" do ElixirRestWeb
     pipe_through(:api)
 
+    forward "/health", HealthCheckup
+
     {{ENTITIES}}
     resources "/{{en_tity}}", ElixirRestWeb.{{Entity}}Controller
     {{/ENTITIES}}
