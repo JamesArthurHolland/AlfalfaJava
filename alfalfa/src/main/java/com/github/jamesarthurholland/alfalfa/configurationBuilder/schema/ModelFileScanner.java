@@ -18,17 +18,23 @@ public class ModelFileScanner
         visibilityForLetterMap.put("u", Variable.PUBLIC);
     }
 
+    private static boolean isTableDefinition(String[] lineArray) {
+        if(lineArray[0].equals("t")) {
+            return true;
+        }
+        return false;
+    }
 
     private static boolean isVariableDefinition(String[] lineArray) throws MalformedVariableLineException
     {
-        if(! (lineArray[0].equals("k") || lineArray[0].equals("v")) ) {
-            throw new MalformedVariableLineException();
+        if (lineArray[0].equals("k") || lineArray[0].equals("v")) {
+            return true;
         }
-        if( ! (lineArray[1].equals("i") || lineArray[1].equals("o") || lineArray[1].equals("u")) ) {
-            throw new MalformedVariableLineException();
-        }
+//        if( ! (lineArray[1].equals("i") || lineArray[1].equals("o") || lineArray[1].equals("u") ) ) {
+//            throw new MalformedVariableLineException();
+//        }
 
-        return true;
+        return false;
     }
 
     public static boolean isMappingLine(String[] lineArray) {
@@ -123,8 +129,16 @@ public class ModelFileScanner
                 }
             }
 
+            Optional<String> tableName = Files.lines(path)
+                    .map(line -> line.split("[ ]+"))
+                    .filter(ModelFileScanner::isTableDefinition)
+                    .findFirst()
+                    .map(lineArray-> {
+                        return lineArray[1];
+                    });
+
             LinkedHashSet<Variable> variables = Files.lines(path)
-                .skip(1)
+                .skip(1) // TODO is this needed?
                 .map(line -> line.split("[ ]+"))
                 .filter(ModelFileScanner::isVariableDefinition)
                 .map(lineArray -> {
@@ -141,7 +155,7 @@ public class ModelFileScanner
                 .collect(Collectors.toCollection(LinkedHashSet::new)); // TODO create entity at return statement, encapsulation
 
 
-            return new EntityInfo(entityName, namespace, variables);
+            return new EntityInfo(entityName, namespace, tableName.get(), variables);
         } catch (MalformedVariableLineException e) {
             e.printStackTrace();
         } catch (IOException e) {

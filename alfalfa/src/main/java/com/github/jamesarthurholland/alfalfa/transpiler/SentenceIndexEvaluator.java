@@ -43,6 +43,8 @@ public class SentenceIndexEvaluator implements Cloneable, SentenceEvaluator
             generatedSentence = replaceVisibilityInString(givenVar, generatedSentence);
         }
         generatedSentence = StringUtils.evaluateForNamespace(generatedSentence, entityInfo);
+        generatedSentence = StringUtils.evaluateForTableReplacements(generatedSentence, entityInfo);
+
         return generatedSentence;
     }
 

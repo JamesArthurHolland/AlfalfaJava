@@ -2,9 +2,10 @@
 # Docker entrypoint script.
 
 # Wait until Postgres is ready
-while ! pg_isready -q -h $RDS_HOST -p $RDS_PORT -U $RDS_USERNAME
+#while ! pg_isready -q -h $RDS_HOST -p $RDS_PORT -U $RDS_USERNAME
+while ! mysqladmin ping -h $MYSQL_HOST --port=$MYSQL_PORT
 do
-  echo "$(date) - waiting for database to start $RDS_HOST $RDS_PORT. User: $RDS_USERNAME"
+  echo "$(date) - waiting for database to start $MYSQL_HOST $MYSQL_PORT. User: $MYSQL_USERNAME"
   sleep 2
 done
 

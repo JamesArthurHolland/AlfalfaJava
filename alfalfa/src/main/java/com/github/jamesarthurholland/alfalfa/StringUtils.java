@@ -56,6 +56,23 @@ public class StringUtils {
         return outputString;
     }
 
+    public static String evaluateForTableReplacements (String sentence, EntityInfo entityInfo)
+    {
+        if(entityInfo.getTableName().isPresent()) {
+            String tableName = entityInfo.getTableName().get();
+            String outputString = sentence.replaceAll("\\{\\{table\\}\\}", tableName);
+            outputString = outputString.replaceAll("\\{\\{ta_ble\\}\\}", camelToLowerUnderScore(tableName));
+            outputString = outputString.replaceAll("\\{\\{TA_BLE\\}\\}", camelToUpperUnderScore(tableName));
+            outputString = outputString.replaceAll("\\{\\{Table\\}\\}", uppercaseFirst(tableName));
+
+            return outputString;
+        }
+
+        return sentence;
+    }
+
+
+
     public static Path processPathEntityReplacement(Path fileOutputDirectoryPath, EntityInfo info) {
         return Paths.get(StringUtils.evaluateForEntityReplacements(fileOutputDirectoryPath.toString(), info));
     }

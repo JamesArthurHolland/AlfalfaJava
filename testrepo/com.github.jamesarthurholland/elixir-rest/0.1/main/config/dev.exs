@@ -38,10 +38,11 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :elixir_rest, ElixirRest.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: {:system, "RDS_USERNAME"},
-  password: {:system, "RDS_PASSWORD"},
-  database: {:system, "RDS_DATABASE"},
-  hostname: {:system, "RDS_HOST"},
-  pool_size: {:system, "RDS_POOL_SIZE", 10}
+#  adapter: Ecto.Adapters.Postgres,
+  adapter: Ecto.Adapters.MySQL,
+  username: {:system, "MYSQL_USERNAME"},
+  password: {:system, "MYSQL_PASSWORD"},
+  database: {:system, "MYSQL_DATABASE"},
+  hostname: {:system, "MYSQL_HOST"},
+  pool_size: {:system, "MYSQL_POOL_SIZE", 10}
 

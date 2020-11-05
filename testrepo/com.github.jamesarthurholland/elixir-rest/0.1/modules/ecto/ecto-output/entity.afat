@@ -7,7 +7,7 @@ defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
   {{KEY}}@primary_key {:id, :string, []}{{/KEY}}
   {{KEY}}@derive {Phoenix.Param, key: :id}{{/KEY}}
   {{/VARS}}
-  schema "{{en_tity}}" do
+  schema "{{table}}" do
     {{VARS}}
     {{NOT-KEY NOT-LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
 	{{/VARS}}

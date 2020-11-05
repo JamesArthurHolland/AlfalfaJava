@@ -20,7 +20,7 @@ defmodule ElixirRest.Mixfile do
   def application do
     [
       mod: {ElixirRest.Application, []},
-      extra_applications: [:confex, :logger, :runtime_tools]
+      extra_applications: [:confex, :logger, :runtime_tools, :mariaex] # mariaex is for mysql, remove for postgres
     ]
   end
 
@@ -37,7 +37,8 @@ defmodule ElixirRest.Mixfile do
       {:phoenix, "~> 1.3.4"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
-      {:postgrex, ">= 0.0.0"},
+      {:mariaex, "~> 0.8.2", override: true},
+#     {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:absinthe, "~> 1.4.13"},

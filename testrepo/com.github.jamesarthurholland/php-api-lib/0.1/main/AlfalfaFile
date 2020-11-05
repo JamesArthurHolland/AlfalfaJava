@@ -4,10 +4,19 @@ version: "0.1"
 
 imports:
   - name: entity
-    location: ./
+    location: ./lib/
     mode: for_each
     folder_swaps:
       entity: "{{en_tity}}"
 
   - name: GraphQL
+    location: ./
+
+  - name: DI
+    location: ./DI
+    mode: for_each
+    folder_swaps:
+      diSwap: "{{en_tity}}"
+
+  - name: composer
     location: ./

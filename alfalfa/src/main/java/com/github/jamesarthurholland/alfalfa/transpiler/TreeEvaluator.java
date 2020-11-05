@@ -54,6 +54,7 @@ public class TreeEvaluator
                     EntityInfo info = (EntityInfo) container.get(TemplateParser.ENTITY_INFO_KEY);
                     evaluatedSentence = StringUtils.evaluateForEntityReplacements(sentence.getSentenceString(), info);
                     evaluatedSentence = StringUtils.evaluateForNamespace(evaluatedSentence, info);
+                    evaluatedSentence = StringUtils.evaluateForTableReplacements(evaluatedSentence, info);
                 }
 
 

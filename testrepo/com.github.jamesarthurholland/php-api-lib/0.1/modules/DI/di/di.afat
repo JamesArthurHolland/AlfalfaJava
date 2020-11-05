@@ -1,0 +1,10 @@
+{{ALFALFA -o {{Entity}}DI.php}}
+<?php
+
+use {{NAMESPACE}}\{{Entity}}Mapper;
+
+$service = new {{Entity}}Service();
+
+return [
+    '{{Entity}}Service' => $service
+];

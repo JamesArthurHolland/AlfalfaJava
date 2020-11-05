@@ -1,17 +1,21 @@
 {{ALFALFA -o composer.json}}
 {
-    "name": "{{NAMESPACE}}/{{Entity}}",
+    "name": "{{COMPANY}}/{{PHP_LIB}}",
     "description": "A library to handle connections to graphql for {{Entity}}",
     "type": "library",
     "authors": [
         {
-            "name": "Jamie Holland",
-            "email": "jholland@dnsfilter.com"
+            "name": "",
+            "email": ""
         }
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": {"{{NAMESPACE}}\\{{Entity}}\\": "src/"}
+        "psr-4": {
+            "{{PHP_PSR4_NAME}}\\": "{{PHP_LIB}}"
+        }
     },
-    "require": {}
+    "require": {
+        "php-di/php-di": "^5.4.6"
+    }
 }

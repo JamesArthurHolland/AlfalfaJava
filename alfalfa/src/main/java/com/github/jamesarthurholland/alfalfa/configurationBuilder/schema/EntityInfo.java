@@ -6,16 +6,19 @@ public class EntityInfo implements Cloneable
 {
     protected String name;
     protected String nameSpace;
+    protected Optional<String> tableName;
     protected LinkedHashSet<Variable> variables = new LinkedHashSet<>();
 
-    public EntityInfo(String entity, LinkedHashSet<Variable> variables) {
+    public EntityInfo(String entity, String tableName, LinkedHashSet<Variable> variables) {
         this.name = entity;
+        this.tableName = Optional.ofNullable(tableName);
         this.variables = variables;
     }
 
-    public EntityInfo(String entity, String nameSpace, LinkedHashSet<Variable> variables) { // TODO remove
+    public EntityInfo(String entity, String nameSpace, String tableName, LinkedHashSet<Variable> variables) { // TODO remove
         this.name = entity;
         this.nameSpace = nameSpace;
+        this.tableName = Optional.ofNullable(tableName);
         this.variables = variables;
     }
 
@@ -28,7 +31,7 @@ public class EntityInfo implements Cloneable
             this.variables.add(new Variable(variable));
         });
 
-        return new EntityInfo(this.name, this.nameSpace, variables);
+        return new EntityInfo(this.name, this.nameSpace, this.tableName.get(), variables);
     }
 
     public String getPrimaryKey(EntityInfo info) {
@@ -69,13 +72,14 @@ public class EntityInfo implements Cloneable
         EntityInfo entityInfo = (EntityInfo) o;
         // field comparison
         return name.equals(entityInfo.name)
+                && tableName.equals(entityInfo.tableName)
                 && nameSpace.equals(entityInfo.nameSpace)
                 && variables.equals(entityInfo.variables);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, nameSpace, variables);
+        return Objects.hash(name, nameSpace, tableName, variables);
     }
 
     public Set<Variable> getVariables()
@@ -103,5 +107,7 @@ public class EntityInfo implements Cloneable
         return nameSpace;
     }
 
-
+    public Optional<String> getTableName() {
+        return tableName;
+    }
 }

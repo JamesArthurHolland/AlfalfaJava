@@ -20,6 +20,7 @@ public class SentenceSingleEvaluator implements Cloneable, SentenceEvaluator
     {
         String generatedSentence = StringUtils.evaluateForEntityReplacements(sentenceToEvaluate, this.entityInfo);
         generatedSentence = StringUtils.evaluateForNamespace(generatedSentence, entityInfo);
+        generatedSentence = StringUtils.evaluateForTableReplacements(generatedSentence, entityInfo);
 
         return generatedSentence;
     }

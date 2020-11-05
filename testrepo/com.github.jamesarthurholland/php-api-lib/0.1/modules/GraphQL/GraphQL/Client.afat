@@ -9,7 +9,7 @@ class Client
 {
     public static function fetchByArgs($entity, $vars, $args, $varValues, $selectionSet) {
         $client = new \GraphQL\Client(
-            'http://0.0.0.0:4000/api/graphql'
+            'http://0.0.0.0:80/api/graphql' // TODO switch to Env var
         );
 
         $gql = (new Query($entity))

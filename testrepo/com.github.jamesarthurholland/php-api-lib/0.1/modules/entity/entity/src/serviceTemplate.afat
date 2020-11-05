@@ -26,6 +26,36 @@ class {{Entity}}Service
         return $mapper->fromArray($json);
     }
 
+    public static function save($entity) {
+        if($entity->id == null) {
+            return $this->create($entity);
+        }
+        return $this->update($entity);
+    }
+
+    public static function update($entity) {
+        {{VARS}}
+        {{KEY}}$id = $entity->{{var}};{{/KEY}}
+        {{/VARS}}
+        $mutation = (new Mutation('update{{Entity}}'))
+            ->setVariables([new Variable('{{entity}}', '{{Entity}}InputObject', true)])
+            ->setArguments(['id' => $id])
+            ->setArguments(['{{entity}}InputObject' => '${{entity}}']);
+
+        $variables = ['{{entity}}' => [
+            {{VARS}}
+            {{KEY}}{{var}} => $entity->{{var}},{{/KEY}}
+            {{NOT-KEY NOT-LAST}}{{var}} => $entity->{{var}},{{/NOT-KEY}}
+            {{NOT-KEY LAST}}{{var}} => $entity->{{var}}{{/NOT-KEY}}
+            {{/VARS}}
+        ]];
+        $client->runQuery(
+            $mutation,
+            true,
+            $variables
+        );
+    }
+
     public static function create($entity) {
         $mutation = (new Mutation('create{{Entity}}'))
             ->setVariables([new Variable('{{entity}}', '{{Entity}}InputObject', true)])
