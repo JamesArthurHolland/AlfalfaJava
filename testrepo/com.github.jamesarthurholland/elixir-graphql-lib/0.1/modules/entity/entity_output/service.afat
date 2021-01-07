@@ -1,0 +1,84 @@
+{{ALFALFA -o {{en_tity}}_service.ex}}
+defmodule {{PROJECT}}.{{Entity}}Service do
+  require Logger
+
+  alias {{PROJECT}}.{{Entity}}Entity
+
+  def all() do
+
+  end
+
+  def fetch(id) do
+    response = Neuron.query("""
+      {{VARS}}
+      {{KEY}}query ($id: String!) { {{/KEY}}
+        {{KEY}}{{entity}}({{var}}: ${{var}}) { {{/KEY}}
+      {{/VARS}}
+          {{VARS}}
+          {{KEY}}{{var}}{{/KEY}}
+          {{NOT-KEY NOT-LAST}}{{var}}{{/NOT-KEY}}
+          {{/VARS}}
+        }
+      }
+    """,
+      %{id: id}
+    )
+
+    case response do
+      {:ok, response} ->
+        response.body["data"]["{{entity}}"]
+      {:error, error} -> Logger.debug(error.error)
+    end
+  end
+
+  def create({{en_tity}}_params) do
+      response = Neuron.query("""
+        mutation create{{Entity}}($input: {{Entity}}InputType!) {
+          create{{Entity}}(input: $input) {
+            {{VARS}}
+            {{KEY}}{{var}}{{/KEY}}
+            {{NOT-KEY NOT-LAST}}{{var}}{{/NOT-KEY}}
+            {{/VARS}}
+          }
+        }
+      """,
+      %{
+        input: {{en_tity}}_params
+      }
+    )
+
+    case response do
+      {:ok, response} ->
+        {:ok, response.body["data"]["create{{Entity}}"]}
+      {:error, error} -> {:error, error}
+    end
+  end
+
+  {{INDICES}}
+  def fetch_by_{{in_dex}}({{in_dex}}) do
+    response = Neuron.query("""
+      query (${{index}}: String!) {
+        {{entity}}By{{Index}}({{index}}: ${{index}}) {
+          {{VARS}}
+          {{KEY}}{{var}}{{/KEY}}
+          {{NOT-KEY NOT-LAST}}{{var}}{{/NOT-KEY}}
+          {{/VARS}}
+      }
+    """,
+      %{{{index}}: {{in_dex}}}
+    )
+
+    case response do
+      {:ok, response} ->
+        {{en_tity}} = response.body["data"]["{{entity}}By{{Index}}"]
+        {:ok, {{en_tity}}}
+      {:error, error} ->
+        Logger.debug("In {{entity}}Service fetch_by_{{in_dex}}")
+        Logger.error(error)
+        {:error, nil}
+    end
+  end
+
+  {{/INDICES}}
+
+end

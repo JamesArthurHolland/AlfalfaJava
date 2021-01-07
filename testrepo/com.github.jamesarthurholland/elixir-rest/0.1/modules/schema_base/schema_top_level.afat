@@ -17,7 +17,7 @@ defmodule ElixirRestWeb.Schema do
 
     {{INDICES}}
     @desc "Get {{en_tity}} by {{in_dex}}"
-    field :{{en_tity}}_by_{{in_dex}}, type: :{{en_tity}}_type do
+    field :{{en_tity}}_by_{{in_dex}}, type: list_of(:{{en_tity}}_type) do
       arg(:{{in_dex}}, non_null(:string))
       resolve(&Resolvers.{{Entity}}Resolver.fetch_by_{{in_dex}}/3)
     end

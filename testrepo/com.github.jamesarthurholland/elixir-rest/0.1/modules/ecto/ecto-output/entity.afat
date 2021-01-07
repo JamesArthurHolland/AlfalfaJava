@@ -15,7 +15,8 @@ defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
     {{NOT-KEY LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
 	{{/VARS}}
 
-    timestamps()
+    timestamps(inserted_at: :created_at)
+
   end
 
   @doc false

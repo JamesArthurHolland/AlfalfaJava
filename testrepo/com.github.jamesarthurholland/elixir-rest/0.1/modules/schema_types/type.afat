@@ -1,6 +1,7 @@
 {{ALFALFA -o {{en_tity}}_type.ex}}
 defmodule ElixirRestWeb.Schema.Types.{{Entity}}Type do
   use Absinthe.Schema.Notation
+  import_types Absinthe.Type.Custom
 
   object :{{en_tity}}_type do
     {{VARS}}

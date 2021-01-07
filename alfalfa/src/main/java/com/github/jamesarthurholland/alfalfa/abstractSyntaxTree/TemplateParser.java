@@ -2,9 +2,6 @@ package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
 import com.github.jamesarthurholland.alfalfa.NoPatternDirectoryException;
 import com.github.jamesarthurholland.alfalfa.PatternDirectoryEmptyException;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderHandler;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderValidationResponse;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.InvalidHeaderException;
 
 import java.io.*;
 import java.net.URL;
@@ -13,25 +10,13 @@ import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Matcher;
 
-public class TemplateParser
+public class TemplateParser extends BaseTemplateParser
 {
     public final static String ENTITY_INFO_KEY = "ENTITY_INFO";
     public final static String SCHEMA_KEY = "SCHEMA";
 
-    private ArrayList<String> templateLines;
-    private HeaderValidationResponse header;
-
-    public TemplateParser(ArrayList<String> lines)
-    {
-        HeaderValidationResponse headerValidationResponse = HeaderHandler.validateHeader(lines.get(0));
-        if(headerValidationResponse.isValidHeader()) {
-            lines.remove(0);
-            this.header = headerValidationResponse;
-            this.templateLines = lines;
-        }
-        else {
-            throw new InvalidHeaderException();
-        }
+    public TemplateParser(ArrayList<String> lines) {
+        super(lines);
     }
 
     public static void writeCompilerResultToFile(String workingDirectory, TranspileResult transpileResult)
@@ -93,7 +78,7 @@ public class TemplateParser
             if (isValidLoopOpener(line).isPresent()) {
                 Optional<Foldable.Types> type = isValidLoopOpener(line);
                 isValid = true;
-                Foldable foldable = parseFoldable(lines, parseTree, type.get());
+                Foldable foldable = parseFoldable(lines, type.get());
                 parseTree.insert(foldable);
             }
             if (isValid == false) {
@@ -106,7 +91,7 @@ public class TemplateParser
         return parseTree;
     }
 
-    public Foldable parseFoldable(ArrayList<String> lines, TemplateASTree parseTree, Foldable.Types type) {
+    public Foldable parseFoldable(ArrayList<String> lines, Foldable.Types type) {
 
         Foldable varLoopNode = FoldableFactory.newFoldable(type);
 
@@ -163,16 +148,6 @@ public class TemplateParser
         return matcher.matches();
     }
 
-    public ArrayList<String> getTemplateLines(){
-        return templateLines;
-    }
 
-    public HeaderValidationResponse getHeader() {
-        return header;
-    }
-
-    public void setHeader(HeaderValidationResponse header) {
-        this.header = header;
-    }
 }
 
