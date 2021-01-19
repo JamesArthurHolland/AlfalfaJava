@@ -16,12 +16,14 @@ public abstract class Foldable extends Node implements FoldableEvaluator
     static {
         FOLDABLE_OPENERS.put(Types.VAR_LOOP, keyToLoopOpener("VARS"));
         FOLDABLE_OPENERS.put(Types.ENTITY_LOOP, keyToLoopOpener("ENTITIES"));
-        FOLDABLE_OPENERS.put(Types.VAR_CONDITIONAL, keyToLoopOpener("ENTITIES"));
+        FOLDABLE_OPENERS.put(Types.VAR_KEY_CONDITIONAL, keyToLoopOpener("KEY"));
+        FOLDABLE_OPENERS.put(Types.MANY_TO_MANY_CONDITIONAL, keyToLoopOpener("M2M"));
         FOLDABLE_OPENERS.put(Types.INDICES_LOOP, keyToLoopOpener("INDICES"));
 
         FOLDABLE_CLOSERS.put(Types.VAR_LOOP, keyToLoopCloser("VARS"));
         FOLDABLE_CLOSERS.put(Types.ENTITY_LOOP, keyToLoopCloser("ENTITIES"));
-        FOLDABLE_CLOSERS.put(Types.VAR_CONDITIONAL, keyToLoopCloser("ENTITIES"));
+        FOLDABLE_CLOSERS.put(Types.VAR_KEY_CONDITIONAL, keyToLoopCloser("KEY"));
+        FOLDABLE_OPENERS.put(Types.MANY_TO_MANY_CONDITIONAL, keyToLoopCloser("M2M"));
         FOLDABLE_CLOSERS.put(Types.INDICES_LOOP, keyToLoopCloser("INDICES"));
     }
 

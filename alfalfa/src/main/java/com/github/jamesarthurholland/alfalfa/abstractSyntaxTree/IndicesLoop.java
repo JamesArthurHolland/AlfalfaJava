@@ -32,8 +32,8 @@ public class IndicesLoop extends Foldable implements FoldableEvaluator
         if(context != null) {
             container = context.container;
         }
-        EntityInfo info = (EntityInfo) container.get(TemplateParser.ENTITY_INFO_KEY);
-        Schema schema = (Schema) container.get(TemplateParser.SCHEMA_KEY);
+        EntityInfo info = (EntityInfo) container.get(Container.ENTITY_INFO_KEY);
+        Schema schema = (Schema) container.get(Container.SCHEMA_KEY);
 
         Container finalContainer = container;
         info.getVariables()

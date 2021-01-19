@@ -44,13 +44,13 @@ public class EntityLoop extends Foldable implements FoldableEvaluator
     public ArrayList<Node> evaluate(Container container) {
         ArrayList<Node> nodes = new ArrayList<>();
 
-        Schema schema = (Schema) container.get(TemplateParser.SCHEMA_KEY);
+        Schema schema = (Schema) container.get(Container.SCHEMA_KEY);
 
         schema.getEntityInfo()
                 .forEach(entityInfo -> {
                     SentenceSingleEvaluator evaluator = new SentenceSingleEvaluator(entityInfo);
                     Container newContainer = (Container) container.clone();
-                    newContainer.put(TemplateParser.ENTITY_INFO_KEY, entityInfo);
+                    newContainer.put(Container.ENTITY_INFO_KEY, entityInfo);
                     Context context = new Context(newContainer, evaluator);
                     EntityLoop copy = new EntityLoop(this);
                     ArrayList<Node> sentenceEvaluatorNodes = addContextToChildNodes(copy, context);

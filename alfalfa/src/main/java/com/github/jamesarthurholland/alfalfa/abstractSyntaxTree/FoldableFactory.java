@@ -10,7 +10,7 @@ public class FoldableFactory
                 return new EntityLoop();
             case INDICES_LOOP:
                 return new IndicesLoop();
-            case VAR_CONDITIONAL:
+            case VAR_KEY_CONDITIONAL:
                 // TODO
                 break;
         }

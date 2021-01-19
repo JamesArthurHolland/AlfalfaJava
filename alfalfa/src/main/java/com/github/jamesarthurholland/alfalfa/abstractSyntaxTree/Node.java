@@ -13,7 +13,8 @@ public abstract class Node
         VAR_LOOP,
         ENTITY_LOOP,
         INDICES_LOOP,
-        VAR_CONDITIONAL
+        VAR_KEY_CONDITIONAL,
+        MANY_TO_MANY_CONDITIONAL,
     }
 
     public Node(Types type)
@@ -43,7 +44,7 @@ public abstract class Node
                         return new VarLoop(((VarLoop)node));
                     case ENTITY_LOOP:
                         return new EntityLoop((EntityLoop)node);
-                    case VAR_CONDITIONAL:
+                    case VAR_KEY_CONDITIONAL:
                         // TODO
                         break;
                     case INDICES_LOOP:

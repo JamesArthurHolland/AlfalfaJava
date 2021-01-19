@@ -42,8 +42,8 @@ public class TemplateFileHandler
                 ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
 
                 Container container = new Container();
-                container.put(TemplateParser.ENTITY_INFO_KEY, entityInfo);
-                container.put(TemplateParser.SCHEMA_KEY, schema);
+                container.put(Container.ENTITY_INFO_KEY, entityInfo);
+                container.put(Container.SCHEMA_KEY, schema);
 
                 TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern); // TODO pass pattern here and do conditional based on variable mode
                 TemplateParser.writeCompilerResultToFile(fileOutputDirectoryPath.toString(), transpileResult);
@@ -63,7 +63,7 @@ public class TemplateFileHandler
             ArrayList<String> lines = Files.lines(patternFilePath).collect(Collectors.toCollection(ArrayList::new));
 
             Container container = new Container();
-            container.put(TemplateParser.SCHEMA_KEY, schema);
+            container.put(Container.SCHEMA_KEY, schema);
             TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern); // TODO pass pattern here and do conditional based on variable mode
             TemplateParser.writeCompilerResultToFile(fileOutputDirectoryPath.toString(), transpileResult);
         } catch (IOException e) {

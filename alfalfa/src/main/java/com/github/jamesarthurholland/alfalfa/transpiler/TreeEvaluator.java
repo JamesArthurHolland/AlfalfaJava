@@ -18,7 +18,7 @@ public class TreeEvaluator
         String fileName = parser.getHeader().getFileName();
 
         if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY) {
-            EntityInfo entityInfo = (EntityInfo) container.get(TemplateParser.ENTITY_INFO_KEY);
+            EntityInfo entityInfo = (EntityInfo) container.get(Container.ENTITY_INFO_KEY);
             fileName = StringUtils.evaluateForEntityReplacements(fileName, entityInfo);
         }
 
@@ -48,15 +48,16 @@ public class TreeEvaluator
                     evaluatedSentence = sentence.evaluate();
                 }
                 else if(pattern.mode == Pattern.ImportMode.ONCE_FOR_ENTITY) {
+                    // TODO does this ever get hit? should be handled by sentence.evaluate
                     evaluatedSentence = sentence.getSentenceString();
                 }
                 else if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY) {
-                    EntityInfo info = (EntityInfo) container.get(TemplateParser.ENTITY_INFO_KEY);
+                    // TODO does this ever get hit? SentenceSingleEvaluator heavily duplicates.
+                    EntityInfo info = (EntityInfo) container.get(Container.ENTITY_INFO_KEY);
                     evaluatedSentence = StringUtils.evaluateForEntityReplacements(sentence.getSentenceString(), info);
                     evaluatedSentence = StringUtils.evaluateForNamespace(evaluatedSentence, info);
                     evaluatedSentence = StringUtils.evaluateForTableReplacements(evaluatedSentence, info);
                 }
-
 
                 if (evaluatedSentence != null) {
                     eval.add (evaluatedSentence);
