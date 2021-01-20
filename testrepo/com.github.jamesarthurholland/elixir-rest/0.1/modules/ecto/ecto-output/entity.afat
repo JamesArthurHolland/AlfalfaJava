@@ -31,14 +31,5 @@ defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
       {{NOT-KEY LAST}}:{{v_ar}}{{/NOT-KEY}}
       {{/VARS}}
     ])
-    |> validate_required([
-      {{VARS}}
-      {{KEY}}:{{v_ar}},{{/KEY}}
-      {{NOT-KEY NOT-LAST}}:{{v_ar}},{{/NOT-KEY}}
-      {{/VARS}}
-      {{VARS}}
-      {{NOT-KEY LAST}}:{{v_ar}}{{/NOT-KEY}}
-      {{/VARS}}
-    ])
   end
 end

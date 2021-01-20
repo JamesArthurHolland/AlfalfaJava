@@ -4,6 +4,7 @@ defmodule ElixirRestWeb.Schema do
 
   alias ElixirRestWeb.Resolvers
   # import Types
+  import_types Absinthe.Type.Custom
   import_types(ElixirRestWeb.Schema.Types)
 
   query do
@@ -40,8 +41,14 @@ defmodule ElixirRestWeb.Schema do
     @desc "Update a {{en_tity}}"
     field :update_{{en_tity}}, type: :{{en_tity}}_type do
       arg(:id, non_null(:string))
-      arg(:{{en_tity}}_attrs, non_null(:{{en_tity}}_input_type))
+      arg(:input, non_null(:{{en_tity}}_input_type))
       resolve(&Resolvers.{{Entity}}Resolver.update_{{en_tity}}/2)
+    end
+
+    @desc "Delete a {{en_tity}}"
+    field :delete_{{en_tity}}, type: :{{en_tity}}_type do
+      arg(:id, non_null(:string))
+      resolve(&Resolvers.{{Entity}}Resolver.delete_{{en_tity}}/2)
     end
 
     {{/ENTITIES}}

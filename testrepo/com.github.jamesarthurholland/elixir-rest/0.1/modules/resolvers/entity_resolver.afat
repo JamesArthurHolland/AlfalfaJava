@@ -1,6 +1,9 @@
 {{ALFALFA -o {{en_tity}}_resolver.ex}}
 defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
   alias ElixirRest.{{Entity}}
+  alias ElixirRest.{{Entity}}.{{Entity}}Entity
+
+  require Logger
 
   def fetch(_, %{id: id}, _) do
     {{en_tity}} = {{Entity}}.fetch(id)
@@ -11,13 +14,34 @@ defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
   end
 
   def create_{{en_tity}}(_, %{input: input}, _) do
-    {{Entity}}.create_{{en_tity}}(input)
+    {{en_tity}}_result = {{Entity}}.create_{{en_tity}}(input)
+    case {{en_tity}}_result do
+      {:error, error} ->
+        Logger.error(error)
+      {:ok, {{en_tity}}} -> {:ok, {{en_tity}}}
+    end
   end
 
-  def update_{{en_tity}}(%{id: id, {{en_tity}}_attrs: {{en_tity}}_attrs}, _info) do
-    {{Entity}}.fetch(id)
-          |> {{Entity}}Entity.changeset({{en_tity}}_attrs)
-          |> {{Entity}}.update_{{en_tity}}
+  def update_{{en_tity}}(%{id: id, input: input}, _info) do
+    {{en_tity}}_result = {{Entity}}.fetch(id)
+          |> {{Entity}}.update_{{en_tity}}(input)
+
+    case {{en_tity}}_result do
+      {:error, error} ->
+        Logger.error(error)
+      {:ok, {{en_tity}}} -> {:ok, {{en_tity}}}
+    end
+  end
+
+  def delete_{{en_tity}}(%{id: id}, _info) do
+    {{en_tity}}_result = {{Entity}}.fetch(id)
+        |> {{Entity}}.delete_{{en_tity}}
+
+    case {{en_tity}}_result do
+      {:error, error} ->
+        Logger.error(error)
+      {:ok, {{en_tity}}} -> {:ok, {{en_tity}}}
+    end
   end
 
   {{INDICES}}
