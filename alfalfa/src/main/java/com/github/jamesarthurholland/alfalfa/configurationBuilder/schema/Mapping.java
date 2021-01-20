@@ -2,27 +2,26 @@ package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 import java.util.Objects;
 
-public class Mapping {
+public class Mapping implements Cloneable {
     public enum Type {
         ONE_TO_ONE,
         ONE_TO_MANY,
-        MANY_TO_ONE,
         MANY_TO_MANY
     }
 
     protected String parentEntityName;
     protected String childEntityName;
 
-    protected String fromVarName;
-    protected String toVarName;
+    protected String parentVarName;
+    protected String childVarName;
 
     protected Type type;
 
-    public Mapping(String parentEntityName, String childEntityName, String fromVarName, String toVarName, Type type) {
+    public Mapping(String parentEntityName, String childEntityName, String parentVarName, String childVarName, Type type) {
         this.parentEntityName = parentEntityName;
         this.childEntityName = childEntityName;
-        this.fromVarName = fromVarName;
-        this.toVarName = toVarName;
+        this.parentVarName = parentVarName;
+        this.childVarName = childVarName;
         this.type = type;
     }
 
@@ -33,14 +32,14 @@ public class Mapping {
         Mapping mapping = (Mapping) o;
         return Objects.equals(parentEntityName, mapping.parentEntityName) &&
                 Objects.equals(childEntityName, mapping.childEntityName) &&
-                Objects.equals(fromVarName, mapping.fromVarName) &&
-                Objects.equals(toVarName, mapping.toVarName) &&
+                Objects.equals(parentVarName, mapping.parentVarName) &&
+                Objects.equals(childVarName, mapping.childVarName) &&
                 type == mapping.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(parentEntityName, childEntityName, fromVarName, toVarName, type);
+        return Objects.hash(parentEntityName, childEntityName, parentVarName, childVarName, type);
     }
 
     @Override
@@ -49,8 +48,8 @@ public class Mapping {
         return new Mapping(
             this.parentEntityName,
             this.childEntityName,
-            this.fromVarName,
-            this.toVarName,
+            this.parentVarName,
+            this.childVarName,
             this.type
         );
     }
@@ -63,13 +62,15 @@ public class Mapping {
         return childEntityName;
     }
 
-    public String getFromVarName() {
-        return fromVarName;
+    public String getParentVarName() {
+        return parentVarName;
     }
 
-    public String getToVarName() {
-        return toVarName;
+    public String getChildVarName() {
+        return childVarName;
     }
 
-
+    public Type getType() {
+        return type;
+    }
 }

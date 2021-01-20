@@ -1,4 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
+package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel;
 
 public class Sentence extends Node implements Cloneable
 {
@@ -6,12 +6,12 @@ public class Sentence extends Node implements Cloneable
     public static final String type = "SENTENCE";
 
     public Sentence(String sentence) {
-        super(Types.SENTENCE);
+        super(Type.SENTENCE);
         this.sentence = sentence;
     }
 
     public Sentence(Node left, Node right, String sentence, Context context) {
-        super(Types.SENTENCE, left, right, context);
+        super(Type.SENTENCE, left, right, context);
         this.sentence = sentence;
     }
 

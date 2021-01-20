@@ -73,6 +73,9 @@ public class ModelFileScanner
                         if(mappingKeyArray[0].equals("121")) { // TODO error for unknown mapping code
                             mappingType = Mapping.Type.ONE_TO_ONE;
                         }
+                        if(mappingKeyArray[0].equals("12M")) { // TODO error for unknown mapping code
+                            mappingType = Mapping.Type.ONE_TO_MANY;
+                        }
 
                         if(mappingKeyArray.length < 2) {
                             Log.error("Mapping array wrong", "Defintion:" + mappingDefinition + ", path: " + path + ", line:" + Arrays.toString(lineArray));

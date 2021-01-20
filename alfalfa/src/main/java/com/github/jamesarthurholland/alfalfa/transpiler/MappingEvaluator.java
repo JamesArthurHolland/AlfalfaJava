@@ -2,36 +2,23 @@ package com.github.jamesarthurholland.alfalfa.transpiler;
 
 import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
-import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Mapping;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Variable;
-
-import java.util.Optional;
 
 import static com.github.jamesarthurholland.alfalfa.StringUtils.*;
 
-public class SentenceIndexEvaluator implements Cloneable, SentenceEvaluator
+public class MappingEvaluator implements Cloneable, SentenceEvaluator
 {
     private Variable givenVar;
     private EntityInfo entityInfo;
-    private Optional<Mapping> mapping;
 
-    public SentenceIndexEvaluator(Variable givenVar, EntityInfo entityInfo) {
+    public MappingEvaluator(Variable givenVar, EntityInfo entityInfo) {
         this.givenVar = givenVar;
         this.entityInfo = entityInfo;
-        this.mapping = Optional.empty();
     }
-
-    public SentenceIndexEvaluator(Variable givenVar, EntityInfo entityInfo, Mapping mapping) {
-        this.givenVar = givenVar;
-        this.entityInfo = entityInfo;
-        this.mapping = Optional.of(mapping);
-    }
-
-
 
     @Override
     public Object clone() {
-        return new SentenceIndexEvaluator(
+        return new MappingEvaluator(
             ((Variable)this.givenVar.clone()),
             ((EntityInfo)this.entityInfo.clone())
         );
@@ -79,29 +66,12 @@ public class SentenceIndexEvaluator implements Cloneable, SentenceEvaluator
 //        return outputSentence;
 //    }
 
-    public String replaceIndicesInString(Variable givenVar, String sentence)
+    public static String replaceIndicesInString(Variable givenVar, String sentence)
     {
-        String outputString = sentence.replaceAll("\\{\\{index\\}\\}", givenVar.getName());
+        String outputString = sentence.replaceAll("\\{\\{from\\}\\}", givenVar.getName());
         outputString = outputString.replaceAll("\\{\\{in_dex\\}\\}", camelToLowerUnderScore(givenVar.getName()));
         outputString = outputString.replaceAll("\\{\\{INDEX\\}\\}", camelToUpperUnderScore(givenVar.getName()));
         outputString = outputString.replaceAll("\\{\\{Index\\}\\}", uppercaseFirst(givenVar.getName()));
-
-        if(this.mapping.isPresent()) {
-            Mapping mapping = this.mapping.get();
-            String childVar = mapping.getChildVarName();
-            outputString = outputString.replaceAll("\\{\\{cvar\\}\\}", childVar);
-            outputString = outputString.replaceAll("\\{\\{c_var\\}\\}", camelToLowerUnderScore(childVar));
-            outputString = outputString.replaceAll("\\{\\{CVAR\\}\\}", camelToUpperUnderScore(childVar));
-            outputString = outputString.replaceAll("\\{\\{Cvar\\}\\}", uppercaseFirst(childVar));
-
-            String parentVar = mapping.getParentVarName();
-            outputString = outputString.replaceAll("\\{\\{pvar\\}\\}", parentVar);
-            outputString = outputString.replaceAll("\\{\\{p_var\\}\\}", camelToLowerUnderScore(parentVar));
-            outputString = outputString.replaceAll("\\{\\{PVAR\\}\\}", camelToUpperUnderScore(parentVar));
-            outputString = outputString.replaceAll("\\{\\{Pvar\\}\\}", uppercaseFirst(parentVar));
-
-            // TODO childEntity and parentEntity
-        }
 
         return outputString;
     }

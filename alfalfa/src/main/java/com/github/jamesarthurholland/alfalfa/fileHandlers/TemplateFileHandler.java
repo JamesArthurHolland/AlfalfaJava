@@ -2,7 +2,7 @@ package com.github.jamesarthurholland.alfalfa.fileHandlers;
 
 import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.Container;
 import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TemplateParser;
-import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.TranspileResult;
+import com.github.jamesarthurholland.alfalfa.transpiler.TranspileResult;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.transpiler.TreeEvaluator;

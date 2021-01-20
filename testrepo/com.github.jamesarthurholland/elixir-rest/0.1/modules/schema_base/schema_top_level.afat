@@ -16,14 +16,24 @@ defmodule ElixirRestWeb.Schema do
       resolve(&Resolvers.{{Entity}}Resolver.fetch/3)
     end
 
-    {{INDICES}}
-    @desc "Get {{en_tity}} by {{in_dex}}"
+    {{MAPPINGS}}
+    {{X2M}}
+    @desc "Fetch {{en_tity}} by {{in_dex}}"
     field :{{en_tity}}_by_{{in_dex}}, type: list_of(:{{en_tity}}_type) do
       arg(:{{in_dex}}, non_null(:string))
       resolve(&Resolvers.{{Entity}}Resolver.fetch_by_{{in_dex}}/3)
     end
+    {{/X2M}}
 
-    {{/INDICES}}
+    {{121}}
+    @desc "Fetch {{en_tity}} by {{in_dex}}"
+    field :{{en_tity}}_by_{{in_dex}}, type: :{{en_tity}}_type do
+      arg(:{{in_dex}}, non_null(:string))
+      resolve(&Resolvers.{{Entity}}Resolver.fetch_by_{{in_dex}}/3)
+    end
+    {{/121}}
+
+    {{/MAPPINGS}}
 
     {{/ENTITIES}}
 

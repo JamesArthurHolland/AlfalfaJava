@@ -58,38 +58,25 @@ public class Schema implements Cloneable
         return null; // TODO wrong I think
     }
 
-    public Optional<Mapping> getMappingForEntityVar(EntityInfo info, Variable var) {
+    public Optional<Mapping> getMappingsWhenIsChildForEntityVar(EntityInfo info, Variable var) {
         Optional<Mapping> mapping = this.mappingsForEntityName.get(info.getFullyQualifedName())
                 .stream()
-                .filter(current -> current.toVarName.equals(var.getName()))
+                .filter(current -> current.childVarName.equals(var.getName()))
                 .findFirst();
 
         return mapping;
     }
 
-//    public void addElement(ConfigElement element) {
-//        this.entityInfoList.add(element.getEntityInfo());
-//        for(Mapping mapping : element.getMappings()) {
+//    public Optional<Mapping> getMappingsWhenIsParentForEntityVar(EntityInfo info, Variable var) {
+//        Optional<Mapping> mapping = this.mappingsForEntityName.get(info.getFullyQualifedName())
+//                .stream()
+//                .filter(current -> current.fromVarName.equals(var.getName()))
+//                .findFirst();
 //
-//            ArrayList<Mapping> fromEntityMappings = this.mappingsForEntityName.getOrDefault(mapping.getParentEntityName(), new ArrayList<>());
-//            fromEntityMappings.add(mapping);
-//
-//            ArrayList<Mapping> toEntityMappings = this.mappingsForEntityName.getOrDefault(mapping.getChildEntityName(), new ArrayList<>());
-//            toEntityMappings.add(mapping);
-//
-//            this.mappingsForEntityName.put( // TODO this is mad wrong. inserting into self
-//                mapping.getParentEntityName(),
-//                fromEntityMappings
-//            );
-//            this.mappingsForEntityName.put(
-//                mapping.getChildEntityName(),
-//                toEntityMappings
-//            );
-//        }
+//        return mapping;
 //    }
 
     public HashSet<EntityInfo> getEntityInfo() {
-
 
         return entityInfoList;
     }

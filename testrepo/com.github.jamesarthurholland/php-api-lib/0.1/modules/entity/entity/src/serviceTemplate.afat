@@ -75,7 +75,7 @@ class {{Entity}}Service
         );
     }
 
-    {{INDICES}}
+    {{MAPPINGS}}
     public static function fetchBy{{Index}}(${{index}}) {
         $graphqlQueryName = '{{entity}}By{{Index}}';
         $args = ['{{index}}' => '${{index}}'];
@@ -96,5 +96,5 @@ class {{Entity}}Service
         return $mapper->fromArray($json);
     }
 
-    {{/INDICES}}
+    {{/MAPPINGS}}
 }

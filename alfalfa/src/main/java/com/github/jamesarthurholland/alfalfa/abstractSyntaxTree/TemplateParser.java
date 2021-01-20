@@ -2,9 +2,13 @@ package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
 import com.github.jamesarthurholland.alfalfa.NoPatternDirectoryException;
 import com.github.jamesarthurholland.alfalfa.PatternDirectoryEmptyException;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Foldable;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Node;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Sentence;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderHandler;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.HeaderValidationResponse;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.InvalidHeaderException;
+import com.github.jamesarthurholland.alfalfa.transpiler.TranspileResult;
 
 import java.io.*;
 import java.net.URL;
@@ -88,7 +92,7 @@ public class TemplateParser
 
             boolean isValid = false;
             if (isValidLoopOpener(line).isPresent()) {
-                Optional<Foldable.Types> type = isValidLoopOpener(line);
+                Optional<Node.Type> type = isValidLoopOpener(line);
                 isValid = true;
                 Foldable foldable = parseFoldable(lines, parseTree, type.get());
                 parseTree.insert(foldable);
@@ -103,7 +107,7 @@ public class TemplateParser
         return parseTree;
     }
 
-    public Foldable parseFoldable(ArrayList<String> lines, TemplateASTree parseTree, Foldable.Types type) {
+    public Foldable parseFoldable(ArrayList<String> lines, TemplateASTree parseTree, Node.Type type) {
 
         Foldable varLoopNode = FoldableFactory.newFoldable(type);
 
@@ -112,13 +116,13 @@ public class TemplateParser
 
         int nestLevel = 0;
 
-        Stack<Foldable.Types> typesStack = new Stack<>();
+        Stack<Node.Type> typesStack = new Stack<>();
         typesStack.push(type);
 
         nestLevel++;
         while (nestLevel != 0) {
             String subLine = lines.get(0);
-            Optional<Foldable.Types> typeIfValidOpener = isValidLoopOpener(subLine);
+            Optional<Node.Type> typeIfValidOpener = isValidLoopOpener(subLine);
             if(typeIfValidOpener.isPresent()) {
                 typesStack.push(typeIfValidOpener.get());
                 nestLevel++;
@@ -138,10 +142,10 @@ public class TemplateParser
         return varLoopNode;
     }
 
-    public Optional<Foldable.Types> isValidLoopOpener(String line) // TODO change to Foldable, not loop, in name
+    public Optional<Node.Type> isValidLoopOpener(String line) // TODO change to Foldable, not loop, in name
     {
-        for (Foldable.Types type : Node.Types.values()) {
-            if(type == Node.Types.SENTENCE) {
+        for (Node.Type type : Node.Type.values()) {
+            if(type == Node.Type.SENTENCE) {
                 continue;
             }
             java.util.regex.Pattern varsLoopOpenerPattern = Foldable.FOLDABLE_OPENERS.get(type); // TODO there was $ at end. assumed mistake. inspect
@@ -153,7 +157,7 @@ public class TemplateParser
         return Optional.empty();
     }
 
-    public boolean isValidLoopCloser(String line, Foldable.Types type)
+    public boolean isValidLoopCloser(String line, Node.Type type)
     {
         java.util.regex.Pattern varsLoopOpenerPattern = Foldable.FOLDABLE_CLOSERS.get(type);
         Matcher matcher = varsLoopOpenerPattern.matcher(line);

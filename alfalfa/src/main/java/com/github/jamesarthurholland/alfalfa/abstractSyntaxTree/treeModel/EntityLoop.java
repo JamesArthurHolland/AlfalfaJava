@@ -1,5 +1,6 @@
-package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
+package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel;
 
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.Container;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.transpiler.FoldableEvaluator;
 import com.github.jamesarthurholland.alfalfa.transpiler.SentenceSingleEvaluator;
@@ -9,18 +10,18 @@ import java.util.ArrayList;
 public class EntityLoop extends Foldable implements FoldableEvaluator
 {
     public EntityLoop() {
-        super(Types.ENTITY_LOOP);
+        super(Type.ENTITY_LOOP);
     }
 
     public EntityLoop(Node left, Node right, boolean isRightTrueFixed) {
-        super(Types.ENTITY_LOOP);
+        super(Type.ENTITY_LOOP);
         this.left = left;
         this.right = right;
         this.rightNodeFixed = isRightTrueFixed;
     }
 
     public EntityLoop(EntityLoop other) {
-        super(Types.ENTITY_LOOP);
+        super(Type.ENTITY_LOOP);
 
         if(other.left != null) {
             this.left = copy(other.left);
@@ -41,15 +42,22 @@ public class EntityLoop extends Foldable implements FoldableEvaluator
 //    }
 
     @Override
-    public ArrayList<Node> evaluate(Container container) {
+    public ArrayList<Node> evaluate(Container baseContainer) {
         ArrayList<Node> nodes = new ArrayList<>();
 
-        Schema schema = (Schema) container.get(Container.SCHEMA_KEY);
+        Container finalContainer;
+        if(this.context != null){
+            finalContainer = this.context.container;
+        }
+        else {
+            finalContainer = baseContainer;
+        }
+        Schema schema = (Schema) finalContainer.get(Container.SCHEMA_KEY);
 
         schema.getEntityInfo()
                 .forEach(entityInfo -> {
                     SentenceSingleEvaluator evaluator = new SentenceSingleEvaluator(entityInfo);
-                    Container newContainer = (Container) container.clone();
+                    Container newContainer = (Container) finalContainer.clone();
                     newContainer.put(Container.ENTITY_INFO_KEY, entityInfo);
                     Context context = new Context(newContainer, evaluator);
                     EntityLoop copy = new EntityLoop(this);

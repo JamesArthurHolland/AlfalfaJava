@@ -1,5 +1,8 @@
 package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
 
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Foldable;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Node;
+
 public class TemplateASTree
 {
     Node root;

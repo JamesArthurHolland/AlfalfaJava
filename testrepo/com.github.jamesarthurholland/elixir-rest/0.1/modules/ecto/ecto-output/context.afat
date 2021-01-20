@@ -40,10 +40,10 @@ defmodule ElixirRest.{{Entity}} do
   def fetch(id), do: Repo.get({{Entity}}Entity, id)
 
 
-  {{INDICES}}
+  {{MAPPINGS}}
   def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.all({{Entity}}Entity, {{in_dex}}: {{in_dex}})
 
-  {{/INDICES}}
+  {{/MAPPINGS}}
 
   @doc """
   Creates a {{en_tity}}.

@@ -2,9 +2,11 @@
 
 {{ENTITIES}}
 entity is {{en_tity}}
-{{INDICES}}
-Index {{in_dex}}
-{{/INDICES}}
 {{/ENTITIES}}
 
+
+{{MAPPINGS}}
+{{in_dex}}
+
+{{/MAPPINGS}}
 

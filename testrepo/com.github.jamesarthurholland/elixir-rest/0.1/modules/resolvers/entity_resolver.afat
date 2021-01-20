@@ -44,10 +44,10 @@ defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
     end
   end
 
-  {{INDICES}}
+  {{MAPPINGS}}
   def fetch_by_{{in_dex}}(_, %{{{in_dex}}: {{in_dex}}}, _) do
     {:ok, {{Entity}}.fetch_by_{{in_dex}}({{in_dex}})}
   end
 
-  {{/INDICES}}
+  {{/MAPPINGS}}
 end

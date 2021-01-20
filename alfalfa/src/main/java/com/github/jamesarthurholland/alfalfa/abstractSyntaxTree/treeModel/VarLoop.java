@@ -1,5 +1,6 @@
-package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
+package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel;
 
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.Container;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.transpiler.FoldableEvaluator;
 import com.github.jamesarthurholland.alfalfa.transpiler.SentenceVarEvaluator;
@@ -9,11 +10,11 @@ import java.util.ArrayList;
 public class VarLoop extends Foldable implements FoldableEvaluator
 {
     public VarLoop() {
-        super(Types.VAR_LOOP);
+        super(Type.VAR_LOOP);
     }
 
     public VarLoop(VarLoop other) {
-        super(Types.VAR_LOOP);
+        super(Type.VAR_LOOP);
 
         if(other.left != null) {
             this.left = copy(other.left);
@@ -24,15 +25,19 @@ public class VarLoop extends Foldable implements FoldableEvaluator
     }
 
     @Override
-    public ArrayList<Node> evaluate(Container container) {
+    public ArrayList<Node> evaluate(Container baseContainer) {
         ArrayList<Node> nodes = new ArrayList<>();
 
-        if(context != null) {
-            container = context.container;
-        }
-        EntityInfo info = (EntityInfo) container.get(Container.ENTITY_INFO_KEY);
 
-        Container finalContainer = container;
+        Container finalContainer;
+        if(this.context != null){
+            finalContainer = this.context.container;
+        }
+        else {
+            finalContainer = baseContainer;
+        }
+        EntityInfo info = (EntityInfo) finalContainer.get(Container.ENTITY_INFO_KEY);
+
         info.getVariables()
             .forEach(var -> {
                 SentenceVarEvaluator evaluator = new SentenceVarEvaluator(var, info);

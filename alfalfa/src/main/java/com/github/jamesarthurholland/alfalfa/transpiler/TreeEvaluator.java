@@ -2,6 +2,9 @@ package com.github.jamesarthurholland.alfalfa.transpiler;
 
 import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.*;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Foldable;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Node;
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Sentence;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 

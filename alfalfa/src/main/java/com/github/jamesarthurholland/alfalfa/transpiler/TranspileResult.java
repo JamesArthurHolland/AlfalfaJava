@@ -1,4 +1,4 @@
-package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree;
+package com.github.jamesarthurholland.alfalfa.transpiler;
 
 import java.util.ArrayList;
 

@@ -54,7 +54,7 @@ defmodule {{PROJECT}}.{{Entity}}Service do
     end
   end
 
-  {{INDICES}}
+  {{MAPPINGS}}
   def fetch_by_{{in_dex}}({{in_dex}}) do
     response = Neuron.query("""
       query (${{index}}: String!) {
@@ -79,6 +79,6 @@ defmodule {{PROJECT}}.{{Entity}}Service do
     end
   end
 
-  {{/INDICES}}
+  {{/MAPPINGS}}
 
 end
