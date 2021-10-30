@@ -1,0 +1,37 @@
+---
+name: com.github.jamesarthurholland/elixir-rest
+version: "0.1"
+
+imports:
+  - name: ecto
+    location: ./lib/elixir_rest/
+    mode: for_each
+    folder_swaps:
+      ecto-output: "{{en_tity}}"
+
+  - name: dockerfile
+    location: ./
+
+  - name: resolvers
+    location: ./lib/elixir_rest_web/resolvers/
+    mode: for_each
+
+  - name: controllers
+    location: ./lib/elixir_rest_web/controllers/
+    mode: for_each
+
+  - name: router
+    location: ./lib/elixir_rest_web/
+
+  - name: schema_base
+    location: ./lib/elixir_rest_web/
+
+  - name: schema_types_base
+    location: ./lib/elixir_rest_web/schema/
+
+  - name: schema_types
+    location: ./lib/elixir_rest_web/schema/
+    mode: for_each
+
+vars:
+  PORT: "80"

@@ -1,0 +1,13 @@
+{{ALFALFA -o {{Entity}}Mappings.php}}
+{{MAPPINGS}}
+newMapping
+{{entity}}By{{Index}}({{index}}: ${{index}}) {
+{{VARS}}
+{{var}}
+{{/VARS}}
+createdAt2
+updatedAt
+
+{{/MAPPINGS}}
+
+aftermapping

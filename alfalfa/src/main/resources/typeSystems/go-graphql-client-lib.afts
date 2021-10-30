@@ -1,0 +1,12 @@
+bool=graphql.Boolean
+int=int
+int4=int4
+int16=graphql.Int
+int32=graphql.Int
+int64=graphql.Int
+uint=uint
+uint4=uint4
+uint16=uint16
+uint32=uint32
+uint64=uint64
+string=graphql.String

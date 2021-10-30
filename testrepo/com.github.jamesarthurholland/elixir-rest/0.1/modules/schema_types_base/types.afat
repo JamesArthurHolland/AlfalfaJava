@@ -1,8 +1,8 @@
 {{ALFALFA -o types.ex}}
-defmodule ElixirRestWeb.Schema.Types do
+defmodule {{Project}}Web.Schema.Types do
   use Absinthe.Schema.Notation
 
-  alias ElixirRestWeb.Schema.Types
+  alias {{Project}}Web.Schema.Types
 
   {{ENTITIES}}
   import_types(Types.{{Entity}}Type)

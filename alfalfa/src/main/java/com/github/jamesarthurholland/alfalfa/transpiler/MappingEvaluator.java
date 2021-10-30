@@ -3,6 +3,7 @@ package com.github.jamesarthurholland.alfalfa.transpiler;
 import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Variable;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
 
 import static com.github.jamesarthurholland.alfalfa.StringUtils.*;
 
@@ -29,7 +30,7 @@ public class MappingEvaluator implements Cloneable, SentenceEvaluator
 //        this.entityInfo = evaluator.entityInfo;
 //    }
 
-    public String evaluate(String sentence)
+    public String evaluate(String sentence, TypeSystemConverter converter, String langName)
     {
         String generatedSentence = evaluateForEntityReplacements(sentence, entityInfo);
 
@@ -39,7 +40,7 @@ public class MappingEvaluator implements Cloneable, SentenceEvaluator
 
         if (generatedSentence != null) {
             generatedSentence = replaceIndicesInString (givenVar, generatedSentence);
-            generatedSentence = replaceTypesInString(givenVar, generatedSentence);
+            generatedSentence = Utils.replaceTypesInString(givenVar, generatedSentence, converter, langName);
             generatedSentence = replaceVisibilityInString(givenVar, generatedSentence);
         }
         generatedSentence = StringUtils.evaluateForNamespace(generatedSentence, entityInfo);
@@ -72,16 +73,6 @@ public class MappingEvaluator implements Cloneable, SentenceEvaluator
         outputString = outputString.replaceAll("\\{\\{in_dex\\}\\}", camelToLowerUnderScore(givenVar.getName()));
         outputString = outputString.replaceAll("\\{\\{INDEX\\}\\}", camelToUpperUnderScore(givenVar.getName()));
         outputString = outputString.replaceAll("\\{\\{Index\\}\\}", uppercaseFirst(givenVar.getName()));
-
-        return outputString;
-    }
-
-    public static String replaceTypesInString(Variable givenVar, String sentence)
-    {
-        String outputString = sentence.replaceAll("\\{\\{type\\}\\}", givenVar.getType());
-        outputString = outputString.replaceAll("\\{\\{t_ype\\}\\}", camelToLowerUnderScore(givenVar.getType()));
-        outputString = outputString.replaceAll("\\{\\{TYPE\\}\\}", camelToUpperUnderScore(givenVar.getType()));
-        outputString = outputString.replaceAll("\\{\\{Type\\}\\}", uppercaseFirst(givenVar.getType()));
 
         return outputString;
     }

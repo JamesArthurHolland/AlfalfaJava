@@ -42,7 +42,9 @@ public class VarLoop extends Foldable implements FoldableEvaluator
             .forEach(var -> {
                 SentenceVarEvaluator evaluator = new SentenceVarEvaluator(var, info);
                 VarLoop copy = new VarLoop(this);
-                Context context = new Context(finalContainer, evaluator);
+                Container newContainer = (Container) finalContainer.clone();
+                newContainer.put(Container.IS_IN_VAR_LOOP, new Container.VarLoopStatus(true));
+                Context context = new Context(newContainer, evaluator);
                 nodes.addAll(addContextToChildNodes(copy, context));
             });
 

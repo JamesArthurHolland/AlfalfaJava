@@ -1,0 +1,27 @@
+{{ALFALFA -o {{en_tity}}_entity.go -ts go-graphql-client-lib }}
+package {{en_tity}}
+
+import "github.com/hasura/go-graphql-client"
+
+type {{Entity}}Entity struct {
+{{VARS}}
+    {{Var}} {{type}} `json:"{{v_ar}}"`
+{{/VARS}}
+    LockVersion int64   `json:"lock_version"`
+}
+
+type {{Entity}}InputType struct {
+{{VARS}}
+    {{Var}}         {{type}}    `json:"{{v_ar}}"`
+{{/VARS}}
+    LockVersion int64   `json:"lock_version"`
+}
+
+func NewInputType(entity *{{Entity}}Entity) *{{Entity}}InputType {
+    return &{{Entity}}InputType{
+    {{VARS}}
+        {{Var}}: entity.{{Var}},
+    {{/VARS}}
+        LockVersion: entity.LockVersion,
+    }
+}

@@ -1,0 +1,13 @@
+bool=boolean
+int=integer
+int4=integer
+int16=integer
+int32=integer
+int64=integer
+uint=integer
+uint4=integer
+uint16=integer
+uint32=integer
+uint64=integer
+string=string
+date=naive_datetime

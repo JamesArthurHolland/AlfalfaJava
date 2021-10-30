@@ -1,11 +1,11 @@
 {{ALFALFA -o {{en_tity}}_controller.ex}}
-defmodule ElixirRestWeb.{{Entity}}Controller do
-  use ElixirRestWeb, :controller
+defmodule {{Project}}Web.{{Entity}}Controller do
+  use {{Project}}Web, :controller
 
-  alias ElixirRest.{{Entity}}
-  alias ElixirRest.{{Entity}}.{{Entity}}Entity
+  alias {{Project}}.{{Entity}}
+  alias {{Project}}.{{Entity}}.{{Entity}}Entity
 
-  action_fallback ElixirRestWeb.FallbackController
+  action_fallback {{Project}}Web.FallbackController
 
   def index(conn, _params) do
     {{en_tity}} = {{Entity}}.list_{{en_tity}}()

@@ -1,0 +1,16 @@
+---
+name: com.github.jamesarthurholland/golang-graphql-lib
+version: "0.1"
+
+imports:
+  - name: entity
+    location: ./
+    mode: for_each
+    folder_swaps:
+      entity_output: "{{en_tity}}"
+
+  - name: provider
+    location: ./
+
+  - name: main_graph_ql
+    location: ./

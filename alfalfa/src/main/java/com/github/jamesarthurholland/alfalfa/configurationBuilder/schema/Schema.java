@@ -2,6 +2,7 @@ package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.NoDotAlfalfaDirectoryException;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
 import one.util.streamex.EntryStream;
 
 import java.io.IOException;
@@ -9,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Stream;
+
+import static com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.ModelFileScanner.readModelFile;
 
 public class Schema implements Cloneable
 {
@@ -33,7 +36,7 @@ public class Schema implements Cloneable
 
 
         streamFilterModelFiles(dotAlfalfaPath)
-            .map(ModelFileScanner::readModelFile)
+            .map(path -> readModelFile(path))
             .forEach(modelFileScan -> {
                 mappingsForEntityName = EntryStream.of(modelFileScan.getMappings())
                         .append(EntryStream.of(mappingsForEntityName))

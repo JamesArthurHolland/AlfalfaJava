@@ -1,4 +1,4 @@
-defmodule ElixirRest.DataCase do
+defmodule {{Project}}.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule ElixirRest.DataCase do
 
   using do
     quote do
-      alias ElixirRest.Repo
+      alias {{Project}}.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import ElixirRest.DataCase
+      import {{Project}}.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(ElixirRest.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout({{Project}}.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(ElixirRest.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode({{Project}}.Repo, {:shared, self()})
     end
 
     :ok

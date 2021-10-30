@@ -7,6 +7,8 @@ import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Node;
 import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel.Sentence;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
+import com.google.common.io.Files;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,17 +17,24 @@ import java.util.stream.Collectors;
 
 public class TreeEvaluator
 {
-    public static TranspileResult runAlfalfa(ArrayList<String> lines, Container container, Pattern pattern) {
+    public static TranspileResult runAlfalfa(ArrayList<String> lines, Container container, Pattern pattern, TypeSystemConverter typeSystemConverter) {
         TemplateParser parser = new TemplateParser(lines);
         TemplateASTree parseTree = parser.parseTemplateLines(parser.getTemplateLines());
         String fileName = parser.getHeader().getFileName();
-
+        // TODO pick type system here
+        String tsName = null;
+        if(parser.getHeader().getTypeSystemName() != null) {
+            tsName = parser.getHeader().getTypeSystemName();
+        }
+        else {
+            tsName = Files.getFileExtension(fileName);
+        }
         if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY) {
             EntityInfo entityInfo = (EntityInfo) container.get(Container.ENTITY_INFO_KEY);
             fileName = StringUtils.evaluateForEntityReplacements(fileName, entityInfo);
         }
 
-        ArrayList<String> processedFileLines = TreeEvaluator.evaluateTree(parseTree, container, pattern);
+        ArrayList<String> processedFileLines = TreeEvaluator.evaluateTree(parseTree, container, pattern, typeSystemConverter, tsName);
         processedFileLines = processedFileLines
             .stream()
             .map(pattern::injectVarsToLine)
@@ -33,7 +42,8 @@ public class TreeEvaluator
         return new TranspileResult(fileName, processedFileLines);
     }
 
-    public static ArrayList<String> evaluateTree(TemplateASTree tree, Container container, Pattern pattern)
+    // TODO refactor passing of both typeSystemConverter and tsName
+    public static ArrayList<String> evaluateTree(TemplateASTree tree, Container container, Pattern pattern, TypeSystemConverter typeSystemConverter, String tsName)
     {
         Node rootNode = tree.getRoot ();
 
@@ -48,7 +58,7 @@ public class TreeEvaluator
                 Sentence sentence = (Sentence) currentNode;
                 String evaluatedSentence = null;
                 if(sentence.isInLoop()) {
-                    evaluatedSentence = sentence.evaluate();
+                    evaluatedSentence = sentence.evaluate(typeSystemConverter, tsName);
                 }
                 else if(pattern.mode == Pattern.ImportMode.ONCE_FOR_ENTITY) {
                     // TODO does this ever get hit? should be handled by sentence.evaluate
@@ -63,9 +73,9 @@ public class TreeEvaluator
                 }
 
                 if (evaluatedSentence != null) {
-                    eval.add (evaluatedSentence);
+                    eval.add(evaluatedSentence);
                 }
-                if (currentNode.left != null & sentence.isInLoop() == false) {
+                if (currentNode.left != null && sentence.isInLoop() == false) {
                     nodeStack.push(currentNode.left);
                 }
                 // TODO entities loop bug
@@ -75,7 +85,7 @@ public class TreeEvaluator
                 Foldable foldable = (Foldable) currentNode;
                 ArrayList<Node> nodes = foldable.evaluate(container);
                 Collections.reverse(nodes);
-                if (currentNode.left != null) {
+                if (currentNode.left != null && currentNode.left.context == null) {
                     nodeStack.push(currentNode.left);
                 }
                 for(Node node : nodes) {

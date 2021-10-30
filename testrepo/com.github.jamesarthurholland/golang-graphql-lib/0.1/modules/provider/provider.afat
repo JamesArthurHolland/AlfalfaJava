@@ -1,0 +1,17 @@
+{{ALFALFA -o provider.go }}
+package main_graphql_lib
+
+import (
+    "go.uber.org/dig"
+    {{ENTITIES}}
+    "{{GITHUB_REPO}}/{{en_tity}}"
+    {{/ENTITIES}}
+)
+
+func BuildContainer(container *dig.Container) *dig.Container {
+    {{ENTITIES}}
+	container.Provide({{en_tity}}.NewService)
+    {{/ENTITIES}}
+
+	return container
+}

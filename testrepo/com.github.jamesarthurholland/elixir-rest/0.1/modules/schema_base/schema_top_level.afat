@@ -1,11 +1,11 @@
 {{ALFALFA -o schema.ex}}
-defmodule ElixirRestWeb.Schema do
+defmodule {{Project}}Web.Schema do
   use Absinthe.Schema
 
-  alias ElixirRestWeb.Resolvers
+  alias {{Project}}Web.Resolvers
   # import Types
   import_types Absinthe.Type.Custom
-  import_types(ElixirRestWeb.Schema.Types)
+  import_types({{Project}}Web.Schema.Types)
 
   query do
     {{ENTITIES}}
@@ -14,6 +14,11 @@ defmodule ElixirRestWeb.Schema do
       # Resolver
       arg(:id, non_null(:string))
       resolve(&Resolvers.{{Entity}}Resolver.fetch/3)
+    end
+
+    @desc "List all {{en_tity}} by id"
+    field :{{en_tity}}_all, type: list_of(:{{en_tity}}_type) do
+      resolve(&Resolvers.{{Entity}}Resolver.all/3)
     end
 
     {{MAPPINGS}}

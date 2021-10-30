@@ -1,0 +1,10 @@
+{{ALFALFA -o types.ex}}
+defmodule ElixirRestWeb.Schema.Types do
+  use Absinthe.Schema.Notation
+
+  alias ElixirRestWeb.Schema.Types
+
+  {{ENTITIES}}
+  import_types(Types.{{Entity}}Type)
+  {{/ENTITIES}}
+end

@@ -1,4 +1,4 @@
-# ElixirRest
+# {{Project}}
 
 To start your Phoenix server:
 

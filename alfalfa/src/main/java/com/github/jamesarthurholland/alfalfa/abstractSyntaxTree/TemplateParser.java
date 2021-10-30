@@ -12,6 +12,9 @@ import com.github.jamesarthurholland.alfalfa.transpiler.TranspileResult;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Stack;
@@ -38,6 +41,8 @@ public class TemplateParser
     public static void writeCompilerResultToFile(String workingDirectory, TranspileResult transpileResult)
     {
         try {
+            Path parent = Paths.get(workingDirectory).resolve(Paths.get(transpileResult.getFileName())).getParent();
+            Files.createDirectories(parent);
             PrintWriter writer = new PrintWriter("" + workingDirectory + "/" + transpileResult.getFileName(), "UTF-8");
             for(String line : transpileResult.getOutput()) {
                 writer.println(line);
@@ -49,6 +54,8 @@ public class TemplateParser
         }
         catch(UnsupportedEncodingException e) {
             System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

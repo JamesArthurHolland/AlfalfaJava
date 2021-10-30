@@ -6,6 +6,7 @@ import com.github.jamesarthurholland.alfalfa.transpiler.TranspileResult;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.transpiler.TreeEvaluator;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,26 +16,26 @@ import java.util.stream.Collectors;
 
 public class TemplateFileHandler
 {
-    public static void handleTemplateFile(Pattern pattern, Path workingDirectory, Schema schema, Path fullInputPath) {
+    public static void handleTemplateFile(Pattern pattern, Path workingDirectory, Schema schema, Path fullInputPath, TypeSystemConverter typeSystemConverter) {
 
         if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY) {
-            evaluateTemplateFileForEntityInfo(fullInputPath, schema, fullInputPath, workingDirectory, pattern);
+            evaluateTemplateFileForEntityInfo(fullInputPath, schema, fullInputPath, workingDirectory, pattern, typeSystemConverter);
         }
         else if (pattern.mode == Pattern.ImportMode.ONCE_FOR_ENTITY) {
-            evaluateTemplateFileForSchema(fullInputPath, schema, fullInputPath, workingDirectory, pattern);
+            evaluateTemplateFileForSchema(fullInputPath, schema, fullInputPath, workingDirectory, pattern, typeSystemConverter);
         }
 
         // TODO not for each?
     }
 
-    public static void evaluateTemplateFileForEntityInfo(Path patternFilePath, Schema schema, Path fullInputPath, Path workingDirectory, Pattern pattern) {
+    public static void evaluateTemplateFileForEntityInfo(Path patternFilePath, Schema schema, Path fullInputPath, Path workingDirectory, Pattern pattern, TypeSystemConverter typeSystemConverter) {
         schema.getEntityInfo().forEach(entityInfo -> {
             Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullInputPath);
             Path fileOutputDirectoryPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule).getParent();
 
             if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY && DirectoryFileHandler.doesDirectoryNeedFolderSwap(filePathRelativeToModule, pattern)) {
-                fileOutputDirectoryPath = DirectoryFileHandler.outputPathForPatternFolderSwap(
-                        filePathRelativeToModule, fileOutputDirectoryPath, pattern, workingDirectory, entityInfo
+                fileOutputDirectoryPath = DirectoryFileHandler.applyFolderSwapIfNeeded(
+                        fullInputPath, fileOutputDirectoryPath, pattern, workingDirectory, entityInfo
                 );
             }
 
@@ -45,7 +46,7 @@ public class TemplateFileHandler
                 container.put(Container.ENTITY_INFO_KEY, entityInfo);
                 container.put(Container.SCHEMA_KEY, schema);
 
-                TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern); // TODO pass pattern here and do conditional based on variable mode
+                TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern, typeSystemConverter); // TODO pass pattern here and do conditional based on variable mode
                 TemplateParser.writeCompilerResultToFile(fileOutputDirectoryPath.toString(), transpileResult);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -55,7 +56,7 @@ public class TemplateFileHandler
 
 
 
-    public static void evaluateTemplateFileForSchema(Path patternFilePath, Schema schema, Path fullInputPath, Path workingDirectory, Pattern pattern) {
+    public static void evaluateTemplateFileForSchema(Path patternFilePath, Schema schema, Path fullInputPath, Path workingDirectory, Pattern pattern, TypeSystemConverter typeSystemConverter) {
         Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullInputPath);
         Path fileOutputDirectoryPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule).getParent();
 
@@ -64,7 +65,7 @@ public class TemplateFileHandler
 
             Container container = new Container();
             container.put(Container.SCHEMA_KEY, schema);
-            TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern); // TODO pass pattern here and do conditional based on variable mode
+            TranspileResult transpileResult = TreeEvaluator.runAlfalfa(lines, container, pattern, typeSystemConverter); // TODO pass pattern here and do conditional based on variable mode
             TemplateParser.writeCompilerResultToFile(fileOutputDirectoryPath.toString(), transpileResult);
         } catch (IOException e) {
             e.printStackTrace();

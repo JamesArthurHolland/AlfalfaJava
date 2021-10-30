@@ -1,8 +1,8 @@
 {{ALFALFA -o {{en_tity}}_service.ex}}
-defmodule {{PROJECT}}.{{Entity}}Service do
+defmodule {{Project}}.{{Entity}}Service do
   require Logger
 
-  alias {{PROJECT}}.{{Entity}}Entity
+  alias {{Project}}.{{Entity}}Entity
 
   def all() do
 
@@ -16,8 +16,10 @@ defmodule {{PROJECT}}.{{Entity}}Service do
       {{/VARS}}
           {{VARS}}
           {{KEY}}{{var}}{{/KEY}}
-          {{NOT-KEY NOT-LAST}}{{var}}{{/NOT-KEY}}
+          {{NOT-KEY}}{{var}}{{/NOT-KEY}}
           {{/VARS}}
+          createdAt
+          updatedAt
         }
       }
     """,
@@ -26,7 +28,7 @@ defmodule {{PROJECT}}.{{Entity}}Service do
 
     case response do
       {:ok, response} ->
-        response.body["data"]["{{entity}}"]
+        {:ok, response.body["data"]["{{entity}}"]}
       {:error, error} -> Logger.debug(error.error)
     end
   end
@@ -37,8 +39,10 @@ defmodule {{PROJECT}}.{{Entity}}Service do
           create{{Entity}}(input: $input) {
             {{VARS}}
             {{KEY}}{{var}}{{/KEY}}
-            {{NOT-KEY NOT-LAST}}{{var}}{{/NOT-KEY}}
+            {{NOT-KEY}}{{var}}{{/NOT-KEY}}
             {{/VARS}}
+            createdAt
+            updatedAt
           }
         }
       """,
@@ -54,6 +58,64 @@ defmodule {{PROJECT}}.{{Entity}}Service do
     end
   end
 
+  {{VARS}}
+  {{KEY}}def update({{v_ar}}, {{entity}}_params) do{{/KEY}}
+  {{/VARS}}
+    response = Neuron.query("""
+          {{VARS}}
+      {{KEY}}mutation update{{Entity}}(${{var}}: String!, $input: {{Entity}}InputType!) {{{/KEY}}
+        {{KEY}}update{{Entity}}({{var}}: ${{var}}, input: $input){{{/KEY}}
+          {{KEY}}{{var}}{{/KEY}}
+          {{NOT-KEY}}{{var}}{{/NOT-KEY}}
+          {{/VARS}}
+          createdAt
+          updatedAt
+        }
+      }
+    """,
+      %{
+        {{VARS}}
+        {{KEY}}{{var}}: {{v_ar}},{{/KEY}}
+        {{/VARS}}
+        input: {{entity}}_params
+      }
+    )
+
+    Logger.debug("response is #{inspect(response)}}")
+
+    case response do
+      {:ok, response} ->
+        {:ok, response.body["data"]["update{{Entity}}"]}
+      {:error, error} -> {:error, error}
+    end
+  end
+
+  def delete(id) do
+    response = Neuron.query("""
+      {{VARS}}
+      {{KEY}}mutation delete{{Entity}}(${{var}}: String!) {{{/KEY}}
+        {{KEY}}delete{{Entity}}({{var}}: ${{var}}) {{{/KEY}}
+          {{var}}
+      {{/VARS}}
+          createdAt
+          updatedAt
+        }
+      }
+    """,
+      %{
+        id: id
+      }
+    )
+
+    Logger.debug("response is #{inspect(response)}}")
+
+    case response do
+      {:ok, response} ->
+        {:ok, response.body["data"]["delete{{Entity}}"]}
+      {:error, error} -> {:error, error}
+    end
+  end
+
   {{MAPPINGS}}
   def fetch_by_{{in_dex}}({{in_dex}}) do
     response = Neuron.query("""
@@ -61,9 +123,12 @@ defmodule {{PROJECT}}.{{Entity}}Service do
         {{entity}}By{{Index}}({{index}}: ${{index}}) {
           {{VARS}}
           {{KEY}}{{var}}{{/KEY}}
-          {{NOT-KEY NOT-LAST}}{{var}}{{/NOT-KEY}}
+          {{NOT-KEY}}{{var}}{{/NOT-KEY}}
           {{/VARS}}
+          createdAt
+          updatedAt
       }
+    }
     """,
       %{{{index}}: {{in_dex}}}
     )

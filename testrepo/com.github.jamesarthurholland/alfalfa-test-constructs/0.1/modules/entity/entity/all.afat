@@ -1,10 +1,5 @@
 {{ALFALFA -o {{Entity}}.php}}
-
-entity {{en_tity}}
 {{VARS}}
 {{v_ar}}
-
-
 {{/VARS}}
-
-{{entity}}
+aftervars

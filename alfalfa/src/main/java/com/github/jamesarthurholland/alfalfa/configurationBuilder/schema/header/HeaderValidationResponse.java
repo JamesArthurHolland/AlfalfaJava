@@ -11,16 +11,18 @@ public class HeaderValidationResponse
 
     protected int validationCode = 0;
     protected String fileName;
+    protected String typeSystemName;
 
     public HeaderValidationResponse(int validationCode)
     {
         this.validationCode = validationCode;
     }
 
-    public HeaderValidationResponse(int validationCode, String fileName)
+    public HeaderValidationResponse(int validationCode, String fileName, String typeSystemName)
     {
         this.validationCode = validationCode;
         this.fileName = fileName;
+        this.typeSystemName = typeSystemName;
     }
 
     public int getValidationCode() {
@@ -46,5 +48,9 @@ public class HeaderValidationResponse
     public String getFileName()
     {
         return this.fileName;
+    }
+
+    public String getTypeSystemName() {
+        return typeSystemName;
     }
 }

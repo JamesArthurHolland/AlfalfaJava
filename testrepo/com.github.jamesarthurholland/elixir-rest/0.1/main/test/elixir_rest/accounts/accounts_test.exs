@@ -1,10 +1,10 @@
-defmodule ElixirRest.UsersTest do
-  use ElixirRest.DataCase
+defmodule {{Project}}.UsersTest do
+  use {{Project}}.DataCase
 
-  alias ElixirRest.Users
+  alias {{Project}}.Users
 
   describe "users" do
-    alias ElixirRest.Users.User
+    alias {{Project}}.Users.User
 
     @valid_attrs %{
       "business_name,": "some business_name,",
@@ -105,7 +105,7 @@ defmodule ElixirRest.UsersTest do
   end
 
   describe "users" do
-    alias ElixirRest.Users.User
+    alias {{Project}}.Users.User
 
     @valid_attrs %{
       business_name: "some business_name",

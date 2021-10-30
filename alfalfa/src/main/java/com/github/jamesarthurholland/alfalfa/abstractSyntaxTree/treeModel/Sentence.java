@@ -1,5 +1,8 @@
 package com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.treeModel;
 
+import com.github.jamesarthurholland.alfalfa.abstractSyntaxTree.Container;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
+
 public class Sentence extends Node implements Cloneable
 {
     private String sentence;
@@ -16,7 +19,17 @@ public class Sentence extends Node implements Cloneable
     }
 
     public boolean isInLoop() {
-        return context != null;
+        if (context == null) {
+            return false;
+        }
+        return true;
+//        Container.VarLoopStatus status = (Container.VarLoopStatus) context.container.getOrDefault(Container.IS_IN_VAR_LOOP, null);
+//
+//        if (status == null) {
+//            return false;
+//        }
+//
+//        return status.isInVarLoop();
     }
 
     @Override
@@ -63,11 +76,11 @@ public class Sentence extends Node implements Cloneable
         return type;
     }
 
-    public String evaluate() {
+    public String evaluate(TypeSystemConverter typeSystemConverter, String langName) {
         if (this.context == null) {
             return sentence;
         }
-        return this.context.evaluator.evaluate(sentence);
+        return this.context.evaluator.evaluate(sentence, typeSystemConverter, langName);
     }
 
 }

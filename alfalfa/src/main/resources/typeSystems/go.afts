@@ -1,0 +1,12 @@
+bool=bool
+int=int
+int4=int4
+int16=int16
+int32=int32
+int64=int64
+uint=uint
+uint4=uint4
+uint16=uint16
+uint32=uint32
+uint64=uint64
+string=string

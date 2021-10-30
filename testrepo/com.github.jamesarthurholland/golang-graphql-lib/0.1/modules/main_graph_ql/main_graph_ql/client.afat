@@ -1,0 +1,38 @@
+{{ALFALFA -o client.go }}
+package main_graph_ql
+
+import (
+    "fmt"
+    "log"
+    "os"
+    "github.com/hasura/go-graphql-client"
+)
+
+
+type DataPersistenceHost string
+type DataPersistencePort string
+type DataPersistenceUrl string
+
+type Client *graphql.Client
+
+func CreateMainGraphQLClient(url DataPersistenceUrl) Client {
+    return graphql.NewClient(string(url), nil)
+}
+
+func GetDataPersistenceUrl(host DataPersistenceHost, port DataPersistencePort) DataPersistenceUrl {
+    return DataPersistenceUrl(fmt.Sprintf("http://%s:%s/api/graphql", host, port))
+}
+
+func GetPersistenceUrlParts() (DataPersistenceHost, DataPersistencePort) {
+    portString := os.Getenv("{{PROJECT}}_PORT")
+    if portString == "" {
+        log.Fatalln("{{PROJECT}}_PORT env var not set.")
+    }
+
+    hostString := os.Getenv("{{PROJECT}}_HOST")
+    if hostString == "" {
+        log.Fatalln("{{PROJECT}}_HOST env var not set.")
+    }
+
+    return DataPersistenceHost(hostString), DataPersistencePort(portString)
+}

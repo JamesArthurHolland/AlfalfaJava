@@ -4,6 +4,7 @@ import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Mapping;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Variable;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
 
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class SentenceIndexEvaluator implements Cloneable, SentenceEvaluator
 //        this.entityInfo = evaluator.entityInfo;
 //    }
 
-    public String evaluate(String sentence)
+    public String evaluate(String sentence, TypeSystemConverter converter, String langName)
     {
         String generatedSentence = evaluateForEntityReplacements(sentence, entityInfo);
 
@@ -52,7 +53,6 @@ public class SentenceIndexEvaluator implements Cloneable, SentenceEvaluator
 
         if (generatedSentence != null) {
             generatedSentence = replaceIndicesInString (givenVar, generatedSentence);
-            generatedSentence = replaceTypesInString(givenVar, generatedSentence);
             generatedSentence = replaceVisibilityInString(givenVar, generatedSentence);
         }
         generatedSentence = StringUtils.evaluateForNamespace(generatedSentence, entityInfo);
@@ -102,16 +102,6 @@ public class SentenceIndexEvaluator implements Cloneable, SentenceEvaluator
 
             // TODO childEntity and parentEntity
         }
-
-        return outputString;
-    }
-
-    public static String replaceTypesInString(Variable givenVar, String sentence)
-    {
-        String outputString = sentence.replaceAll("\\{\\{type\\}\\}", givenVar.getType());
-        outputString = outputString.replaceAll("\\{\\{t_ype\\}\\}", camelToLowerUnderScore(givenVar.getType()));
-        outputString = outputString.replaceAll("\\{\\{TYPE\\}\\}", camelToUpperUnderScore(givenVar.getType()));
-        outputString = outputString.replaceAll("\\{\\{Type\\}\\}", uppercaseFirst(givenVar.getType()));
 
         return outputString;
     }

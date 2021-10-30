@@ -1,0 +1,76 @@
+{{ALFALFA -o schema.ex}}
+defmodule ElixirRestWeb.Schema do
+  use Absinthe.Schema
+
+  alias ElixirRestWeb.Resolvers
+  # import Types
+  import_types Absinthe.Type.Custom
+  import_types(ElixirRestWeb.Schema.Types)
+
+  query do
+    {{ENTITIES}}
+    @desc "Fetch a {{en_tity}} by id"
+    field :{{en_tity}}, type: :{{en_tity}}_type do
+      # Resolver
+      arg(:id, non_null(:string))
+      resolve(&Resolvers.{{Entity}}Resolver.fetch/3)
+    end
+
+    @desc "List all {{en_tity}} by id"
+    field :{{en_tity}}_all, type: list_of(:{{en_tity}}_type) do
+      resolve(&Resolvers.{{Entity}}Resolver.all/3)
+    end
+
+    {{MAPPINGS}}
+    {{X2M}}
+    @desc "Fetch {{en_tity}} by {{in_dex}}"
+    field :{{en_tity}}_by_{{in_dex}}, type: list_of(:{{en_tity}}_type) do
+      arg(:{{in_dex}}, non_null(:string))
+      resolve(&Resolvers.{{Entity}}Resolver.fetch_by_{{in_dex}}/3)
+    end
+    {{/X2M}}
+
+    {{121}}
+    @desc "Fetch {{en_tity}} by {{in_dex}}"
+    field :{{en_tity}}_by_{{in_dex}}, type: :{{en_tity}}_type do
+      arg(:{{in_dex}}, non_null(:string))
+      resolve(&Resolvers.{{Entity}}Resolver.fetch_by_{{in_dex}}/3)
+    end
+    {{/121}}
+
+    {{/MAPPINGS}}
+
+    {{/ENTITIES}}
+
+
+  end
+
+  mutation do
+    {{ENTITIES}}
+    @desc "Create a new {{en_tity}}"
+    field :create_{{en_tity}}, type: :{{en_tity}}_type do
+      arg(:input, non_null(:{{en_tity}}_input_type))
+      resolve(&Resolvers.{{Entity}}Resolver.create_{{en_tity}}/3)
+    end
+
+    @desc "Update a {{en_tity}}"
+    field :update_{{en_tity}}, type: :{{en_tity}}_type do
+      arg(:id, non_null(:string))
+      arg(:input, non_null(:{{en_tity}}_input_type))
+      resolve(&Resolvers.{{Entity}}Resolver.update_{{en_tity}}/2)
+    end
+
+    @desc "Delete a {{en_tity}}"
+    field :delete_{{en_tity}}, type: :{{en_tity}}_type do
+      arg(:id, non_null(:string))
+      resolve(&Resolvers.{{Entity}}Resolver.delete_{{en_tity}}/2)
+    end
+
+    {{/ENTITIES}}
+  end
+
+
+  #subscription do
+  #end
+
+end

@@ -71,8 +71,6 @@ public class StringUtils {
         return sentence;
     }
 
-
-
     public static Path processPathEntityReplacement(Path fileOutputDirectoryPath, EntityInfo info) {
         return Paths.get(StringUtils.evaluateForEntityReplacements(fileOutputDirectoryPath.toString(), info));
     }
@@ -90,6 +88,8 @@ public class StringUtils {
         return Files.getFileExtension(path.toString()).equals(StringUtils.TEMPLATE_EXTENSION);
     }
 
+
+
     public static String camelToLowerUnderScore(String variableString)
     {
         OptionalInt firstChar = variableString.chars().findFirst();
@@ -98,6 +98,9 @@ public class StringUtils {
             char first = (char) firstChar.getAsInt();
             if(Character.isUpperCase(first) && numberOfUpperCases(variableString) == 1) {
                 return variableString.toLowerCase();
+            }
+            if(Character.isUpperCase(first)) {
+                variableString = Character.toLowerCase(variableString.charAt(0)) + variableString.substring(1);
             }
         }
         String StringParts = variableString.replaceAll("([A-Z])", "_$1");

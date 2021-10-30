@@ -1,5 +1,5 @@
-defmodule ElixirRest.Repo do
-  use Ecto.Repo, otp_app: :elixir_rest
+defmodule {{Project}}.Repo do
+  use Ecto.Repo, otp_app: :{{pro_ject}}
 
   @doc """
   Dynamically loads the repository url from the

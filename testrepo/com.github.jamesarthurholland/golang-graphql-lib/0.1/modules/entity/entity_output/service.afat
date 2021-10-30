@@ -1,0 +1,130 @@
+{{ALFALFA -o {{en_tity}}_service.go -ts go-graphql-client-lib }}
+package {{en_tity}}
+
+import (
+    "context"
+    "fmt"
+    "github.com/hasura/go-graphql-client"
+    "{{GITHUB_REPO}}/main_graph_ql"
+)
+
+type Service struct {
+    client *graphql.Client
+}
+
+type {{Entity}}AllQuery struct {
+    Result []{{Entity}}Entity `graphql:"{{entity}}All"`
+}
+type {{Entity}}ByIdQuery struct {
+    Result {{Entity}}Entity `graphql:"{{entity}}(id: $id)"`
+}
+type Create{{Entity}}Query struct {
+    Result {{Entity}}Entity `graphql:"create{{Entity}}(input: $input)"`
+}
+type Update{{Entity}}Query struct {
+    Result {{Entity}}Entity `graphql:"update{{Entity}}(id: $id, input: $input)"`
+}
+
+{{MAPPINGS}}
+{{121}}
+type {{Entity}}By{{Index}}Query struct {
+    Result {{Entity}}Entity `graphql:"{{entity}}By{{Index}}({{index}}: ${{index}})"`
+}
+{{/121}}
+
+{{X2M}}
+type {{entity}}By{{Index}}Query struct {
+    Result []{{Entity}}Entity `graphql:"{{entity}}By{{Index}}({{index}}: ${{index}})"`
+}
+{{/X2M}}
+{{/MAPPINGS}}
+
+func NewService(client main_graph_ql.Client) *Service {
+    return &Service{
+        client: client,
+    }
+}
+
+func(s *Service) All() ([]*{{Entity}}Entity, error) {
+    var query {{Entity}}AllQuery
+    err := s.client.Query(context.Background(), &query, nil)
+    if(err != nil) {
+        return nil, err
+    }
+
+    var pointerSlice []*{{Entity}}Entity
+    for i := 0; i < len(query.Result); i++ {
+    	pointerSlice = append(pointerSlice, &query.Result[i])
+    }
+
+
+    return pointerSlice, nil
+}
+
+func(s *Service) Fetch(id string) (*{{Entity}}Entity, error) {
+    variables := map[string]interface{}{
+        "{{entity}}Id": graphql.String(id),
+    }
+
+    var query {{Entity}}ByIdQuery
+    err := s.client.Query(context.Background(), &query, variables)
+    if(err != nil) {
+        return nil, err
+    }
+
+    return &query.Result, nil
+}
+
+{{MAPPINGS}}
+{{121}}
+func(s *Service) FetchBy{{Index}}({{in_dex}} string) (*{{Entity}}Entity, error) {
+    variables := map[string]interface{}{
+        "{{index}}": graphql.String({{in_dex}}),
+    }
+
+    var query {{Entity}}By{{Index}}Query
+    err := s.client.Query(context.Background(), &query, variables)
+    if(err != nil) {
+        return nil, err
+    }
+
+    return &query.Result, err
+}
+{{/121}}
+
+{{/MAPPINGS}}
+
+func(s *Service) Create(input *{{Entity}}InputType) (*{{Entity}}Entity, error) {
+	variables := map[string]interface{}{
+		"input": input,
+	}
+
+	var query Create{{Entity}}Query
+	err := s.client.Mutate(context.Background(), &query, variables)
+	if(err != nil) {
+		return nil, err
+	}
+
+	return &query.Result, nil
+}
+
+func(s *Service) Update(inputEntity *{{Entity}}Entity) (*{{Entity}}Entity, error) {
+    input := NewInputType(inputEntity)
+
+	variables := map[string]interface{}{
+	    "id": graphql.String(input.Id),
+		"input": input,
+	}
+
+	var query Update{{Entity}}Query
+    fmt.Println("vars:")
+    fmt.Println(variables)
+	err := s.client.Mutate(context.Background(), &query, variables)
+    if(err != nil) {
+        fmt.Println("here3-----")
+        return nil, err
+    }
+
+	return &query.Result, nil
+}
+

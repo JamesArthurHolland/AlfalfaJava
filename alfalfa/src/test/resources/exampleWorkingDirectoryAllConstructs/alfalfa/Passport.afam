@@ -1,4 +1,5 @@
 com.exampleapp.test.Passport
+t passports
 k o long id
 v o int countryOfIssue
 v o long studentId 121<-com.exampleapp.test.Student.id

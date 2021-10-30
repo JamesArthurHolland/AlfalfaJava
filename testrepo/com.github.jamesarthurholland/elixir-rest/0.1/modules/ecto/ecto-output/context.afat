@@ -1,14 +1,14 @@
 {{ALFALFA -o {{en_tity}}.ex}}
-defmodule ElixirRest.{{Entity}} do
+defmodule {{Project}}.{{Entity}} do
   @moduledoc """
   The {{Entity}} context.
   """
 
   import Ecto.UUID
   import Ecto.Query, warn: false
-  alias ElixirRest.Repo
+  alias {{Project}}.Repo
 
-  alias ElixirRest.{{Entity}}.{{Entity}}Entity
+  alias {{Project}}.{{Entity}}.{{Entity}}Entity
 
   @doc """
   Returns the list of {{en_tity}}.
@@ -41,8 +41,13 @@ defmodule ElixirRest.{{Entity}} do
 
 
   {{MAPPINGS}}
-  def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.all({{Entity}}Entity, {{in_dex}}: {{in_dex}})
+  {{X2M}}
+  def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.all(from e in {{Entity}}Entity, where: e.{{in_dex}} == ^{{in_dex}})
+  {{/X2M}}
 
+  {{121}}
+  def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.get_by(from e in {{Entity}}Entity, where: e.{{in_dex}} == ^{{in_dex}})
+  {{/121}}
   {{/MAPPINGS}}
 
   @doc """

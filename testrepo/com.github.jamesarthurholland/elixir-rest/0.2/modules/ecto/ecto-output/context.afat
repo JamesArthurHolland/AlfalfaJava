@@ -1,0 +1,119 @@
+{{ALFALFA -o {{en_tity}}.ex}}
+defmodule ElixirRest.{{Entity}} do
+  @moduledoc """
+  The {{Entity}} context.
+  """
+
+  import Ecto.UUID
+  import Ecto.Query, warn: false
+  alias ElixirRest.Repo
+
+  alias ElixirRest.{{Entity}}.{{Entity}}Entity
+
+  @doc """
+  Returns the list of {{en_tity}}.
+
+  ## Examples
+
+      iex> list_{{en_tity}}()
+      [%{{Entity}}Entity{}, ...]
+
+  """
+  def list_{{en_tity}} do
+    Repo.all({{Entity}}Entity)
+  end
+
+  @doc """
+  Gets a single {{en_tity}}.
+
+  Raises `Ecto.NoResultsError` if the {{Entity}} does not exist.
+
+  ## Examples
+
+      iex> get_{{en_tity}}!(123)
+      %{{Entity}}Entity{}
+
+      iex> get_{{en_tity}}!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def fetch(id), do: Repo.get({{Entity}}Entity, id)
+
+
+  {{MAPPINGS}}
+  {{X2M}}
+  def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.all({{Entity}}Entity, {{in_dex}}: {{in_dex}})
+  {{/X2M}}
+
+  {{121}}
+  def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.get_by(from e in {{Entity}}Entity, where: e.{{in_dex}} == ^{{in_dex}})
+  {{/121}}
+  {{/MAPPINGS}}
+
+  @doc """
+  Creates a {{en_tity}}.
+
+  ## Examples
+
+      iex> create_{{en_tity}}(%{field: value})
+      {:ok, %{{Entity}}Entity{}}
+
+      iex> create_{{en_tity}}(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_{{en_tity}}(attrs \\ %{}) do
+    attrs = Map.put(attrs, :id, Ecto.UUID.generate)
+
+    %{{Entity}}Entity{}
+    |> {{Entity}}Entity.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a {{en_tity}}.
+
+  ## Examples
+
+      iex> update_{{en_tity}}({{en_tity}}, %{field: new_value})
+      {:ok, %{{Entity}}Entity{}}
+
+      iex> update_{{en_tity}}({{en_tity}}, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_{{en_tity}}(%{{Entity}}Entity{} = {{en_tity}}, attrs) do
+    {{en_tity}}
+    |> {{Entity}}Entity.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a {{Entity}}.
+
+  ## Examples
+
+      iex> delete_{{en_tity}}({{en_tity}})
+      {:ok, %{{Entity}}Entity{}}
+
+      iex> delete_{{en_tity}}({{en_tity}})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_{{en_tity}}(%{{Entity}}Entity{} = {{en_tity}}) do
+    Repo.delete({{en_tity}})
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking {{en_tity}} changes.
+
+  ## Examples
+
+      iex> change_{{en_tity}}({{en_tity}})
+      %Ecto.Changeset{source: %{{Entity}}Entity{}}
+
+  """
+  def change_{{en_tity}}(%{{Entity}}Entity{} = {{en_tity}}) do
+    {{Entity}}Entity.changeset({{en_tity}}, %{})
+  end
+end

@@ -1,6 +1,7 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuilder.schema;
 
 import com.esotericsoftware.minlog.Log;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -68,12 +69,12 @@ public class ModelFileScanner
 
                         String mappingDefinition = lineArray[4];
                         String[] mappingKeyArray = mappingDefinition.split("<-");
-                        Mapping.Type mappingType = Mapping.Type.ONE_TO_ONE;
+                        Mapping.Type mappingType = Mapping.Type.ONE_TO_ONE; // TODO don't default. Change if its null and throw error for input handling
 
                         if(mappingKeyArray[0].equals("121")) { // TODO error for unknown mapping code
                             mappingType = Mapping.Type.ONE_TO_ONE;
                         }
-                        if(mappingKeyArray[0].equals("12M")) { // TODO error for unknown mapping code
+                        if(mappingKeyArray[0].equals("12M") || mappingKeyArray[0].equals("12m")) { // TODO error for unknown mapping code
                             mappingType = Mapping.Type.ONE_TO_MANY;
                         }
 

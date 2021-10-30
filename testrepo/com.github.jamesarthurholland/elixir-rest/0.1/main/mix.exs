@@ -1,9 +1,9 @@
-defmodule ElixirRest.Mixfile do
+defmodule {{Project}}.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :elixir_rest,
+      app: :{{pro_ject}},
       version: "0.0.1",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule ElixirRest.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {ElixirRest.Application, []},
+      mod: { {{Project}}.Application, [] },
       extra_applications: [:confex, :logger, :runtime_tools, :mariaex] # mariaex is for mysql, remove for postgres
     ]
   end

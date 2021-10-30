@@ -20,6 +20,7 @@ public class PatternFileScanner {
     public static String LOCATION_KEY = "location";
     public static String MODE_KEY = "mode";
     public static String NAME_KEY = "name";
+    public static String PROJECT_KEY = "project";
     public static String SWAP_NAME_KEY = "swap";
     public static String VERSION_KEY = "version";
     public static String VARS_KEY = "vars";
@@ -195,6 +196,7 @@ public class PatternFileScanner {
         public PatternBuilder addImportHashMap(LinkedHashMap<String, Object> importHashMap, PatternBuilder parentPatternBuilder) {
             if(importHashMap != null) {
                 String importName = (String) importHashMap.get(NAME_KEY);
+                String importProject = importHashMap.get(PROJECT_KEY) == null ? parentPatternBuilder.patternTmp.project : (String) importHashMap.get(PROJECT_KEY);
                 String importVersion = (String) importHashMap.getOrDefault(VERSION_KEY, "");
                 String outputLocation = (String) importHashMap.getOrDefault(LOCATION_KEY, "./");
 
@@ -221,6 +223,7 @@ public class PatternFileScanner {
                 LinkedHashMap<String, String> folderSwaps = parseFolderSwapsFromHashMap(importHashMap, patternTmp.folderSwaps);
 
                 this.setName((String) importHashMap.get(NAME_KEY))
+                    .setProject(importProject)
                     .setVersion((String) importHashMap.get(VERSION_KEY))
                     .setVars(vars)
                     .setFolderSwaps(folderSwaps)
@@ -251,6 +254,11 @@ public class PatternFileScanner {
 
         public PatternBuilder setMode(Pattern.ImportMode mode) {
             patternTmp.mode = mode;
+            return this;
+        }
+
+        public PatternBuilder setProject(String project) {
+            patternTmp.project = Optional.ofNullable(patternTmp.project).orElse(project);
             return this;
         }
 

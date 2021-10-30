@@ -1,5 +1,6 @@
 package com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern;
 
+import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.hubspot.jinjava.Jinjava;
 import org.apache.commons.lang3.SerializationUtils;
 
@@ -15,6 +16,7 @@ import static java.util.Objects.requireNonNull;
 public class Pattern implements Serializable
 {
     public String name;
+    public String project;
     public String version;
     public ArrayList<Pattern> imports = new ArrayList<>();
 //    public HashMap<String, Pattern> imports = new HashMap<>();
@@ -35,11 +37,13 @@ public class Pattern implements Serializable
 
     public Pattern(
         String name,
+        String project,
         String version,
         LinkedHashMap<String, String> folderSwaps,
         LinkedHashMap<String, String> vars
     ) {
         this.name = requireNonNull(name, "The argument 'name' must not be null.");
+        this.project = requireNonNull(project, "The argument 'project' must not be null.");
         this.version = requireNonNull(version, "The argument 'version' must not be null.");
         this.folderSwaps = folderSwaps;
         this.vars = vars;
@@ -47,12 +51,14 @@ public class Pattern implements Serializable
 
     public Pattern(
         String name,
+        String project,
         String version,
         ArrayList<Pattern> imports,
         LinkedHashMap<String, String> folderSwaps,
         LinkedHashMap<String, String> vars
     ) {
         this.name = requireNonNull(name, "The argument 'name' must not be null.");
+        this.project = requireNonNull(project, "The argument 'project' must not be null.");
         this.version = requireNonNull(version, "The argument 'version' must not be null.");
         this.imports = imports;
         this.folderSwaps = folderSwaps;
@@ -76,7 +82,9 @@ public class Pattern implements Serializable
         if (outputPath == null) {
             return null;
         }
-        return Paths.get(outputPath);
+
+        String injectedOutputPath = injectVarsToLine(outputPath);
+        return Paths.get(injectedOutputPath);
     }
 
     public void setOutputPath(Path path) {
@@ -104,9 +112,20 @@ public class Pattern implements Serializable
     }
 
     public String injectVarsToLine(String line) {
+        if (line == null) {
+            return null;
+        }
         Jinjava jinjava = new Jinjava();
+
+        // TODO it throws error if no project
+        if (project != null) {
+            vars.putIfAbsent("project", project);
+            vars.putIfAbsent("pro_ject", StringUtils.camelToLowerUnderScore(project));
+            vars.putIfAbsent("PROJECT", StringUtils.camelToUpperUnderScore(project));
+            vars.putIfAbsent("Project", StringUtils.uppercaseFirst(project));
+        }
+
         String output = jinjava.render(line, vars);
         return output;
     }
-
 }

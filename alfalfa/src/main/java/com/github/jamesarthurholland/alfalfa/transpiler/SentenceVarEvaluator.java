@@ -3,6 +3,7 @@ package com.github.jamesarthurholland.alfalfa.transpiler;
 import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Variable;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,12 +28,12 @@ public class SentenceVarEvaluator implements Cloneable, SentenceEvaluator
         );
     }
 
-    //    public SentenceForEachEntityEvaluator(Variable givenVar, SentenceForEachEntityEvaluator evaluator) {
+//    public SentenceForEachEntityEvaluator(Variable givenVar, SentenceForEachEntityEvaluator evaluator) {
 //        this.givenVar = givenVar;
 //        this.entityInfo = evaluator.entityInfo;
 //    }
 
-    public String evaluate(String sentence)
+    public String evaluate(String sentence, TypeSystemConverter converter, String langName)
     {
         String generatedSentence = evaluateForEntityReplacements(sentence, entityInfo);
         generatedSentence = evaluateForKeyStatement (givenVar, generatedSentence);
@@ -51,7 +52,7 @@ public class SentenceVarEvaluator implements Cloneable, SentenceEvaluator
         generatedSentence = evaluateForLastStatement(givenVar, generatedSentence, entityInfo);
         if (generatedSentence != null) {
             generatedSentence = replaceVarsInString (givenVar, generatedSentence);
-            generatedSentence = replaceTypesInString(givenVar, generatedSentence);
+            generatedSentence = Utils.replaceTypesInString(givenVar, generatedSentence, converter, langName);
             generatedSentence = replaceVisibilityInString(givenVar, generatedSentence);
         }
         generatedSentence = StringUtils.evaluateForNamespace(generatedSentence, entityInfo);
@@ -62,7 +63,7 @@ public class SentenceVarEvaluator implements Cloneable, SentenceEvaluator
 
     public static String evaluateForNotKeyStatement (Variable givenVar, String sentence, EntityInfo entityInfo)
     {
-        Pattern patternForKey = Pattern.compile("(.*)\\{\\{NOT-KEY\\s+(NOT-LAST|LAST)?\\}\\}(.*)\\{\\{/NOT-KEY\\}\\}.*");
+        Pattern patternForKey = Pattern.compile("(.*)\\{\\{NOT-KEY\\s*(NOT-LAST|LAST)?\\}\\}(.*)\\{\\{/NOT-KEY\\}\\}.*");
         Pattern patternForKeyWholeGroup = Pattern.compile(".*(\\{\\{NOT-KEY\\}\\}.*\\{\\{/NOT-KEY\\}\\}).*");
         String generatedSentence = sentence;
         Matcher matcher = patternForKey.matcher(sentence);
@@ -70,20 +71,23 @@ public class SentenceVarEvaluator implements Cloneable, SentenceEvaluator
             if (!givenVar.isPrimary ()) {
                 generatedSentence = matcher.group(1) + SentenceVarEvaluator.replaceVarsInString (givenVar, matcher.group(3));
                 String lastOrNot = matcher.group(2);
-                if (lastOrNot.equals("NOT-LAST")) {
-                    if (!entityInfo.isVarLast (givenVar)) {
-                        return generatedSentence;
-                    } else {
-                        return null;
+                if (lastOrNot != null) {
+                    if (lastOrNot.equals("NOT-LAST")) {
+                        if (!entityInfo.isVarLast (givenVar)) {
+                            return generatedSentence;
+                        } else {
+                            return null;
+                        }
+                    }
+                    if (lastOrNot.equals("LAST")) {
+                        if (entityInfo.isVarLast (givenVar)) {
+                            return generatedSentence;
+                        } else {
+                            return null;
+                        }
                     }
                 }
-                if (lastOrNot.equals("LAST")) {
-                    if (entityInfo.isVarLast (givenVar)) {
-                        return generatedSentence;
-                    } else {
-                        return null;
-                    }
-                }
+
             }
             else {
                 return null;
@@ -151,37 +155,12 @@ public class SentenceVarEvaluator implements Cloneable, SentenceEvaluator
         return outputString;
     }
 
-//    protected String evaluateForNamespace(String sentence, EntityInfo entityInfo)
-//    {
-//        String nameSpace = entityInfo.getNameSpace();
-//        nameSpace = nameSpace.replaceAll("\\\\", "\\\\\\\\");
-//        String outputSentence = sentence.replaceAll("\\{\\{NAMESPACE\\}\\}", nameSpace);
-//        return outputSentence;
-//    }
-
-    public String replaceInputInString (Variable givenVar, String sentence)
-    {
-        String outputString = sentence.replaceAll("\\{\\{input\\}\\}", givenVar.getName());
-
-        return outputString;
-    }
-
     public static String replaceVarsInString(Variable givenVar, String sentence)
     {
         String outputString = sentence.replaceAll("\\{\\{var\\}\\}", givenVar.getName());
         outputString = outputString.replaceAll("\\{\\{v_ar\\}\\}", camelToLowerUnderScore(givenVar.getName()));
         outputString = outputString.replaceAll("\\{\\{VAR\\}\\}", camelToUpperUnderScore(givenVar.getName()));
         outputString = outputString.replaceAll("\\{\\{Var\\}\\}", uppercaseFirst(givenVar.getName()));
-
-        return outputString;
-    }
-
-    public static String replaceTypesInString(Variable givenVar, String sentence)
-    {
-        String outputString = sentence.replaceAll("\\{\\{type\\}\\}", givenVar.getType());
-        outputString = outputString.replaceAll("\\{\\{t_ype\\}\\}", camelToLowerUnderScore(givenVar.getType()));
-        outputString = outputString.replaceAll("\\{\\{TYPE\\}\\}", camelToUpperUnderScore(givenVar.getType()));
-        outputString = outputString.replaceAll("\\{\\{Type\\}\\}", uppercaseFirst(givenVar.getType()));
 
         return outputString;
     }

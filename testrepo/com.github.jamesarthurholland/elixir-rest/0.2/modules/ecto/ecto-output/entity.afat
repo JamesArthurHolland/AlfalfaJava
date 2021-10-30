@@ -1,0 +1,37 @@
+{{ALFALFA -o {{en_tity}}_entity.ex}}
+defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  {{VARS}}
+  {{KEY}}@primary_key {:id, :string, []}{{/KEY}}
+  {{KEY}}@derive {Phoenix.Param, key: :id}{{/KEY}}
+  {{/VARS}}
+  schema "{{table}}" do
+    {{VARS}}
+    {{NOT-KEY NOT-LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
+	{{/VARS}}
+	{{VARS}}
+    {{NOT-KEY LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
+	{{/VARS}}
+    field(:lock_version, :integer, default: 1)
+
+    timestamps(inserted_at: :created_at)
+
+  end
+
+  @doc false
+  def changeset({{en_tity}}, attrs) do
+    {{en_tity}}
+    |> cast(attrs, [
+      {{VARS}}
+      {{KEY}}:{{v_ar}},{{/KEY}}
+      {{NOT-KEY NOT-LAST}}:{{v_ar}},{{/NOT-KEY}}
+      {{/VARS}}
+      {{VARS}}
+      {{NOT-KEY LAST}}:{{v_ar}}{{/NOT-KEY}}
+      {{/VARS}}
+    ])
+    |> Ecto.Changeset.optimistic_lock(:lock_version)
+  end
+end

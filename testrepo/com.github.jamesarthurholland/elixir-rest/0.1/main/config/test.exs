@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :elixir_rest, ElixirRestWeb.Endpoint,
+config :{{pro_ject}}, {{Project}}Web.Endpoint,
   http: [port: 4001],
   server: false
 
@@ -10,10 +10,10 @@ config :elixir_rest, ElixirRestWeb.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-config :elixir_rest, ElixirRest.Repo,
+config :{{pro_ject}}, {{Project}}.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "elixir_rest_test",
+  database: "{{pro_ject}}_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

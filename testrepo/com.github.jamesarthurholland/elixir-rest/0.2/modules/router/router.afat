@@ -1,0 +1,29 @@
+{{ALFALFA -o router.ex}}
+defmodule ElixirRestWeb.Router do
+  use ElixirRestWeb, :router
+
+  forward "/health/live", Healthchex.Probes.Liveness
+  forward "/health/ready", Healthchex.Probes.Readiness
+
+  pipeline :api do
+    plug(:accepts, ["json"])
+  end
+
+  scope "/" do ElixirRestWeb
+    pipe_through(:api)
+
+    {{ENTITIES}}
+    resources "/{{en_tity}}", ElixirRestWeb.{{Entity}}Controller
+    {{/ENTITIES}}
+  end
+
+  scope "/api" do
+    pipe_through(:api)
+
+    forward("/graphql", Absinthe.Plug, schema: ElixirRestWeb.Schema, json_codec: Poison)
+
+    if Mix.env() == :dev do
+      forward("/graphiql", Absinthe.Plug.GraphiQL, schema: ElixirRestWeb.Schema, json_codec: Poison)
+    end
+  end
+end

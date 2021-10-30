@@ -1,9 +1,17 @@
 {{ALFALFA -o {{en_tity}}_resolver.ex}}
-defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
-  alias ElixirRest.{{Entity}}
-  alias ElixirRest.{{Entity}}.{{Entity}}Entity
+defmodule {{Project}}Web.Resolvers.{{Entity}}Resolver do
+  alias {{Project}}.{{Entity}}
+  alias {{Project}}.{{Entity}}.{{Entity}}Entity
 
   require Logger
+
+  def all(_, _, _) do
+    {{en_tity}} = {{Entity}}.list_{{en_tity}}()
+    case {{en_tity}} do
+      nil -> {:error, nil}
+      _   -> {:ok, {{en_tity}}}
+    end
+  end
 
   def fetch(_, %{id: id}, _) do
     {{en_tity}} = {{Entity}}.fetch(id)
@@ -23,6 +31,11 @@ defmodule ElixirRestWeb.Resolvers.{{Entity}}Resolver do
   end
 
   def update_{{en_tity}}(%{id: id, input: input}, _info) do
+    input = input
+      |> Map.from_struct
+      |> Enum.filter(fn {_, v} -> v != nil end)
+      |> Enum.into(%{})
+
     {{en_tity}}_result = {{Entity}}.fetch(id)
           |> {{Entity}}.update_{{en_tity}}(input)
 

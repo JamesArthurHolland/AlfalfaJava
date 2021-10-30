@@ -4,6 +4,7 @@ import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Patter
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.fileHandlers.DirectoryFileHandler;
 import com.github.jamesarthurholland.alfalfa.fileHandlers.TemplateFileHandler;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -13,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -22,35 +24,48 @@ public class Alfalfa {
 
     private final static Logger Log = Logger.getLogger(Alfalfa.class.getName());
 
-    public static void alfalfaSimpleRun(Path workingDirectory, Path templateDirectory, Schema config){
-//            ArrayList<Path> patterns = Files.list(Paths.get("patternFolderPathString"))
-
-//        config.getEntityInfo().forEach(entityInfo -> {
-//            try {
-//
-//                Files.list(templateDirectory)
-//                    .filter(StringUtils::fileIsTemplateFile)
-//                    .forEach(patternPath -> {
-//                        TemplateFileHandler.evaluateTemplateFileForEntityInfo(patternPath, entityInfo, workingDirectory);
-//                    });
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-
-//                    .collect(Collectors.toCollection(ArrayList::new));
-    }
-
     public static boolean pathIsNotTheModuleRootFolder(Path path, Pattern pattern) {
         return ! Files.isDirectory(path) || (Files.isDirectory(path) && ! pattern.getPatternRepoPath().relativize(path).toString().isEmpty());
     }
 
-    public static void alfalfaRun(Path workingDirectory, Schema config, Pattern rootPattern) {
+    private static void createFoldersAndStaticFiles(Path workingDirectory, Schema config, Pattern rootPattern) {
         Stack<Pattern> patternStack = new Stack();
         patternStack.add(rootPattern);
 
         while( ! patternStack.empty() ) {
             Pattern pattern = patternStack.pop();
+            Log.info("pattern is " + pattern.name);
+            pattern.files.stream()
+                .sorted()
+                .map(Paths::get)
+                .filter(path -> FileUtils.isAlfalfaFile(path) == false)// TODO this doesnt work
+                .forEach(fullPath -> {
+                    Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullPath);
+
+                    Path filePathWithVars = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule);
+
+                    if (Files.isDirectory(fullPath)) {
+                        if (pattern.folderSwaps.containsKey(filePathRelativeToModule.toString()) == false) {
+                            DirectoryFileHandler.handle(workingDirectory, config, pattern, fullPath, filePathWithVars);
+                        }
+                    }
+                });
+            pattern.imports.forEach(patternStack::add);
+        }
+    }
+
+    public static void alfalfaRun(Path workingDirectory, Schema config, Pattern rootPattern, TypeSystemConverter converter) {
+//        createFoldersAndStaticFiles(workingDirectory, config, rootPattern);
+        handleFiles(workingDirectory, config, rootPattern, converter);
+    }
+
+    private static void handleFiles(Path workingDirectory, Schema config, Pattern rootPattern, TypeSystemConverter converter) {
+        Stack<Pattern> patternStack = new Stack();
+        patternStack.add(rootPattern);
+
+        while( ! patternStack.empty() ) {
+            Pattern pattern = patternStack.pop();
+
 
             pattern.files.stream()
                 .sorted()
@@ -58,30 +73,20 @@ public class Alfalfa {
                 .filter(path -> FileUtils.isAlfalfaFile(path) == false )// TODO this doesnt work
                 .filter(path -> pathIsNotTheModuleRootFolder(path, pattern))
                 .forEach(fullPath -> {
-                    Log.info("File is " + fullPath);
                     Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullPath);
 
-                    AtomicReference<Path> fileAbsoluteOutputPath = new AtomicReference<>(workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule));
-
-
+                    Path fileAbsoluteOutputPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(filePathRelativeToModule);
 
                     if(fileIsTemplateFile(fullPath)) {
-                        // TODO
-                        TemplateFileHandler.handleTemplateFile(pattern, workingDirectory, config, fullPath);
+                        Log.info("File1 is " + fullPath);
+                        TemplateFileHandler.handleTemplateFile(pattern, workingDirectory, config, fullPath, converter);
                     }
-                    else if (Files.isDirectory(fullPath)) {
-                        DirectoryFileHandler.handle(workingDirectory, config, pattern, fullPath, fileAbsoluteOutputPath.get());
+                    else if( !Files.isDirectory(fullPath) && !FileUtils.isAlfalfaFile(fullPath)) {
                         try {
-                            Files.createDirectories(fileAbsoluteOutputPath.get());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    else if( FileUtils.isEmptyDir(fullPath) || ! Files.isDirectory(fullPath) && !FileUtils.isAlfalfaFile(fullPath)) {
-                        try {
+                            Log.info("File2 is " + fullPath);
                             // TODO add file if doesn't exist, otherwise if exists, find the delta between this one and the last. Then add the diff. Don't delete any code that was added manually.
 
-// TODO folderSwap here if file is folder and folderfilePathRelativeToModule is listed in folder swaps
+                            // TODO folderSwap here if file is folder and folderfilePathRelativeToModule is listed in folder swaps
 
                             Log.info("Here not alfalfafile " + fullPath);
                             ArrayList<String> lines = Files.lines(fullPath, Charset.defaultCharset()) // TODO this breaks for binary files
@@ -89,29 +94,31 @@ public class Alfalfa {
                                     .collect(Collectors.toCollection(ArrayList::new));
 
                             try {
-                                org.apache.commons.io.FileUtils.writeLines(fileAbsoluteOutputPath.get().toFile(), lines);
+                                Path relativeRoot = filePathRelativeToModule.subpath(0, 1);
+                                if (pattern.folderSwaps.containsKey(relativeRoot.toString())) {
+                                    Path folderToSwap = Paths.get(pattern.patternRepoPath).resolve(relativeRoot);
+                                    Path swappedFolder = DirectoryFileHandler.applyFolderSwapIfNeeded(folderToSwap, relativeRoot, pattern, workingDirectory, null);
+                                    Path fileRelativeToSwapFolder = filePathRelativeToModule.subpath(1, filePathRelativeToModule.getNameCount());
+                                    fileAbsoluteOutputPath = swappedFolder.resolve(fileRelativeToSwapFolder);
+                                }
+                                org.apache.commons.io.FileUtils.writeLines(fileAbsoluteOutputPath.toFile(), lines);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
 
-//                            Files.copy(fullPath, fileAbsoluteOutputPath, REPLACE_EXISTING);
+                            //                            Files.copy(fullPath, fileAbsoluteOutputPath, REPLACE_EXISTING);
                         } catch (Exception e1) {
                             Log.warning("File " + fullPath.toString() + " is a binary, copying without touching. Are you sure you need this binary?");
+                            Log.warning(e1.getMessage());
                             e1.printStackTrace();
                         }
                         return;
                     }
-
-                    System.out.println(filePathRelativeToModule);
-                    System.out.println(fileAbsoluteOutputPath);
-                    System.out.println("\n");
                 });
 
             pattern.imports.forEach(patternStack::add);
         }
     }
-
-
 
 
 }

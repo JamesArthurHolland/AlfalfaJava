@@ -1,0 +1,27 @@
+{{ALFALFA -o {{en_tity}}_type.ex}}
+defmodule ElixirRestWeb.Schema.Types.{{Entity}}Type do
+  use Absinthe.Schema.Notation
+
+  object :{{en_tity}}_type do
+    {{VARS}}
+    field(:{{v_ar}}, :{{type}})
+	{{/VARS}}
+    field(:lock_version, :integer)
+    field(:created_at, :naive_datetime)
+    field(:updated_at, :naive_datetime)
+  end
+
+  # TODO validation of nullables
+  input_object :{{en_tity}}_input_type do
+    {{VARS}}
+    {{KEY}}field(:{{v_ar}}, :{{type}}){{/KEY}}
+    {{NOT-KEY NOT-LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
+	{{/VARS}}
+	{{VARS}}
+    {{NOT-KEY LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
+	{{/VARS}}
+    field(:lock_version, :integer)
+    field(:created_at, :naive_datetime)
+    field(:updated_at, :naive_datetime)
+  end
+end

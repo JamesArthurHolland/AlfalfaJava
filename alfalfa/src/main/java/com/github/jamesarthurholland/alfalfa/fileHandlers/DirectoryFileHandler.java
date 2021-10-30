@@ -1,5 +1,6 @@
 package com.github.jamesarthurholland.alfalfa.fileHandlers;
 
+import com.esotericsoftware.minlog.Log;
 import com.github.jamesarthurholland.alfalfa.FileUtils;
 import com.github.jamesarthurholland.alfalfa.transpiler.SentenceVarEvaluator;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
@@ -14,27 +15,50 @@ import java.util.Map;
 
 public class DirectoryFileHandler
 {
-    public static void handle(Path workingDirectory, Schema config, Pattern pattern, Path fullInputPath, Path fileAbsoluteOutputPath) {
-        Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullInputPath);
-
-
-        if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY && doesDirectoryNeedFolderSwap(filePathRelativeToModule, pattern)) {
-            config.getEntityInfo().forEach(entityInfo -> {
-                Path fileAbsoluteOutputPathNew = outputPathForPatternFolderSwap(filePathRelativeToModule, fileAbsoluteOutputPath, pattern, workingDirectory, entityInfo);
-                try {
-                    Files.createDirectories(fileAbsoluteOutputPathNew);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+    public static void handle(Path workingDirectory, Schema config, Pattern pattern, Path fullInputPath, Path pathUnswapped) {
+        Log.info("In folder is " + fullInputPath);
+        if(pattern.mode == Pattern.ImportMode.ONCE_FOR_ENTITY ) {
+            createDirectory(workingDirectory, pattern, fullInputPath, pathUnswapped, null);
         }
-        else if(FileUtils.isEmptyDir(fullInputPath)) {
-            try {
-                Files.createDirectories(fileAbsoluteOutputPath);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if(pattern.mode == Pattern.ImportMode.FOR_EACH_ENTITY ) {
+            for (EntityInfo entityInfo : config.getEntityInfo()) {
+                createDirectory(workingDirectory, pattern, fullInputPath, pathUnswapped, entityInfo);
+//                Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(filePath);
+//                Path fullPathUnswapped = pathUnswapped.resolve(filePathRelativeToModule);
+//                boolean created =
+//                if (created == false) {
+//                    continue;
+//                }
             }
         }
+//        else if(FileUtils.isEmptyDir(fullInputPath)) {
+//            try {
+//                Files.createDirectories(pathUnswapped);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+    }
+
+    private static boolean createDirectory(Path workingDirectory, Pattern pattern, Path fullInputPath, Path pathUnswapped, EntityInfo info) {
+        try {
+            Path resolvedPath = applyFolderSwapIfNeeded(
+                    fullInputPath,
+                    pathUnswapped,
+                    pattern,
+                    workingDirectory,
+                    info
+            );
+            if (resolvedPath == null) {
+                return false;
+            }
+            Files.createDirectories(resolvedPath);
+            Log.info("Out folder is " + resolvedPath.toString());
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static boolean doesDirectoryNeedFolderSwap(Path relativePath, Pattern pattern) {
@@ -52,19 +76,30 @@ public class DirectoryFileHandler
         return childFolder.startsWith(parentFolder);
     }
 
-    public static Path outputPathForPatternFolderSwap(Path relativePath, Path unswapped, Pattern pattern, Path workingDirectory, EntityInfo entityInfo) {
-        Path outputPath = Paths.get(unswapped.toUri());
+    public static Path applyFolderSwapIfNeeded(Path fullInputPath, Path unswapped, Pattern pattern, Path workingDirectory, EntityInfo entityInfo) {
+        Path filePathRelativeToModule = pattern.getPatternRepoPath().relativize(fullInputPath);
+        if (filePathRelativeToModule.toString().isEmpty()) {
+            return null;
+        }
+        if (!doesDirectoryNeedFolderSwap(filePathRelativeToModule, pattern)) {
+            return unswapped;
+        }
+        Path resolvedPath = unswapped;
 
         for (Map.Entry<String, String> entry : pattern.folderSwaps.entrySet()) {
             String folderName = entry.getKey();
             String swapValue = entry.getValue();
 
-            if(isChildFolderInParentFolder(relativePath, Paths.get(folderName))) {
+            if(isChildFolderInParentFolder(filePathRelativeToModule, Paths.get(folderName))) {
                 String relativeFolderSwapped = unswapped.toString().replace(folderName, swapValue);
-                relativeFolderSwapped = SentenceVarEvaluator.evaluateForEntityReplacements(relativeFolderSwapped, entityInfo);
-                outputPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(relativeFolderSwapped);
+                if (entityInfo != null) {
+                    relativeFolderSwapped = SentenceVarEvaluator.evaluateForEntityReplacements(relativeFolderSwapped, entityInfo);
+                }
+                resolvedPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(relativeFolderSwapped);
+                String pathStringInjected = pattern.injectVarsToLine(resolvedPath.toString());
+                resolvedPath = Paths.get(pathStringInjected);
             }
         }
-        return outputPath;
+        return resolvedPath;
     }
 }

@@ -6,8 +6,8 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :elixir_rest, ElixirRestWeb.Endpoint,
-  http: [port: 80],
+config :{{pro_ject}}, {{Project}}Web.Endpoint,
+  http: [port: {{PORT}}],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -37,7 +37,7 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :elixir_rest, ElixirRest.Repo,
+config :{{pro_ject}}, {{Project}}.Repo,
 #  adapter: Ecto.Adapters.Postgres,
   adapter: Ecto.Adapters.MySQL,
   username: {:system, "MYSQL_USERNAME"},

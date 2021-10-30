@@ -6,15 +6,8 @@
 use Mix.Config
 
 # General application configuration
-config :elixir_rest,
-  ecto_repos: [ElixirRest.Repo]
-
-# Configures the endpoint
-config :elixir_rest, ElixirRestWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "D6jNSw4e7We5y7AAg+MqLpVZ1ureygTMQ+deek1y58N+2HJWzo/HDqby6lvBL6Ah",
-  render_errors: [view: ElixirRestWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: ElixirRest.PubSub, adapter: Phoenix.PubSub.PG2]
+config :{{pro_ject}},
+  ecto_repos: [{{Project}}.Repo]
 
 # Configures Elixir's Logger
 config :logger, :console,

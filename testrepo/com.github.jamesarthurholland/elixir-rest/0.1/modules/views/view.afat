@@ -1,13 +1,13 @@
 {{ALFALFA -o {{en_tity}}_view.ex}}
-defmodule ElixirRestWeb.{{Entity}}View do
-  use ElixirRestWeb, :view
+defmodule {{Project}}Web.{{Entity}}View do
+  use {{Project}}Web, :view
 
   def render("index.json", %{{{en_tity}}s: {{en_tity}}s}) do
-    %{data: render_many({{en_tity}}s, ElixirRestWeb.{{Entity}}View, "{{en_tity}}.json")}
+    %{data: render_many({{en_tity}}s, {{Project}}Web.{{Entity}}View, "{{en_tity}}.json")}
   end
 
   def render("show.json", %{{{en_tity}}: {{en_tity}}}) do
-    %{data: render_one({{en_tity}}, ElixirRestWeb.{{Entity}}View, "{{en_tity}}.json")}
+    %{data: render_one({{en_tity}}, {{Project}}Web.{{Entity}}View, "{{en_tity}}.json")}
   end
 
   def render("{{en_tity}}.json", %{{{en_tity}}: {{en_tity}}}) do

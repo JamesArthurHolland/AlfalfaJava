@@ -3,7 +3,7 @@ name: com.github.jamesarthurholland/alfalfa-test-constructs
 version: "0.1"
 
 imports:
-  - name: entity
+  - name: mappings
     location: ./
     mode: for_each
     folder_swaps:

@@ -5,6 +5,7 @@ import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Patter
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.NoEntityFileException;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.header.InvalidHeaderException;
+import com.github.jamesarthurholland.alfalfa.typeSystem.TypeSystemConverter;
 import com.google.common.io.Files;
 import picocli.CommandLine;
 
@@ -42,12 +43,13 @@ public class AlfalfaMain implements Callable<Void>
 
             Pattern pattern = new PatternFileScanner(workingDirectory).scan();
 
+            TypeSystemConverter converter = new TypeSystemConverter();
 
             Schema config = new Schema(workingDirectory);
 
 
             System.out.println("ALFALFA run \n\n\n========\n\n\n");
-            Alfalfa.alfalfaRun(workingDirectory, config, pattern);
+            Alfalfa.alfalfaRun(workingDirectory, config, pattern, converter);
 
         }
         catch (NoPatternDirectoryException e) {

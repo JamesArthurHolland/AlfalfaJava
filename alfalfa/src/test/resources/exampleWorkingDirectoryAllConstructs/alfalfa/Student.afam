@@ -1,4 +1,5 @@
 com.exampleapp.test.Student
+t students
 k o long id
 v o String firstName
 v o String lastName

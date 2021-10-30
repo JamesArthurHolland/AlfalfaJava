@@ -1,28 +1,28 @@
 {{ALFALFA -o router.ex}}
-defmodule ElixirRestWeb.Router do
-  use ElixirRestWeb, :router
+defmodule {{Project}}Web.Router do
+  use {{Project}}Web, :router
 
   pipeline :api do
     plug(:accepts, ["json"])
   end
 
-  scope "/" do ElixirRestWeb
+  scope "/" do {{Project}}Web
     pipe_through(:api)
 
     forward "/health", HealthCheckup
 
     {{ENTITIES}}
-    resources "/{{en_tity}}", ElixirRestWeb.{{Entity}}Controller
+    resources "/{{en_tity}}", {{Project}}Web.{{Entity}}Controller
     {{/ENTITIES}}
   end
 
   scope "/api" do
     pipe_through(:api)
 
-    forward("/graphql", Absinthe.Plug, schema: ElixirRestWeb.Schema, json_codec: Poison)
+    forward("/graphql", Absinthe.Plug, schema: {{Project}}Web.Schema, json_codec: Poison)
 
     if Mix.env() == :dev do
-      forward("/graphiql", Absinthe.Plug.GraphiQL, schema: ElixirRestWeb.Schema, json_codec: Poison)
+      forward("/graphiql", Absinthe.Plug.GraphiQL, schema: {{Project}}Web.Schema, json_codec: Poison)
     end
   end
 end
