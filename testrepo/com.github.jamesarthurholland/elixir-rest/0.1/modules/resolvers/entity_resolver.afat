@@ -31,11 +31,6 @@ defmodule {{Project}}Web.Resolvers.{{Entity}}Resolver do
   end
 
   def update_{{en_tity}}(%{id: id, input: input}, _info) do
-    input = input
-      |> Map.from_struct
-      |> Enum.filter(fn {_, v} -> v != nil end)
-      |> Enum.into(%{})
-
     {{en_tity}}_result = {{Entity}}.fetch(id)
           |> {{Entity}}.update_{{en_tity}}(input)
 

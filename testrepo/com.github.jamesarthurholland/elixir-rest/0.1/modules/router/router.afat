@@ -2,14 +2,15 @@
 defmodule {{Project}}Web.Router do
   use {{Project}}Web, :router
 
+  forward "/health/live", Healthchex.Probes.Liveness
+  forward "/health/ready", Healthchex.Probes.Readiness
+
   pipeline :api do
     plug(:accepts, ["json"])
   end
 
   scope "/" do {{Project}}Web
     pipe_through(:api)
-
-    forward "/health", HealthCheckup
 
     {{ENTITIES}}
     resources "/{{en_tity}}", {{Project}}Web.{{Entity}}Controller

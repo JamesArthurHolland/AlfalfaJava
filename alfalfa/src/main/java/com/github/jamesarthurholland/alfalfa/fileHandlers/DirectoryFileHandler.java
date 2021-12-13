@@ -2,6 +2,7 @@ package com.github.jamesarthurholland.alfalfa.fileHandlers;
 
 import com.esotericsoftware.minlog.Log;
 import com.github.jamesarthurholland.alfalfa.FileUtils;
+import com.github.jamesarthurholland.alfalfa.StringUtils;
 import com.github.jamesarthurholland.alfalfa.transpiler.SentenceVarEvaluator;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.Schema;
@@ -96,8 +97,7 @@ public class DirectoryFileHandler
                     relativeFolderSwapped = SentenceVarEvaluator.evaluateForEntityReplacements(relativeFolderSwapped, entityInfo);
                 }
                 resolvedPath = workingDirectory.resolve(pattern.getOutputPath()).resolve(relativeFolderSwapped);
-                String pathStringInjected = pattern.injectVarsToLine(resolvedPath.toString());
-                resolvedPath = Paths.get(pathStringInjected);
+                resolvedPath = StringUtils.injectVarsToPath(pattern, resolvedPath);
             }
         }
         return resolvedPath;

@@ -33,6 +33,7 @@ public class TreeEvaluator
             EntityInfo entityInfo = (EntityInfo) container.get(Container.ENTITY_INFO_KEY);
             fileName = StringUtils.evaluateForEntityReplacements(fileName, entityInfo);
         }
+        fileName = pattern.injectVarsToLine(fileName);
 
         ArrayList<String> processedFileLines = TreeEvaluator.evaluateTree(parseTree, container, pattern, typeSystemConverter, tsName);
         processedFileLines = processedFileLines

@@ -46,7 +46,7 @@ defmodule {{Project}}.{{Entity}} do
   {{/X2M}}
 
   {{121}}
-  def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.get_by(from e in {{Entity}}Entity, where: e.{{in_dex}} == ^{{in_dex}})
+  def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.get_by({{Entity}}Entity, {{in_dex}}: {{in_dex}})
   {{/121}}
   {{/MAPPINGS}}
 

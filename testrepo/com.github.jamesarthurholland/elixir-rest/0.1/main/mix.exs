@@ -33,7 +33,7 @@ defmodule {{Project}}.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:health_checkup, "~> 0.1.0"},
+      {:healthchex, "~> 0.2"},
       {:phoenix, "~> 1.3.4"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
@@ -45,7 +45,7 @@ defmodule {{Project}}.Mixfile do
       {:absinthe_phoenix, "~> 1.4.3"},
       {:absinthe_plug, "~> 1.4.5"},
       {:absinthe_ecto, "~> 0.1.3"},
-      {:plug_cowboy, "~> 1.0"},
+      {:plug_cowboy, "~> 1.0", override: true},
       {:confex, "~> 3.4.0"}
     ]
   end

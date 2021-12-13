@@ -1,5 +1,6 @@
 package com.github.jamesarthurholland.alfalfa;
 
+import com.github.jamesarthurholland.alfalfa.configurationBuilder.pattern.Pattern;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.EntityInfo;
 import com.github.jamesarthurholland.alfalfa.configurationBuilder.schema.NoEntityFileException;
 import com.google.common.io.Files;
@@ -36,6 +37,11 @@ public class StringUtils {
         finally {
             return list;
         }
+    }
+
+    public static Path injectVarsToPath(Pattern pattern, Path path) {
+        String pathStringInjected = pattern.injectVarsToLine(path.toString());
+        return Paths.get(pathStringInjected);
     }
 
     public static String evaluateForNamespace(String sentence, EntityInfo entityInfo)

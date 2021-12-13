@@ -99,7 +99,9 @@ public class Alfalfa {
                                     Path folderToSwap = Paths.get(pattern.patternRepoPath).resolve(relativeRoot);
                                     Path swappedFolder = DirectoryFileHandler.applyFolderSwapIfNeeded(folderToSwap, relativeRoot, pattern, workingDirectory, null);
                                     Path fileRelativeToSwapFolder = filePathRelativeToModule.subpath(1, filePathRelativeToModule.getNameCount());
+
                                     fileAbsoluteOutputPath = swappedFolder.resolve(fileRelativeToSwapFolder);
+                                    fileAbsoluteOutputPath = StringUtils.injectVarsToPath(pattern, fileAbsoluteOutputPath);
                                 }
                                 org.apache.commons.io.FileUtils.writeLines(fileAbsoluteOutputPath.toFile(), lines);
                             } catch (IOException e) {
