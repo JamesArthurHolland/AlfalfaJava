@@ -1,20 +1,28 @@
 {{ALFALFA -o {{en_tity}}_entity.go -ts go-graphql-client-lib }}
 package {{en_tity}}
 
-import "github.com/hasura/go-graphql-client"
+import (
+    "github.com/hasura/go-graphql-client"
+    "time"
+)
 
 type {{Entity}}Entity struct {
 {{VARS}}
-    {{Var}} {{type}} `json:"{{v_ar}}"`
+    {{KEY}}{{Var}} {{type}} `json:"{{v_ar}},omitempty"`{{/KEY}}
+    {{NOT-KEY}}{{Var}} {{type}} `json:"{{v_ar}}"`{{/NOT-KEY}}
 {{/VARS}}
-    LockVersion int64   `json:"lock_version"`
+    LockVersion int64      `json:"lock_version"`
+    CreatedAt   time.Time  `json:"created_at"`
+    UpdatedAt   time.Time  `json:"updated_at"`
 }
 
 type {{Entity}}InputType struct {
 {{VARS}}
-    {{Var}}         {{type}}    `json:"{{v_ar}}"`
+    {{Var}}         {{type}}    `json:"{{v_ar}},omitempty"`
 {{/VARS}}
-    LockVersion int64   `json:"lock_version"`
+    LockVersion int64      `json:"lock_version"`
+    CreatedAt   time.Time  `json:"created_at"`
+    UpdatedAt   time.Time  `json:"updated_at"`
 }
 
 func NewInputType(entity *{{Entity}}Entity) *{{Entity}}InputType {
@@ -23,5 +31,7 @@ func NewInputType(entity *{{Entity}}Entity) *{{Entity}}InputType {
         {{Var}}: entity.{{Var}},
     {{/VARS}}
         LockVersion: entity.LockVersion,
+        CreatedAt:  entity.CreatedAt,
+        UpdatedAt:  entity.UpdatedAt,
     }
 }

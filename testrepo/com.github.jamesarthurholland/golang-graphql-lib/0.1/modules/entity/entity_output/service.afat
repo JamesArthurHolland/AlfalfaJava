@@ -77,9 +77,9 @@ func(s *Service) Fetch(id string) (*{{Entity}}Entity, error) {
 
 {{MAPPINGS}}
 {{121}}
-func(s *Service) FetchBy{{Index}}({{in_dex}} string) (*{{Entity}}Entity, error) {
+func(s *Service) FetchBy{{Index}}({{index}} string) (*{{Entity}}Entity, error) {
     variables := map[string]interface{}{
-        "{{index}}": graphql.String({{in_dex}}),
+        "{{index}}": graphql.String({{index}}),
     }
 
     var query {{Entity}}By{{Index}}Query
