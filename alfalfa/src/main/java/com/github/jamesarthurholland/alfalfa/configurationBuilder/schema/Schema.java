@@ -67,6 +67,13 @@ public class Schema implements Cloneable
                 .filter(current -> current.childVarName.equals(var.getName()))
                 .findFirst();
 
+        if (mapping.isPresent() == false) {
+            mapping = this.mappingsForEntityName.get("_")// TODO this is a bit hacky. For doing 121 indexes without parent
+                    .stream()
+                    .filter(current -> current.childVarName.equals(var.getName()))
+                    .findFirst();
+        }
+
         return mapping;
     }
 
