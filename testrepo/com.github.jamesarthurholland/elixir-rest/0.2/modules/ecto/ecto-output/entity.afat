@@ -7,6 +7,7 @@ defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
   {{KEY}}@primary_key {:id, :string, []}{{/KEY}}
   {{KEY}}@derive {Phoenix.Param, key: :id}{{/KEY}}
   {{/VARS}}
+
   schema "{{table}}" do
     {{VARS}}
     {{NOT-KEY NOT-LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
@@ -15,8 +16,8 @@ defmodule ElixirRest.{{Entity}}.{{Entity}}Entity do
     {{NOT-KEY LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
 	{{/VARS}}
     field(:lock_version, :integer, default: 1)
-
-    timestamps(inserted_at: :created_at)
+    field(:created_at, :integer)
+    field(:updated_at, :integer)
 
   end
 

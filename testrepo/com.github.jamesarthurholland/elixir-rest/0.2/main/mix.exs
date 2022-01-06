@@ -46,7 +46,8 @@ defmodule ElixirRest.Mixfile do
       {:absinthe_plug, "~> 1.4.5"},
       {:absinthe_ecto, "~> 0.1.3"},
       {:plug_cowboy, "~> 1.0", override: true},
-      {:confex, "~> 3.4.0"}
+      {:confex, "~> 3.4.0"},
+      {:blankable, "~> 1.0.0"}
     ]
   end
 

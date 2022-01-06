@@ -5,7 +5,7 @@ import (
     "context"
     "fmt"
     "github.com/hasura/go-graphql-client"
-    "{{GITHUB_REPO}}/main_graph_ql"
+    "{{GITHUB_REPO}}/main-go-graph-lib/main_graph_ql"
 )
 
 type Service struct {

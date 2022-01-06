@@ -7,8 +7,8 @@ defmodule ElixirRestWeb.Schema.Types.{{Entity}}Type do
     field(:{{v_ar}}, :{{type}})
 	{{/VARS}}
     field(:lock_version, :integer)
-    field(:created_at, :naive_datetime)
-    field(:updated_at, :naive_datetime)
+    field(:created_at, :integer)
+    field(:updated_at, :integer)
   end
 
   # TODO validation of nullables
@@ -21,7 +21,7 @@ defmodule ElixirRestWeb.Schema.Types.{{Entity}}Type do
     {{NOT-KEY LAST}}field(:{{v_ar}}, :{{type}}){{/NOT-KEY}}
 	{{/VARS}}
     field(:lock_version, :integer)
-    field(:created_at, :naive_datetime)
-    field(:updated_at, :naive_datetime)
+    field(:created_at, :integer)
+    field(:updated_at, :integer)
   end
 end

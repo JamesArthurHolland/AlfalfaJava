@@ -3,7 +3,6 @@ package {{en_tity}}
 
 import (
     "github.com/hasura/go-graphql-client"
-    "time"
 )
 
 type {{Entity}}Entity struct {
@@ -12,8 +11,8 @@ type {{Entity}}Entity struct {
     {{NOT-KEY}}{{Var}} {{type}} `json:"{{v_ar}}"`{{/NOT-KEY}}
 {{/VARS}}
     LockVersion int64      `json:"lock_version"`
-    CreatedAt   time.Time  `json:"created_at"`
-    UpdatedAt   time.Time  `json:"updated_at"`
+    CreatedAt   int64      `json:"created_at"`
+    UpdatedAt   int64      `json:"updated_at"`
 }
 
 type {{Entity}}InputType struct {
@@ -21,8 +20,8 @@ type {{Entity}}InputType struct {
     {{Var}}         {{type}}    `json:"{{v_ar}},omitempty"`
 {{/VARS}}
     LockVersion int64      `json:"lock_version"`
-    CreatedAt   time.Time  `json:"created_at"`
-    UpdatedAt   time.Time  `json:"updated_at"`
+    CreatedAt   int64      `json:"created_at"`
+    UpdatedAt   int64      `json:"updated_at"`
 }
 
 func NewInputType(entity *{{Entity}}Entity) *{{Entity}}InputType {

@@ -10,6 +10,8 @@ defmodule ElixirRest.{{Entity}} do
 
   alias ElixirRest.{{Entity}}.{{Entity}}Entity
 
+
+
   @doc """
   Returns the list of {{en_tity}}.
 
@@ -43,10 +45,11 @@ defmodule ElixirRest.{{Entity}} do
   {{MAPPINGS}}
   {{X2M}}
   def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.all({{Entity}}Entity, {{in_dex}}: {{in_dex}})
+  #def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.get_by(from e in {{Entity}}Entity, where: e.{{in_dex}} == ^{{in_dex}})
   {{/X2M}}
 
   {{121}}
-  def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.get_by(from e in {{Entity}}Entity, where: e.{{in_dex}} == ^{{in_dex}})
+  def fetch_by_{{in_dex}}({{in_dex}}), do: Repo.get_by({{Entity}}Entity, {{in_dex}}: {{in_dex}})
   {{/121}}
   {{/MAPPINGS}}
 
@@ -62,9 +65,17 @@ defmodule ElixirRest.{{Entity}} do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_{{en_tity}}(attrs \\ %{}) do
+  def create_{{en_tity}}(%{id: id} = attrs) do
+    create_{{en_tity}}(attrs, :ok)
+  end
+  def create_{{en_tity}}(attrs \\ %{} ) do
     attrs = Map.put(attrs, :id, Ecto.UUID.generate)
-
+    create_{{en_tity}}(attrs, :ok)
+  end
+  def create_{{en_tity}}(attrs, :ok) do
+    timestamp = DateTime.utc_now() |> DateTime.to_unix(:second)
+    attrs = Map.put(attrs, :created_at, timestamp)
+    attrs = Map.put(attrs, :updated_at, timestamp)
     %{{Entity}}Entity{}
     |> {{Entity}}Entity.changeset(attrs)
     |> Repo.insert()
@@ -83,6 +94,8 @@ defmodule ElixirRest.{{Entity}} do
 
   """
   def update_{{en_tity}}(%{{Entity}}Entity{} = {{en_tity}}, attrs) do
+    timestamp = DateTime.utc_now() |> DateTime.to_unix(:second)
+    attrs = Map.put(attrs, :updated_at, timestamp)
     {{en_tity}}
     |> {{Entity}}Entity.changeset(attrs)
     |> Repo.update()
