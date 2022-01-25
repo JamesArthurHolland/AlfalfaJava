@@ -24,6 +24,18 @@ type {{Entity}}InputType struct {
     UpdatedAt   int64      `json:"updated_at"`
 }
 
+func New(
+{{VARS}}
+    {{var}} {{type}},
+{{/VARS}}
+) *{{Entity}}Entity {
+    return &{{Entity}}Entity {
+    {{VARS}}
+        {{Var}}: {{var}},
+    {{/VARS}}
+    }
+}
+
 func NewInputType(entity *{{Entity}}Entity) *{{Entity}}InputType {
     return &{{Entity}}InputType{
     {{VARS}}

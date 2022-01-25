@@ -92,6 +92,22 @@ func(s *Service) FetchBy{{Index}}({{index}} string) (*{{Entity}}Entity, error) {
 }
 {{/121}}
 
+{{12M}}
+func(s *Service) FetchBy{{Index}}({{index}} string) ([]*{{Entity}}Entity, error) {
+    variables := map[string]interface{}{
+        "{{index}}": graphql.String({{index}}),
+    }
+
+    var query {{Entity}}By{{Index}}Query
+    err := s.client.Query(context.Background(), &query, variables)
+    if(err != nil) {
+        return nil, err
+    }
+
+    return &query.Result, err
+}
+{{/12M}}
+
 {{/MAPPINGS}}
 
 func(s *Service) Create(input *{{Entity}}InputType) (*{{Entity}}Entity, error) {
