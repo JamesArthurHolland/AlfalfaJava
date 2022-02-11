@@ -6,6 +6,7 @@ import (
     "log"
     "os"
     "github.com/hasura/go-graphql-client"
+    "go.uber.org/dig"
 )
 
 
@@ -17,6 +18,12 @@ type Client *graphql.Client
 
 func CreateMainGraphQLClient(url DataPersistenceUrl) Client {
     return graphql.NewClient(string(url), nil)
+}
+
+func Provision(container *dig.Container) {
+    container.Provide(CreateMainGraphQLClient)
+    container.Provide(GetDataPersistenceUrl)
+    container.Provide(GetPersistenceUrlParts)
 }
 
 func GetDataPersistenceUrl(host DataPersistenceHost, port DataPersistencePort) DataPersistenceUrl {
